@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -60,34 +61,34 @@
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
+                                    <a href="trangchu.php"><img src="assets/img/logo/logo.png" alt="" /></a>
                                 </div>
                             </div>
                             <div class="col-lg-6 menu-none-block menu-center">
                                 <div class="main-menu">
                                     <nav>
                                         <ul>
-                                            <li><a href="#">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
+                                            <li><a href="about-us.php">about us</a></li>
                                             <li><a href="shop-grid-view-5-col.html">shop</a></li>
                                             <li><a href="#">pages</a>
                                                 <ul class="dropdown">
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
+                                                    <li><a href="about-us.php">about us</a></li>
+                                                    <li><a href="cart.php">cart</a></li>
+                                                    <li><a href="checkout.php">checkout</a></li>
+                                                    <li><a href="wishlist.php">wishlist</a></li>
+                                                    <li><a href="contact.php">contact</a></li>
+                                                    <li><a href="login.php">login</a></li>
+                                                    <li><a href="register.php">register</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">blog</a>
                                                 <ul class="dropdown">
-                                                    <li><a href="blog.html">blog </a></li>
+                                                    <li><a href="blog.php">blog </a></li>
                                                     <li><a href="blog-details.html">blog details</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">contact</a></li>
+                                            <li><a href="contact.php">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -115,9 +116,9 @@
                                 <div class="mobile-menu">
                                     <nav id="mobile-menu-active">
                                         <ul class="menu-overflow">
-                                            <li><a href="#">HOME</a>
+                                            <li><a href="trangchu.php">HOME</a>
                                                 <ul>
-                                                    <li><a href="index.html">furniture</a></li>
+                                                    <li><a href="trangchu.php">furniture</a></li>
                                                     <li><a href="index-electronics.html">electronics</a></li>
                                                     <li><a href="index-fashion.html">fashion</a></li>
                                                     <li><a href="index-jewellery.html">jewellery</a></li>
@@ -127,13 +128,13 @@
                                             </li>
                                             <li><a href="#">pages</a>
                                                 <ul>
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
+                                                    <li><a href="about-us.php">about us</a></li>
+                                                    <li><a href="cart.php">cart</a></li>
+                                                    <li><a href="checkout.php">checkout</a></li>
+                                                    <li><a href="wishlist.php">wishlist</a></li>
+                                                    <li><a href="contact.php">contact</a></li>
+                                                    <li><a href="login.php">login</a></li>
+                                                    <li><a href="register.php">register</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">shop</a>
@@ -164,7 +165,7 @@
                                                     <li><a href="blog-details.html">blog details</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html"> Contact  </a></li>
+                                            <li><a href="contact.php"> Contact  </a></li>
                                         </ul>
                                     </nav>							
                                 </div>
