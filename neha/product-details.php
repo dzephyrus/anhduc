@@ -332,44 +332,44 @@
                                         <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
                                             <div class="easyzoom easyzoom--overlay">
                                                 <a href="assets/img/product-details/bl1.jpg">
-                                                    <img src="assets/img/product-details/l1.jpg" alt="">
+                                                    <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="pro-details2" role="tabpanel">
                                             <div class="easyzoom easyzoom--overlay">
                                                 <a href="assets/img/product-details/bl2.jpg">
-                                                    <img src="assets/img/product-details/l2.jpg" alt="">
+                                                    <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="pro-details3" role="tabpanel">
                                             <div class="easyzoom easyzoom--overlay">
                                                 <a href="assets/img/product-details/bl3.jpg">
-                                                    <img src="assets/img/product-details/l3.jpg" alt="">
+                                                    <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="pro-details4" role="tabpanel">
                                             <div class="easyzoom easyzoom--overlay">
                                                 <a href="assets/img/product-details/bl4.jpg">
-                                                    <img src="assets/img/product-details/l4.jpg" alt="">
+                                                    <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="product-details-small nav mt-12 main-product-details" role=tablist>
                                         <a class="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
-                                            <img src="assets/img/product-details/s1.jpg" alt="">
+                                            <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
                                         </a>
                                         <a class="mr-12" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
-                                            <img src="assets/img/product-details/s2.jpg" alt="">
+                                            <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
                                         </a>
                                         <a class="mr-12" href="#pro-details3" data-toggle="tab" role="tab" aria-selected="true">
-                                            <img src="assets/img/product-details/s3.jpg" alt="">
+                                            <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
                                         </a>
                                         <a class="mr-12" href="#pro-details4" data-toggle="tab" role="tab" aria-selected="true">
-                                            <img src="assets/img/product-details/s4.jpg" alt="">
+                                            <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
                                         </a>
                                     </div>
                                 </div>
