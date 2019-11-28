@@ -1,11 +1,35 @@
 <?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
+session_start(); 
+ob_start();
+?>
+<?php
 include"connection.php";
-$sql= "select * from category";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if(isset($_GET['id'])){
+	$id=$_GET['id'];
+	$sql="select * from category where id_cate='$id'";
+	$stmt= $conn ->prepare($sql);
+	$stmt -> execute();
+	
+	$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
+	
+}
+if(isset($_POST['update'])){
+	$name= $_POST['name'];
+		//$image = "";
+		$sql= "update category set name_cate='$name' where id_cate='$id'";
+	
+				$stmt = $conn->prepare($sql);
+    			$stmt->execute();
+				
+				
+	if ($stmt->rowCount() > 0) {
+        header('location:danhmuc1.php');
+    } else {
+       echo "Cập nhật dữ liệu thất bại";
+    }
+	//dm loi eo update ddcccc, dcmmmmm
+	
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +42,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Buttons</title>
+  <title>SB Admin 2 - Cards</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -65,17 +89,11 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
        <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
-          <span>Product</span></a>
+          <span>Sản phẩm</span></a>
       </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Đơn hàng</span></a>
-      </li>
+      
 
       <!-- Nav Item - Utilities Collapse Menu -->
       
@@ -93,7 +111,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <li class="nav-item">
         <a class="nav-link" href="comment1.php">
           <i class="fas fa-fw fa-comments"></i>
-          <span>Comment</span></a>
+          <span>Bình luận</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
@@ -103,14 +121,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <a class="nav-link" href="slide1.php">    
 		  <i class="fas fa-fw fa-chart-area"></i>
           <span>Slide</span></a>
-      </li>
-		
-		<hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Voucher</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
@@ -170,7 +180,24 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
 
             <!-- Nav Item - Alerts -->
             
@@ -184,7 +211,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -199,6 +225,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
               </div>
             </li>
 
+
           </ul>
 
         </nav>
@@ -208,74 +235,56 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Danh mục</h1>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Cards</h1>
+          </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            
+
+            <!-- Earnings (Monthly) Card Example -->
+            
+
+            <!-- Earnings (Monthly) Card Example -->
+            
+
+            <!-- Pending Requests Card Example -->
+            
 
           <div class="row">
 
-            <div class="col-lg-12">
+            <div class="col-lg-8">
 
-              <!-- Circle Buttons -->
-              <div class="card shadow mb-4 bg-light">
-                <div class="card-header py-3">
-                  <button class="btn btn-success"><a href="adddanhmuc1.php">thêm danh mục</a></button>
-                </div>
-                <div class="card-body">
-                  
-                  <div class="row">
-		
-		
-		<div class="col-md-12  ">
-			
-	
-		
-	<table class="table text-dark">
-  <thead>
-    <tr>
-      <th width="11%" scope="col">id</th>
-      <th width="25%" scope="col">tên danh mục</th>
-	<th width="51%" scope="col">ảnh</th>
-	<th width="13%" scope="col">cài đặt</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_cate']?></td>
-		<td><?=$row['name_cate']?></td>
-		
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suadanhmuc1.php?id=<?=$row['id_cate']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoadanhmuc.php?id=<?=$row['id_cate']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
-		}
-	?>
-    
-  </tbody>
-</table>
-			
+              <!-- Default Card Example -->
+              
 				
-			</div>
-		</div>
-                  
-                </div>
-              </div>
-
-              <!-- Brand ....Buttons -->
+		<div class="form-group">
+    <label for="exampleInputEmail1">thêm danh mục</label>
+   
+			
+  </div>
+		<form action="" method="post" enctype="multipart/form-data">			
+		<div class="input-group input-group-lg" style="width: 80%">
+			<input type="hidden" name="id" value="<?=$id?>">
+  <input type="text" class="form-control " name="name" placeholder="tên danh mục" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4" value="<?=$row['name_cate']?>">
+	
+  <div class="input-group-append" id="button-addon4">
+    <button name="update" class="btn btn-outline-secondary" type="submit">update</button>
+    <button class="btn btn-outline-secondary" type="button"><a href="danhmuc1.php">quản trị danh mục</a></button>
+  </div>
+</div>
+		
+	</form>
+              <!-- Basic Card Example -->
               
 
             </div>
 
             
-
-          </div>
-
         </div>
         <!-- /.container-fluid -->
 
-      </div>
+     
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -331,3 +340,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </body>
 
 </html>
+<?php
+	ob_end_flush();
+	?>
