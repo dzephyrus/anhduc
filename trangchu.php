@@ -313,11 +313,11 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 						  <div class="item active">
-							<img src="image/ok1.jpg" alt="" style="width:1972px; height: 550px;">
+							<img src="image/ok1.jpg" alt="" style="width:1972px; height:650px;">
 						  </div>
 
 						  <div class="item">
-							<img src="image/ok2.jpg" alt="" style="width: 1972px; height: 550px;"/>
+							<img src="image/ok2.jpg" alt="" style="width: 1972px; height: 650px;"/>
 						  </div>
 
 						  
