@@ -273,11 +273,11 @@
 					//upload ảnh lên server
 			move_uploaded_file( $tmp ,"image/".$image );
 				#Nếu Ảnh được add vào thì sẽ upload ảnh lên server và câu lệnh update có thêm phần update ảnh
-				$sql= "update product set name_p='$name', image_p='$image', price='$price', sale_p='$sale', sl_p='$soluong', date='$date', detail='$chitiet', id_dm='$id_dm',ten_dm=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
+				$sqls= "update product set name_p='$name', image_p='$image', price='$price', sale_p='$sale', sl_p='$soluong', date='$date', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
 			}
 			else{
 				//$image = "";
-				$sql= "update product set name_p='$name', price='$price', sale_p='$sale', sl_p='$soluong', date='$date', detail='$chitiet', id_dm='$id_dm',ten_dm=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
+				$sqls= "update product set name_p='$name', price='$price', sale_p='$sale', sl_p='$soluong', date='$date', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
 			}
 
 						/*if($_FILES['image']['name']!=""){
@@ -327,7 +327,7 @@
 			</div>
 				<div class="form-group col-md-6">
 			<label for="exampleFormControlFile1">Ảnh</label>
-					<img src="image/<?=$row['image_p']?>" width="120" alt="">
+					<img src="image/<?=$row['image_p']?>" width="120" alt="" style="padding: 5px 5px;">
 			<input type="hidden" name="image" value="<?=$row['image']?>">
 			<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
 		  </div>
@@ -356,7 +356,8 @@
 			
 			
 				<label for="inputAddress">chi tiết sp</label>
-						<textarea name="ad" style="width: 90%;"><? echo $row['detail']?>
+						<textarea name="ad" style="width: 90%;">
+							<?php echo $row['detail']?>
 									</textarea>
 									  <script>
 										  CKEDITOR.replace( 'ad' );
@@ -373,18 +374,18 @@
 					<!-- Đổ danh mục ra ngoài -->
 				<?php
 					include "connection.php";
-					$sqldm = "select * from danh_muc";
+					$sqldm = "select * from category";
 					$kqdm = $conn->query($sqldm);
 					foreach ($kqdm as $key => $value){
 				?>
 					<!-- Nếu danh mục trong phần danh_muc = danh mục trong phần sanpham thì set selected -->
-					<option value="<?php echo $value['id_p']?>" 
+					<option value="<?php echo $value['id_cate']?>" 
 							<?php
-								if($value['id_p']==$row['id_p']){echo 'selected';}
+								if($value['id_cate']==$row['id_cate']){echo 'selected';}
 							?>  >
 
-					<a href="" name="tenmuc" ><?php echo $value['name_p']?></a>
-						<?php echo $value['name_p']?>
+							<a href="" name="tenmuc" ><?php echo $value['name_cate']?></a>
+							
 					</option>
 
 					<?php }
@@ -393,7 +394,7 @@
 			</div>
 
 		  </div>
-		  <button name="add_sp" type="submit" class="btn btn-primary">sửa</button>
+		  <button name="add_sp" type="submit" class="btn btn-primary text-light">sửa</button>
 
 		</form>
         </div>
