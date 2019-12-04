@@ -250,7 +250,7 @@
 			$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
 		}
 				if(isset($_POST['add_sp'])){
-					if($_POST['name']==""|| $_FILES['image']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['chitiet']=="" ){
+					if($_POST['name']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']=="" ){
 						echo"thêm thất bại, phải nhập đủ thông tin";
 					}
 					elseif($_POST['price']<=0 || $_POST['SalePrice']<=0 || $_POST['SalePrice']<=0){
@@ -262,7 +262,7 @@
 						$sale = $_POST['SalePrice'];
 						$soluong =$_POST['soluong'];
 						$date= date("Y-m-d");
-						$chitiet=$_POST['chitiet'];
+						$chitiet=$_POST['ad'];
 						$id_dm= $_POST['dmuc'];
 
 						if($_FILES['image']['name']!=""){
@@ -273,44 +273,17 @@
 					//upload ảnh lên server
 			move_uploaded_file( $tmp ,"image/".$image );
 				#Nếu Ảnh được add vào thì sẽ upload ảnh lên server và câu lệnh update có thêm phần update ảnh
-				$sqls= "update product set name_p='$name', image_p='$image', price='$price', sale_p='$sale', sl_p='$soluong', date='$date', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
+				$sql= "update product set name_p='$name', image_p='$image', price='$price', sale_p='$sale',date='$date', sl_p='$soluong', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
 			}
 			else{
 				//$image = "";
-				$sqls= "update product set name_p='$name', price='$price', sale_p='$sale', sl_p='$soluong', date='$date', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
+				$sql= "update product set name_p='$name', price='$price', sale_p='$sale', date='$date' , sl_p='$soluong', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
 			}
 
-						/*if($_FILES['image']['name']!=""){
-					//cho phép upload ảnh vào
-					//cộng thêm time để tránh trùng ảnh
-					$tenanh = time() . $_FILES['image']['name'];
-					//upload ảnh lên server
-					move_uploaded_file($_FILES['image']['tmp_name'],$tenanh );
-				}
-					else{
-						$tenanh = "";
-					}*/
-
-						//$sql= "update sanpham set name='$name', image='$image', price='$price', SalePrice='$sale', soluong='$soluong', date='$date', chitiet_sp='$chitiet' where id_sp='$id'";
-
-						/*$stmt = $conn->prepare($sql);
-					$stmt->bindParam(':name', $name);
-					$stmt->bindParam(':image', $image);
-					$stmt->bindParam(':price', $price);
-					$stmt->bindParam(':SalePrice', $sale);
-					$stmt->bindParam(':soluong', $soluong);
-					$stmt->bindParam(':date', $date);
-					$stmt->bindParam(':chitiet', $chitiet);*/
-
-					/*$stmt->execute();
-						if ($stmt->rowCount()>0) {
-						echo "sửa dữ liệu thành công";
-					} else {
-						echo "sửa dữ liệu thất bại";
-					}*/
-					$kqs = $conn -> prepare($sqls);
+					
+					$kqs = $conn -> prepare($sql);
 							if($kqs -> execute()){
-								header("location:sanpham1.php");
+								echo 'thanh cong';
 							}else{
 								echo 'loi';
 							}
@@ -325,8 +298,8 @@
 			<label for="inputAddress">tên sản phẩm</label>
 			<input name="name" type="text" class="form-control" id="inputAddress" value="<?=$row['name_p']?>">
 			</div>
-				<div class="form-group col-md-6">
-			<label for="exampleFormControlFile1">Ảnh</label>
+			<div class="form-group col-md-6">
+				<label for="exampleFormControlFile1">Ảnh</label>
 					<img src="image/<?=$row['image_p']?>" width="120" alt="" style="padding: 5px 5px;">
 			<input type="hidden" name="image" value="<?=$row['image']?>">
 			<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
@@ -365,9 +338,9 @@
 						</div>		
 		  </div>				  
 
-		  <div class="form-row">
+		 
 
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-3">
 			  <label for="inputState">danh mục</label>
 
 				<select name="dmuc" id="inputState" class="form-control">
@@ -390,11 +363,12 @@
 
 					<?php }
 					?>
-				</select><br>
-			</div>
+				</select>
+			</div><br>
 
-		  </div>
-		  <button name="add_sp" type="submit" class="btn btn-primary text-light">sửa</button>
+
+		  
+		  <button name="add_sp" type="submit" class="btn btn-primary text-light col-md-1">sửa</button>
 
 		</form>
         </div>
