@@ -57,14 +57,14 @@
 												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 												?>
 													<?php
-												foreach($result as $row){
-												?>
+														foreach($result as $row){
+															?>
 												
-                                                    <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+                                                   				 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
                                                    
                                                 
-												<?php
-												}
+															<?php
+													}
 												?>
 													</ul>
 										   </li>
