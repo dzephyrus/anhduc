@@ -248,7 +248,7 @@
 			?>
 	<tr>
 		<td><?=$row['id_slide']?></td>
-		<td><img src="image/<?=$row['image']?>" width="150"></td>
+		<td><img src="image/<?=$row['image_slide']?>" width="150"></td>
 		<td><?=$row['title']?></td>
 		<td><?=$row['link']?></td>
 		<td><?=$row['tt']?></td>
@@ -263,7 +263,7 @@
     
   </tbody>
 			  </table>
-			  <button class="btn btn-success col-md-3"><a href="addslide1.php" class="text-light text-decoration-none">thêm slide</a></button>
+			  <button class="btn btn-success col-md-1"><a href="addslide1.php" class="text-light text-decoration-none">thêm slide</a></button>
             <!-- Donut Chart -->
             
           </div>

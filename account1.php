@@ -256,8 +256,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['phone']?></td>
 		<td><?=$row['email']?></td>
 		<td><?=$row['quyen']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_u']?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_u']?>" class="text-light">xóa</a> </button>
 		</td>
 	</tr>
 	<?php

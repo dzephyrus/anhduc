@@ -100,7 +100,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -217,58 +217,75 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
+          <h1 class="h3 mb-2 text-gray-800">Đăng ký</h1>
           
 
           <!-- Content Row -->
-          <div class="card shadow m-6">
-<?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from voucher";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
-					  
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
-		
-		
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
-		}
-	?>
+          <div class="row">
+
+            <form action="" method="post">
+	<div class="form-group">
+    <label for="inputAddress">tên</label>
+    <input name="name" type="text" class="form-control" id="inputAddress" placeholder="name">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">pass</label>
+      <input name="pass" type="password" class="form-control" id="inputEmail4" placeholder="password">
+    </div>
+	  <div class="form-group col-md-6">
+      <label for="inputCity">Số điện thoại</label>
+      <input name="phone" type="number" class="form-control" id="inputCity">
+    </div>
     
-  </tbody>
-</table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+  </div>
+					  
+  <div class="form-row">
+	  
+  <div class="form-group col-md-8">
+      <label for="inputCity">email</label>
+      <input name="email" type="email" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">quyền</label>
+      <select name="quyen" id="inputState" class="form-control">
+        <option selected>admin</option>
+        <option>user</option>
+      </select>
+    </div>
+    
+  </div>
+  <div class="form-group">
+    
+  </div>
+  <button type="submit" name="add_sp" class="btn btn-primary">thêm</button>
+</form>
+<?php
+	include "connection.php";
+		if(isset($_POST['add_sp'])){
+			if($_POST['name']==""|| $_POST['pass']==""|| $_POST['phone']==""||$_POST['email']==""){
+				echo"thêm thất bại, phải nhập đủ thông tin";
+			}
+			else{
+				$name= $_POST['name'];
+				$pass = $_POST['pass'];
+				$phone = $_POST['phone'];
+				$email =$_POST['email'];
+				$quyen= $_POST['quyen'];
+				
+				$sql= "insert into user values('','$name','$phone','$email','$pass','$quyen')";
+				
+				
+				$kq = $conn->exec($sql);
+				if($kq==1){
+				echo "thêm thành công";
+			}
+			else{
+				echo "không thêm đc dữ liệu";
+			}
+			}
+		}
+	?>	  
             <!-- Donut Chart -->
             
           </div>
