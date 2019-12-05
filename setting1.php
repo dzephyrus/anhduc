@@ -248,12 +248,12 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($result as $row){
 			?>
 	<tr>
-		<td><?=$row['id']?></td>
+		<td><?=$row['id_st']?></td>
 		<td><img src="image/<?=$row['logo']?>" width="150"></td>
 		<td><?=$row['email']?></td>
 		<td><?=$row['phone']?></td>
 		<td><?=$row['address']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasetting1.php?id=<?=$row['id']?>">Update</a> </button>
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasetting1.php?id=<?=$row['id_st']?>">Update</a> </button>
 		
 		</td>
 	</tr>

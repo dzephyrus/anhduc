@@ -1,4 +1,9 @@
-
+<?php
+session_start(); 
+ob_start();
+	
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +46,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -57,17 +62,11 @@
        <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
-          <span>Product</span></a>
+          <span>Sản phẩm</span></a>
       </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Đơn hàng</span></a>
-      </li>
+      
 
       <!-- Nav Item - Utilities Collapse Menu -->
       
@@ -85,7 +84,7 @@
       <li class="nav-item">
         <a class="nav-link" href="comment1.php">
           <i class="fas fa-fw fa-comments"></i>
-          <span>Comment</span></a>
+          <span>Bình luận</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
@@ -99,15 +98,7 @@
 		
 		<hr class="sidebar-divider">
 		
-		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Voucher</span></a>
-      </li>
-		
-		<hr class="sidebar-divider">
-		
-		<li class="nav-item">
+		<li class="nav-item active">
         <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Tài khoản</span></a>
@@ -217,58 +208,74 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
+          <h1 class="h3 mb-2 text-gray-800">Add Voucher</h1>
           
 
           <!-- Content Row -->
-          <div class="card shadow m-6">
-<?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from voucher";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
+          <div class="row">
+
+            <form action="" method="post">
+	<div class="form-group">
+    <label for="inputAddress">Mã Vocher</label>
+    <input name="ma_vc" type="text" class="form-control" id="inputAddress" placeholder="Mã Vocher">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Start date </label>
+      <input name="start" type="date" class="form-control" id="inputEmail4" placeholder="start date">
+    </div>
+	   <div class="form-group col-md-6">
+      <label for="inputEmail4">End date</label>
+      <input name="end" type="date" class="form-control" id="inputEmail4" placeholder="End date">
+    </div>
+	
+  </div>
 					  
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
-		
-		
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
-		}
-	?>
+  <div class="form-row">
+	  
+  <div class="form-group col-md-8">
+      <label for="inputCity">Sale</label>
+      <input name="sale" type="number" class="form-control" id="sale">
+    </div>
+     <div class="form-group col-md-8">
+      <label for="inputCity">detail</label>
+      <input name="detail" type="text" class="form-control" id="detail">
+    </div>
     
-  </tbody>
-</table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+  </div>
+  <div class="form-group">
+    
+  </div>
+  <button type="submit" name="add_vc" class="btn btn-primary">ADD VOCHER</button>
+</form>
+<?php
+	include "connection.php";
+		if(isset($_POST['add_vc'])){
+			if($_POST['ma_vc']==""|| $_POST['start']==""|| $_POST['end']==""||$_POST['sale']=="" ||$_POST['detail']==""){
+				echo"thêm thất bại, phải nhập đủ thông tin";
+			}
+			else{
+				$ma_vc= $_POST['ma_vc'];
+				$start= $_POST['start'];
+				$end= $_POST['end'];
+				$sale= $_POST['sale'];
+				$detail= $_POST['detail'];
+				
+				
+				
+				$sql= "insert into voucher values('','$ma_vc','$start','$end','$sale','$detail')";
+				
+				
+				$kq = $conn->exec($sql);
+				if($kq==1){
+				header('location:voucher1.php');
+			}
+			else{
+				echo "không thêm đc dữ liệu";
+			}
+			}
+		}
+	?>	  
             <!-- Donut Chart -->
             
           </div>
@@ -339,4 +346,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </body>
 
+	
 </html>
+<?php
+	ob_end_flush();
+	?>

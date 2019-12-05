@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +101,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -193,7 +194,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -208,6 +208,7 @@
               </div>
             </li>
 
+
           </ul>
 
         </nav>
@@ -221,54 +222,74 @@
           
 
           <!-- Content Row -->
-          <div class="card shadow m-6">
+          <div class="row">
 <?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from voucher";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
-					  
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
+require_once "connection.php";
+if(isset($_GET['id'])){
+	$id=$_GET['id'];
+	$sql="select * from user where id_u='$id'";
+	$stmt= $conn ->prepare($sql);
+	$stmt -> execute();
+	$row = $stmt -> fetch();
+	//fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
+}
+		if(isset($_POST['sua'])){
+				$name= $_POST['name'];
+				$pass = $_POST['pass'];
+				$quyen = $_POST['quyen'];
+				$email = $_POST['email'];
+				$phone= $_POST['phone'];
 		
+				$sql= "update user set name_u='$name', phone='$phone',email='$email', pass='$pass', quyen='$quyen' where id_u='$id'";
+				$stmt = $conn->prepare($sql);
+				$stmt->execute();
+				
+			if ($stmt->rowCount() > 0) {
+				echo "cập nhập thành công";
+    		} else {
+			echo "Cập nhật dữ liệu thất bại";
+    		}
+			}
+?>	
+            <form action="" method="post">
+	<input type="hidden" name="id" value="<?=$id?>">
+	<div class="form-group">
 		
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
-		}
-	?>
+    <label >tên</label>
+    <input name="name" type="text" class="form-control"  value="<?=$row['name_u']?>">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">pass</label>
+      <input name="pass" type="password" class="form-control" id="inputEmail4" value="<?=$row['pass']?>">
+    </div>
+	  <div class="form-group col-md-6">
+      <label for="inputCity">Số điện thoại</label>
+      <input name="phone" type="number" class="form-control" id="inputCity" value="<?=$row['phone']?>">
+    </div>
     
-  </tbody>
-</table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+  </div>
+					  
+  <div class="form-row">
+	  
+  <div class="form-group col-md-8">
+      <label for="inputCity">email</label>
+      <input name="email" type="email" class="form-control" id="inputCity" value="<?=$row['email']?>">
+    </div>
+	  
+    <div class="form-group col-md-4">
+      <label for="inputState">quyền</label>
+      <select name="quyen" id="inputState" class="form-control" value="<?=$row['quyen']?>">
+        <option selected>admin</option>
+        <option>user</option>
+      </select>
+    </div>
+    
+  </div>
+  
+  <button type="submit" name="sua" class="btn btn-primary">sửa</button>
+</form>
+	  
             <!-- Donut Chart -->
             
           </div>

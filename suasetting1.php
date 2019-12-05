@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +101,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -193,7 +194,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -208,6 +208,7 @@
               </div>
             </li>
 
+
           </ul>
 
         </nav>
@@ -217,58 +218,107 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
+          <h1 class="h3 mb-2 text-gray-800">sửa</h1>
           
 
           <!-- Content Row -->
-          <div class="card shadow m-6">
-<?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from voucher";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
-					  
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
-		
-		
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
+          <div class="row">
+ <?php
+	include "connection.php";
+		if(isset($_GET['id'])){
+	$id=$_GET['id'];
+	$sql="select * from setting where id_st='$id'";
+	$stmt= $conn ->prepare($sql);
+	$stmt -> execute();
+	$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
+}
+		if(isset($_POST['sua'])){
+				$email= $_POST['email'];
+				$sdt = $_POST['sdt'];
+				$address = $_POST['address'];
+				if($_FILES['image']['name']!=""){
+			//cho phép upload ảnh vào
+			//cộng thêm time để tránh trùng ảnh
+	$image = $_FILES['image']['name'];
+	$tmp = $_FILES['image']['tmp_name'];
+			//upload ảnh lên server
+	move_uploaded_file( $tmp ,"image/".$image );
+		#Nếu Ảnh được add vào thì sẽ upload ảnh lên server và câu lệnh update có thêm phần update ảnh
+		$sql= "update setting set logo='$image', email='$email', phone='$sdt', address='$address' where id_st='$id'";
+	}
+	else{
+		//$image = "";
+		$sql= "update setting set email='$email', phone='$sdt', address='$address' where id_st='$id'";
+	}
+			
+				/*if($_FILES['image']['name']!=""){
+			//cho phép upload ảnh vào
+			//cộng thêm time để tránh trùng ảnh
+			$tenanh = time() . $_FILES['image']['name'];
+			//upload ảnh lên server
+			move_uploaded_file($_FILES['image']['tmp_name'],$tenanh );
 		}
-	?>
+			else{
+				$tenanh = "";
+			}*/
+				
+				//$sql= "update sanpham set name='$name', image='$image', price='$price', SalePrice='$sale', soluong='$soluong', date='$date', chitiet_sp='$chitiet' where id_sp='$id'";
+				$stmt = $conn->prepare($sql);
+				$stmt->execute();
+				/*$stmt = $conn->prepare($sql);
+            $stmt->bindParam(':name', $name);
+			$stmt->bindParam(':image', $image);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':SalePrice', $sale);
+			$stmt->bindParam(':soluong', $soluong);
+			$stmt->bindParam(':date', $date);
+			$stmt->bindParam(':chitiet', $chitiet);*/
+			
+            /*$stmt->execute();
+				if ($stmt->rowCount()>0) {
+                echo "sửa dữ liệu thành công";
+            } else {
+                echo "sửa dữ liệu thất bại";
+            }*/
+			if ($stmt->rowCount() > 0) {
+				echo "cập nhập thành công";
+    		} else {
+			echo "Cập nhật dữ liệu thất bại";
+    		}
+			}
+		
+	?>  
+          <form action="" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="<?=$id?>">
+  
+	<div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">email</label>
+      <input name="email" type="email" class="form-control" value="<?=$row['email']?>" >
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">số điện thoại </label>
+      <input name="sdt" type="number" class="form-control" value="<?=$row['phone']?>"  >
+    </div>
+  </div>				  
+  <div class="form-row">
+   <div class="form-group">
+    <label for="exampleFormControlFile1">Ảnh</label>
+			<img src="<?=$row['logo']?>" width="120" alt="">
+	<input type="hidden" name="image" value="<?=$row['logo']?>">
+    <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+	  
+  </div>		  
+	<div class=" col-md-8">
+      <label for="inputEmail4">địa chỉ</label>
+      <input name="address" type="text" class="form-control" value="<?=$row['address']?>" >
+    </div>
+  <div class="form-group">
     
-  </tbody>
-</table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+  </div>
+  <button type="submit" name="sua" class="btn btn-primary">sửa</button>
+</form>
             <!-- Donut Chart -->
             
           </div>
