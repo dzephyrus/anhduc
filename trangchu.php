@@ -10,6 +10,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 		
 		<!-- all css here -->
+		
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/magnific-popup.css">
         <link rel="stylesheet" href="assets/css/animate.css">
@@ -37,7 +38,17 @@
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
+									<?php
+						include 'connection.php';
+					$stmt = $conn->query("select * from setting");
+					foreach($stmt as $key => $row){
+					?>
+					
+					<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
+				
+					<?php 
+					}
+					?>
                                 </div>
                             </div>
                             <div class="col-lg-6 menu-none-block menu-center">
@@ -79,12 +90,7 @@
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">blog</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
+                                            	
                                             <li><a href="contact.html">contact</a></li>
                                         </ul>
                                     </nav>
@@ -153,6 +159,7 @@
                                                     <li><a href="product-details-4.html">fixed image style</a></li>
                                                     <li><a href="product-details-5.html">fixed image style 2</a></li> 
                                                 </ul>
+
                                             </li>
                                             <li><a href="#">BLOG</a>
                                                 <ul>
@@ -1225,7 +1232,17 @@
                             <div class="footer-widget">
                                 <div class="footer-widget-m-content text-center">
                                     <div class="footer-logo">
-                                        <a href="#"><img src="assets/img/logo/logo.png" alt=""></a>
+                                       <?php
+						include 'connection.php';
+					$stmt = $conn->query("select * from setting");
+					foreach($stmt as $key => $row){
+					?>
+					
+					<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
+				
+					<?php 
+					}
+					?>
                                     </div>
                                     <div class="footer-nav">
                                         <nav>
