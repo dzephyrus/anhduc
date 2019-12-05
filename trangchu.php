@@ -48,24 +48,23 @@
                                             <li><a href="about-us.html">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
-										   	<?php
-												include"connection.php";
-												$sql= "select * from category";
-												//Xử lý lệnh sql
-												$stmt = $conn->prepare($sql);
-												$stmt->execute();
-												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-												?>
 													<?php
-														foreach($result as $row){
-															?>
-												
-                                                   				 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-                                                   
-                                                
+														include"connection.php";
+														$sql= "select * from category";
+														//Xử lý lệnh sql
+														$stmt = $conn->prepare($sql);
+														$stmt->execute();
+														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+													?>
 															<?php
-													}
-												?>
+																foreach($result as $row){
+																	?>
+																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+
+
+																	<?php
+																}
+															?>
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -332,7 +331,7 @@
 						  <span class="sr-only">Next</span>
 						</a>
 					  </div>
-				</div>
+				</div><br>
            <!--Kết thúc slider-->
           
             <div class="banner-area pt-100 pb-70">
