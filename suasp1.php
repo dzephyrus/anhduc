@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>SB Admin 2 - Cards</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-
+<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 </head>
 
 <body id="page-top">
@@ -41,7 +40,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-       <li class="nav-item ">
+      <li class="nav-item ">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -120,6 +119,7 @@
           <i class="fas fa-fw fa-wrench"></i>
           <span>Cài đặt</span></a>
       </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -217,110 +217,164 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Danh sách sản phẩm</h1><br>
-
-			  
-           
+            <h1 class="h3 mb-0 text-gray-800">Sửa sản phẩm</h1>
           </div>
-
-          <!-- Content Row -->
-          <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
             
-          </div>
 
-          <!-- Content Row -->
-
-          <div class="row">
-
-            <!-- Area Chart -->
+            <!-- Earnings (Monthly) Card Example -->
             
-          </div>
 
-          <!-- Content Row -->
+            <!-- Earnings (Monthly) Card Example -->
+            
+
+            <!-- Pending Requests Card Example -->
+            
+
           <div class="row">
-			
-	
-            <!-- Content Column -->
-            <div class="col-lg-12 mb-4">
 
-              <!-- Project Card Example -->
-              <div class="card shadow m-6">
- <?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from product";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>               
-				  <table class="table ">
-					  <div class="card-header py-3 bg-light">
-                 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
-                </div>
-					  
-  <thead>
-	  	
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Tên</th>
-      <th scope="col">Ảnh</th>
-      <th scope="col">Giá</th>
-		<th scope="col">Giá KM</th>
-		<th scope="col">Số lượng</th>
-		<th scope="col">Ngày đăng</th>
-		<th scope="col">Chi tiết</th>
-		<th scope="col">view</th>
-		<th scope="col">Danh mục</th>
-		<th scope="col">Chỉnh sửa</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_p']?></td>
-		<td><?=$row['name_p']?></td>
-		<td><img src="image/<?=$row['image_p']?>" width="150"></td>
-		<td><?=$row['price']?></td>
-		<td><?=$row['sale_p']?></td>
-		<td><?=$row['sl_p']?></td>
-		<td><?=$row['date']?></td>
-		<td><?=$row['detail']?></td>
-		<td><?=$row['view']?></td>
-		<td><?=$row['id_cate']?> </td>
+            <div class="col-lg-12">
+
+              <!-- Default Card Example -->
+              
+				
 		
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
+		<?php
+			include "connection.php";
+				if(isset($_GET['id'])){
+			$id=$_GET['id'];
+			$sql="select * from product where id_p='$id'";
+			$stmt= $conn ->prepare($sql);
+			$stmt -> execute();
+			$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
 		}
-	?>
-    
-  </tbody>
-</table>
-				  
-				  
-              </div>
+				if(isset($_POST['add_sp'])){
+					if($_POST['name']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']=="" ){
+						echo"thêm thất bại, phải nhập đủ thông tin";
+					}
+					elseif($_POST['price']<=0 || $_POST['SalePrice']<=0 || $_POST['SalePrice']<=0){
+						echo"giá của sản phẩm phải lớn hơn 0";
+					}
+					else{
+						$name= $_POST['name'];
+						$price = $_POST['price'];
+						$sale = $_POST['SalePrice'];
+						$soluong =$_POST['soluong'];
+						$date= date("Y-m-d");
+						$chitiet=$_POST['ad'];
+						$id_dm= $_POST['dmuc'];
 
-              <!-- Color System -->
-              <div class="row">
-                
-              </div>
+						if($_FILES['image']['name']!=""){
+					//cho phép upload ảnh vào
+					//cộng thêm time để tránh trùng ảnh
+			$image = $_FILES['image']['name'];
+			$tmp = $_FILES['image']['tmp_name'];
+					//upload ảnh lên server
+			move_uploaded_file( $tmp ,"image/".$image );
+				#Nếu Ảnh được add vào thì sẽ upload ảnh lên server và câu lệnh update có thêm phần update ảnh
+				$sql= "update product set name_p='$name', image_p='$image', price='$price', sale_p='$sale',date='$date', sl_p='$soluong', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
+			}
+			else{
+				//$image = "";
+				$sql= "update product set name_p='$name', price='$price', sale_p='$sale', date='$date' , sl_p='$soluong', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
+			}
 
-            </div>
+					
+					$kqs = $conn -> prepare($sql);
+							if($kqs -> execute()){
+								echo 'thanh cong';
+							}else{
+								echo 'loi';
+							}
+					}
+				}
+			?>               
+			<form class="p-4" action="" method="POST" enctype="multipart/form-data" >
+			<input type="hidden" name="id" value="<?=$id?>">
+			<div class="form-row">				  
+			<div class="form-group col-md-6">
 
-           
-          </div>
+			<label for="inputAddress">tên sản phẩm</label>
+			<input name="name" type="text" class="form-control" id="inputAddress" value="<?=$row['name_p']?>">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="exampleFormControlFile1">Ảnh</label>
+					<img src="image/<?=$row['image_p']?>" width="120" alt="" style="padding: 5px 5px;">
+			<input type="hidden" name="image" value="<?=$row['image']?>">
+			<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+		  </div>
+			</div>
 
+			<div class="form-row">
+			<div class="form-group col-md-6">
+			  <label for="inputEmail4">giá</label>
+			  <input name="price" type="number" class="form-control" id="inputEmail4" value="<?=$row['price']?>">
+			</div>
+			  <div class="form-group col-md-6">
+			  <label for="inputCity">Giá khuyến mãi</label>
+			  <input name="SalePrice" type="number" class="form-control" id="inputCity" value="<?=$row['sale_p']?>">
+			</div>
+		  </div>				  
+
+			<div class="form-row">
+			<div class="form-group col-md-6">
+			  <label for="inputEmail4">Số lượng</label>
+			  <input name="soluong" type="number" class="form-control" id="inputEmail4" value="<?=$row['sl_p']?>" >
+			</div>
+
+		  </div>
+
+			<div class="form-group"  >
+			
+			
+				<label for="inputAddress">chi tiết sp</label>
+						<textarea name="ad" style="width: 90%;">
+							<?php echo $row['detail']?>
+									</textarea>
+									  <script>
+										  CKEDITOR.replace( 'ad' );
+									  </script>
+						</div>		
+		  </div>				  
+
+		 
+
+			<div class="form-group col-md-3">
+			  <label for="inputState">danh mục</label>
+
+				<select name="dmuc" id="inputState" class="form-control">
+					<!-- Đổ danh mục ra ngoài -->
+				<?php
+					include "connection.php";
+					$sqldm = "select * from category";
+					$kqdm = $conn->query($sqldm);
+					foreach ($kqdm as $key => $value){
+				?>
+					<!-- Nếu danh mục trong phần danh_muc = danh mục trong phần sanpham thì set selected -->
+					<option value="<?php echo $value['id_cate']?>" 
+							<?php
+								if($value['id_cate']==$row['id_cate']){echo 'selected';}
+							?>  >
+
+							<a href="" name="tenmuc" ><?php echo $value['name_cate']?></a>
+							
+					</option>
+
+					<?php }
+					?>
+				</select>
+			</div><br>
+
+
+		  
+		  <button name="add_sp" type="submit" class="btn btn-primary text-light col-md-1">sửa</button>
+
+		</form>
         </div>
         <!-- /.container-fluid -->
 
-      </div>
+     
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -372,14 +426,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
-
 </body>
 
 </html>

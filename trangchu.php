@@ -56,7 +56,8 @@
                                     <nav>
                                        <ul>
                                             <li><a href="#">home</a></li>
-                                            <li><a href="">shop</a>
+                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="#">shop</a>
 												<ul class="dropdown">
 										   	<?php
 												include"connection.php";
