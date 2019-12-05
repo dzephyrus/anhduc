@@ -1,5 +1,11 @@
 <?php
-	include 'connection.php';
+//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
+include"connection.php";
+$sql= "select * from category";
+//Xử lý lệnh sql
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +18,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Cards</title>
+  <title>SB Admin 2 - Buttons</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,7 +26,7 @@
 
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-<script src="https://cdn.ckeditor.com/4.12.1/stand	ard/ckeditor.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -43,7 +49,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item ">
+      <li class="nav-item active">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -56,7 +62,7 @@
       
 
       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Product</span></a>
@@ -164,24 +170,7 @@
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
+            
 
             <!-- Nav Item - Alerts -->
             
@@ -195,6 +184,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
+                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -209,7 +199,6 @@
               </div>
             </li>
 
-
           </ul>
 
         </nav>
@@ -219,135 +208,74 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Thêm sản phẩm</h1>
-          </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Pending Requests Card Example -->
-            
+          <h1 class="h3 mb-4 text-gray-800">Danh mục</h1>
 
           <div class="row">
 
             <div class="col-lg-12">
 
-              <!-- Default Card Example -->
-              
-				
+              <!-- Circle Buttons -->
+              <div class="card shadow mb-4 bg-light">
+                <div class="card-header py-3">
+                  <button class="btn btn-success"><a href="adddanhmuc1.php">thêm danh mục</a></button>
+                </div>
+                <div class="card-body">
+                  
+                  <div class="row">
 		
-		<form class="p-4" action="" method="POST" enctype="multipart/form-data" >
-					<div class="form-row">				  
-						<div class="form-group col-md-6">
-							<label for="inputAddress">tên sản phẩm</label>
-							<input name="name" type="text" class="form-control" id="inputAddress" placeholder="name">
-						</div>
-						<div class="form-group col-md-6">
-							<label for="exampleFormControlFile1">Ảnh</label>
-							<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
-						</div>
-					</div>
+		
+		<div class="col-md-12  ">
 			
-					<div class="form-row">
-						<div class="form-group col-md-6">
-						  <label for="inputEmail4">giá</label>
-						  <input name="price" type="number" class="form-control" id="inputEmail4" placeholder="price">
-						</div>
-						  <div class="form-group col-md-6">
-						  <label for="inputCity">Giá khuyến mãi</label>
-						  <input name="SalePrice" type="number" class="form-control" id="inputCity">
-						</div>
-				 	</div>				  
-
-					<div class="form-row">
-						<div class="form-group col-md-6">
-						  <label for="inputEmail4">Số lượng</label>
-						  <input name="soluong" type="number" class="form-control" id="inputEmail4" >
-						</div>
-				  	</div>
-
-					<div class="form-group"  >
-						<label for="inputAddress">chi tiết sp</label>
-						<textarea name="ad" style="width: 90%;">
-									</textarea>
-									  <script>
-										  CKEDITOR.replace( 'ad' );
-									  </script>
-						</div>				  
-
-				  	<div class="form-row">
-
-					<div class="form-group col-md-4">
-					  <label for="inputState">danh mục</label>
-
-						<select name="dmuc" id="inputState" class="form-control">
-						<?php
-							
-							$sqldm = "select * from category";
-							$kqdm = $conn->query($sqldm);
-							foreach ($kqdm as $key => $value){
-						?>		
-							<option value="<?php echo $value['id_cate'] ?>">
-							<a href="" name="tenmuc" ><?php echo $value['name_cate']?></a>
-								<?php echo $value['id_cate']?>
-
-							</option>
-
-							<?php }
-							?>
-						</select><br>
-					</div>
-
-				  </div>
-				  <button name="add_sp" type="submit" class="btn btn-primary">Thêm sản phẩm</button>
-				</form>
-				<?php
-					
-						if(isset($_POST['add_sp'])){
-							if($_POST['name']==""|| $_FILES['image']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']=="" ){
-								echo"thêm thất bại, phải nhập đủ thông tin";
-							}
-							elseif($_POST['price']<=0 || $_POST['SalePrice']<=0 || $_POST['soluong']<=0){
-								echo"giá của sản phẩm phải lớn hơn 0";
-							}
-							else{
-								$name= $_POST['name'];
-								$price = $_POST['price'];
-								$sale = $_POST['SalePrice'];
-								$soluong =$_POST['soluong'];
-								$date= date("Y-m-d");
-								$chitiet=$_POST['ad'];
-								$id_dm= $_POST['dmuc'];
-								$image=$_FILES['image']['name'];
-								$tmpA= $_FILES['image']['tmp_name'];
-								move_uploaded_file( $tmpA ,"image/".$image);
-
-
-								$sql = "insert into product values(null,'$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm',(select name_cate from category where id_cate ='$id_dm'))";
-									echo $sql;
-									$kq = $conn -> exec($sql);
-									if($kq == 1){
-										echo 'thanh cong';
-									}else{
-										echo 'ko thanh cong';
-									}
-							}
-						}
-					?>
-				  
+	
+		
+	<table class="table text-dark">
+  <thead>
+    <tr>
+      <th width="11%" scope="col">id</th>
+      <th width="25%" scope="col">tên danh mục</th>
+	<th width="51%" scope="col">ảnh</th>
+	<th width="13%" scope="col">cài đặt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+		foreach($result as $row){
+			?>
+	<tr>
+		<td><?=$row['id_cate']?></td>
+		<td><?=$row['name_cate']?></td>
+		
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suadanhmuc1.php?id=<?=$row['id_dm']?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoadanhmuc.php?id=<?=$row['id_dm']?>" class="text-light">xóa</a> </button>
+		</td>
+	</tr>
+	<?php
+		}
+	?>
+    
+  </tbody>
+</table>
+			
+				
+			</div>
+		</div>
+                  
+                </div>
               </div>
+
+              <!-- Brand Buttons -->
+              
+
+            </div>
+
             
+
+          </div>
+
         </div>
         <!-- /.container-fluid -->
 
-     
+      </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -399,6 +327,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+
 </body>
 
 </html>

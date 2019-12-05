@@ -1,4 +1,10 @@
+
+<?php
+session_start(); 
+ob_start();	
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -283,7 +289,7 @@
 					
 					$kqs = $conn -> prepare($sql);
 							if($kqs -> execute()){
-								echo 'thanh cong';
+								header("location:sanpham1.php");
 							}else{
 								echo 'loi';
 							}
@@ -429,3 +435,6 @@
 </body>
 
 </html>
+<?php
+	ob_end_flush();
+	?>
