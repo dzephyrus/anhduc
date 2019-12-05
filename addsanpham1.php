@@ -1,3 +1,6 @@
+<?php
+	include 'connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +20,7 @@
 
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.12.1/stand	ard/ckeditor.js"></script>
 </head>
 
 <body id="page-top">
@@ -286,7 +289,7 @@
 
 						<select name="dmuc" id="inputState" class="form-control">
 						<?php
-							include "connection.php";
+							
 							$sqldm = "select * from category";
 							$kqdm = $conn->query($sqldm);
 							foreach ($kqdm as $key => $value){
@@ -306,7 +309,7 @@
 				  <button name="add_sp" type="submit" class="btn btn-primary">Thêm sản phẩm</button>
 				</form>
 				<?php
-					include "connection.php";
+					
 						if(isset($_POST['add_sp'])){
 							if($_POST['name']==""|| $_FILES['image']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']=="" ){
 								echo"thêm thất bại, phải nhập đủ thông tin";
@@ -322,13 +325,12 @@
 								$date= date("Y-m-d");
 								$chitiet=$_POST['ad'];
 								$id_dm= $_POST['dmuc'];
-
 								$image=$_FILES['image']['name'];
 								$tmpA= $_FILES['image']['tmp_name'];
 								move_uploaded_file( $tmpA ,"image/".$image);
 
 
-								$sql = "insert into product values(null,'$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm')";
+								$sql = "insert into product values(null,'$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm',(select name_cate from category where id_cate ='$id_dm'))";
 									echo $sql;
 									$kq = $conn -> exec($sql);
 									if($kq == 1){
