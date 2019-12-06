@@ -291,7 +291,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['date']?></td>
 		<td><?=$row['detail']?></td>
 		<td><?=$row['view']?></td>
+
 		<td><?=$row['id_cate']?> <?=$row['name_cate']?> </td>
+
 		
 		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
 		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>

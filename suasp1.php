@@ -256,10 +256,10 @@ ob_start();
 			$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
 		}
 				if(isset($_POST['add_sp'])){
-					if($_POST['name']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']=="" ){
+					if($_POST['name']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']==""|| $_POST['SalePrice']<0 ){
 						echo"thêm thất bại, phải nhập đủ thông tin";
 					}
-					elseif($_POST['price']<=0 || $_POST['SalePrice']<=0 || $_POST['SalePrice']<=0){
+					elseif($_POST['price']<=0 || $_POST['soluong']<0 ){
 						echo"giá của sản phẩm phải lớn hơn 0";
 					}
 					else{
@@ -279,7 +279,7 @@ ob_start();
 					//upload ảnh lên server
 			move_uploaded_file( $tmp ,"image/".$image );
 				#Nếu Ảnh được add vào thì sẽ upload ảnh lên server và câu lệnh update có thêm phần update ảnh
-				$sql= "update product set name_p='$name', image_p='$image', price='$price', sale_p='$sale',date='$date', sl_p='$soluong', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
+				$sql= "update product set name_p='$name', image_p='$image', price='$price', sale_p='$sale', sl_p='$soluong',date='$date', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
 			}
 			else{
 				//$image = "";
