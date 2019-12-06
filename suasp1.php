@@ -339,11 +339,11 @@
 		  </div>				  
 
 		 
-
-			<div class="form-group col-md-3">
-			  <label for="inputState">danh mục</label>
-
-				<select name="dmuc" id="inputState" class="form-control">
+			
+			<div class="form-group col-md-4" >
+			  <label for="inputState" class="col-md-4">danh mục</label>
+<div class="form-row col-md-12 d-flex">
+				<select name="dmuc" id="inputState" class="form-control ">
 					<!-- Đổ danh mục ra ngoài -->
 				<?php
 					include "connection.php";
@@ -364,12 +364,11 @@
 					<?php }
 					?>
 				</select>
-			</div><br>
-
-
-		  
-		  <button name="add_sp" type="submit" class="btn btn-primary text-light col-md-1">sửa</button>
-
+			
+		 
+<button name="add_sp" type="submit" class="btn btn-primary text-light col-md-4 mt-3  ">sửa</button>
+			</div>
+				</div>
 		</form>
         </div>
         <!-- /.container-fluid -->

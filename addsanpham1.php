@@ -308,10 +308,10 @@
 				<?php
 					include "connection.php";
 						if(isset($_POST['add_sp'])){
-							if($_POST['name']==""|| $_FILES['image']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']=="" ){
+							if($_POST['name']==""|| $_FILES['image']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']==""|| $_POST['SalePrice']<0 ){
 								echo"thêm thất bại, phải nhập đủ thông tin";
 							}
-							elseif($_POST['price']<=0 || $_POST['SalePrice']<=0 || $_POST['soluong']<=0){
+							elseif($_POST['price']<=0 || $_POST['soluong']<=0){
 								echo"giá của sản phẩm phải lớn hơn 0";
 							}
 							else{
