@@ -76,6 +76,7 @@
 																	<?php
 																}
 															?>
+															?>
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -341,36 +342,7 @@
 				</div><br>
            <!--Kết thúc slider-->
           
-            <div class="banner-area pt-100 pb-70">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-3 col-12">
-                            <div class="single-banner mb-30">
-                                <a href="shop-grid-view-sidebar.html"><img src="image/thuc-an-me-o.jpg" width="270px" height="283px" alt=""></a>
-                                <div class="banner-content banner-content-position1">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-sm-none d-lg-block col-lg-6 col-12">
-                            <div class="single-banner mb-30">
-                                <a href="shop-grid-view-sidebar.html"><img src="image/bzcmarket-thiet-ke-bao-bi-thuc-an-cho-meo-lon-propet(2).jpg" height="283px;" alt=""></a>
-                                <div class="banner-content banner-content-position2">
-                                   
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 col-12">
-                            <div class="single-banner mb-30">
-                                <a href="shop-grid-view-sidebar.html"><img src="image/394b65429066fb6955b71e39d630308e.jpg" width="270px" height="283px" alt=""></a>
-                                <div class="banner-content banner-content-position3">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
             <div class="product-area pb-100">
                 <div class="container">
                     <div class="section-title text-center mb-35">

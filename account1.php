@@ -253,7 +253,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<tr>
 		<td><?=$row['id_u']?></td>
 		<td><?=$row['name_u']?></td>
-		<td><?=$row['phone']?></td>
+		<td>0<?=$row['phone']?></td>
 		<td><?=$row['email']?></td>
 		<td><?=$row['quyen']?></td>
 		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_u']?>">Update</a> </button>
