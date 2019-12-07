@@ -1,8 +1,11 @@
 <?php
-session_start(); 
-ob_start();
-	
-	
+//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
+include"connection.php";
+$sql= "select * from category";
+//Xử lý lệnh sql
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +18,7 @@ ob_start();
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>SB Admin 2 - Buttons</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,7 +49,7 @@ ob_start();
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-       <li class="nav-item ">
+      <li class="nav-item active">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -59,7 +62,7 @@ ob_start();
       
 
       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Product</span></a>
@@ -125,6 +128,7 @@ ob_start();
           <i class="fas fa-fw fa-wrench"></i>
           <span>Cài đặt</span></a>
       </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -166,24 +170,7 @@ ob_start();
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
+            
 
             <!-- Nav Item - Alerts -->
             
@@ -197,6 +184,7 @@ ob_start();
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
+                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -211,7 +199,6 @@ ob_start();
               </div>
             </li>
 
-
           </ul>
 
         </nav>
@@ -221,65 +208,33 @@ ob_start();
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Danh sách sản phẩm</h1><br>
-
-			  
-           
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-          </div>
-
-          <!-- Content Row -->
+          <h1 class="h3 mb-4 text-gray-800">Danh mục</h1>
 
           <div class="row">
 
-            <!-- Area Chart -->
-            
-          </div>
+            <div class="col-lg-12">
 
-          <!-- Content Row -->
-          <div class="row">
+              <!-- Circle Buttons -->
+              <div class="card shadow mb-4 bg-light">
+                <div class="card-header py-3">
+                  <button class="btn btn-success"><a href="adddanhmuc1.php">thêm danh mục</a></button>
+                </div>
+                <div class="card-body">
+                  
+                  <div class="row">
+		
+		
+		<div class="col-md-12  ">
 			
 	
-            <!-- Content Column -->
-            <div class="col-lg-12 mb-4">
-
-              <!-- Project Card Example -->
-              <div class="card shadow m-6">
- <?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from product";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>               
-				  <table class="table ">
-					  <div class="card-header py-3 bg-light">
-                 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
-                </div>
-					  
+		
+	<table class="table text-dark">
   <thead>
-	  	
     <tr>
-      <th scope="col">id</th>
-      <th scope="col">Tên</th>
-      <th scope="col">Ảnh</th>
-      <th scope="col">Giá</th>
-		<th scope="col">Giá KM</th>
-		<th scope="col">Số lượng</th>
-		<th scope="col">Ngày đăng</th>
-		<th scope="col">Chi tiết</th>
-		<th scope="col">view</th>
-		<th scope="col">Danh mục</th>
-		<th scope="col">Chỉnh sửa</th>
+      <th width="11%" scope="col">id</th>
+      <th width="25%" scope="col">tên danh mục</th>
+	<th width="51%" scope="col">ảnh</th>
+	<th width="13%" scope="col">cài đặt</th>
     </tr>
   </thead>
   <tbody>
@@ -287,21 +242,11 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($result as $row){
 			?>
 	<tr>
-		<td><?=$row['id_p']?></td>
-		<td><?=$row['name_p']?></td>
-		<td><img src="image/<?=$row['image_p']?>" width="150"></td>
-		<td><?=$row['price']?></td>
-		<td><?=$row['sale_p']?></td>
-		<td><?=$row['sl_p']?></td>
-		<td><?=$row['date']?></td>
-		<td><?=$row['detail']?></td>
-		<td><?=$row['view']?></td>
-
-		<td><?=$row['id_cate']?> <?=$row['name_cate']?> </td>
-
+		<td><?=$row['id_cate']?></td>
+		<td><?=$row['name_cate']?></td>
 		
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suadanhmuc1.php?id=<?=$row['id_dm']?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoadanhmuc.php?id=<?=$row['id_dm']?>" class="text-light">xóa</a> </button>
 		</td>
 	</tr>
 	<?php
@@ -310,18 +255,21 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
   </tbody>
 </table>
-				  
-				  
+			
+				
+			</div>
+		</div>
+                  
+                </div>
               </div>
 
-              <!-- Color System -->
-              <div class="row">
-                
-              </div>
+              <!-- Brand Buttons -->
+              
 
             </div>
 
-           
+            
+
           </div>
 
         </div>
@@ -380,16 +328,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
-
 </body>
 
 </html>
-<?php
-	ob_end_flush();
-	?>
