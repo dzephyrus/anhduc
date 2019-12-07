@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	ob_start();
+	include 'connection.php';	
+?>
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -329,9 +334,31 @@
                                                     <label>Remember me</label>
                                                     <a href="#">Forgot Password?</a>
                                                 </div>
-                                                <button type="submit" class="default-btn floatright">Login</button>
+                                                <button type="submit" name="login" class="default-btn floatright">Login</button>
                                             </div>
                                         </form>
+										<?php
+											if (isset($_POST['login'])) {
+												if($_POST['user-name']=="" || $_POST['user-password'] == ""){
+													?><br> <script> alert('Dữ liệu không được để trống'); </script> <?php
+												}else{
+												$user = $_POST['user-name'];
+												$pass = $_POST['user-password'];
+
+												$sql = "SELECT * FROM user WHERE name_u='$user'";
+												$kq = $conn->query($sql)->fetch();
+												 if($pass == $kq['pass'] && $kq['quyen'] == 'qt' ){
+																$_SESSION['name_u'] = $_POST['user-name'];
+																header("Location:show5.php");
+															}else if($pass == $kq['pass']){
+																$_SESSION['name_u'] = $_POST['user-name'];
+																header("Location:trangchu.php");
+															}else{
+															   ?><br> <script> alert('Sai tên tài khoản hoặc mật khẩu'); </script> <?php
+															}
+
+											}}
+									  ?>
                                     </div>
                                 </div>
                             </div>
@@ -425,3 +452,6 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<?php
+	ob_end_flush();
+?>

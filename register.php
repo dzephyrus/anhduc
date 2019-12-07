@@ -357,7 +357,9 @@ include 'connection.php';
 												$sqlSignin = "insert into user value('','$name','$phone','$email','$pass','kh')";
 												$kqSignin = $conn ->exec($sqlSignin);
 												if($kqSignin){
+													?><br> <script> alert('Đăng ký tài khoản thành công'); </script> <?php
 													header("location:login.php");
+													
 												}else{
 													?><br> <script> alert('Đăng ký tài khoản không thành công'); </script> <?php
 												}								
@@ -463,4 +465,4 @@ include 'connection.php';
 </html>
 <?php
 	ob_end_flush();
-	?>
+?>
