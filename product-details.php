@@ -1,3 +1,10 @@
+<?php
+session_start();
+    date_default_timezone_set("Asia/Ho_Chi_Minh"); // set múi giờ hiện tại
+    $now = getdate(); // get ngày giờ tuần hiện tại
+       $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"]; 
+       $currentTime;
+?>
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -62,16 +69,47 @@
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
+									<?php
+						include 'connection.php';
+					$stmt = $conn->query("select * from setting");
+					foreach($stmt as $key => $row){
+					?>
+					
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
+				
+					<?php 
+					}
+					?>
                                 </div>
                             </div>
                             <div class="col-lg-6 menu-none-block menu-center">
                                 <div class="main-menu">
                                     <nav>
-                                        <ul>
-                                            <li><a href="#">home</a></li>
+                                       <ul>
+                                            <li><a href="trangchu.php">home</a></li>
                                             <li><a href="about-us.html">about us</a></li>
-                                            <li><a href="shop-grid-view-5-col.html">shop</a></li>
+                                            <li><a href="#">shop</a>
+												<ul class="dropdown">
+										   	<?php
+												include"connection.php";
+												$sql= "select * from category";
+												//Xử lý lệnh sql
+												$stmt = $conn->prepare($sql);
+												$stmt->execute();
+												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+												?>
+													<?php
+												foreach($result as $row){
+												?>
+												
+                                                    <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+                                                   
+                                                
+												<?php
+												}
+												?>
+													</ul>
+										   </li>
                                             <li><a href="#">pages</a>
                                                 <ul class="dropdown">
                                                     <li><a href="about-us.html">about us</a></li>
@@ -83,12 +121,7 @@
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">blog</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
+                                            	
                                             <li><a href="contact.html">contact</a></li>
                                         </ul>
                                     </nav>
@@ -113,64 +146,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mobile-menu-area d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
-                                <div class="mobile-menu">
-                                    <nav id="mobile-menu-active">
-                                        <ul class="menu-overflow">
-                                            <li><a href="#">HOME</a>
-                                                <ul>
-                                                    <li><a href="index.html">furniture</a></li>
-                                                    <li><a href="index-electronics.html">electronics</a></li>
-                                                    <li><a href="index-fashion.html">fashion</a></li>
-                                                    <li><a href="index-jewellery.html">jewellery</a></li>
-                                                    <li><a href="index-food-drink.html">food & drink</a></li>
-                                                    <li><a href="index-toys.html">Toys & Games</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">pages</a>
-                                                <ul>
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">shop</a>
-                                                <ul>
-                                                    <li><a href="shop-grid-view-3-col.html">grid 3 column</a></li>
-                                                    <li><a href="shop-grid-view-5-col.html">grid 5 column</a></li>
-                                                    <li><a href="shop-grid-view-sidebar.html">grid with sidebar</a></li>
-                                                    <li><a href="shop-list-view-1-col.html">list 1 column</a></li>
-                                                    <li><a href="shop-list-view-2-col.html">list 2 column</a></li>
-                                                    <li><a href="shop-list-view-sidebar.html">list with sidebar</a></li>
-                                                    <li><a href="shop-list-view-1-col-container.html">list 1 column box</a></li>
-                                                    <li><a href="product-details.html">tab style 1</a></li>
-                                                    <li><a href="product-details-2.html">tab style 2</a></li>
-                                                    <li><a href="product-details-3.html">tab style 3</a></li>
-                                                    <li><a href="product-details-6.html">sticky style</a></li>
-                                                    <li><a href="product-details-7.html">sticky style 2</a></li>
-                                                    <li><a href="product-details-8.html">gallery style</a></li>
-                                                    <li><a href="product-details-9.html">gallery style 2</a></li>
-                                                    <li><a href="product-details-4.html">fixed image style</a></li>
-                                                    <li><a href="product-details-5.html">fixed image style 2</a></li> 
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">BLOG</a>
-                                                <ul>
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-2-col.html">blog 2 column</a></li>
-                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html"> Contact  </a></li>
-                                        </ul>
-                                    </nav>							
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -325,59 +301,43 @@
                         </div>
                     </div>
                     <div class="row">
+						<?php 
+								include 'connection.php';
+								if(isset($_GET['id'])){
+								$id=$_GET['id'];
+								$sql="select * from product where id_p='$id'";
+								$stmt= $conn ->prepare($sql);
+								$stmt -> execute();
+								$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
+								}
+							?>
+							<?php
+									$sq = "update product set view = view + 1 where id_p = '$id'";
+									$stmt= $conn ->prepare($sq);
+									$stmt -> execute();
+							?>
                         <div class="col-md-12 col-lg-7 col-12">
                             <div class="product-details-img-content">
                                 <div class="product-details-tab mr-70">
                                     <div class="product-details-large tab-content">
                                         <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/img/product-details/bl1.jpg">
-                                                    <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
+                                            
+                                                <a href="">
+                                                    <img src="image/<?=$row['image_p']?>" alt="">
                                                 </a>
-                                            </div>
+                                            
                                         </div>
-                                        <div class="tab-pane fade" id="pro-details2" role="tabpanel">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/img/product-details/bl2.jpg">
-                                                    <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="pro-details3" role="tabpanel">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/img/product-details/bl3.jpg">
-                                                    <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="pro-details4" role="tabpanel">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="assets/img/product-details/bl4.jpg">
-                                                    <img src="file:///E:/xampp/htdocs/duan1/anhduc/image/SH-Adult_beefCho-truong-thanh.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
-                                    <div class="product-details-small nav mt-12 main-product-details" role=tablist>
-                                        <a class="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
-                                            <img src="assets/img/product-details/s1.jpg" alt="">
-                                        </a>
-                                        <a class="mr-12" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
-                                            <img src="assets/img/product-details/s2.jpg" alt="">
-                                        </a>
-                                        <a class="mr-12" href="#pro-details3" data-toggle="tab" role="tab" aria-selected="true">
-                                            <img src="assets/img/product-details/s3.jpg" alt="">
-                                        </a>
-                                        <a class="mr-12" href="#pro-details4" data-toggle="tab" role="tab" aria-selected="true">
-                                            <img src="assets/img/product-details/s4.jpg" alt="">
-                                        </a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-5 col-12">
-                            <div class="product-details-content">
-                                <h3>Handcrafted Supper Mug</h3>
+                            
+							<div class="product-details-content">
+								<input type="hidden" name="id" value="<?=$id?>">
+                                <h3><?=$row['name_p']?></h3>
                                 <div class="rating-number">
                                     <div class="quick-view-rating">
                                         <i class="ion-ios-star red-star"></i>
@@ -391,30 +351,11 @@
                                     </div>
                                 </div>
                                 <div class="details-price">
-                                    <span>$120.00</span>
+									<h3><?=$row['sale_p']?></h3>
+                                    <span><del><?=$row['price']?></del></span>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmol tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim veni quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</p>
-                                <div class="quick-view-select">
-                                    <div class="select-option-part">
-                                        <label>Size*</label>
-                                        <select class="select">
-                                            <option value="">- Please Select -</option>
-                                            <option value="">xl</option>
-                                            <option value="">ml</option>
-                                            <option value="">m</option>
-                                            <option value="">sl</option>
-                                        </select>
-                                    </div>
-                                    <div class="select-option-part">
-                                        <label>Color*</label>
-                                        <select class="select">
-                                            <option value="">- Please Select -</option>
-                                            <option value="">orange</option>
-                                            <option value="">pink</option>
-                                            <option value="">yellow</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
+                                
                                 <div class="quickview-plus-minus">
                                     <div class="cart-plus-minus">
                                         <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
@@ -429,23 +370,10 @@
                                 <div class="product-categories product-cat-tag">
                                     <ul>
                                         <li class="categories-title">Categories :</li>
-                                        <li><a href="#">fashion</a></li>
-                                        <li><a href="#">electronics</a></li>
-                                        <li><a href="#">toys</a></li>
-                                        <li><a href="#">food</a></li>
-                                        <li><a href="#">jewellery</a></li>
+                                        <li><a href="#"><?=$row['name_cate']?></a></li>
                                     </ul>
                                 </div>
-                                <div class="product-tags product-cat-tag">
-                                    <ul>
-                                        <li class="categories-title">Tags :</li>
-                                        <li><a href="#">fashion</a></li>
-                                        <li><a href="#">electronics</a></li>
-                                        <li><a href="#">toys</a></li>
-                                        <li><a href="#">food</a></li>
-                                        <li><a href="#">jewellery</a></li>
-                                    </ul>
-                                </div>
+                                
                                 <div class="product-share">
                                     <ul>
                                         <li class="categories-title">Share :</li>
@@ -472,6 +400,7 @@
                                     </ul>
                                 </div>
                             </div>
+							
                         </div>
                     </div>
                 </div>
@@ -489,7 +418,7 @@
                         </div>
                         <div class="description-review-text tab-content">
                             <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</p>
+                                <p><?=$row['detail']?></p>
                             </div>
                             <div class="tab-pane fade" id="pro-review" role="tabpanel">
                                 <a href="#">Be the first to write your review!</a>
@@ -505,28 +434,43 @@
                     </div>
                     <div class="row">
                         <div class="new-collection-slider owl-carousel">
+							
+							<?php
+								//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
+								
+								include"connection.php";
+								//$sql= "select * from sanpham where ten_dm='melissani'";
+								if(isset($_GET['id'])){
+									$id=$_GET['id'];
+									$sql="select * from product where id_cate=(SELECT id_cate FROM product WHERE id_p='$id') ";
+								//Xử lý lệnh sql
+								$stmt = $conn->prepare($sql);
+								$stmt->execute();
+								$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+								}
+							?>
+							<?php
+								foreach($result as $row){
+							?>
                             <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
                                 <div class="single-product mb-35">
                                     <div class="product-img">
-                                        <a href="#"><img src="assets/img/shop/shop-grid-1/1.jpg" alt=""></a>
+                                        <a href="product-details.php?id=<?=$row['id_p']?>"><img src="image/<?=$row['image_p']?>" alt=""></a>
                                         <span>sale</span>
-                                        <div class="product-action">
-                                            <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                            <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                        </div>
+                                        
                                     </div>
                                     <div class="product-content">
                                         <div class="product-title-price">
                                             <div class="product-title">
-                                                <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
+                                                <h4><a href="product-details-6.html"><?=$row['name_p']?></a></h4>
                                             </div>
                                             <div class="product-price">
-                                                <span>$110.00</span>
+                                                <span><?=$row['price']?></span>
                                             </div>
                                         </div>
                                         <div class="product-cart-categori">
                                             <div class="product-cart">
-                                                <span>Furniter</span>
+                                                <span><?=$row['name_cate']?></span>
                                             </div>
                                             <div class="product-categori">
                                                 <a href="#"><i class="ion-bag"></i> Add to cart</a>
@@ -535,94 +479,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
-                                <div class="single-product mb-35">
-                                    <div class="product-img">
-                                        <a href="#"><img src="assets/img/shop/shop-grid-1/7.jpg" alt=""></a>
-                                        <div class="product-action">
-                                            <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                            <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <div class="product-title-price">
-                                            <div class="product-title">
-                                                <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$120.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-cart-categori">
-                                            <div class="product-cart">
-                                                <span>Furniter</span>
-                                            </div>
-                                            <div class="product-categori">
-                                                <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
-                                <div class="single-product mb-35">
-                                    <div class="product-img">
-                                        <a href="#"><img src="assets/img/shop/shop-grid-1/14.jpg" alt=""></a>
-                                        <span>sale</span>
-                                        <div class="product-action">
-                                            <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                            <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <div class="product-title-price">
-                                            <div class="product-title">
-                                                <h4><a href="product-details-6.html">HANDCRAFTED MUG</a></h4>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$130.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-cart-categori">
-                                            <div class="product-cart">
-                                                <span>Furniter</span>
-                                            </div>
-                                            <div class="product-categori">
-                                                <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
-                                <div class="single-product mb-35">
-                                    <div class="product-img">
-                                        <a href="#"><img src="assets/img/shop/shop-grid-1/11.jpg" alt=""></a>
-                                        <div class="product-action">
-                                            <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                            <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <div class="product-title-price">
-                                            <div class="product-title">
-                                                <h4><a href="product-details-6.html">HANDCRAFTED MUG</a></h4>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$140.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-cart-categori">
-                                            <div class="product-cart">
-                                                <span>Furniter</span>
-                                            </div>
-                                            <div class="product-categori">
-                                                <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+								}
+							?>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -647,7 +508,17 @@
                             <div class="footer-widget">
                                 <div class="footer-widget-m-content text-center">
                                     <div class="footer-logo">
-                                        <a href="#"><img src="assets/img/logo/logo.png" alt=""></a>
+                                       <?php
+											include 'connection.php';
+										$stmt = $conn->query("select * from setting");
+										foreach($stmt as $key => $row){
+										?>
+
+										<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
+
+										<?php 
+										}
+										?>
                                     </div>
                                     <div class="footer-nav">
                                         <nav>
