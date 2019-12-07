@@ -1,4 +1,9 @@
-
+<?php
+session_start(); 
+ob_start();
+	
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -383,3 +388,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </body>
 
 </html>
+<?php
+	ob_end_flush();
+	?>

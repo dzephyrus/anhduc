@@ -44,7 +44,7 @@
 					foreach($stmt as $key => $row){
 					?>
 					
-					<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
 				
 					<?php 
 					}
@@ -55,7 +55,7 @@
                                 <div class="main-menu">
                                     <nav>
                                        <ul>
-                                            <li><a href="#">home</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
                                             <li><a href="about-us.html">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
@@ -98,6 +98,18 @@
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
+										<div class="main-menu">
+                                   			 <nav>
+                                      			 <ul>
+													<li><a href="#">Tài khoản</a>
+															<ul class="dropdown">
+																<li><a href="about-us.html">Đăng nhập</a></li>
+																<li><a href="cart.html">Đăng ký</a></li>
+															</ul>
+													</li>
+													
+												</ul>
+									</div>
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
                                             <span class="ion-ios-search-strong"></span>
@@ -115,65 +127,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mobile-menu-area d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
-                                <div class="mobile-menu">
-                                    <nav id="mobile-menu-active">
-                                        <ul class="menu-overflow">
-                                            <li><a href="#">HOME</a>
-                                                <ul>
-                                                    <li><a href="index.html">furniture</a></li>
-                                                    <li><a href="index-electronics.html">electronics</a></li>
-                                                    <li><a href="index-fashion.html">fashion</a></li>
-                                                    <li><a href="index-jewellery.html">jewellery</a></li>
-                                                    <li><a href="index-food-drink.html">food & drink</a></li>
-                                                    <li><a href="index-toys.html">Toys & Games</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">pages</a>
-                                                <ul>
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">shop</a>
-                                                <ul>
-                                                    <li><a href="shop-grid-view-3-col.html">grid 3 column</a></li>
-                                                    <li><a href="shop-grid-view-5-col.html">grid 5 column</a></li>
-                                                    <li><a href="shop-grid-view-sidebar.html">grid with sidebar</a></li>
-                                                    <li><a href="shop-list-view-1-col.html">list 1 column</a></li>
-                                                    <li><a href="shop-list-view-2-col.html">list 2 column</a></li>
-                                                    <li><a href="shop-list-view-sidebar.html">list with sidebar</a></li>
-                                                    <li><a href="shop-list-view-1-col-container.html">list 1 column box</a></li>
-                                                    <li><a href="product-details.html">tab style 1</a></li>
-                                                    <li><a href="product-details-2.html">tab style 2</a></li>
-                                                    <li><a href="product-details-3.html">tab style 3</a></li>
-                                                    <li><a href="product-details-6.html">sticky style</a></li>
-                                                    <li><a href="product-details-7.html">sticky style 2</a></li>
-                                                    <li><a href="product-details-8.html">gallery style</a></li>
-                                                    <li><a href="product-details-9.html">gallery style 2</a></li>
-                                                    <li><a href="product-details-4.html">fixed image style</a></li>
-                                                    <li><a href="product-details-5.html">fixed image style 2</a></li> 
-                                                </ul>
-
-                                            </li>
-                                            <li><a href="#">BLOG</a>
-                                                <ul>
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-2-col.html">blog 2 column</a></li>
-                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html"> Contact  </a></li>
-                                        </ul>
-                                    </nav>							
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -1212,67 +1166,11 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer-area gray-bg pt-100 pb-95">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-5 col-12">
-                            <div class="footer-widget">
-                                <div class="footer-widget-l-content">
-                                    <h4>20 Years Experience</h4>
-                                    <ul>
-                                        <li><a href="#"><i class="ion-social-twitter"></i></a></li> 
-                                        <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
-                                        <li><a href="#"><i class="ion-social-facebook"></i></a></li> 
-                                        <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li> 
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-7 col-12">
-                            <div class="footer-widget">
-                                <div class="footer-widget-m-content text-center">
-                                    <div class="footer-logo">
-                                       <?php
-						include 'connection.php';
-					$stmt = $conn->query("select * from setting");
-					foreach($stmt as $key => $row){
-					?>
-					
-					<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
-				
-					<?php 
-					}
-					?>
-                                    </div>
-                                    <div class="footer-nav">
-                                        <nav>
-                                            <ul>
-                                                <li><a href="#">home</a></li>
-                                                <li><a href="#">about us</a></li>
-                                                <li><a href="#">shop </a></li>
-                                                <li><a href="#"> blog </a></li>
-                                                <li><a href="#">pages </a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="https://freethemescloud.com/" target="_blank" >Free Themes Cloud.</a> All rights reserved. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-12 col-12">
-                            <div class="footer-widget f-right">
-                                <div class="footer-widget-r-content">
-                                    <ul>
-                                        <li><span>Phone :</span> +00 123 54 0056</li>
-                                        <li><span>Email : </span> <a href="#">neha@gmail.com</a></li>
-                                        <li><span>Address :</span> Dhaka Bangladesh</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            
+              <!--đây là footer-->  
+             <?php include 'sharefooter.php'?>
+          
+       
             <!-- modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1366,28 +1264,6 @@
            
            <!--ok-->
         </div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<!-- all js here -->
-        <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
-        <script src="assets/js/popper.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="assets/js/isotope.pkgd.min.js"></script>
-        <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-        <script src="assets/js/jquery.counterup.min.js"></script>
-        <script src="assets/js/waypoints.min.js"></script>
-        <script src="assets/js/slinky.min.js"></script>
-        <script src="assets/js/ajax-mail.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/plugins.js"></script>
-        <script src="assets/js/main.js"></script>
+		<?php include 'sharejs.php'?>
     </body>
 </html>
