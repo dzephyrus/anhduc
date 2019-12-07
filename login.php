@@ -326,13 +326,14 @@
                                 <div class="login-form-container">
                                     <div class="login-form">
                                         <form action="#" method="post">
+											<h3>Mời bạn đăng nhập</h3>
                                             <input type="text" name="user-name" placeholder="Username">
                                             <input type="password" name="user-password" placeholder="Password">
                                             <div class="button-box">
                                                 <div class="login-toggle-btn">
-                                                    <input type="checkbox">
-                                                    <label>Remember me</label>
-                                                    <a href="#">Forgot Password?</a>
+                                                    <input type="checkbox" checked>
+                                                    <label>Nhớ tài khoản</label>
+                                                    <a href="#">Quên mật khẩu</a>
                                                 </div>
                                                 <button type="submit" name="login" class="default-btn floatright">Login</button>
                                             </div>
