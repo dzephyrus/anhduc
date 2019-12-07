@@ -327,6 +327,7 @@ include 'connection.php';
                                 <div class="login-form-container">
                                     <div class="login-form">
                                         <form action="#" method="post">
+											<h3>Mời bạn đăng ký tài khoản</h3>
                                             <input type="text" name="user-name" placeholder="Username">
                                             <input type="password" name="user-password" placeholder="Password">
 											<input type="password" name="user-password2" placeholder="Password2">
@@ -357,7 +358,7 @@ include 'connection.php';
 												$sqlSignin = "insert into user value('','$name','$phone','$email','$pass','kh')";
 												$kqSignin = $conn ->exec($sqlSignin);
 												if($kqSignin){
-													?><br> <script> alert('Đăng ký tài khoản thành công'); </script> <?php
+													
 													header("location:login.php");
 													
 												}else{
