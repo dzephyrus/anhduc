@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Charts</title>
+  <title>SB Admin 2 - Cards</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -100,7 +99,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -182,7 +181,7 @@
             </li>
 
             <!-- Nav Item - Alerts -->
-           
+            
 
             <!-- Nav Item - Messages -->
             
@@ -193,7 +192,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -208,6 +206,7 @@
               </div>
             </li>
 
+
           </ul>
 
         </nav>
@@ -217,66 +216,73 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
-          
-
-          <!-- Content Row -->
-          <div class="card shadow m-6">
-<?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from voucher";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
-					  
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
-		
-		
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
-		}
-	?>
-    
-  </tbody>
-</table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
-            <!-- Donut Chart -->
-            
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Thêm danh mục</h1>
           </div>
 
+            <!-- Earnings (Monthly) Card Example -->
+            
+
+            <!-- Earnings (Monthly) Card Example -->
+            
+
+            <!-- Earnings (Monthly) Card Example -->
+            
+
+            <!-- Pending Requests Card Example -->
+            
+
+          <div class="row">
+
+            <div class="col-lg-12">
+
+              <!-- Default Card Example -->
+              
+				
+		<div class="form-group">
+    <label for="exampleInputEmail1">thêm danh mục</label>
+   
+			
+  </div>
+		<form action="" method="post" enctype="multipart/form-data">			
+			<div class="input-group input-group-lg" style="width: 80%">
+  				<input type="text" class="form-control " name="dm_name" placeholder="tên danh mục" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+  			<div class="input-group-append" id="button-addon4">
+    			<button name="add_dm" class="btn btn-outline-secondary" type="submit">Thêm danh mục</button>
+    			<button class="btn btn-outline-secondary" type="button"><a href="danhmuc1.php">quản trị danh mục</a></button>
+  			</div>
+			</div>
+		</form>
+				
+	</div>
+<?php
+		include"connection.php";
+	if(isset($_POST['add_dm'])){
+		if($_POST['dm_name']== ""){
+			echo 'thiếu tên danh mục';
+		}
+		else{
+			$name = $_POST['dm_name'];
+			$sql = "insert into category(name_cate) values ('$name')";
+			$stmt = $conn -> prepare($sql);
+			$stmt ->execute();
+			if($stmt){
+				echo 'thêm thành công';
+			}
+			else{
+				echo 'thêm thất bại';
+			}
+		}
+		}
+					
+?>
+		</div>
+
+            
         </div>
         <!-- /.container-fluid -->
 
-      </div>
+     
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -328,15 +334,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
-
 </body>
 
 </html>

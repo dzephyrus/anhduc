@@ -21,6 +21,9 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
         <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+ 		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
         <!-- header start -->
@@ -50,16 +53,45 @@
                 </div>
             </div>
             <!-- Newsletter Popup End -->
-            <header>
-                <div class="header-area header-area-padding">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-6">
+           <header class="pl-155 pr-155 intelligent-header">
+                <div class="header-area header-area-2">
+                    <div class="container-fluid p-0">
+                        <div class="row no-gutters">
+                            <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-                                    <a href="index.php"><img src="assets/img/logo/logo.png" alt="" /></a>
+                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-6">
+                            <div class="col-lg-6 menu-none-block menu-center">
+                                <div class="main-menu">
+                                    <nav>
+                                       <ul>
+                                            <li><a href="#">home</a></li>
+                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="shop-grid-view-5-col.html">shop</a></li>
+                                            <li><a href="#">pages</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="about-us.html">about us</a></li>
+                                                    <li><a href="cart.html">cart</a></li>
+                                                    <li><a href="checkout.html">checkout</a></li>
+                                                    <li><a href="wishlist.html">wishlist</a></li>
+                                                    <li><a href="contact.html">contact</a></li>
+                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="register.html">register</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">blog</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="blog.html">blog </a></li>
+                                                    <li><a href="blog-details.html">blog details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html">contact</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
@@ -76,6 +108,64 @@
                                             <span class="ion-navicon"></span>
                                         </button>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="mobile-menu-area d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
+                                <div class="mobile-menu">
+                                    <nav id="mobile-menu-active">
+                                        <ul class="menu-overflow">
+                                            <li><a href="#">HOME</a>
+                                                <ul>
+                                                    <li><a href="index.html">furniture</a></li>
+                                                    <li><a href="index-electronics.html">electronics</a></li>
+                                                    <li><a href="index-fashion.html">fashion</a></li>
+                                                    <li><a href="index-jewellery.html">jewellery</a></li>
+                                                    <li><a href="index-food-drink.html">food & drink</a></li>
+                                                    <li><a href="index-toys.html">Toys & Games</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">pages</a>
+                                                <ul>
+                                                    <li><a href="about-us.html">about us</a></li>
+                                                    <li><a href="cart.html">cart</a></li>
+                                                    <li><a href="checkout.html">checkout</a></li>
+                                                    <li><a href="wishlist.html">wishlist</a></li>
+                                                    <li><a href="contact.html">contact</a></li>
+                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="register.html">register</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">shop</a>
+                                                <ul>
+                                                    <li><a href="shop-grid-view-3-col.html">grid 3 column</a></li>
+                                                    <li><a href="shop-grid-view-5-col.html">grid 5 column</a></li>
+                                                    <li><a href="shop-grid-view-sidebar.html">grid with sidebar</a></li>
+                                                    <li><a href="shop-list-view-1-col.html">list 1 column</a></li>
+                                                    <li><a href="shop-list-view-2-col.html">list 2 column</a></li>
+                                                    <li><a href="shop-list-view-sidebar.html">list with sidebar</a></li>
+                                                    <li><a href="shop-list-view-1-col-container.html">list 1 column box</a></li>
+                                                    <li><a href="product-details.html">tab style 1</a></li>
+                                                    <li><a href="product-details-2.html">tab style 2</a></li>
+                                                    <li><a href="product-details-3.html">tab style 3</a></li>
+                                                    <li><a href="product-details-6.html">sticky style</a></li>
+                                                    <li><a href="product-details-7.html">sticky style 2</a></li>
+                                                    <li><a href="product-details-8.html">gallery style</a></li>
+                                                    <li><a href="product-details-9.html">gallery style 2</a></li>
+                                                    <li><a href="product-details-4.html">fixed image style</a></li>
+                                                    <li><a href="product-details-5.html">fixed image style 2</a></li> 
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">BLOG</a>
+                                                <ul>
+                                                    <li><a href="blog.html">blog </a></li>
+                                                    <li><a href="blog-2-col.html">blog 2 column</a></li>
+                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
+                                                    <li><a href="blog-details.html">blog details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html"> Contact  </a></li>
+                                        </ul>
+                                    </nav>							
                                 </div>
                             </div>
                         </div>
@@ -209,32 +299,43 @@
                     </div>
                 </div>
             </div>
-            <div class="slider-area">
-                <div class="slider-active owl-carousel">
-                    <div class="single-slider single-slider-hm1 bg-img ptb-260" style="background-image: url(assets/img/slider/1.jpg)">
-                        <div class="container">
-                            <div class="slider-content slider-content-style-1 slider-animated-1">
-                                <h3 class="animated">New Collection <span>2018.</span></h3>
-                                <h2 class="animated">Amazing Product</h2>
-                                <p class="animated">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor incididunt ut labore et dolore </p>
-                                <a class="btn-hover slider-btn-style animated" href="shop-grid-view-sidebar.html">shop now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-slider single-slider-hm1 bg-img slider-content-style-1 ptb-260" style="background-image: url(assets/img/slider/8.jpg)">
-                        <div class="container">
-                            <div class="slider-content slider-content-style-1 slider-animated-2 slider-text-right">
-                                <h3 class="animated">New Fashion <span>2018.</span></h3>
-                                <h2 class="animated">Awesome Product</h2>
-                                <div class="slide-right-pera">
-                                    <p class="animated">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor incididunt ut labore et dolore </p>
-                                </div>
-                                <a class="btn-hover slider-btn-style animated" href="shop-grid-view-sidebar.html">shop now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+                <!--long slider-->
+                <div class="container" style ="width: 100%; height: 550px;">
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+						<ol class="carousel-indicators">
+						  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						  <li data-target="#myCarousel" data-slide-to="1"></li>
+						  <li data-target="#myCarousel" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+						  <div class="item active">
+							<img src="image/ok1.jpg" alt="Los Angeles" style="height: 550px;">
+						  </div>
+
+						  <div class="item">
+							<img src="image/ok2.jpg" alt="Chicago" style="height: 550px;"/>
+						  </div>
+
+						  
+						</div>
+
+						<!-- Left and right controls -->
+						<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+						  <span class="glyphicon glyphicon-chevron-left"></span>
+						  <span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" data-slide="next">
+						  <span class="glyphicon glyphicon-chevron-right"></span>
+						  <span class="sr-only">Next</span>
+						</a>
+					  </div>
+				</div>
+           <!--Kết thúc slider-->
+          
             <div class="banner-area pt-100 pb-70">
                 <div class="container">
                     <div class="row">
@@ -1250,41 +1351,8 @@
                     </div>
                 </div>
             </div>
-            <div class="clickable-mainmenu-btn">
-                <a class="clickable-mainmenu-active" href="#"><i class="ion-navicon"></i></a>
-            </div>
-            <div class="clickable-mainmenu text-center">
-                <div class="clickable-mainmenu-icon">
-                    <button class="clickable-mainmenu-close">
-                        <span class="ion-android-close"></span>
-                    </button>
-                </div>
-                <div id="menu" class="text-left">
-                    <ul>
-                                            <li><a href="#">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
-                                            <li><a href="shop-grid-view-5-col.html">shop</a></li>
-                                            <li><a href="#">pages</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">blog</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">contact</a></li>
-                                        </ul>
-                </div>
-            </div>
+           
+           <!--ok-->
         </div>
 		
 		

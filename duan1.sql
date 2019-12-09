@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2019 at 04:11 PM
+-- Generation Time: Nov 26, 2019 at 06:05 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -32,6 +32,14 @@ CREATE TABLE `category` (
   `id_cate` int(11) NOT NULL,
   `name_cate` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id_cate`, `name_cate`) VALUES
+(1, 'dog_food'),
+(2, 'cat_food');
 
 -- --------------------------------------------------------
 
@@ -103,10 +111,10 @@ CREATE TABLE `slide` (
 CREATE TABLE `user` (
   `id_u` int(11) NOT NULL,
   `name_u` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL,
+  `phone` int(11) NOT NULL,
   `email` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL,
   `pass` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL,
-  `quyen` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL,
-  `phone` int(255) NOT NULL
+  `quyen` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -178,7 +186,7 @@ ALTER TABLE `voucher`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id_cate` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `comment`

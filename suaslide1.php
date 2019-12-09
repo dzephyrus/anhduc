@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-
+	<script src="ckeditor_4.13.0_full_easyimage/ckeditor/ckeditor.js" ></script>
 </head>
 
 <body id="page-top">
@@ -41,7 +42,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -57,17 +58,11 @@
        <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
-          <span>Product</span></a>
+          <span>Sản phẩm</span></a>
       </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Đơn hàng</span></a>
-      </li>
+      
 
       <!-- Nav Item - Utilities Collapse Menu -->
       
@@ -85,24 +80,16 @@
       <li class="nav-item">
         <a class="nav-link" href="comment1.php">
           <i class="fas fa-fw fa-comments"></i>
-          <span>Comment</span></a>
+          <span>Bình luận</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="slide1.php">    
 		  <i class="fas fa-fw fa-chart-area"></i>
           <span>Slide</span></a>
-      </li>
-		
-		<hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Voucher</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
@@ -193,7 +180,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -208,75 +194,116 @@
               </div>
             </li>
 
+
           </ul>
 
         </nav>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        
+        <!-- /.container-fluid -->
+
+      </div>
+		
+		<div class="container-fluid col-md-12 ">
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Slide</h1>
           
 
           <!-- Content Row -->
-          <div class="card shadow m-6">
-<?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from voucher";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
-					  
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
+          <div class="row col-12">
+ <?php
+	include "connection.php";
+		if(isset($_GET['id'])){
+	$id=$_GET['id'];
+	$sql="select * from slide where id_slide='$id'";
+	$stmt= $conn ->prepare($sql);
+	$stmt -> execute();
+	$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
+}
+		if(isset($_POST['add_slide'])){
+				$title= $_POST['title'];
+				$link = $_POST['link'];
+				$tt = $_POST['tt'];
+				
+				if($_FILES['image']['name']!=""){
+			//cho phép upload ảnh vào
+			//cộng thêm time để tránh trùng ảnh
+	$image = $_FILES['image']['name'];
+	$tmp = $_FILES['image']['tmp_name'];
+			//upload ảnh lên server
+	move_uploaded_file( $tmp ,"image/".$image );
+		#Nếu Ảnh được add vào thì sẽ upload ảnh lên server và câu lệnh update có thêm phần update ảnh
+		$sql= "update slide set image_slide='$image', title='$title', link='$link', tt='$tt' where id_slide='$id'";
+	}
+	else{
+		//$image = "";
+		$sql= "update slide set title='$title', link='$link', tt='$tt' where id_slide='$id'";
+	}
+			
+				
+				$stmt = $conn->prepare($sql);
+				$stmt->execute();
+				
+			if ($stmt->rowCount() > 0) {
+				echo "cập nhập thành công";
+    		} else {
+			echo "Cập nhật dữ liệu thất bại";
+    		}
+			}
 		
-		
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
-		}
-	?>
+	?>  
+          <form action="" method="post" enctype="multipart/form-data">
+	
+  	<input type="hidden" name="id" value="<?=$id?>">
+	<div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="inputEmail4">title</label>
+     <textarea name="title" id="editor1" rows="10" cols="80">
+		 <?=$row['title']?>
+	</textarea>
+    </div>
     
-  </tbody>
-</table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+  </div>				  
+  <div class="form-row">
+	  <div class="form-group col-md-12">
+      <label for="inputPassword4">link </label>
+      <input name="link" type="text" class="form-control" value="<?=$row['link']?>" >
+    </div>
+	  
+   
+	  
+  </div>
+	<div class="form-row">
+		<div class="col-md-5">
+      <label for="inputState">trạng thái</label>
+      <select name="tt" id="inputState" class="form-control" value="<?=$row['tt']?>">
+        <option selected>on</option>
+        <option>off</option>
+      </select>
+    </div>
+		
+		<div class="form-group col-md-6">
+    <label for="exampleFormControlFile1">Ảnh</label>
+			<img src="<?=$row['image_slide']?>" width="120" alt="">
+			<input type="hidden" name="image" value="<?=$row['image_slide']?>">
+   		 	<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+	</div>
+	
+ 
+  <button name="add_slide" type="submit" class="btn btn-primary">sửa slide</button>
+			  <button type="submit" class="btn btn-primary"><a href="slide1.php" class="text-light">danh sách slide</a></button>
+</form>
             <!-- Donut Chart -->
-            
+	
+			  
           </div>
 
         </div>
-        <!-- /.container-fluid -->
-
-      </div>
+		
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -336,7 +363,11 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
-
+<script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
 </body>
 
 </html>

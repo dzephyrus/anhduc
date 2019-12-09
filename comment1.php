@@ -100,7 +100,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -193,7 +193,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -208,6 +207,7 @@
               </div>
             </li>
 
+
           </ul>
 
         </nav>
@@ -217,58 +217,63 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
+          <h1 class="h3 mb-2 text-gray-800">Charts</h1>
           
 
           <!-- Content Row -->
           <div class="card shadow m-6">
-<?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from voucher";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
+
             <table class="table">
 					  
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
-		
+		<th scope="col">STT</th>
+      <th scope="col">ID_SP</th>
+      <th scope="col">Số BL</th>
+      <th scope="col">BL gần đây</th>
+		<th scope="col">BL cũ nhất</th>
+		<th scope="col">Chỉnh sửa</th>
 		
     </tr>
   </thead>
   <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
-		}
-	?>
-    
+	  <?php
+	  include"connection.php";
+      $sql = "select COUNT(id_p),id_cmt,id_p, detail, name_u,date from comment GROUP BY id_p";
+      $kq = $conn->query($sql);
+      foreach($kq as $key=>$value){
+        ?>
+    <tr>
+      
+      <td><?php echo $key+1 ?></td>
+      <td><?php 
+                  $sqldm = "select * from product where id_p = $value[id_p]";
+                  $kqdm = $conn->query($sqldm)->fetch();
+                  if($value['id_p'] == $kqdm['id_p']){
+                     echo $kqdm['id_p']; ?> - <?php echo $kqdm['name_p'];
+                  }
+              ?></td>        
+      <td><?php 
+                  $sqlsl = "select * from comment WHERE id_p=$value[id_p]";
+                  $kqdm = $conn->query($sqlsl)->rowCount();
+                    echo $kqdm;
+              ?></td>
+		<td><?php $sql = "SELECT * FROM comment ORDER BY date DESC";
+                      $kq  = $conn->query($sql)->fetch(); 
+                      echo $kq['date'];
+                      ?></td>
+		<td><?php $sql = "SELECT * FROM comment ORDER BY date ASC";
+                      $kq  = $conn->query($sql)->fetch(); 
+                      echo $kq['date'];
+                      ?></td>
+		<td><button type="button" class="btn btn-success"><a href="comment2.php?idsp=<?php echo $value['id_p']; ?>">Chi tiết</a></button></td>
+    </tr>	
+	  <?php
+   }
+   ?>
   </tbody>
 </table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+
             <!-- Donut Chart -->
             
           </div>

@@ -100,7 +100,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -225,7 +225,7 @@
 <?php
 //câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
 include"connection.php";
-$sql= "select * from voucher";
+$sql= "select * from user";
 //Xử lý lệnh sql
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -235,13 +235,13 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 					  
   <thead>
     <tr>
-      <th scope="col">ID</th>
+      <th scope="col">ID tk</th>
       <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
+      
+      <th scope="col">phone</th>
+		<th scope="col">email</th>
+		<th scope="col">quyền</th>
+		<th scope="col">thao tác</th>
 		
 		
     </tr>
@@ -251,14 +251,13 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($result as $row){
 			?>
 	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
+		<td><?=$row['id_u']?></td>
+		<td><?=$row['name_u']?></td>
+		<td>0<?=$row['phone']?></td>
+		<td><?=$row['email']?></td>
+		<td><?=$row['quyen']?></td>
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_u']?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_u']?>" class="text-light">xóa</a> </button>
 		</td>
 	</tr>
 	<?php
@@ -267,8 +266,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
   </tbody>
 </table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addaccount1.php">Thêm account</a></button>
             <!-- Donut Chart -->
             
           </div>

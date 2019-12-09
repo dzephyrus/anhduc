@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +101,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -120,7 +121,6 @@
           <i class="fas fa-fw fa-wrench"></i>
           <span>Cài đặt</span></a>
       </li>
-
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -193,7 +193,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -207,6 +206,7 @@
                 </a>
               </div>
             </li>
+
 
           </ul>
 
@@ -223,26 +223,22 @@
           <!-- Content Row -->
           <div class="card shadow m-6">
 <?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from voucher";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
+	include 'connection.php';
+					$sql="select * from slide";
+					$stmt = $conn->query($sql);
+					$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					
+			  ?>
+            <table class="table ">
 					  
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
-		
+      <th scope="col">ID slide</th>
+      <th scope="col">Ảnh</th>
+      <th scope="col">tiêu đề</th>
+      <th scope="col">link</th>
+		<th scope="col">TT</th>
+		<th scope="col">Chỉnh sửa</th>
 		
     </tr>
   </thead>
@@ -251,24 +247,23 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($result as $row){
 			?>
 	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
+		<td><?=$row['id_slide']?></td>
+		<td><img src="image/<?=$row['image_slide']?>" width="150"></td>
+		<td><?=$row['title']?></td>
+		<td><?=$row['link']?></td>
+		<td><?=$row['tt']?></td>
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suaslide1.php?id=<?=$row['id_slide']?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoaslide.php?id=<?=$row['id_slide']?>" class="text-light">xóa</a> </button>
 		</td>
 	</tr>
+	
 	<?php
 		}
 	?>
     
   </tbody>
-</table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+			  </table>
+			  <button class="btn btn-success col-md-1"><a href="addslide1.php" class="text-light text-decoration-none">thêm slide</a></button>
             <!-- Donut Chart -->
             
           </div>

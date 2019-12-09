@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +99,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -193,7 +192,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -207,6 +205,7 @@
                 </a>
               </div>
             </li>
+
 
           </ul>
 
@@ -225,24 +224,22 @@
 <?php
 //câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
 include"connection.php";
-$sql= "select * from voucher";
+$sql= "select * from setting";
 //Xử lý lệnh sql
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
+?>
+            <table class="table ">
 					  
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
-		
+      <th scope="col">logo</th>
+      <th scope="col">email</th>
+      <th scope="col">số điện thoại</th>
+		<th scope="col">địa chỉ</th>
+		<th scope="col">Chỉnh sửa</th>
 		
     </tr>
   </thead>
@@ -251,14 +248,13 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($result as $row){
 			?>
 	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
-		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
+		<td><?=$row['id_st']?></td>
+		<td><img src="image/<?=$row['logo']?>" width="150"></td>
+		<td><?=$row['email']?></td>
+		<td><?=$row['phone']?></td>
+		<td><?=$row['address']?></td>
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasetting1.php?id=<?=$row['id_st']?>">Update</a> </button>
+		
 		</td>
 	</tr>
 	<?php
@@ -267,8 +263,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
   </tbody>
 </table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
+
             <!-- Donut Chart -->
             
           </div>

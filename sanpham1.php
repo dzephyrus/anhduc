@@ -1,4 +1,9 @@
-
+<?php
+session_start(); 
+ob_start();
+	
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +15,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Charts</title>
+  <title>SB Admin 2 - Dashboard</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,7 +46,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+       <li class="nav-item ">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -54,7 +59,7 @@
       
 
       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item">
+       <li class="nav-item active">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Product</span></a>
@@ -100,7 +105,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -120,7 +125,6 @@
           <i class="fas fa-fw fa-wrench"></i>
           <span>Cài đặt</span></a>
       </li>
-
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -182,7 +186,7 @@
             </li>
 
             <!-- Nav Item - Alerts -->
-           
+            
 
             <!-- Nav Item - Messages -->
             
@@ -193,7 +197,6 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
-                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -208,6 +211,7 @@
               </div>
             </li>
 
+
           </ul>
 
         </nav>
@@ -217,33 +221,65 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
-          
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Danh sách sản phẩm</h1><br>
+
+			  
+           
+          </div>
 
           <!-- Content Row -->
-          <div class="card shadow m-6">
-<?php
+          <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            
+          </div>
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+			
+	
+            <!-- Content Column -->
+            <div class="col-lg-12 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card shadow m-6">
+ <?php
 //câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
 include"connection.php";
-$sql= "select * from voucher";
+$sql= "select * from product";
 //Xử lý lệnh sql
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
+?>               
+				  <table class="table ">
+					  <div class="card-header py-3 bg-light">
+                 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
+                </div>
 					  
   <thead>
+	  	
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">ngày bắt đầu</th>
-		<th scope="col">ngày kết thúc</th>
-		<th scope="col">khuyến mãi</th>
-		<th scope="col">nội dung ct</th>
-		<th scope="col">thay dổi</th>
-		
-		
+      <th scope="col">id</th>
+      <th scope="col">Tên</th>
+      <th scope="col">Ảnh</th>
+      <th scope="col">Giá</th>
+		<th scope="col">Giá KM</th>
+		<th scope="col">Số lượng</th>
+		<th scope="col">Ngày đăng</th>
+		<th scope="col">Chi tiết</th>
+		<th scope="col">view</th>
+		<th scope="col">Danh mục</th>
+		<th scope="col">Chỉnh sửa</th>
     </tr>
   </thead>
   <tbody>
@@ -251,14 +287,21 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($result as $row){
 			?>
 	<tr>
-		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
-		<td><?=$row['start']?></td>
-		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
+		<td><?=$row['id_p']?></td>
+		<td><?=$row['name_p']?></td>
+		<td><img src="image/<?=$row['image_p']?>" width="150"></td>
+		<td><?=$row['price']?></td>
+		<td><?=$row['sale_p']?></td>
+		<td><?=$row['sl_p']?></td>
+		<td><?=$row['date']?></td>
 		<td><?=$row['detail']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_tk']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_tk']?>" class="text-light">xóa</a> </button>
+		<td><?=$row['view']?></td>
+
+		<td><?=$row['id_cate']?> <?=$row['name_cate']?> </td>
+
+		
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
 		</td>
 	</tr>
 	<?php
@@ -267,10 +310,18 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
   </tbody>
 </table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addvoucher1.php">Thêm voucher</a></button>
-			  
-            <!-- Donut Chart -->
-            
+				  
+				  
+              </div>
+
+              <!-- Color System -->
+              <div class="row">
+                
+              </div>
+
+            </div>
+
+           
           </div>
 
         </div>
@@ -335,8 +386,10 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <!-- Page level custom scripts -->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
 
 </body>
 
 </html>
+<?php
+	ob_end_flush();
+	?>

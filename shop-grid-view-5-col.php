@@ -31,29 +31,7 @@
         <!-- header start -->
         <div class="wrapper">
             <!-- Newsletter Popup Start -->
-            <div class="popup_wrapper hidden-sm hidden-xs">
-                <div class="test">
-                    <span class="popup_off">Close</span>
-                    <div class="subscribe_area text-center">
-                        <h2>Newsletter</h2>
-                        <p>Subscribe to the Neha mailing list to receive updates on new arrivals, special offers and other discount information.</p>
-                        <div id="mc_embed_signup" class="subscribe-bottom">
-                            <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                                <div id="mc_embed_signup_scroll" class="mc-form">
-                                    <input type="email" value="" name="EMAIL" class="email" placeholder="Enter your email address" required>
-                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                    <div class="mc-news" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                                    <div class="clear-2"><input type="submit" value="subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="subscribe-bottom mt-15">
-                            <input type="checkbox" id="newsletter-permission">
-                            <label for="newsletter-permission">Don't show this popup again</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- Newsletter Popup End -->
             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
@@ -61,7 +39,17 @@
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
+									<?php
+						include 'connection.php';
+					$stmt = $conn->query("select * from setting");
+					foreach($stmt as $key => $row){
+					?>
+					
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
+				
+					<?php 
+					}
+					?>
                                 </div>
                             </div>
                             <div class="col-lg-6 menu-none-block menu-center">
@@ -70,7 +58,28 @@
                                        <ul>
                                             <li><a href="#">home</a></li>
                                             <li><a href="about-us.html">about us</a></li>
-                                            <li><a href="shop-grid-view-5-col.html">shop</a></li>
+                                            <li><a href="#">shop</a>
+												<ul class="dropdown">
+										   	<?php
+												include"connection.php";
+												$sql= "select * from category";
+												//Xử lý lệnh sql
+												$stmt = $conn->prepare($sql);
+												$stmt->execute();
+												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+												?>
+													<?php
+												foreach($result as $row){
+												?>
+												
+                                                    <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+                                                   
+                                                
+												<?php
+												}
+												?>
+													</ul>
+										   </li>
                                             <li><a href="#">pages</a>
                                                 <ul class="dropdown">
                                                     <li><a href="about-us.html">about us</a></li>
@@ -82,12 +91,7 @@
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">blog</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
+                                            	
                                             <li><a href="contact.html">contact</a></li>
                                         </ul>
                                     </nav>
@@ -156,6 +160,7 @@
                                                     <li><a href="product-details-4.html">fixed image style</a></li>
                                                     <li><a href="product-details-5.html">fixed image style 2</a></li> 
                                                 </ul>
+
                                             </li>
                                             <li><a href="#">BLOG</a>
                                                 <ul>
@@ -498,10 +503,24 @@
                         <div class="shop-product-content tab-content">
                             <div id="grid-5-col1" class="tab-pane fade active show">
                                 <div class="row custom-row">
+									<?php
+										include 'connection.php';
+										if(isset($_GET['id'])){
+										$id=$_GET['id'];
+										$sql="select * from product where id_cate='$id'";
+									//Xử lý lệnh sql
+									$stmt = $conn->prepare($sql);
+									$stmt->execute();
+									$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+										}
+									?>
+									<?php
+										foreach($result as $row){
+											?>	
                                     <div class="custom-col-5 custom-col-style">
                                         <div class="single-product mb-35">
                                             <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/2.jpg" alt=""></a>
+                                                <a href="product-details.php?id=<?=$row['id_p']?>" class=""><img src="image/<?php echo $row["image_p"]?>" alt=""></a>
                                                 <div class="product-action">
                                                     <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
                                                     <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
@@ -510,15 +529,16 @@
                                             <div class="product-content">
                                                 <div class="product-title-price">
                                                     <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
+                                                        <h4><a href="product-details.php?id=<?=$row['id_p']?>"><?php echo $row["name_p"]?></a></h4>
                                                     </div>
                                                     <div class="product-price">
-                                                        <span>$110.00</span>
+                                                        <span><?php echo $row["sale_p"]?> <del> <?php echo $row["price"]?></del></span>
                                                     </div>
                                                 </div>
                                                 <div class="product-cart-categori">
+													
                                                     <div class="product-cart">
-                                                        <span>Furniter</span>
+                                                        <span><?php echo $row["name_cate"]?></span>
                                                     </div>
                                                     <div class="product-categori">
                                                         <a href="#"><i class="ion-bag"></i> Add to cart</a>
@@ -527,421 +547,11 @@
                                             </div>
                                         </div>
                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/1.jpg" alt=""></a>
-                                                <span>sale</span>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/3.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/4.jpg" alt=""></a>
-                                                <span>sale</span>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/5.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/6.jpg" alt=""></a>
-                                                <span>sale</span>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/7.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/8.jpg" alt=""></a>
-                                                <span>sale</span>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/9.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/10.jpg" alt=""></a>
-                                                <span>sale</span>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/11.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/12.jpg" alt=""></a>
-                                                <span>sale</span>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/13.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/14.jpg" alt=""></a>
-                                                <span>sale</span>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/15.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    <?php
+		}
+	?>	
+                                    
+                                    
                             <div id="grid-5-col2" class="tab-pane fade">
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12 col-xl-6">
@@ -1170,7 +780,17 @@
                             <div class="footer-widget">
                                 <div class="footer-widget-m-content text-center">
                                     <div class="footer-logo">
-                                        <a href="#"><img src="assets/img/logo/logo.png" alt=""></a>
+                                       <?php
+											include 'connection.php';
+										$stmt = $conn->query("select * from setting");
+										foreach($stmt as $key => $row){
+										?>
+
+										<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
+
+										<?php 
+										}
+										?>
                                     </div>
                                     <div class="footer-nav">
                                         <nav>
