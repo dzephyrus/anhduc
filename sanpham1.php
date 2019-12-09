@@ -11,13 +11,7 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?> 
-<?php
-include"connection.php";
-$sql1= "select * from category";
-$stmt1 = $conn->prepare($sql1);
-$stmt1->execute();
-$result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-?>                      
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -302,13 +296,7 @@ $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['date']?></td>
 		<td><?=$row['detail']?></td>
 		<td><?=$row['view']?></td>
-    <?php
-    foreach($result1 as $row1){
-      ?>
-		<td><?=$row['id_cate']?> <?=$row1['name_cate']?></td>
-    <?php
-		}
-	?>
+		<td><?=$row['id_cate']?></td>
 		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
 		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
 		</td>
