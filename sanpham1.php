@@ -4,6 +4,20 @@ ob_start();
 	
 	
 ?>
+<?php
+include"connection.php";
+$sql= "select * from product";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?> 
+<?php
+include"connection.php";
+$sql1= "select * from category";
+$stmt1 = $conn->prepare($sql1);
+$stmt1->execute();
+$result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+?>                      
 <!DOCTYPE html>
 <html lang="en">
 
@@ -252,15 +266,7 @@ ob_start();
 
               <!-- Project Card Example -->
               <div class="card shadow m-6">
- <?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from product";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>               
+   
 				  <table class="table ">
 					  <div class="card-header py-3 bg-light">
                  <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
@@ -296,10 +302,13 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['date']?></td>
 		<td><?=$row['detail']?></td>
 		<td><?=$row['view']?></td>
-
-		<td><?=$row['id_cate']?> <?=$row['name_cate']?> </td>
-
-		
+    <?php
+    foreach($result1 as $row1){
+      ?>
+		<td><?=$row['id_cate']?> <?=$row1['name_cate']?></td>
+    <?php
+		}
+	?>
 		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
 		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
 		</td>
@@ -307,6 +316,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<?php
 		}
 	?>
+  
     
   </tbody>
 </table>
