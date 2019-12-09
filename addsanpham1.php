@@ -1,6 +1,12 @@
 <?php
 	include 'connection.php';
 ?>
+<?php
+session_start(); 
+ob_start();
+	
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -330,11 +336,11 @@
 								move_uploaded_file( $tmpA ,"image/".$image);
 
 
-								$sql = "insert into product values(null,'$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm',(select name_cate from category where id_cate ='$id_dm'))";
+								$sql = "insert into product values('','$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm')";
 									echo $sql;
 									$kq = $conn -> exec($sql);
 									if($kq == 1){
-										echo 'thanh cong';
+										header("location:sanpham1.php");
 									}else{
 										echo 'ko thanh cong';
 									}
@@ -402,3 +408,6 @@
 </body>
 
 </html>
+<?php
+	ob_end_flush();
+	?>

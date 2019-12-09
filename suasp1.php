@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-<?php
-session_start(); 
-ob_start();
-	
-	
-=======
 
 <?php
 session_start(); 
-ob_start();	
->>>>>>> 7ea9ae5e500deec0db8a845d0c223f4e30cf779e
+ob_start();
+
 ?>
 <!DOCTYPE html>
 
@@ -442,10 +435,10 @@ ob_start();
 </body>
 
 </html>
-<<<<<<< HEAD
-	<?php
-=======
+
+	
+
 <?php
->>>>>>> 7ea9ae5e500deec0db8a845d0c223f4e30cf779e
+
 	ob_end_flush();
 	?>
