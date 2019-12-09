@@ -1,9 +1,11 @@
+
 <?php
 session_start(); 
 ob_start();
 	
 	
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -290,7 +292,10 @@ ob_start();
 				$sql= "insert into slide values('','$image','$title','$link','$tt')";
 				$kq = $conn->exec($sql);
 				if($kq==1){
+
 			header("location:slide1.php");
+
+				
 			}
 			else{
 				echo "không thêm đc dữ liệu";
@@ -370,6 +375,8 @@ ob_start();
 </body>
 
 </html>
+
 <?php
 	ob_end_flush();
 	?>
+
