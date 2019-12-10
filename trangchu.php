@@ -2,6 +2,7 @@
 	session_start();
 	ob_start();
 	include 'connection.php';	
+	
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -110,14 +111,22 @@
 													 <?php
 														
 													 	if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
+															$sql_dangnhap = "SELECT * FROM user";
+															$kq_dangnhap = $conn->query($sql_dangnhap)->fetch();
 													 ?>
 													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
-													
-															<ul class="dropdown">
-																<li><a href="dangxuat.php">Đăng xuất</a></li>
-																<li><a href="">Đổi mật khẩu</a></li>
-																<li><a href="danhmuc1.php">Quản trị</a></li>
-															</ul>
+															<?php if($kq_dangnhap['quyen']=="user"){?>
+																<ul class="dropdown">
+																	<li><a href="dangxuat.php">Đăng xuất</a></li>
+																	<li><a href="">Đổi mật khẩu</a></li>
+																</ul>
+															<?php } else {?>
+																<ul class="dropdown">
+																	<li><a href="dangxuat.php">Đăng xuất</a></li>
+																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="danhmuc1.php">Quản trị</a></li>
+																</ul>
+															<?php }?>
 													</li>
 													<?php } else { ?>
 													 <li><a href="#">Tài khoản</a>
