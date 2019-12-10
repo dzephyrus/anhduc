@@ -90,24 +90,24 @@ session_start();
                                             <li><a href="about-us.html">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
-										   	<?php
-												include"connection.php";
-												$sql= "select * from category";
-												//Xử lý lệnh sql
-												$stmt = $conn->prepare($sql);
-												$stmt->execute();
-												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-												?>
 													<?php
-												foreach($result as $row){
-												?>
-												
-                                                    <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-                                                   
-                                                
-												<?php
-												}
-												?>
+														include"connection.php";
+														$sql= "select * from category";
+														//Xử lý lệnh sql
+														$stmt = $conn->prepare($sql);
+														$stmt->execute();
+														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+													?>
+															<?php
+																foreach($result as $row){
+																	?>
+																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+
+
+																	<?php
+																}
+															?>
+														
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -117,7 +117,7 @@ session_start();
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
                                                     <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="login.php">login</a></li>
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
@@ -129,6 +129,18 @@ session_start();
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
+										<div class="main-menu">
+                                   			 <nav>
+                                      			 <ul>
+													<li><a href="#">Tài khoản</a>
+															<ul class="dropdown">
+																<li><a href="login.php">Đăng nhập</a></li>
+																<li><a href="register.php">Đăng ký</a></li>
+															</ul>
+													</li>
+													
+												</ul>
+									</div>
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
                                             <span class="ion-ios-search-strong"></span>
@@ -422,6 +434,8 @@ session_start();
                             </div>
                             <div class="tab-pane fade" id="pro-review" role="tabpanel">
                                 <a href="#">Be the first to write your review!</a>
+                                
+								
                             </div>
                         </div>
                     </div>
