@@ -101,10 +101,10 @@
 										<div class="main-menu">
                                    			 <nav>
                                       			 <ul>
-													<li><a href="#">Tài khoản</a>
+													<li><a href="#">Tài khoản </a>
 															<ul class="dropdown">
 																<li><a href="login.php">Đăng nhập</a></li>
-																<li><a href="cart.html">Đăng ký</a></li>
+																<li><a href="register.php">Đăng ký</a></li>
 															</ul>
 													</li>
 													
