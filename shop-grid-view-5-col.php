@@ -1,3 +1,7 @@
+<?php
+	session_start();
+
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -190,43 +194,51 @@
                         </div>
                         <div class="cart-content">
                             <h3>Shopping Cart</h3>
+							
+							
                             <ul>
+								<?php
+								if(isset($_POST['addcart'])){
+									$id = $_POST['addcart'];
+									
+									if(!isset($_SESSION['cart'])){
+										$_SESSION['cart']= array(); // tạo giỏ hàng
+									}
+									if(!isset($_SESSION['cart'][$id])){ // nếu ko tồn tại mã hàng thì ta gán số lượng là 1 
+										$_SESSION['cart'][$id]['sl']=1;
+									}
+									else{ // nếu tồn tại mã hàng, cộng thêm 1 
+										$_SESSION['cart'][$id]['sl']+=1;
+									}
+									//in ra giỏi hàng
+									//print_r($_SESSION['cart']);
+								} 
+								?>
+								<?php
+									
+									foreach($_SESSION['cart'] as $row=>$value){
+										include 'connection.php';
+									$sql="select * from product where id_p='$id'";
+									$stmt= $conn ->prepare($sql);
+									$stmt -> execute();
+									$r = $stmt -> fetch();
+										?>	
+									
                                 <li class="single-product-cart">
                                     <div class="cart-img">
                                         <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
                                     </div>
                                     <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
+                                        <h3><a href="#"> mã sp là. <?= $row['id']?></a></h3>
+                                        <span> số lượng <?= $value['sl']?> <?= $r['price']?></span>
                                     </div>
                                     <div class="cart-delete">
                                         <a href="#"><i class="ion-ios-trash-outline"></i></a>
                                     </div>
                                 </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
+								<?php
+											}
+                                ?>
                                 <li class="single-product-cart">
                                     <div class="cart-total">
                                         <h4>Total : <span>$ 120</span></h4>
@@ -502,6 +514,7 @@
                         </div>
                         <div class="shop-product-content tab-content">
                             <div id="grid-5-col1" class="tab-pane fade active show">
+								
                                 <div class="row custom-row">
 									<?php
 										include 'connection.php';
@@ -521,10 +534,7 @@
                                         <div class="single-product mb-35">
                                             <div class="product-img">
                                                 <a href="product-details.php?id=<?=$row['id_p']?>" class=""><img src="image/<?php echo $row["image_p"]?>" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
+                                                
                                             </div>
                                             <div class="product-content">
                                                 <div class="product-title-price">
@@ -540,9 +550,12 @@
                                                     <div class="product-cart">
                                                         <span><?php echo $row["name_cate"]?></span>
                                                     </div>
+													
                                                     <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
+														<form action="" method="get">
+														<button type="submit" class="btn" name="addcart" value="<?=$row['id_p']?>"><a href="addcart.php?id=<?=$row['id_p']?>">add cart</a></button></form>
                                                     </div>
+													
                                                 </div>
                                             </div>
                                         </div>
@@ -822,97 +835,7 @@
                 </div>
             </footer>
             <!-- modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="ion-android-close" aria-hidden="true"></span>
-                </button>
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="qwick-view-left">
-                                <div class="quick-view-learg-img">
-                                    <div class="quick-view-tab-content tab-content">
-                                        <div class="tab-pane active show fade" id="modal1" role="tabpanel">
-                                            <img src="assets/img/quick-view/l1.jpg" alt="">
-                                        </div>
-                                        <div class="tab-pane fade" id="modal2" role="tabpanel">
-                                            <img src="assets/img/quick-view/l2.jpg" alt="">
-                                        </div>
-                                        <div class="tab-pane fade" id="modal3" role="tabpanel">
-                                            <img src="assets/img/quick-view/l3.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="quick-view-list nav" role=tablist>
-                                    <a class="active" href="#modal1" data-toggle="tab" role="tab" aria-selected="true">
-                                        <img src="assets/img/quick-view/s1.jpg" alt="">
-                                    </a>
-                                    <a href="#modal2" data-toggle="tab" role="tab" aria-selected="false">
-                                        <img src="assets/img/quick-view/s2.jpg" alt="">
-                                    </a>
-                                    <a href="#modal3" data-toggle="tab" role="tab" aria-selected="false">
-                                        <img src="assets/img/quick-view/s3.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="qwick-view-right">
-                                <div class="qwick-view-content">
-                                    <h3>Handcrafted Supper Mug</h3>
-                                    <div class="price">
-                                        <span class="new">$90.00</span>
-                                        <span class="old">$120.00  </span>
-                                    </div>
-                                    <div class="rating-number">
-                                        <div class="quick-view-rating">
-                                            <i class="ion-ios-star red-star"></i>
-                                            <i class="ion-ios-star red-star"></i>
-                                            <i class="ion-android-star-outline"></i>
-                                            <i class="ion-android-star-outline"></i>
-                                            <i class="ion-android-star-outline"></i>
-                                        </div>
-                                        <div class="quick-view-number">
-                                            <span>2 Ratting (S)</span>
-                                        </div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do tempor incididun ut labore et dolore magna aliqua. Ut enim ad mi , quis nostrud veniam exercitation .</p>
-                                    <div class="quick-view-select">
-                                        <div class="select-option-part">
-                                            <label>Size*</label>
-                                            <select class="select">
-                                                <option value="">- Please Select -</option>
-                                                <option value="">xl</option>
-                                                <option value="">ml</option>
-                                                <option value="">m</option>
-                                                <option value="">sl</option>
-                                            </select>
-                                        </div>
-                                        <div class="select-option-part">
-                                            <label>Color*</label>
-                                            <select class="select">
-                                                <option value="">- Please Select -</option>
-                                                <option value="">orange</option>
-                                                <option value="">pink</option>
-                                                <option value="">yellow</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="quickview-plus-minus">
-                                        <div class="cart-plus-minus">
-											<input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-										</div>
-                                        <div class="quickview-btn-cart">
-                                            <a class="btn-hover-black" href="#">add to cart</a>
-                                        </div>
-                                        <div class="quickview-btn-wishlist">
-                                            <a class="btn-hover" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
         </div>
 		
 		
