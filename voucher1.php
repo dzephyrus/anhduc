@@ -250,6 +250,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php
 		foreach($result as $row){
 			?>
+
 	<tr>
 		<td><?=$row['id_vc']?></td>
 		<td><?=$row['ma_vc']?></td>
@@ -264,6 +265,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<?php
 		}
 	?>
+
     
   </tbody>
 </table>
