@@ -106,6 +106,7 @@
 										<div class="main-menu">
                                    			 <nav>
                                       			 <ul>
+
 													 <?php
 														
 													 	if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
@@ -120,6 +121,7 @@
 													</li>
 													<?php } else { ?>
 													 <li><a href="#">Tài khoản</a>
+
 															<ul class="dropdown">
 																<li><a href="login.php">Đăng nhập</a></li>
 																<li><a href="register.php">Đăng ký</a></li>
