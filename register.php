@@ -1,3 +1,9 @@
+<?php
+session_start(); 
+ob_start();
+include 'connection.php';	
+	
+?>
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -321,13 +327,50 @@
                                 <div class="login-form-container">
                                     <div class="login-form">
                                         <form action="#" method="post">
+											<h3>Mời bạn đăng ký tài khoản</h3>
                                             <input type="text" name="user-name" placeholder="Username">
                                             <input type="password" name="user-password" placeholder="Password">
-                                            <input name="user-email" placeholder="Email" type="email">
+											<input type="password" name="user-password2" placeholder="Password2">
+											<input type="number" name="phone" placeholder="Phone">
+                                            <input name="email" placeholder="Email" type="email">
                                             <div class="button-box">
-                                                <button type="submit" class="default-btn floatright">Register</button>
+                                                <button type="submit" class="default-btn floatright" name="xacnhan">Đăng ký</button>
                                             </div>
                                         </form>
+								<?php
+									
+									if(isset($_POST['xacnhan'])){
+										$name = $_POST['user-name'];
+										$email = $_POST['email'];
+										$phone = $_POST['phone'];
+										$pass = $_POST['user-password'];
+										$repass = $_POST['user-password2'];
+										#Check 2 pass
+										if($_POST['user-name']=="" || $_POST['email']=="" || $_POST['user-password']=="" || $_POST['user-password2']=="" || $_POST['phone']==""){
+											?><br> <script> alert('Dữ liệu không được để trống'); </script> <?php
+										}else if($pass==$repass){
+											$sqlCheckUser = "select * from user where name_u= '$name';";
+											$kqCheckUser = $conn->query($sqlCheckUser)->fetch();
+											#Check tài khoản tồn tại
+											if(isset($kqCheckUser['id_u'])){
+												?><br> <script> alert('Tên tài khoản đã tồn tại'); </script> <?php
+											}else{
+												$sqlSignin = "insert into user value('','$name','$phone','$email','$pass','kh')";
+												$kqSignin = $conn ->exec($sqlSignin);
+												if($kqSignin){
+													
+													header("location:login.php");
+													
+												}else{
+													?><br> <script> alert('Đăng ký tài khoản không thành công'); </script> <?php
+												}								
+											}
+										}else{
+											?><br> <script> alert('Hai mật khẩu không trùng nhau'); </script> <?php
+										}
+									}
+
+								?>
                                     </div>
                                 </div>
                             </div>
@@ -421,3 +464,6 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<?php
+	ob_end_flush();
+?>

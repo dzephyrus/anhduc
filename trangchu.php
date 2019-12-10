@@ -101,7 +101,7 @@
 										<div class="main-menu">
                                    			 <nav>
                                       			 <ul>
-													<li><a href="#">Tài khoản</a>
+													<li><a href="#">Tài khoản </a>
 															<ul class="dropdown">
 																<li><a href="login.php">Đăng nhập</a></li>
 																<li><a href="register.php">Đăng ký</a></li>
@@ -329,12 +329,14 @@
 									
                                     <div class="product-slider-active owl-carousel">
 										<?php
+
 										include 'connection.php';
 						$sql1 = "select * from product order by id_p DESC LIMIT 0,4 ";
 						$stmt = $conn->prepare($sql1);
 						$stmt->execute();
 						$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						foreach($result as $row){
+
 					
 						?>
                                         <div class="col-md-3 col-lg-3 col-sm-4">
@@ -342,6 +344,9 @@
 											
                                                 <div class="product-img" style="width: 270px;height: 300px;">
                                                     <a href="product-details.php?id=<?=$row['id_p']?>"><img src="image/<?php echo $row['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
+
+                                                    <a href="#"><img src="image/<?php echo $row['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
+
                                                    
                                                     <div class="product-action">
                                                         <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
@@ -351,10 +356,12 @@
                                                 <div class="product-content">
                                                     <div class="product-title-price">
                                                         <div class="product-title" >
+
                                                             <h4><a href="product-details-6.html"><?php echo $row['name_p'] ?></a></h4>
                                                         </div>
                                                         <div class="product-price" style="margin-left: 150px;">
                                                             <span><?php echo $row['price'] ?></span>
+
                                                         </div>
                                                     </div>
                                                     <div class="product-cart-categori">
@@ -369,8 +376,10 @@
                                             </div>
 											
                                         </div>
+
                                        <?php 
-						}
+						
+                                       <?php }
 						?>
                                     </div>
 									
