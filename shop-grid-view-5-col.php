@@ -60,8 +60,8 @@
                                 <div class="main-menu">
                                     <nav>
                                        <ul>
-                                            <li><a href="#">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
+                                            <li><a href="about-us.php">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
 										   	<?php
@@ -86,7 +86,7 @@
 										   </li>
                                             <li><a href="#">pages</a>
                                                 <ul class="dropdown">
-                                                    <li><a href="about-us.html">about us</a></li>
+                                                    <li><a href="about-us.php">about us</a></li>
                                                     <li><a href="cart.html">cart</a></li>
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
@@ -102,6 +102,22 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
+                                <div class="header-search-cart">
+										<div class="main-menu">
+                                   			 <nav>
+                                      			 <ul>
+													<li><a href="#">Tài khoản</a>
+															<ul class="dropdown">
+																<li><a href="login.php">Đăng nhập</a></li>
+																<li><a href="cart.html">Đăng ký</a></li>
+															</ul>
+													</li>
+													
+												</ul>
+									</div>
+
+
+                            
                                 <div class="header-search-cart">
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
@@ -166,15 +182,8 @@
                                                 </ul>
 
                                             </li>
-                                            <li><a href="#">BLOG</a>
-                                                <ul>
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-2-col.html">blog 2 column</a></li>
-                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html"> Contact  </a></li>
+                                            
+                                            <li><a href="contact.php"> Contact  </a></li>
                                         </ul>
                                     </nav>							
                                 </div>
@@ -226,7 +235,7 @@
 									
                                 <li class="single-product-cart">
                                     <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
+                                        <a href="#"><img src="image/<?=$stmt['image_p']   ?>" alt=""></a>
                                     </div>
                                     <div class="cart-title">
                                         <h3><a href="#"> mã sp là. <?= $row['id']?></a></h3>
@@ -319,17 +328,25 @@
                     </div>
                 </div>
             </div>
-            <div class="breadcrumb-area pt-205 pb-210 bg-img" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
+            <?php
+						$sql = "select * from banner  where tt='off' limit 1";
+						$kqslide = $conn->query($sql);
+						foreach($kqslide as $key=>$value){
+					
+						?>
+            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/<?= $value['image']   ?>)">
                 <div class="container">
                     <div class="breadcrumb-content">
-                        <h2>shop</h2>
+                        <h2>Shop</h2>
                         <ul>
-                            <li><a href="#">home</a></li>
+                            <li><a href="trangchu.php">home</a></li>
                             <li> shop </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <?php }
+			?>
             <div class="shop-page-wrapper hidden-items padding-filter">
                 <div class="container-fluid">
                     <div class="shop-filters-left">
@@ -553,7 +570,22 @@
 													
                                                     <div class="product-categori">
 														<form action="" method="get">
-														<button type="submit" class="btn" name="addcart" value="<?=$row['id_p']?>"><a href="addcart.php?id=<?=$row['id_p']?>">add cart</a></button></form>
+														<button type="submit" class="btn" name="addcart" value="<?=$row['id_p']?>">add cart</button></form>
+                                                        <?php
+                                                         if(isset($_POST['addcart'])){
+                                                             $addcart = $_POST['addcart'];
+                                                             if(!isset($_SESSION['cart'])){
+                                                                $_SESSION['cart'] = array();
+
+                                                             }
+                                                             if(!isset($_SESSION['cart'][$addcart])){
+                                                                $sl=$_SESSION['cart'][$addcart]['sl_p']=1;
+
+                                                             }else{
+                                                              print_r($_SESSION['cart']);
+                                                             }
+                                                         }
+                                                         ?>
                                                     </div>
 													
                                                 </div>
