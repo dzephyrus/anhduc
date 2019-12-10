@@ -1,9 +1,14 @@
 <?php
 session_start();
+
     date_default_timezone_set("Asia/Ho_Chi_Minh"); // set múi giờ hiện tại
     $now = getdate(); // get ngày giờ tuần hiện tại
        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"]; 
        $currentTime;
+       
+?>
+<?php
+ob_start();
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -13,8 +18,17 @@ session_start();
         <title>Neha - Minimalist eCommerce HTML5 Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.4/dist/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.4/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.2.4/dist/js/uikit-icons.min.js"></script>
+
+
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+
 		
 		
 		<!-- all css here -->
@@ -39,29 +53,7 @@ session_start();
         <!-- header start -->
         <div class="wrapper">
             <!-- Newsletter Popup Start -->
-            <div class="popup_wrapper hidden-sm hidden-xs">
-                <div class="test">
-                    <span class="popup_off">Close</span>
-                    <div class="subscribe_area text-center">
-                        <h2>Newsletter</h2>
-                        <p>Subscribe to the Neha mailing list to receive updates on new arrivals, special offers and other discount information.</p>
-                        <div id="mc_embed_signup" class="subscribe-bottom">
-                            <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                                <div id="mc_embed_signup_scroll" class="mc-form">
-                                    <input type="email" value="" name="EMAIL" class="email" placeholder="Enter your email address" required>
-                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                    <div class="mc-news" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                                    <div class="clear-2"><input type="submit" value="subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="subscribe-bottom mt-15">
-                            <input type="checkbox" id="newsletter-permission">
-                            <label for="newsletter-permission">Don't show this popup again</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             <!-- Newsletter Popup End -->
             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
@@ -417,6 +409,117 @@ session_start();
                     </div>
                 </div>
             </div>
+
+            <?php
+		include('connection.php');
+	if(isset($_GET['id'])){
+		
+		$idm = $_GET['id'];
+		$sqlt = "select * from product where id_p ='$id'";
+		$kqt = $conn->query($sqlt);
+			foreach($kqt as $key => $th){
+	
+		?>
+	<article class="uk-comment uk-comment-primary">
+		<?php
+		include('connection.php');
+	 
+		$idmm = $th['id_p'];
+		$sqlb = "select * from comment where id_p ='$idm'";
+		$kqb = $conn->query($sqlb);
+			foreach($kqb as $key => $row){
+	
+		?>
+    <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+        <div class="uk-width-auto">
+            <img class="uk-comment-avatar" src="image/29ebbf8b3d9c3654c4206e333bd3535a_tn.jpg" width="80" height="80" alt="">
+        </div>
+        <div class="uk-width-expand">
+            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#"><?php echo $row['name_u'] ?></a></h4>
+            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                <li><a href="#"><?php echo $row['date'] ?></a></li>
+                <li><a href="#">Reply</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="uk-comment-body">
+        <p><?php echo $row['detail'] ?></p><br>
+    </div>
+		<?php } ?>
+		
+		
+</article>
+	
+	
+	<?php } ?>
+	
+		<?php } ?>
+			
+	
+	<?php
+		include('connection.php');
+	if(isset($_GET['id'])){
+		
+		$idm = $_GET['id'];
+		$sqlbl = "select * from comment where id_p ='$id'";
+		$kqbl = $conn->query($sqlbl)->fetch();
+	}
+		?>
+		
+
+
+            <div class="container3 bg-dark">
+		<h2 style="text-align: center; padding-top: 30px" class="text-light" >ĐÁNH GIÁ CỦA KHÁCH HÀNG</h2>
+		<div class="row justify-content-center">
+			<div class="col-md-10">
+				<?php
+					include 'connection.php';
+			
+                    if(isset($_SESSION['name_u'])){
+				?>
+				<form method="post" enctype="multipart/form-data" action="product-details.php?id=<?php echo $_GET['id']?>">
+				<div class="form-group">
+   			 		<label for="exampleFormControlTextarea1" class="text-light">NHẬN XÉT</label>
+    				<textarea name="ndbl" class="form-control" placeholder="write your comments here" id="exampleFormControlTextarea1" rows="3"></textarea>
+  				</div>
+  					<button name="btn_luu" type="submit" class="btn btn-primary">Submit</button>
+				</form>
+				<?php
+                    if(isset($_POST['btn_luu'])){
+                        $ngay = date('y-m-d');
+                        if(empty($_POST['ndbl'])){
+                            ?>
+                            <script> alert("Vui lòng nhập bình luận trước khi gửi! "); </script>
+                            <?php
+                        }else{
+                        $ndbl = $_POST['ndbl']; 
+                        $sql = "insert into comment values('','$_SESSION[name_u]','$ndbl', '$ngay','$id')";
+                        $kqbl = $conn->exec($sql);
+							if($kqbl ==1){
+                                header("location:product-details.php?id=$idm");
+							   }else{
+								   echo 'that bai';
+							   }
+                    }
+                }
+                    ?>
+                    <?php 
+				 }else{
+                      ?>
+                        <div class="alert alert-danger">
+                            <a href="login.php" data-toggle="modal" data-target="#myModal" class="alert-link">Đăng nhập để bình luận</a>.
+                        </div>
+                      <?php
+                      }
+                  ?>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
             <div class="product-description-review-area pb-100">
                 <div class="container">
                     <div class="product-description-review text-center">
@@ -690,3 +793,6 @@ session_start();
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<?php
+	ob_end_flush();
+	?>
