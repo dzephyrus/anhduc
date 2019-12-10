@@ -1,4 +1,9 @@
-  <!doctype html>
+<?php
+	session_start();
+	ob_start();
+	include 'connection.php';	
+?>
+<!doctype html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
@@ -101,13 +106,26 @@
 										<div class="main-menu">
                                    			 <nav>
                                       			 <ul>
-													<li><a href="#">Tài khoản</a>
+													 <?php
+														
+													 	if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
+													 ?>
+													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
+													
 															<ul class="dropdown">
-																<li><a href="login.php">Đăng nhập</a></li>
-																<li><a href="cart.html">Đăng ký</a></li>
+																<li><a href="dangxuat.php">Đăng xuất</a></li>
+																<li><a href="">Đổi mật khẩu</a></li>
+																<li><a href="danhmuc1.php">Quản trị</a></li>
 															</ul>
 													</li>
-													
+													<?php } else { ?>
+													 <li><a href="#">Tài khoản</a>
+															<ul class="dropdown">
+																<li><a href="login.php">Đăng nhập</a></li>
+																<li><a href="register.php">Đăng ký</a></li>
+															</ul>
+													</li>
+													 <?php } ?>
 												</ul>
 									</div>
                                     <div class="header-search common-style">
@@ -211,7 +229,7 @@
                     </form>
                 </div>
             </div>
-            <!-- main-search start -->
+            <!-- main-search start 
             <div class="cur-lang-acc-active">
                 <div class="wrap-sidebar">
                     <div class="sidebar-nav-icon">
