@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -333,42 +336,50 @@
                                         </thead>
                                         <tbody>
                                             <tr>
+												<?php
+												include 'connection.php';
+												$cart= $_SESSION['addcart'];
+								if(isset($_get['addcart'])){
+									//$id = $_get['addcart'];
+//									if(!isset($_SESSION['cart'])){
+//										$_SESSION['cart']= array(); // tạo giỏ hàng
+//									}
+//									if(!isset($_SESSION['cart'][$id])){ // nếu ko tồn tại mã hàng thì ta gán số lượng là 1 
+//										$_SESSION['cart'][$id]['sl']=1;
+//									}
+//									else{ // nếu tồn tại mã hàng, cộng thêm 1 
+//										$_SESSION['cart'][$id]['sl'] +=1;
+//									}
+									//in ra giỏi hàng
+									//print_r($_SESSION['cart']);
+									
+								}
+												if(count($cart)){
+													foreach($_SESSION['cart'] as $row=>$value){
+														$sql="select * from product where id_cate='$id'";
+														//Xử lý lệnh sql
+														$stmt = $conn->prepare($sql);
+														$stmt->execute();
+														$row = $stmt -> fetch();
+												
+								?>
+								
                                                 <td class="product-remove"><a href="#"><i class="ion-android-close"></i></a></td>
                                                 <td class="product-thumbnail">
-                                                    <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
+                                                    <a href="#"><img src="image/<?= $row['image']?>" alt=""></a>
                                                 </td>
-                                                <td class="product-name"><a href="#">Wooden Furniture </a></td>
-                                                <td class="product-price"><span class="amount">$165.00</span></td>
+                                                <td class="product-name"><a href="#"><?= $row['name_p']?> </a></td>
+                                                <td class="product-price"><span class="amount"><? echo number_format($row['sale_p'],3)?> </span></td>
                                                 <td class="product-quantity">
                                                     <input value="1" type="number">
                                                 </td>
-                                                <td class="product-subtotal">$165.00</td>
-                                                
+                                                <td class="product-subtotal"><? echo number_format($_SESSION['cart'][$row['id_p']]*$row['sale_p'],3) ?></td>
+                                                <?php
+													}
+												}
+												?>
                                             </tr>
-                                            <tr>
-                                                <td class="product-remove"><a href="#"><i class="ion-android-close"></i></a></td>
-                                                <td class="product-thumbnail">
-                                                    <a href="#"><img src="assets/img/cart/2.jpg" alt=""></a>
-                                                </td>
-                                                <td class="product-name"><a href="#">Vestibulum dictum</a></td>
-                                                <td class="product-price"><span class="amount">$150.00</span></td>
-                                                <td class="product-quantity">
-                                                    <input value="1" type="number">
-                                                </td>
-                                                <td class="product-subtotal">$150.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product-remove"><a href="#"><i class="ion-android-close"></i></a></td>
-                                                <td class="product-thumbnail">
-                                                    <a href="#"><img src="assets/img/cart/3.jpg" alt=""></a>
-                                                </td>
-                                                <td class="product-name"><a href="#">Vestibulum dictum</a></td>
-                                                <td class="product-price"><span class="amount">$150.00</span></td>
-                                                <td class="product-quantity">
-                                                    <input value="1" type="number">
-                                                </td>
-                                                <td class="product-subtotal">$150.00</td>
-                                            </tr>
+                                             
                                         </tbody>
                                     </table>
                                 </div>
