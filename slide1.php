@@ -237,7 +237,7 @@
       <th scope="col">Ảnh</th>
       <th scope="col">tiêu đề</th>
       <th scope="col">link</th>
-		<th scope="col">TT</th>
+		<th scope="col">Trạng thái</th>
 		<th scope="col">Chỉnh sửa</th>
 		
     </tr>
@@ -249,9 +249,32 @@
 	<tr>
 		<td><?=$row['id_slide']?></td>
 		<td><img src="image/<?=$row['image_slide']?>" width="150"></td>
-		<td><?=$row['title']?></td>
+		<td><?=$row['status']?></td>
 		<td><?=$row['link']?></td>
-		<td><?=$row['tt']?></td>
+    
+		<?php
+				if($row['title']=='on'){
+					?>
+					<td >
+			<a href="offslide.php?id=<?php echo $row['id_slide'] ?>" >
+				<button style="width: 50px;height: 50px;background: #33B33D;color: white;font-size: 18px;">
+					bật </button></a>
+			
+			
+		</td>
+				<?php 	
+				}else{
+					?>
+		<td >
+			<a href="onslide.php?id=<?php echo $row['id_slide'] ?>" >
+				<button style="width: 50px;height: 50px;background: #C90407;color: white;font-size: 18px;">
+					tắt </button></a>
+			
+			
+		</td>
+		 <?php    }
+				?>
+		
 		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suaslide1.php?id=<?=$row['id_slide']?>">Update</a> </button>
 		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoaslide.php?id=<?=$row['id_slide']?>" class="text-light">xóa</a> </button>
 		</td>
