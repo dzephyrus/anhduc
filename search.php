@@ -215,12 +215,12 @@
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form method="get" enctype="multipart/form-data" action="search.php">
+                    <form>
                         <div class="form-search">
-                            <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
-                            
-                               <button class="btn btn-outline-success my-2 my-sm-0" name="submit-search" type="submit">Search</button>
-                            
+                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
+                            <button>
+                                <i class="ion-ios-search-strong"></i>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -471,19 +471,17 @@
 								
                                 <div class="row custom-row">
 									<?php
-										include 'connection.php';
-										if(isset($_GET['id'])){
-										$id=$_GET['id'];
-										$sql="select * from product where id_cate='$id'";
-									//Xử lý lệnh sql
-									$stmt = $conn->prepare($sql);
-									$stmt->execute();
-									$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-										}
-									?>
-									<?php
-										foreach($result as $row){
-											?>	
+				include"connection.php";
+				if(isset($_GET['submit-search'])){
+					$search = addslashes($_GET['search']);
+					$sql = "select * from product where name_p LIKE N'%$search%' or price LIKE N'%$search%' or name_cate LIKE N'%$search%' ";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute();
+					$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					
+					if($result >0 ){
+						foreach($result as $row){
+							?>	
                                     <div class="custom-col-5 custom-col-style">
                                         <div class="single-product mb-35">
                                             <div class="product-img">
@@ -515,8 +513,13 @@
                                         </div>
                                    </div>
                                     <?php
-		}
-	?>	
+						}
+					}
+					else{
+						echo"không có kết quả thích hợp";
+					}
+				}
+				?>	
                                     
                                     
                             <div id="grid-5-col2" class="tab-pane fade">

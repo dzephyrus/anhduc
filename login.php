@@ -224,12 +224,12 @@
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form>
+                    <form method="get" enctype="multipart/form-data" action="search.php">
                         <div class="form-search">
-                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
-                            <button>
-                                <i class="ion-ios-search-strong"></i>
-                            </button>
+                            <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
+                            
+                               <button class="btn btn-outline-success my-2 my-sm-0" name="submit-search" type="submit">Search</button>
+                            
                         </div>
                     </form>
                 </div>

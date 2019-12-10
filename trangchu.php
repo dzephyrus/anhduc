@@ -201,12 +201,12 @@
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form>
+                    <form method="get" enctype="multipart/form-data" action="search.php">
                         <div class="form-search">
-                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
-                            <button>
-                                <i class="ion-ios-search-strong"></i>
-                            </button>
+                            <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
+                            
+                               <button class="btn btn-outline-success my-2 my-sm-0" name="submit-search" type="submit">Search</button>
+                            
                         </div>
                     </form>
                 </div>
@@ -351,7 +351,7 @@
                                                 <div class="product-content">
                                                     <div class="product-title-price">
                                                         <div class="product-title" >
-                                                            <h4><a href="product-details-6.html"><?php echo $row['name_p'] ?></a></h4>
+                                                            <h4><a href="product-details.php?id=<?=$row['id_p']?>"><?php echo $row['name_p'] ?></a></h4>
                                                         </div>
                                                         <div class="product-price" style="margin-left: 150px;">
                                                             <span><?php echo $row['price'] ?></span>
@@ -407,16 +407,17 @@
                     </div>
                     <div class="row">
 						<?php
-						$sql = "select * from product  limit 8  ";
-						$kqproduct = $conn->query($sql);
-						foreach($kqproduct as $key=>$value){
-					
+						$sql ="select * from product order by view DESC LIMIT 0,4";
+							$stmt = $conn->prepare($sql);
+							$stmt->execute();
+							$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+							foreach($result as $row){
 						?>
                         <div class="col-md-6 col-lg-4 col-xl-3" >
 							
                             <div class="single-product mb-35">
                                 <div class="product-img" style="width: 270px;height: 300px;">
-                                    <a href="#"><img src="image/<?php echo $value['image_p']?>" alt=""></a>
+                                    <a href="product-details.php?id=<?=$row['id_p']?>"><img src="image/<?php echo $row['image_p']?>" alt=""></a>
                                     <span>sale</span>
                                     <div class="product-action">
                                         <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
@@ -426,10 +427,10 @@
                                 <div class="product-content">
                                     <div class="product-title-price">
                                         <div class="product-title">
-                                            <h4><a href="product-details-6.html"><?php echo $value['name_p']?></a></h4>
+                                            <h4><a href="product-details.php?id=<?=$row['id_p']?>"><?php echo $row['name_p']?></a></h4>
                                         </div>
                                         <div class="product-price">
-                                            <span><?php echo $value['price']?></span>
+                                            <span><?php echo $row['price']?></span>
                                         </div>
                                     </div>
                                     <div class="product-cart-categori">
