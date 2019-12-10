@@ -345,7 +345,7 @@
                                                 <div class="product-img" style="width: 270px;height: 300px;">
                                                     <a href="product-details.php?id=<?=$row['id_p']?>"><img src="image/<?php echo $row['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
 
-                                                    <a href="#"><img src="image/<?php echo $row['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
+                                                  
 
                                                    
                                                     <div class="product-action">
@@ -357,17 +357,17 @@
                                                     <div class="product-title-price">
                                                         <div class="product-title" >
 
-                                                            <h4><a href="product-details.php?id=<?=$row['id_p']?>"><?php echo $row['name_p'] ?></a></h4>
+                                                            <h4><a href="product-details.php?id=<?=$row['id_p']?>" style="font-size: 23px"><?php echo $row['name_p'] ?></a></h4>
 
                                                         </div>
-                                                        <div class="product-price" style="margin-left: 150px;">
-                                                            <span><?php echo $row['price'] ?></span>
+                                                        <div class="product-price" style="margin-left: 100px;">
+                                                            <span style="font-size: 20px"><?php echo $row['sale_p']?></span><del><?php echo $row['price']?></del>
 
                                                         </div>
                                                     </div>
                                                     <div class="product-cart-categori">
                                                         <div class="product-cart">
-                                                            <span>Furniter</span>
+                                                            <span><?php echo $row['name_cate'] ?></span>
                                                         </div>
                                                         <div class="product-categori">
                                                             <a href="#"><i class="ion-bag"></i> Add to cart</a>
@@ -380,7 +380,7 @@
 
                                        <?php 
 						
-                                       <?php }
+                                       }
 						?>
                                     </div>
 									
@@ -440,12 +440,12 @@
                                             <h4><a href="product-details.php?id=<?=$row['id_p']?>"><?php echo $row['name_p']?></a></h4>
                                         </div>
                                         <div class="product-price">
-                                            <span><?php echo $row['price']?></span>
+                                            <span style="font-size: 20px"><?php echo $row['sale_p']?></span><del><?php echo $row['price']?></del>
                                         </div>
                                     </div>
                                     <div class="product-cart-categori">
                                         <div class="product-cart">
-                                            <span>Furniter</span>
+                                            <span><?php echo $row['name_cate'] ?></span>
                                         </div>
                                         <div class="product-categori">
                                             <a href="#"><i class="ion-bag"></i> Add to cart</a>
