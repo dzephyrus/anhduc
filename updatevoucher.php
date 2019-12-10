@@ -5,13 +5,15 @@ ob_start();
 	
 ?>
 <?php
-include"connection.php";
-$sql= "select * from product";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?> 
-
+	include('connection.php');
+	if(isset($_GET['masua'])){
+		
+		$masua = $_GET['masua'];
+		$sqlsua = "select * from product where id_p ='$masua'";
+		$kqsua = $conn->query($sqlsua)->fetch();
+		
+	}
+	?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +25,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>SB Admin 2 - Charts</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -54,7 +56,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-       <li class="nav-item ">
+      <li class="nav-item">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -67,20 +69,14 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       
 
       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
-          <span>Product</span></a>
+          <span>Sản phẩm</span></a>
       </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Đơn hàng</span></a>
-      </li>
+      
 
       <!-- Nav Item - Utilities Collapse Menu -->
       
@@ -98,7 +94,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <li class="nav-item">
         <a class="nav-link" href="comment1.php">
           <i class="fas fa-fw fa-comments"></i>
-          <span>Comment</span></a>
+          <span>Bình luận</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
@@ -109,8 +105,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		  <i class="fas fa-fw fa-chart-area"></i>
           <span>Slide</span></a>
       </li>
-		
-		<hr class="sidebar-divider">
+      <hr class="sidebar-divider">
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
@@ -118,9 +113,10 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <span>Voucher</span></a>
       </li>
 		
+		
 		<hr class="sidebar-divider">
 		
-		<li class="nav-item">
+		<li class="nav-item active">
         <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Tài khoản</span></a>
@@ -133,6 +129,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <i class="fas fa-fw fa-wrench"></i>
           <span>Cài đặt</span></a>
       </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -194,7 +191,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </li>
 
             <!-- Nav Item - Alerts -->
-            
+           
 
             <!-- Nav Item - Messages -->
             
@@ -205,6 +202,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
+                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -219,7 +217,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
               </div>
             </li>
 
-
           </ul>
 
         </nav>
@@ -229,97 +226,73 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Danh sách sản phẩm</h1><br>
-
-			  
-           
-          </div>
+          <h1 class="h3 mb-2 text-gray-800">EDIT Voucher</h1>
+          
 
           <!-- Content Row -->
           <div class="row">
 
-            <!-- Earnings (Monthly) Card Example -->
-            
-          </div>
-
-          <!-- Content Row -->
-
-          <div class="row">
-
-            <!-- Area Chart -->
-            
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-			
+            <form action="" method="post">
+	<div class="form-group">
+    <label for="inputAddress">Mã Vocher</label>
+    <input name="ma_vc" type="text" class="form-control" id="inputAddress" value="<?php echo $kqsua['ma_vc']?>">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Start date </label>
+      <input name="start" type="date" class="form-control" id="inputEmail4" value="<?php echo $kqsua['start']?>">
+    </div>
+	   <div class="form-group col-md-6">
+      <label for="inputEmail4">End date</label>
+      <input name="end" type="date" class="form-control" id="inputEmail4" value="<?php echo $kqsua['end']?>">
+    </div>
 	
-            <!-- Content Column -->
-            <div class="col-lg-12 mb-4">
-
-              <!-- Project Card Example -->
-              <div class="card shadow m-6">
-   
-				  <table class="table ">
-					  <div class="card-header py-3 bg-light">
-                 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
-                </div>
+  </div>
 					  
-  <thead>
-	  	
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Tên</th>
-      <th scope="col">Ảnh</th>
-      <th scope="col">Giá</th>
-		<th scope="col">Giá KM</th>
-		<th scope="col">Số lượng</th>
-		<th scope="col">Ngày đăng</th>
-		<th scope="col">Chi tiết</th>
-		<th scope="col">view</th>
-		<th scope="col">Danh mục</th>
-		<th scope="col">Chỉnh sửa</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-		foreach($result as $row){
-			?>
-	<tr>
-		<td><?=$row['id_p']?></td>
-		<td><?=$row['name_p']?></td>
-		<td><img src="image/<?=$row['image_p']?>" width="150"></td>
-		<td><?=$row['price']?></td>
-		<td><?=$row['sale_p']?></td>
-		<td><?=$row['sl_p']?></td>
-		<td><?=$row['date']?></td>
-		<td><?=$row['detail']?></td>
-		<td><?=$row['view']?></td>
-		<td><?=$row['id_cate']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
-		</td>
-	</tr>
-	<?php
-		}
-	?>
-  
+  <div class="form-row">
+	  
+  <div class="form-group col-md-8">
+      <label for="inputCity">Sale</label>
+      <input name="sale" type="number" class="form-control" id="sale" value="<?php echo $kqsua['sale']?>">
+    </div>
+     <div class="form-group col-md-8">
+      <label for="inputCity">detail</label>
+      <input name="detail" type="text" class="form-control" id="detail" value="<?php echo $kqsua['detail']?>">
+    </div>
     
-  </tbody>
-</table>
-				  
-				  
-              </div>
-
-              <!-- Color System -->
-              <div class="row">
-                
-              </div>
-
-            </div>
-
-           
+  </div>
+  <div class="form-group">
+    
+  </div>
+  <button type="submit" name="add_vc" class="btn btn-primary">EDIT VOCHER</button>
+</form>
+<?php
+	include "connection.php";
+		if(isset($_POST['add_vc'])){
+			
+				$ma_vc= $_POST['ma_vc'];
+				$start= $_POST['start'];
+				$end= $_POST['end'];
+				$sale= $_POST['sale'];
+				$detail= $_POST['detail'];
+				
+				
+				
+				$sql= "update  voucher set ma_vc='$ma_vc',start='$start',end='$end', sale='$sale', detail='$detail' where id_vc='$masua' ";
+				
+				
+				$kq = $conn->prepare($sql);
+		if($kq->execute()){
+				header('location:voucher1.php');
+			}
+			else{
+				echo "không thêm đc dữ liệu";
+			}
+			}
+	
+	?>	  
+            <!-- Donut Chart -->
+            
           </div>
 
         </div>
@@ -384,9 +357,11 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <!-- Page level custom scripts -->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
+  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
 
 </body>
 
+	
 </html>
 <?php
 	ob_end_flush();
