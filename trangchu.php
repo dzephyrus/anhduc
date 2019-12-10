@@ -86,7 +86,7 @@
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
                                                     <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="login.php">login</a></li>
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
@@ -103,7 +103,7 @@
                                       			 <ul>
 													<li><a href="#">Tài khoản</a>
 															<ul class="dropdown">
-																<li><a href="about-us.html">Đăng nhập</a></li>
+																<li><a href="login.php">Đăng nhập</a></li>
 																<li><a href="cart.html">Đăng ký</a></li>
 															</ul>
 													</li>
