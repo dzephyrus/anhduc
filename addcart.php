@@ -3,13 +3,12 @@ session_start();
 $id=$_GET['id'];
 include 'connection.php';
 	$sql="select * from product where id_p='$id'";
-$stmt = $conn->prepare($sql);
-	$stmt->execute();
-	$row = $stmt -> fetch();
-if(!isset($_SESSION['cart'])){
+if($id != ""){
 	
 	//Xử lý lệnh sql
-	
+	$stmt = $conn->prepare($sql);
+	$stmt->execute();
+	$row = $stmt -> fetch();
 	
 	
 	if($row ==1 ){
