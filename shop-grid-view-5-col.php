@@ -60,8 +60,8 @@
                                 <div class="main-menu">
                                     <nav>
                                        <ul>
-                                            <li><a href="#">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
+                                            <li><a href="about-us.php">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
 										   	<?php
@@ -96,7 +96,7 @@
                                                 </ul>
                                             </li>
                                             	
-                                            <li><a href="contact.html">contact</a></li>
+                                            <li><a href="contact.php">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
