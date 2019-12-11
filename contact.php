@@ -77,7 +77,7 @@
                                 <div class="main-menu">
                                     <nav>
                                         <ul>
-                                            <li><a href="home.php">home</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
                                             <li><a href="about-us.php">about us</a></li>
                                             <li><a href="shop-grid-view-5-col.html">shop</a>
                                             <ul class="dropdown">
