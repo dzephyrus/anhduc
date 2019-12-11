@@ -317,14 +317,14 @@
 										<?php
 						$sql1 = "select * from product   limit 4  ";
 						$kqproduct = $conn->query($sql1);
-						foreach($kqproduct as $key=>$value){
+						foreach($kqproduct as $key=>$pro){
 					
 						?>
                                         <div class="col-md-3 col-lg-3 col-sm-4">
                                             <div class="single-product">
 											
                                                 <div class="product-img" style="width: 270px;height: 300px;">
-                                                    <a href="#"><img src="image/<?php echo $value['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
+                                                    <a href="#"><img src="image/<?php echo $pro['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
                                                    
                                                     <div class="product-action">
                                                         <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
@@ -334,10 +334,10 @@
                                                 <div class="product-content">
                                                     <div class="product-title-price">
                                                         <div class="product-title" >
-                                                            <h4><a href="product-details-6.html"><?php echo $value['name_p'] ?></a></h4>
+                                                            <h4><a href="product-details-6.html"><?php echo $pro['name_p'] ?></a></h4>
                                                         </div>
                                                         <div class="product-price" style="margin-left: 150px;">
-                                                            <span><?php echo number_format($value['price'], 0, '', ',') ?>VNĐ</span>
+                                                            <span><?php echo number_format($pro['price'], 0, '', ',') ?>VNĐ</span>
                                                         </div>
                                                     </div>
                                                     <div class="product-cart-categori">
@@ -345,7 +345,7 @@
                                                             <span>Furniter</span>
                                                         </div>
                                                         <div class="product-categori">
-                                                             <a href="add-cart.php?id_p=<?php echo $value['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
+                                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -398,17 +398,12 @@
 							
                             <div class="single-product mb-35">
                                 <div class="product-img" style="width: 270px;height: 300px;">
-                                    <a href="#"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
-                                    <span>sale</span>
-                                    <div class="product-action">
-                                        <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                        <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                    </div>
+                                    <a href="product-details.php"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
                                 </div>
                                 <div class="product-content">
                                     <div class="product-title-price">
                                         <div class="product-title">
-                                            <h4><a href="product-details-6.html"><?php echo $pro['name_p']?></a></h4>
+                                            <h4><a href="product-details.php"><?php echo $pro['name_p']?></a></h4>
                                         </div>
                                         <div class="product-price">
                                             <span><?php echo $pro['price']?></span>
@@ -426,7 +421,8 @@
                             </div>
 							
                         </div>
-                      <?php }
+                      <?php
+						}
 						?>
                     </div>
                 </div>

@@ -6,7 +6,7 @@
 	$sqlQuery = "select * from product where id_p='$id_p'";
 	$stmt = $conn->prepare($sqlQuery);
 	$stmt->execute();
-	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$product = $stmt->fetch();
 
 if(!isset($_SESSION['CART']) || $_SESSION['CART']==null){
 	$_SESSION['CART']=[];
@@ -20,7 +20,28 @@ if(!isset($_SESSION['CART']) || $_SESSION['CART']==null){
 		'quantity' => 1
 	];
 }else{
-	$_SESSION['CART']['quantity']+=1;
+	$cart = $_SESSION['CART'];
+	$existed = -1;
+	foreach ($cart as $index => $item) {
+		if($item['id_p'] == $product['id_p']){
+			$existed = $index;
+			break;
+		}
+	}
+	if($existed == -1){
+		$cart[] = [
+			'id_p' => $product['id_p'],
+		'name_p' => $product['name_p'],
+		'image_p' => $product['image_p'],
+		'price' => $product['price'],
+		'sale_p' => $product['sale_p'],
+		'sl_p' => $product['sl_p'],
+		'quantity' => 1
+		];
+	}else{
+		$cart[$existed]['quantity']+=1;
+	}
+	$_SESSION['CART'] = $cart;
 		
 }
 ?> echo '<script> alert('Thêm vao giỏ hàng thành công');location.href='cart.php'</script>';<?php
