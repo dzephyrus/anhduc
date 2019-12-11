@@ -120,7 +120,7 @@
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																</ul>
-															<?php } else {?>
+															<?php } if($kq_dangnhap['quyen']=="admin") {?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
@@ -174,7 +174,7 @@
                             <ul>
                                 <li class="single-product-cart">
                                     <div class="cart-img">
-                                        <a href="#"><img src="image/thuc-an-me-o.jpg" alt=""></a>
+                                        <a href="#"><img src="" alt=""></a>
                                     </div>
                                     <div class="cart-title">
                                         <h3><a href="#"> HANDCRAFTED MUG</a></h3>
@@ -288,57 +288,9 @@
                     </div>
                 </div>
             </div>
-            
-                <!--long slider-->
-                <div class="container" >
-					
-				 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						<?php
-							$sql = "select * from slide where title='on'";
-							$kq = $conn -> query($sql);
-							$stt= 0;
-							foreach($kq as $key => $row){
-								?>
-									  <li data-target="#myCarousel" data-slide-to="<?php echo $stt; ?>"<?php if($stt==0){echo " class='active' ";}?>></li>
-								<?php
-								$stt ++;
-							}
-						?>
-					</ol>
-
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner">
-						<?php
-							$sql = "select * from slide where title = 'on'";
-							$kq=$conn -> query($sql);
-							$stt =0;
-							foreach($kq as $key => $row){
-						?>
-						 <div class="item <?php  if($stt==0){echo 'active'; }?>">
-							<img src="image/<?php echo $row['image_slide'] ?>" style=" height: 600px; width:100%;">
-						 </div>
-						<?php
-							$stt ++;
-							}
-
-						?>
-
-							</div>
-
-							<!-- Left and right controls -->
-							<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-							  <span class="glyphicon glyphicon-chevron-left"></span>
-							  <span class="sr-only">Previous</span>
-							</a>
-							<a class="right carousel-control" href="#myCarousel" data-slide="next">
-							  <span class="glyphicon glyphicon-chevron-right"></span>
-							  <span class="sr-only">Next</span>
-							</a>
-					  </div>
-					
-				</div><br>
+             
+           <!--long slider-->
+			   <?php include 'shareslider.php'?>
            <!--Kết thúc slider-->
           
           
@@ -385,7 +337,7 @@
                                                             <h4><a href="product-details-6.html"><?php echo $value['name_p'] ?></a></h4>
                                                         </div>
                                                         <div class="product-price" style="margin-left: 150px;">
-                                                            <span><?php echo $value['price'] ?></span>
+                                                            <span><?php echo number_format($value['price'], 0, '', ',') ?>VNĐ</span>
                                                         </div>
                                                     </div>
                                                     <div class="product-cart-categori">
@@ -393,7 +345,7 @@
                                                             <span>Furniter</span>
                                                         </div>
                                                         <div class="product-categori">
-                                                            <a href="#"><i class="ion-bag"></i> Add to cart</a>
+                                                             <a href="add-cart.php?id_p=<?php echo $value['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -439,14 +391,14 @@
 						<?php
 						$sql = "select * from product  limit 8  ";
 						$kqproduct = $conn->query($sql);
-						foreach($kqproduct as $key=>$value){
+						foreach($kqproduct as $key=>$pro){
 					
 						?>
                         <div class="col-md-6 col-lg-4 col-xl-3" >
 							
                             <div class="single-product mb-35">
                                 <div class="product-img" style="width: 270px;height: 300px;">
-                                    <a href="#"><img src="image/<?php echo $value['image_p']?>" alt=""></a>
+                                    <a href="#"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
                                     <span>sale</span>
                                     <div class="product-action">
                                         <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
@@ -456,18 +408,18 @@
                                 <div class="product-content">
                                     <div class="product-title-price">
                                         <div class="product-title">
-                                            <h4><a href="product-details-6.html"><?php echo $value['name_p']?></a></h4>
+                                            <h4><a href="product-details-6.html"><?php echo $pro['name_p']?></a></h4>
                                         </div>
                                         <div class="product-price">
-                                            <span><?php echo $value['price']?></span>
+                                            <span><?php echo $pro['price']?></span>
                                         </div>
                                     </div>
                                     <div class="product-cart-categori">
                                         <div class="product-cart">
-                                            <span>Furniter</span>
+                                            <span>Thêm vào giỏ hàng</span>
                                         </div>
                                         <div class="product-categori">
-                                            <a href="#"><i class="ion-bag"></i> Add to cart</a>
+                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -483,7 +435,7 @@
           
               <!--đây là footer-->  
              <?php include 'sharefooter.php'?>
-          
+          	<!--ket thuc footer-->
        
 
             <!-- modal -->

@@ -1,7 +1,7 @@
 <?php
 //câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
 include"connection.php";
-$sql= "select * from category";
+$sql= "select * from order";
 //Xử lý lệnh sql
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -49,7 +49,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item ">
+      <li class="nav-item active">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -216,9 +216,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
               <!-- Circle Buttons -->
               <div class="card shadow mb-4 bg-light">
-                <div class="card-header py-3">
-                  <button class="btn btn-success"><a href="adddanhmuc1.php">thêm danh mục</a></button>
-                </div>
+                
                 <div class="card-body">
                   
                   <div class="row">
@@ -231,9 +229,12 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<table class="table text-dark">
   <thead>
     <tr>
-      <th width="11%" scope="col">id</th>
-      <th width="25%" scope="col">tên danh mục</th>
-	<th width="51%" scope="col">Chỉnh sửa</th>
+      <th  scope="col">id</th>
+      <th  scope="col">Tài khoản</th>
+	  <th  scope="col">Ngày mua</th>
+	  <th  scope="col">Điện thoại</th>
+	  <th  scope="col">Địa chỉ</th>
+	  <th scope="col">Chi tiết</th>
 	
     </tr>
   </thead>
@@ -241,16 +242,15 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php
 		foreach($result as $row){
 			?>
-	<tr>
-		<td><?=$row['id_cate']?></td>
-		<td><?=$row['name_cate']?></td>
-		
-		<td>
-			<a class="btn btn-primary text-light" href="suadanhmuc1.php?id=<?=$row['id_cate']?>">Update</a> 
-			<a href="xoadanhmuc.php?id=<?=$row['id_cate']?>" onclick="return confirm('chấp nhận xóa')" class="btn btn-danger text-light">xóa</a> 
-		</td>
-	</tr>
-	<?php
+				<tr>
+					<td><?=$row['id_cate']?></td>
+					<td><?=$row['name_cate']?></td>
+
+					<td>
+						<a class="btn btn-primary text-light" href="suadanhmuc1.php?id=<?=$row['id_cate']?>">Chi tiet</a>  
+					</td>
+				</tr>
+				<?php
 		}
 	?>
     

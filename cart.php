@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	include 'connection.php';
+	
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -70,7 +72,7 @@
                                 <div class="main-menu">
                                     <nav>
                                         <ul>
-                                            <li><a href="#">home</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
                                             <li><a href="about-us.html">about us</a></li>
                                             <li><a href="shop-grid-view-5-col.html">shop</a></li>
                                             <li><a href="#">pages</a>
@@ -257,7 +259,7 @@
                 </div>
             </div>
             <!-- main-search start -->
-            <div class="cur-lang-acc-active">
+            <<div class="cur-lang-acc-active">
                 <div class="wrap-sidebar">
                     <div class="sidebar-nav-icon">
                         <button class="op-sidebar-close"><span class="ion-android-close"></span></button>
@@ -320,75 +322,46 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h1 class="cart-heading">Cart</h1>
+                            <h1 class="cart-heading">Giỏ hàng của bạn</h1>
                             <form action="#">
                                 <div class="table-content table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th class="product-name">remove</th>
-                                                <th class="product-price">images</th>
-                                                <th class="product-name">Product</th>
-                                                <th class="product-price">Price</th>
-                                                <th class="product-quantity">Quantity</th>
-                                                <th class="product-subtotal">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-												<?php
-												include 'connection.php';
-												$cart= $_SESSION['addcart'];
-								if(isset($_get['addcart'])){
-									//$id = $_get['addcart'];
-//									if(!isset($_SESSION['cart'])){
-//										$_SESSION['cart']= array(); // tạo giỏ hàng
-//									}
-//									if(!isset($_SESSION['cart'][$id])){ // nếu ko tồn tại mã hàng thì ta gán số lượng là 1 
-//										$_SESSION['cart'][$id]['sl']=1;
-//									}
-//									else{ // nếu tồn tại mã hàng, cộng thêm 1 
-//										$_SESSION['cart'][$id]['sl'] +=1;
-//									}
-									//in ra giỏi hàng
-									//print_r($_SESSION['cart']);
-									
-								}
-												if(count($cart)){
-													foreach($_SESSION['cart'] as $row=>$value){
-														$sql="select * from product where id_cate='$id'";
-														//Xử lý lệnh sql
-														$stmt = $conn->prepare($sql);
-														$stmt->execute();
-														$row = $stmt -> fetch();
-												
-								?>
-								
-                                                <td class="product-remove"><a href="#"><i class="ion-android-close"></i></a></td>
-                                                <td class="product-thumbnail">
-                                                    <a href="#"><img src="image/<?= $row['image']?>" alt=""></a>
-                                                </td>
-                                                <td class="product-name"><a href="#"><?= $row['name_p']?> </a></td>
-                                                <td class="product-price"><span class="amount"><? echo number_format($row['sale_p'],3)?> </span></td>
-                                                <td class="product-quantity">
-                                                    <input value="1" type="number">
-                                                </td>
-                                                <td class="product-subtotal"><? echo number_format($_SESSION['cart'][$row['id_p']]*$row['sale_p'],3) ?></td>
-                                                <?php
-													}
-												}
-												?>
-                                            </tr>
-                                             
-                                        </tbody>
-                                    </table>
+                                     <table class="table cart-table">
+										<thead>
+											<tr>
+												<th>Stt</th>
+												<th>Tên sản phẩm</th>
+												<th>Ảnh sản phẩm</th>
+												<th>Số lượng</th>
+												<th>Giá sản phẩm</th>
+												<th>Tổng tiền</th>
+												<th>Thao tác</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php $stt=1;foreach ($_SESSION['CART'] as $key => $item): ?>
+												<tr>
+													<td><?php echo $stt ;?></td>
+													<td><?php echo $item['name_p'] ;?></td>
+													<td>
+														<img src="image/<?php echo $item['image_p']?>" width="80px" height="25px;">
+													</td>
+													<td>
+														<input type="number" name="qty" value="<?php echo $item['sl_p']?>">
+													</td>
+													<td><?php echo $item['price'] ;?></td>
+													
+												</tr>
+											<?php $stt++; endforeach ?>
+
+										</tbody>
+                                </table>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="coupon-all">
                                             <div class="coupon">
                                                 <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
-    <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
+    											<input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                             </div>
                                             <div class="coupon2">
                                                 <input class="button" name="update_cart" value="Update cart" type="submit">
