@@ -96,7 +96,7 @@
                                                 </ul>
                                             </li>
                                             	
-                                            <li><a href="contact.html">contact</a></li>
+                                            <li><a href="contact.php">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
