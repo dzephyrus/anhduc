@@ -1,11 +1,4 @@
 
-<?php
-session_start(); 
-ob_start();
-	
-	
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +42,7 @@ ob_start();
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -65,17 +58,11 @@ ob_start();
        <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
-          <span>Product</span></a>
+          <span>Sản phẩm</span></a>
       </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Đơn hàng</span></a>
-      </li>
+      
 
       <!-- Nav Item - Utilities Collapse Menu -->
       
@@ -93,25 +80,25 @@ ob_start();
       <li class="nav-item">
         <a class="nav-link" href="comment1.php">
           <i class="fas fa-fw fa-comments"></i>
-          <span>Comment</span></a>
+          <span>Bình luận</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="slide1.php">    
 		  <i class="fas fa-fw fa-chart-area"></i>
           <span>Slide</span></a>
       </li>
-		
-		<hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Voucher</span></a>
-      </li>
+      <hr class="sidebar-divider">
+
+<!-- Nav Item - Tables -->
+<li class="nav-item active">
+  <a class="nav-link" href="voucher1.php">    
+<i class="fas fa-fw fa-chart-area"></i>
+    <span>Voucher</span></a>
+</li>
 		
 		<hr class="sidebar-divider">
 		
@@ -230,35 +217,69 @@ ob_start();
 		<div class="container-fluid col-md-12 ">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
+          <h1 class="h3 mb-2 text-gray-800">banner</h1>
           
 
           <!-- Content Row -->
           <div class="row col-12">
-
+ <?php
+	include "connection.php";
+		if(isset($_GET['id'])){
+	$id=$_GET['id'];
+	$sql="select * from banner where id_ban='$id'";
+	$stmt= $conn ->prepare($sql);
+	$stmt -> execute();
+	$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
+}
+		if(isset($_POST['add_slide'])){
+				$title= $_POST['detail'];
+				$tt = $_POST['tt'];
+				
+				if($_FILES['image']['name']!=""){
+			//cho phép upload ảnh vào
+			//cộng thêm time để tránh trùng ảnh
+	$image = $_FILES['image']['name'];
+	$tmp = $_FILES['image']['tmp_name'];
+			//upload ảnh lên server
+	move_uploaded_file( $tmp ,"image/".$image );
+		#Nếu Ảnh được add vào thì sẽ upload ảnh lên server và câu lệnh update có thêm phần update ảnh
+		$sql= "update slide set image='$image', detail='$title',  tt='$tt' where id_ban='$id'";
+	}
+	else{
+		//$image = "";
+		$sql= "update slide set detail='$title',tt='$tt' where id_ban='$id'";
+	}
+			
+				
+				$stmt = $conn->prepare($sql);
+				$stmt->execute();
+				
+			if ($stmt->rowCount() > 0) {
+				echo "cập nhập thành công";
+    		} else {
+			echo "Cập nhật dữ liệu thất bại";
+    		}
+			}
+		
+	?>  
           <form action="" method="post" enctype="multipart/form-data">
 	
-  
+  	<input type="hidden" name="id" value="<?=$id?>">
 	<div class="form-row">
     <div class="form-group col-md-12">
       <label for="inputEmail4">title</label>
-     <textarea name="title" id="editor1" rows="10" cols="80"></textarea>
+     <textarea name="title" id="editor1" rows="10" cols="80">
+		 <?=$row['detail']?>
+	</textarea>
     </div>
     
   </div>				  
-  <div class="form-row">
-	  <div class="form-group col-md-12">
-      <label for="inputPassword4">link </label>
-      <input name="link" type="text" class="form-control"  >
-    </div>
-	  
-   
-	  
+  
   </div>
 	<div class="form-row">
 		<div class="col-md-5">
       <label for="inputState">trạng thái</label>
-      <select name="tt" id="inputState" class="form-control">
+      <select name="tt" id="inputState" class="form-control" value="<?=$row['tt']?>">
         <option selected>on</option>
         <option>off</option>
       </select>
@@ -266,43 +287,18 @@ ob_start();
 		
 		<div class="form-group col-md-6">
     <label for="exampleFormControlFile1">Ảnh</label>
-    <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+			<img src="<?=$row['image']?>" width="120" alt="">
+			<input type="hidden" name="image" value="<?=$row['image']?>">
+   		 	<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
   </div>
 	</div>
 	
  
-  <button name="add_slide" type="submit" class="btn btn-primary">thêm</button>
+  <button name="add_slide" type="submit" class="btn btn-primary">sửa slide</button>
+			  <button type="submit" class="btn btn-primary"><a href="banner.php" class="text-light">danh sách slide</a></button>
 </form>
             <!-- Donut Chart -->
-	<?php
-		include "connection.php";
-			 if(isset($_POST['add_slide'])){
-			if($_POST['title']==""|| $_FILES['image']==""|| $_POST['link']==""|| $_POST['tt']==""){
-				echo"thêm thất bại, phải nhập đủ thông tin";
-			}
-			else{
-				$title= $_POST['title'];
-				$link = $_POST['link'];
-				$tt = $_POST['tt'];
-				
-				$image=$_FILES['image']['name'];
-			$tmpA= $_FILES['image']['tmp_name'];
-			move_uploaded_file( $tmpA ,"image/".$image);
-				
-				$sql= "insert into slide values('','$image','$title','$link','$tt')";
-				$kq = $conn->exec($sql);
-				if($kq==1){
-
-			header("location:slide1.php");
-
-				
-			}
-			else{
-				echo "không thêm đc dữ liệu";
-			}
-			}
-		}
-			  ?>
+	
 			  
           </div>
 
@@ -375,8 +371,3 @@ ob_start();
 </body>
 
 </html>
-
-<?php
-	ob_end_flush();
-	?>
-

@@ -113,7 +113,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
+        <a class="nav-link" href="voucher1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -263,8 +263,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
    
 				  <table class="table ">
 					  <div class="card-header py-3 bg-light">
-                 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
-                </div>
+						 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
+					</div>
 					  
   <thead>
 	  	
@@ -297,10 +297,14 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['detail']?></td>
 		<td><?=$row['view']?></td>
 		<td><?=$row['id_cate']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
+		<td>
+			<button type="button" class="btn btn-primary text-light"> 
+				<a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> 
+			</button>
+			<a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
 		</td>
 	</tr>
+	 
 	<?php
 		}
 	?>

@@ -1,12 +1,12 @@
-
 <?php
-session_start(); 
-ob_start();
-	
-	
+//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
+include"connection.php";
+$sql= "select * from order";
+//Xử lý lệnh sql
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +18,7 @@ ob_start();
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Charts</title>
+  <title>SB Admin 2 - Buttons</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@ ob_start();
 
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-	<script src="ckeditor_4.13.0_full_easyimage/ckeditor/ckeditor.js" ></script>
+
 </head>
 
 <body id="page-top">
@@ -72,7 +72,7 @@ ob_start();
       <hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
+        <a class="nav-link" href="order1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Đơn hàng</span></a>
       </li>
@@ -170,27 +170,10 @@ ob_start();
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
+            
 
             <!-- Nav Item - Alerts -->
-           
+            
 
             <!-- Nav Item - Messages -->
             
@@ -201,6 +184,7 @@ ob_start();
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
+                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -215,99 +199,84 @@ ob_start();
               </div>
             </li>
 
-
           </ul>
 
         </nav>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        
-        <!-- /.container-fluid -->
-
-      </div>
-		
-		<div class="container-fluid col-md-12 ">
+        <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
-          
+          <h1 class="h3 mb-4 text-gray-800">Danh mục</h1>
 
-          <!-- Content Row -->
-          <div class="row col-12">
+          <div class="row">
 
-          <form action="" method="post" enctype="multipart/form-data">
-	
-  
-	<div class="form-row">
-    <div class="form-group col-md-12">
-      <label for="inputEmail4">title</label>
-     <textarea name="title" id="editor1" rows="10" cols="80"></textarea>
-    </div>
-    
-  </div>				  
-  <div class="form-row">
-	  <div class="form-group col-md-12">
-      <label for="inputPassword4">link </label>
-      <input name="link" type="text" class="form-control"  >
-    </div>
-	  
-   
-	  
-  </div>
-	<div class="form-row">
-		<div class="col-md-5">
-      <label for="inputState">trạng thái</label>
-      <select name="tt" id="inputState" class="form-control">
-        <option selected>on</option>
-        <option>off</option>
-      </select>
-    </div>
+            <div class="col-lg-12">
+
+              <!-- Circle Buttons -->
+              <div class="card shadow mb-4 bg-light">
+                
+                <div class="card-body">
+                  
+                  <div class="row">
 		
-		<div class="form-group col-md-6">
-    <label for="exampleFormControlFile1">Ảnh</label>
-    <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
-  </div>
-	</div>
+		
+		<div class="col-md-12  ">
+			
 	
- 
-  <button name="add_slide" type="submit" class="btn btn-primary">thêm</button>
-</form>
-            <!-- Donut Chart -->
-	<?php
-		include "connection.php";
-			 if(isset($_POST['add_slide'])){
-			if($_POST['title']==""|| $_FILES['image']==""|| $_POST['link']==""|| $_POST['tt']==""){
-				echo"thêm thất bại, phải nhập đủ thông tin";
-			}
-			else{
-				$title= $_POST['title'];
-				$link = $_POST['link'];
-				$tt = $_POST['tt'];
-				
-				$image=$_FILES['image']['name'];
-			$tmpA= $_FILES['image']['tmp_name'];
-			move_uploaded_file( $tmpA ,"image/".$image);
-				
-				$sql= "insert into slide values('','$image','$title','$link','$tt')";
-				$kq = $conn->exec($sql);
-				if($kq==1){
+		
+	<table class="table text-dark">
+  <thead>
+    <tr>
+      <th  scope="col">id</th>
+      <th  scope="col">Tài khoản</th>
+	  <th  scope="col">Ngày mua</th>
+	  <th  scope="col">Điện thoại</th>
+	  <th  scope="col">Địa chỉ</th>
+	  <th scope="col">Chi tiết</th>
+	
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+		foreach($result as $row){
+			?>
+				<tr>
+					<td><?=$row['id_cate']?></td>
+					<td><?=$row['name_cate']?></td>
 
-			header("location:slide1.php");
-
-				
-			}
-			else{
-				echo "không thêm đc dữ liệu";
-			}
-			}
+					<td>
+						<a class="btn btn-primary text-light" href="suadanhmuc1.php?id=<?=$row['id_cate']?>">Chi tiet</a>  
+					</td>
+				</tr>
+				<?php
 		}
-			  ?>
-			  
+	?>
+    
+  </tbody>
+</table>
+			
+				
+			</div>
+		</div>
+                  
+                </div>
+              </div>
+
+              <!-- Brand ....Buttons -->
+              
+
+            </div>
+
+            
+
           </div>
 
         </div>
-		
+        <!-- /.container-fluid -->
+
+      </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -360,23 +329,6 @@ ob_start();
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
-<script>
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'editor1' );
-            </script>
 </body>
 
 </html>
-
-<?php
-	ob_end_flush();
-	?>
-

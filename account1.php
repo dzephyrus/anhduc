@@ -100,7 +100,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
+        <a class="nav-link" href="voucher1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -222,6 +222,9 @@
 
           <!-- Content Row -->
           <div class="card shadow m-6">
+			   <div class="card-header py-3 bg-light">
+						 <a href="addaccount1.php" class="btn btn-success">thêm tai khoan</a> 
+				</div>
 <?php
 //câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
 include"connection.php";
@@ -266,7 +269,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
   </tbody>
 </table>
-<button type="button" class="btn btn-success" style="width: 15%; float: right"> <a href="addaccount1.php">Thêm account</a></button>
+
             <!-- Donut Chart -->
             
           </div>

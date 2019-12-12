@@ -91,6 +91,14 @@
 		  <i class="fas fa-fw fa-chart-area"></i>
           <span>Slide</span></a>
       </li>
+      <hr class="sidebar-divider">
+
+<!-- Nav Item - Tables -->
+<li class="nav-item active">
+  <a class="nav-link" href="voucher1.php">    
+<i class="fas fa-fw fa-chart-area"></i>
+    <span>Voucher</span></a>
+</li>
 		
 		<hr class="sidebar-divider">
 		

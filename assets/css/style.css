@@ -1272,8 +1272,8 @@ input.cart-plus-minus-box {
 .cart-plus-minus {
   border: 1px solid #dcdcdc;
   overflow: hidden;
-  padding: 10px 0 10px 5px;
-  width: 80px;
+  padding: 5px 0 5px 5px;
+  width: 90px;
 }
 .quickview-plus-minus {
   display: -webkit-box;
@@ -1310,7 +1310,7 @@ input.cart-plus-minus-box {
   border: 1px solid transparent;
 }
 .quickview-btn-cart {
-  margin: 0 30px;
+  margin: 0 10px;
 }
 .qtybutton.inc {
   margin-top: 2px;

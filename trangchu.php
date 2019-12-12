@@ -2,6 +2,7 @@
 	session_start();
 	ob_start();
 	include 'connection.php';	
+	
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -61,7 +62,7 @@
                                     <nav>
                                        <ul>
                                             <li><a href="trangchu.php">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="about-us.php">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
 													<?php
@@ -96,7 +97,7 @@
                                                 </ul>
                                             </li>
                                             	
-                                            <li><a href="contact.html">contact</a></li>
+                                            <li><a href="contact.php">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -108,20 +109,28 @@
                                       			 <ul>
 
 													 <?php
+
 													 	if(isset($_SESSION['name_u'])){
 															 $username=$_SESSION['name_u'];
 															$sqltk = "select * from user where name_u = '$username'";
         													$kqtk = $conn->query($sqltk)->fetch();
 															if($kqtk['quyen'] == 'admin'){
 															
+
 													 ?>
 													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
-													
-															<ul class="dropdown">
-																<li><a href="dangxuat.php">Đăng xuất</a></li>
-																<li><a href="">Đổi mật khẩu</a></li>
-																<li><a href="danhmuc1.php">Quản trị</a></li>
-															</ul>
+															<?php if($kq_dangnhap['quyen']=="user"){?>
+																<ul class="dropdown">
+																	<li><a href="dangxuat.php">Đăng xuất</a></li>
+																	<li><a href="">Đổi mật khẩu</a></li>
+																</ul>
+															<?php } if($kq_dangnhap['quyen']=="admin") {?>
+																<ul class="dropdown">
+																	<li><a href="dangxuat.php">Đăng xuất</a></li>
+																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="danhmuc1.php">Quản trị</a></li>
+																</ul>
+															<?php }?>
 													</li>
 													 <?php
 															}
@@ -173,77 +182,19 @@
             </header>
             <!-- header end --> 
             <!-- sidebar-cart start -->
-            <div class="sidebar-cart onepage-sidebar-area">
-                <div class="wrap-sidebar">
-                    <div class="sidebar-cart-all">
-                        <div class="sidebar-cart-icon">
-                            <button class="op-sidebar-close"><span class="ion-android-close"></span></button>
-                        </div>
-                        <div class="cart-content">
-                            <h3>Shopping Cart</h3>
-                            <ul>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="image/thuc-an-me-o.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-total">
-                                        <h4>Total : <span>$ 120</span></h4>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-checkout-btn">
-                                        <a class="btn-hover cart-btn-style" href="#">view cart</a>
-                                        <a class="no-mrg btn-hover cart-btn-style" href="#">checkout</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- main-search start -->
             <div class="main-search-active">
                 <div class="sidebar-search-icon">
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form method="get" enctype="multipart/form-data" action="search.php">
+                    <form>
                         <div class="form-search">
+
                             <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
                                <button class="btn btn-outline-success my-2 my-sm-0" name="submit-search" type="submit">Search</button>
+
                         </div>
                     </form>
                 </div>
@@ -296,57 +247,9 @@
                     </div>
                 </div>
             </div>
-            
-                <!--long slider-->
-                <div class="container" >
-					
-				 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						<?php
-							$sql = "select * from slide where title='on'";
-							$kq = $conn -> query($sql);
-							$stt= 0;
-							foreach($kq as $key => $row){
-								?>
-									  <li data-target="#myCarousel" data-slide-to="<?php echo $stt; ?>"<?php if($stt==0){echo " class='active' ";}?>></li>
-								<?php
-								$stt ++;
-							}
-						?>
-					</ol>
-
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner">
-						<?php
-							$sql = "select * from slide where title = 'on'";
-							$kq=$conn -> query($sql);
-							$stt =0;
-							foreach($kq as $key => $row){
-						?>
-						 <div class="item <?php  if($stt==0){echo 'active'; }?>">
-							<img src="image/<?php echo $row['image_slide'] ?>" style=" height: 600px; width:100%;">
-						 </div>
-						<?php
-							$stt ++;
-							}
-
-						?>
-
-							</div>
-
-							<!-- Left and right controls -->
-							<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-							  <span class="glyphicon glyphicon-chevron-left"></span>
-							  <span class="sr-only">Previous</span>
-							</a>
-							<a class="right carousel-control" href="#myCarousel" data-slide="next">
-							  <span class="glyphicon glyphicon-chevron-right"></span>
-							  <span class="sr-only">Next</span>
-							</a>
-					  </div>
-					
-				</div><br>
+             
+           <!--long slider-->
+			   <?php include 'shareslider.php'?>
            <!--Kết thúc slider-->
           
           
@@ -371,24 +274,16 @@
 									
                                     <div class="product-slider-active owl-carousel">
 										<?php
-
-										include 'connection.php';
-						$sql1 = "select * from product order by id_p DESC LIMIT 0,4 ";
-						$stmt = $conn->prepare($sql1);
-						$stmt->execute();
-						$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-						foreach($result as $row){
-
+						$sql1 = "select * from product   limit 4  ";
+						$kqproduct = $conn->query($sql1);
+						foreach($kqproduct as $key=>$pro){
 					
 						?>
                                         <div class="col-md-3 col-lg-3 col-sm-4">
                                             <div class="single-product">
 											
                                                 <div class="product-img" style="width: 270px;height: 300px;">
-                                                    <a href="product-details.php?id=<?=$row['id_p']?>"><img src="image/<?php echo $row['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
-
-                                                  
-
+                                                    <a href="#"><img src="image/<?php echo $pro['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
                                                    
                                                     <div class="product-action">
                                                         <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
@@ -398,31 +293,25 @@
                                                 <div class="product-content">
                                                     <div class="product-title-price">
                                                         <div class="product-title" >
-
-                                                            <h4><a href="product-details.php?id=<?=$row['id_p']?>" style="font-size: 23px"><?php echo $row['name_p'] ?></a></h4>
-
+                                                            <h4><a href="product-details-6.html"><?php echo $pro['name_p'] ?></a></h4>
                                                         </div>
-                                                        <div class="product-price" style="margin-left: 100px;">
-                                                            <span style="font-size: 20px"><?php echo $row['sale_p']?></span><del><?php echo $row['price']?></del>
-
+                                                        <div class="product-price" style="margin-left: 150px;">
+                                                            <span><?php echo number_format($pro['price'], 0, '', ',') ?>VNĐ</span>
                                                         </div>
                                                     </div>
                                                     <div class="product-cart-categori">
                                                         <div class="product-cart">
-                                                            <span><?php echo $row['name_cate'] ?></span>
+                                                            <span>Furniter</span>
                                                         </div>
                                                         <div class="product-categori">
-                                                            <a href="#"><i class="ion-bag"></i> Add to cart</a>
+                                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 											
                                         </div>
-
-                                       <?php 
-						
-                                       }
+                                       <?php }
 						?>
                                     </div>
 									
@@ -435,16 +324,16 @@
                 </div>
             </div>
 			<?php
-						$sql = "select * from slide where id_slide = 4 limit 1";
+						$sql = "select * from banner where tt='on'  limit 1";
 						$kqslide = $conn->query($sql);
 						foreach($kqslide as $key=>$value){
 					
 						?>
-            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image_slide']   ?>)" data-overlay="3">
+            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image']   ?>)" data-overlay="3">
 				
                 <div class="container">
                     <div class="shop-limited-content text-center">
-                        <h2><?php echo $value['status'] ?></h2>
+                        <h2><?php echo $value['detail'] ?></h2>
                         <a class="btn-hover limited-btn" href="#">view more</a>
                     </div>
                 </div>
@@ -459,45 +348,40 @@
                     </div>
                     <div class="row">
 						<?php
-						$sql ="select * from product order by view DESC LIMIT 0,4";
-							$stmt = $conn->prepare($sql);
-							$stmt->execute();
-							$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-							foreach($result as $row){
+						$sql = "select * from product  limit 8  ";
+						$kqproduct = $conn->query($sql);
+						foreach($kqproduct as $key=>$pro){
+					
 						?>
                         <div class="col-md-6 col-lg-4 col-xl-3" >
 							
                             <div class="single-product mb-35">
                                 <div class="product-img" style="width: 270px;height: 300px;">
-                                    <a href="product-details.php?id=<?=$row['id_p']?>"><img src="image/<?php echo $row['image_p']?>" alt=""></a>
-                                    <span>sale</span>
-                                    <div class="product-action">
-                                        <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                        <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                    </div>
+                                    <a href="product-details.php"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
                                 </div>
                                 <div class="product-content">
                                     <div class="product-title-price">
                                         <div class="product-title">
-                                            <h4><a href="product-details.php?id=<?=$row['id_p']?>"><?php echo $row['name_p']?></a></h4>
+                                            <h4><a href="product-details.php"><?php echo $pro['name_p']?></a></h4>
                                         </div>
                                         <div class="product-price">
-                                            <span style="font-size: 20px"><?php echo $row['sale_p']?></span><del><?php echo $row['price']?></del>
+                                            <span><?php echo $pro['price']?></span>
                                         </div>
                                     </div>
                                     <div class="product-cart-categori">
                                         <div class="product-cart">
-                                            <span><?php echo $row['name_cate'] ?></span>
+                                            <span>Thêm vào giỏ hàng</span>
                                         </div>
                                         <div class="product-categori">
-                                            <a href="#"><i class="ion-bag"></i> Add to cart</a>
+                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 							
                         </div>
-                      <?php }
+                      <?php
+						}
 						?>
                     </div>
                 </div>
@@ -506,7 +390,7 @@
           
               <!--đây là footer-->  
              <?php include 'sharefooter.php'?>
-          
+          	<!--ket thuc footer-->
        
 
             <!-- modal -->

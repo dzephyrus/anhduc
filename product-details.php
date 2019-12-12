@@ -82,24 +82,24 @@ ob_start();
                                             <li><a href="about-us.html">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
+										   	<?php
+												include"connection.php";
+												$sql= "select * from category";
+												//Xử lý lệnh sql
+												$stmt = $conn->prepare($sql);
+												$stmt->execute();
+												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+												?>
 													<?php
-														include"connection.php";
-														$sql= "select * from category";
-														//Xử lý lệnh sql
-														$stmt = $conn->prepare($sql);
-														$stmt->execute();
-														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-													?>
-															<?php
-																foreach($result as $row){
-																	?>
-																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-
-
-																	<?php
-																}
-															?>
-														
+												foreach($result as $row){
+												?>
+												
+                                                    <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+                                                   
+                                                
+												<?php
+												}
+												?>
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -109,7 +109,7 @@ ob_start();
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
                                                     <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.php">login</a></li>
+                                                    <li><a href="login.html">login</a></li>
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
@@ -121,18 +121,6 @@ ob_start();
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
-										<div class="main-menu">
-                                   			 <nav>
-                                      			 <ul>
-													<li><a href="#">Tài khoản</a>
-															<ul class="dropdown">
-																<li><a href="login.php">Đăng nhập</a></li>
-																<li><a href="register.php">Đăng ký</a></li>
-															</ul>
-													</li>
-													
-												</ul>
-									</div>
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
                                             <span class="ion-ios-search-strong"></span>
@@ -220,17 +208,17 @@ ob_start();
                 </div>
             </div>
             <!-- main-search start -->
-           <div class="main-search-active">
+            <div class="main-search-active">
                 <div class="sidebar-search-icon">
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form method="get" enctype="multipart/form-data" action="search.php">
+                    <form>
                         <div class="form-search">
-                            <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
-                            
-                               <button class="btn btn-outline-success my-2 my-sm-0" name="submit-search" type="submit">Search</button>
-                            
+                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
+                            <button>
+                                <i class="ion-ios-search-strong"></i>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -365,10 +353,10 @@ ob_start();
                                         <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
                                     </div>
                                     <div class="quickview-btn-cart">
-                                        <a class="btn-hover-black" href="#">add to cart</a>
+                                        <a class="btn-hover-black" href="#">Thêm giỏ hàng</a>
                                     </div>
-                                    <div class="quickview-btn-wishlist">
-                                        <a class="btn-hover" href="#"><i class="ion-ios-heart-outline"></i></a>
+                                     <div class="quickview-btn-cart">
+                                        <a class="btn-hover-black" href="checkout.php">Thanh toán</a>
                                     </div>
                                 </div>
                                 <div class="product-categories product-cat-tag">
@@ -537,8 +525,6 @@ ob_start();
                             </div>
                             <div class="tab-pane fade" id="pro-review" role="tabpanel">
                                 <a href="#">Be the first to write your review!</a>
-                                
-								
                             </div>
                         </div>
                     </div>
@@ -605,67 +591,8 @@ ob_start();
                     </div>
                 </div>
             </div>
-            <footer class="footer-area gray-bg pt-100 pb-95">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-5 col-12">
-                            <div class="footer-widget">
-                                <div class="footer-widget-l-content">
-                                    <h4>20 Years Experience</h4>
-                                    <ul>
-                                        <li><a href="#"><i class="ion-social-twitter"></i></a></li> 
-                                        <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
-                                        <li><a href="#"><i class="ion-social-facebook"></i></a></li> 
-                                        <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li> 
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-7 col-12">
-                            <div class="footer-widget">
-                                <div class="footer-widget-m-content text-center">
-                                    <div class="footer-logo">
-                                       <?php
-											include 'connection.php';
-										$stmt = $conn->query("select * from setting");
-										foreach($stmt as $key => $row){
-										?>
-
-										<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
-
-										<?php 
-										}
-										?>
-                                    </div>
-                                    <div class="footer-nav">
-                                        <nav>
-                                            <ul>
-                                                <li><a href="index.html">home</a></li>
-                                                <li><a href="about-us.html">about us</a></li>
-                                                <li><a href="shop-grid-view-sidebar.html">shop </a></li>
-                                                <li><a href="blog-left-sidebar.html"> blog </a></li>
-                                                <li><a href="#">pages </a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="https://freethemescloud.com/" target="_blank" >Free Themes Cloud.</a> All rights reserved. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-12 col-12">
-                            <div class="footer-widget f-right">
-                                <div class="footer-widget-r-content">
-                                    <ul>
-                                        <li><span>Phone :</span> +00 123 54 0056</li>
-                                        <li><span>Email : </span> <a href="#">neha@gmail.com</a></li>
-                                        <li><span>Address :</span> Dhaka Bangladesh</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+           <!-- footer-->
+			<?php include 'sharefooter.php'?>
             <!-- modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -747,10 +674,10 @@ ob_start();
 											<input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
 										</div>
                                         <div class="quickview-btn-cart">
-                                            <a class="btn-hover-black" href="#">add to cart</a>
+                                            <a class="btn-hover-black" href="#">Thêm vào giỏ hàng</a>
                                         </div>
                                         <div class="quickview-btn-wishlist">
-                                            <a class="btn-hover" href="#"><i class="ion-ios-heart-outline"></i></a>
+                                            <button type="submit"><a class="btn btn-primary text-light" href="checkout.php">Thanh toán</a></button>
                                         </div>
                                     </div>
                                 </div>
