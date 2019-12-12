@@ -113,7 +113,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
+        <a class="nav-link" href="voucher1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>

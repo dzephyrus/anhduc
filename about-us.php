@@ -60,16 +60,62 @@
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
+                                <?php
+						include 'connection.php';
+					$stmt = $conn->query("select * from setting");
+					foreach($stmt as $key => $row){
+					?>
+					
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
+				
+					<?php 
+					}
+					?>
                                 </div>
                             </div>
                             <div class="col-lg-6 menu-none-block menu-center">
                                 <div class="main-menu">
                                     <nav>
                                         <ul>
-                                            <li><a href="#">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
-                                            <li><a href="shop-grid-view-5-col.html">shop</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
+                                            <li><a href="about-us.php">about us</a>
+                                           
+                                            </li>
+                                            <li><a href="shop-grid-view-5-col.html">shop</a>
+                                             
+                                            <ul class="dropdown">
+													<?php
+														include"connection.php";
+														$sql= "select * from category";
+														//Xử lý lệnh sql
+														$stmt = $conn->prepare($sql);
+														$stmt->execute();
+														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+													?>
+															<?php
+																foreach($result as $row){
+																	?>
+																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+
+
+																	<?php
+																}
+															?>
+														
+													</ul> 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            </li>
                                             <li><a href="#">pages</a>
                                                 <ul class="dropdown">
                                                     <li><a href="about-us.html">about us</a></li>
@@ -81,18 +127,29 @@
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">blog</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">contact</a></li>
+                                            
+                                            <li><a href="contact.php">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
+                                <div class="header-search-cart">
+										<div class="main-menu">
+                                   			 <nav>
+                                      			 <ul>
+													<li><a href="#">Tài khoản</a>
+															<ul class="dropdown">
+																<li><a href="login.php">Đăng nhập</a></li>
+																<li><a href="cart.html">Đăng ký</a></li>
+															</ul>
+													</li>
+													
+												</ul>
+									</div>
+
+
+                            
                                 <div class="header-search-cart">
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
@@ -301,17 +358,25 @@
                     </div>
                 </div>
             </div>
-            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
+            <?php
+						$sql = "select * from banner  where tt='off' limit 1";
+						$kqslide = $conn->query($sql);
+						foreach($kqslide as $key=>$value){
+					
+						?>
+            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/<?= $value['image']   ?>)">
                 <div class="container">
                     <div class="breadcrumb-content">
                         <h2>About Us</h2>
                         <ul>
-                            <li><a href="#">home</a></li>
+                            <li><a href="trangchu.php">home</a></li>
                             <li> about us </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <?php }
+			?>
             <div class="about-story ptb-100">
                 <div class="container">
                     <div class="row">
@@ -323,13 +388,13 @@
                                 <p class="story-paragraph">Modo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu dolore eu fugiat pariatur. Excepteur sint occaecat cupidatat non proident, sun in culpa qui officia deserunt molli</p>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-12 col-12">
+                        <div class="col-lg-6 col-md-12 col-12" >
                             <div class="about-story-img">
                                 <div class="about-story-img1">
-                                    <img src="assets/img/banner/22.jpg" alt="">
+                                    <img src="image/pic17-6180.jpg" alt="" >
                                 </div>
                                 <div class="about-story-img2">
-                                    <img src="assets/img/banner/23.jpg" alt="">
+                                    <img src="image/pic17-6180.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -370,8 +435,8 @@
             <div class="video-area">
                 <div class="container">
                     <div class="video-banner">
-                        <img src="assets/img/banner/24.jpg" alt="">
-                        <a class="video-popup" href="https://www.youtube.com/watch?v=wI4ocEF3Wfk">
+                        <img src="image/hamster_tranvantieng_t4_02-7297.png" alt="">
+                        <a class="video-popup" href="https://www.youtube.com/watch?v=wwK-uPHUS0A">
                             <i class="ion-ios-play"></i>
                         </a>
                     </div>
@@ -398,57 +463,7 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer-area gray-bg pt-100 pb-95">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-5 col-12">
-                            <div class="footer-widget">
-                                <div class="footer-widget-l-content">
-                                    <h4>20 Years Experience</h4>
-                                    <ul>
-                                        <li><a href="#"><i class="ion-social-twitter"></i></a></li> 
-                                        <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
-                                        <li><a href="#"><i class="ion-social-facebook"></i></a></li> 
-                                        <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li> 
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-7 col-12">
-                            <div class="footer-widget">
-                                <div class="footer-widget-m-content text-center">
-                                    <div class="footer-logo">
-                                        <a href="#"><img src="assets/img/logo/logo.png" alt=""></a>
-                                    </div>
-                                    <div class="footer-nav">
-                                        <nav>
-                                            <ul>
-                                                <li><a href="index.html">home</a></li>
-                                                <li><a href="about-us.html">about us</a></li>
-                                                <li><a href="shop-grid-view-sidebar.html">shop </a></li>
-                                                <li><a href="blog-left-sidebar.html"> blog </a></li>
-                                                <li><a href="#">pages </a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="https://freethemescloud.com/" target="_blank" >Free Themes Cloud.</a> All rights reserved. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-12 col-12">
-                            <div class="footer-widget f-right">
-                                <div class="footer-widget-r-content">
-                                    <ul>
-                                        <li><span>Phone :</span> +00 123 54 0056</li>
-                                        <li><span>Email : </span> <a href="#">neha@gmail.com</a></li>
-                                        <li><span>Address :</span> Dhaka Bangladesh</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php include 'sharefooter.php'?>
         </div>
 		
 		

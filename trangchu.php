@@ -62,7 +62,7 @@
                                     <nav>
                                        <ul>
                                             <li><a href="trangchu.php">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="about-us.php">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
 													<?php
@@ -97,7 +97,7 @@
                                                 </ul>
                                             </li>
                                             	
-                                            <li><a href="contact.html">contact</a></li>
+                                            <li><a href="contact.php">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -305,16 +305,16 @@
                 </div>
             </div>
 			<?php
-						$sql = "select * from slide where id_slide = 4 limit 1";
+						$sql = "select * from banner where tt='on'  limit 1";
 						$kqslide = $conn->query($sql);
 						foreach($kqslide as $key=>$value){
 					
 						?>
-            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image_slide']   ?>)" data-overlay="3">
+            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image']   ?>)" data-overlay="3">
 				
                 <div class="container">
                     <div class="shop-limited-content text-center">
-                        <h2><?php echo $value['status'] ?></h2>
+                        <h2><?php echo $value['detail'] ?></h2>
                         <a class="btn-hover limited-btn" href="#">view more</a>
                     </div>
                 </div>
