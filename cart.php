@@ -1,7 +1,9 @@
 <?php
 	session_start();
 	include 'connection.php';
-	
+	$cart = isset($_SESSION['CART']) ? $_SESSION['CART'] : [];
+	$totalPrice = 0;
+	$sumPrice=0;
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -323,6 +325,11 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <h1 class="cart-heading">Giỏ hàng của bạn</h1>
+							<?php if(isset($_SESSION['case'])) :?>
+								<div>
+									<?php echo $_SESSION['case']; unset($_SESSION['case']);?>
+								</div>
+							<?php endif ?>
                             <form action="#">
                                 <div class="table-content table-responsive">
                                      <table class="table cart-table">
@@ -332,13 +339,13 @@
 												<th>Tên sản phẩm</th>
 												<th>Ảnh sản phẩm</th>
 												<th>Số lượng</th>
-												<th>Giá sản phẩm</th>
+												<th>Đơn giá</th>
 												<th>Tổng tiền</th>
 												<th>Thao tác</th>
 											</tr>
 										</thead>
 										<tbody>
-											<?php $stt=1;foreach ($_SESSION['CART'] as $key => $item): ?>
+											<?php $stt=1;foreach ($cart as $key => $item): ?>
 												<tr>
 													<td><?php echo $stt ;?></td>
 													<td><?php echo $item['name_p'] ;?></td>
@@ -346,10 +353,17 @@
 														<img src="image/<?php echo $item['image_p']?>" width="80px" height="25px;">
 													</td>
 													<td>
-														<input type="number" name="qty" value="<?php echo $item['sl_p']?>">
+														<input type="number" name="qtantity" value="<?php echo $item['quantity']?>" min='0'>
 													</td>
-													<td><?php echo $item['price'] ;?></td>
-													
+													<td><?php echo number_format($item['sale_p'], 0, '', ','); ?> vnđ</td>
+													<td><?php 
+														$itemTotal = $item['sale_p']*$item['quantity'];
+														$totalPrice += $itemTotal;
+														echo number_format($itemTotal, 0, '', ','); ?> vnđ</td>
+                                        			<td>
+														<a href=""class="btn btn-danger text-light">Update</a>
+														<a href="xoaspgiohang.php?key=<?php echo $key ?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
+													</td>
 												</tr>
 											<?php $stt++; endforeach ?>
 
@@ -363,9 +377,6 @@
                                                 <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
     											<input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                             </div>
-                                            <div class="coupon2">
-                                                <input class="button" name="update_cart" value="Update cart" type="submit">
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -374,10 +385,10 @@
                                         <div class="cart-page-total">
                                             <h2>Cart totals</h2>
                                             <ul>
-                                                <li>Subtotal<span>100.00</span></li>
-                                                <li>Total<span>100.00</span></li>
+                                                <li>Tổng tiền<span><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
+                                               
                                             </ul>
-                                            <a href="#">Proceed to checkout</a>
+                                            <a href="checkout.php">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
