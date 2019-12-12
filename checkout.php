@@ -269,7 +269,33 @@
 										<!-- kết thuc ddien thong tin-->
               						</div>													
                                 </div>
-								<?php }?>
+								<?php }
+								else{?>
+									<div class="checkbox-form">						
+                                    <h3>Điền thông tin nhận hàng</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>First Name <span class="required">*</span></label>									<input type="text" placeholder="tên" name="fullname"/>
+                                            </div>
+										</div>
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>Phone</label>
+                                                <input type="number" placeholder="phone" name="phone"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>Address <span class="required">*</span></label>
+                                                <input type="text" placeholder="Street address" name="dc" />
+                                            </div>
+                                        </div>
+										<!-- kết thuc ddien thong tin-->
+              						</div>													
+                                </div>
+								<?php	
+								}?>
 								<input type="submit" value="Place order" name="xacnhan"/>
                             </form>
 							
