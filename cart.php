@@ -372,13 +372,33 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<?php			
+									if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
+									$sql_dangnhap = "SELECT * FROM voucher ";
+									$kq_dangnhap = $conn->query($sql_dangnhap)->fetch();
+													 ?>
+										<form action="" method="get" >
                                         <div class="coupon-all">
                                             <div class="coupon">
                                                 <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
     											<input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                             </div>
                                         </div>
+										</form>
+										<?php }
+										else{
+											
+										}?>				   
                                     </div>
+									<?php
+										if (isset($_GET['apply_coupon'])) {
+											$voucher_code = $_GET['coupon_code'];
+											$sql = "SELECT * FROM voucher WHERE name_vc='$voucher_code'";
+											$kq = $conn->query($sql)->fetch();
+											
+											 if($voucher_code == $kq['name_vc'] ){
+												 
+												 ?>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-5 ml-auto">
@@ -386,7 +406,13 @@
                                             <h2>Cart totals</h2>
                                             <ul>
                                                 <li>Tổng tiền<span><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
-                                               
+                                         <?php
+											 }
+											else{
+												echo "voucher không tồn tại";
+											}
+										}
+									?>      
                                             </ul>
                                             <a href="checkout.php">Checkout</a>
                                         </div>
