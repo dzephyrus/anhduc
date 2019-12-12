@@ -108,8 +108,12 @@
                                       			 <ul>
 
 													 <?php
-														
-													 	if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
+													 	if(isset($_SESSION['name_u'])){
+															 $username=$_SESSION['name_u'];
+															$sqltk = "select * from user where name_u = '$username'";
+        													$kqtk = $conn->query($sqltk)->fetch();
+															if($kqtk['quyen'] == 'admin'){
+															
 													 ?>
 													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
 													
@@ -119,6 +123,20 @@
 																<li><a href="danhmuc1.php">Quản trị</a></li>
 															</ul>
 													</li>
+													 <?php
+															}
+															else{
+															?>
+													 			<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
+													
+															<ul class="dropdown">
+																<li><a href="dangxuat.php">Đăng xuất</a></li>
+																<li><a href="">Đổi mật khẩu</a></li>
+															</ul>
+													</li>
+													 		<?php
+														}
+													 ?>
 													<?php } else { ?>
 													 <li><a href="#">Tài khoản</a>
 
@@ -127,7 +145,8 @@
 																<li><a href="register.php">Đăng ký</a></li>
 															</ul>
 													</li>
-													 <?php } ?>
+													 <?php 
+																 } ?>
 												</ul>
 									</div>
                                     <div class="header-search common-style">
@@ -224,9 +243,7 @@
                     <form method="get" enctype="multipart/form-data" action="search.php">
                         <div class="form-search">
                             <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
-                            
                                <button class="btn btn-outline-success my-2 my-sm-0" name="submit-search" type="submit">Search</button>
-                            
                         </div>
                     </form>
                 </div>

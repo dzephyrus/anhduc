@@ -151,7 +151,7 @@
 							
 							
                             <ul>
-								<?php
+								<?php /*?><?php
 								if(isset($_POST['addcart'])){
 									$id = $_POST['addcart'];
 									
@@ -176,7 +176,7 @@
 									$stmt= $conn ->prepare($sql);
 									$stmt -> execute();
 									$r = $stmt -> fetch();
-										?>	
+										?><?php */?>	
 									
                                 <li class="single-product-cart">
                                     <div class="cart-img">
@@ -190,9 +190,9 @@
                                         <a href="#"><i class="ion-ios-trash-outline"></i></a>
                                     </div>
                                 </li>
-								<?php
+								<?php /*?><?php
 											}
-                                ?>
+                                ?><?php */?>
                                 <li class="single-product-cart">
                                     <div class="cart-total">
                                         <h4>Total : <span>$ 120</span></h4>
@@ -273,7 +273,7 @@
                     </div>
                 </div>
             </div>
-            <div class="breadcrumb-area pt-205 pb-210 bg-img" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
+            <div class="breadcrumb-area pt-205 pb-210 bg-img" style="background-image: url(image/ok2.jpg)">
                 <div class="container">
                     <div class="breadcrumb-content">
                         <h2>shop</h2>
