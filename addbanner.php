@@ -230,7 +230,7 @@ ob_start();
 		<div class="container-fluid col-md-12 ">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
+          <h1 class="h3 mb-2 text-gray-800">banner</h1>
           
 
           <!-- Content Row -->
@@ -242,16 +242,11 @@ ob_start();
 	<div class="form-row">
     <div class="form-group col-md-12">
       <label for="inputEmail4">title</label>
-     <textarea name="title" id="editor1" rows="10" cols="80"></textarea>
+     <textarea name="detail" id="editor1" rows="10" cols="80"></textarea>
     </div>
     
   </div>				  
-  <div class="form-row">
-	  <div class="form-group col-md-12">
-      <label for="inputPassword4">link </label>
-      <input name="link" type="text" class="form-control"  >
-    </div>
-	  
+ 
    
 	  
   </div>
@@ -277,23 +272,22 @@ ob_start();
 	<?php
 		include "connection.php";
 			 if(isset($_POST['add_slide'])){
-			if($_POST['title']==""|| $_FILES['image']==""|| $_POST['link']==""|| $_POST['tt']==""){
+			if($_POST['detail']==""|| $_FILES['image']==""||  $_POST['tt']==""){
 				echo"thêm thất bại, phải nhập đủ thông tin";
 			}
 			else{
-				$title= $_POST['title'];
-				$link = $_POST['link'];
+				$detail= $_POST['detail'];
 				$tt = $_POST['tt'];
 				
 				$image=$_FILES['image']['name'];
 			$tmpA= $_FILES['image']['tmp_name'];
 			move_uploaded_file( $tmpA ,"image/".$image);
 				
-				$sql= "insert into slide values('','$image','$title','$link','$tt')";
+				$sql= "insert into banner values('','$image','$detail','$tt')";
 				$kq = $conn->exec($sql);
 				if($kq==1){
 
-			header("location:slide1.php");
+			header("location:banner.php");
 
 				
 			}

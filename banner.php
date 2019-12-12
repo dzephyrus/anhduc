@@ -1,11 +1,4 @@
 
-<?php
-session_start(); 
-ob_start();
-	
-	
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +19,7 @@ ob_start();
 
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-	<script src="ckeditor_4.13.0_full_easyimage/ckeditor/ckeditor.js" ></script>
+
 </head>
 
 <body id="page-top">
@@ -128,7 +121,6 @@ ob_start();
           <i class="fas fa-fw fa-wrench"></i>
           <span>Cài đặt</span></a>
       </li>
-
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -222,92 +214,85 @@ ob_start();
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        
-        <!-- /.container-fluid -->
-
-      </div>
-		
-		<div class="container-fluid col-md-12 ">
+        <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
+          <h1 class="h3 mb-2 text-gray-800">Banner</h1>
           
 
           <!-- Content Row -->
-          <div class="row col-12">
-
-          <form action="" method="post" enctype="multipart/form-data">
-	
-  
-	<div class="form-row">
-    <div class="form-group col-md-12">
-      <label for="inputEmail4">title</label>
-     <textarea name="title" id="editor1" rows="10" cols="80"></textarea>
-    </div>
-    
-  </div>				  
-  <div class="form-row">
-	  <div class="form-group col-md-12">
-      <label for="inputPassword4">link </label>
-      <input name="link" type="text" class="form-control"  >
-    </div>
-	  
-   
-	  
-  </div>
-	<div class="form-row">
-		<div class="col-md-5">
-      <label for="inputState">trạng thái</label>
-      <select name="tt" id="inputState" class="form-control">
-        <option selected>on</option>
-        <option>off</option>
-      </select>
-    </div>
-		
-		<div class="form-group col-md-6">
-    <label for="exampleFormControlFile1">Ảnh</label>
-    <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
-  </div>
-	</div>
-	
- 
-  <button name="add_slide" type="submit" class="btn btn-primary">thêm</button>
-</form>
-            <!-- Donut Chart -->
-	<?php
-		include "connection.php";
-			 if(isset($_POST['add_slide'])){
-			if($_POST['title']==""|| $_FILES['image']==""|| $_POST['link']==""|| $_POST['tt']==""){
-				echo"thêm thất bại, phải nhập đủ thông tin";
-			}
-			else{
-				$title= $_POST['title'];
-				$link = $_POST['link'];
-				$tt = $_POST['tt'];
-				
-				$image=$_FILES['image']['name'];
-			$tmpA= $_FILES['image']['tmp_name'];
-			move_uploaded_file( $tmpA ,"image/".$image);
-				
-				$sql= "insert into slide values('','$image','$title','$link','$tt')";
-				$kq = $conn->exec($sql);
-				if($kq==1){
-
-			header("location:slide1.php");
-
-				
-			}
-			else{
-				echo "không thêm đc dữ liệu";
-			}
-			}
-		}
+          <div class="card shadow m-6">
+<?php
+	include 'connection.php';
+					$sql="select * from banner";
+					$stmt = $conn->query($sql);
+					$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					
 			  ?>
-			  
+            <table class="table ">
+					  
+  <thead>
+    <tr>
+      <th scope="col">ID baner</th>
+      <th scope="col">Ảnh</th>
+      <th scope="col">tiêu đề</th>
+		<th scope="col">Trạng thái</th>
+		<th scope="col">Chỉnh sửa</th>
+		
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+		foreach($result as $row){
+			?>
+	<tr>
+		<td><?=$row['id_ban']?></td>
+		<td><img src="image/<?=$row['image']?>" width="150"></td>
+		<td><?=$row['detail']?></td>
+		
+		<?php
+				if($row['tt']=='on'){
+					?>
+					<td >
+			<a href="offban.php?id=<?php echo $row['id_ban'] ?>" >
+				<button style="width: 50px;height: 50px;background: #33B33D;color: white;font-size: 18px;">
+					bật </button></a>
+			
+			
+		</td>
+				<?php 	
+				}else{
+					?>
+		<td >
+			<a href="onban.php?id=<?php echo $row['id_ban'] ?>" >
+				<button style="width: 50px;height: 50px;background: #C90407;color: white;font-size: 18px;">
+					tắt </button></a>
+			
+			
+		</td>
+		 <?php    }
+				?>
+		
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="updatebanner.php?id=<?=$row['id_ban']?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoabaner.php?id=<?=$row['id_ban']?>" class="text-light">xóa</a> </button>
+		</td>
+	</tr>
+	
+	<?php
+		}
+	?>
+    
+  </tbody>
+			  </table>
+			  <button class="btn btn-success col-md-1"><a href="addbanner.php" class="text-light text-decoration-none">thêm banner</a></button>
+            <!-- Donut Chart -->
+            
           </div>
 
         </div>
-		
+        <!-- /.container-fluid -->
+
+      </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -367,16 +352,7 @@ ob_start();
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
-<script>
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'editor1' );
-            </script>
+
 </body>
 
 </html>
-
-<?php
-	ob_end_flush();
-	?>
-

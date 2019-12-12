@@ -63,8 +63,8 @@
                                 <div class="main-menu">
                                     <nav>
                                        <ul>
-                                            <li><a href="#">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
+                                            <li><a href="about-us.php">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
 										   	<?php
@@ -99,7 +99,7 @@
                                                 </ul>
                                             </li>
                                             	
-                                            <li><a href="contact.html">contact</a></li>
+                                            <li><a href="contact.php">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -322,9 +322,27 @@
                     </div>
                 </div>
             </div>
-            <!--long slider-->
-			   <?php include 'shareslider.php'?>
-           <!--Kết thúc slider-->
+
+            <?php
+						$sql = "select * from banner  where tt='off' limit 1";
+						$kqslide = $conn->query($sql);
+						foreach($kqslide as $key=>$value){
+					
+						?>
+            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/<?= $value['image']   ?>)">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <h2>Shop</h2>
+                        <ul>
+                            <li><a href="trangchu.php">home</a></li>
+                            <li> Shop </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <?php }
+			?>
+
             <div class="shop-page-wrapper hidden-items padding-filter">
                 <div class="container-fluid">
                     <div class="shop-filters-left">

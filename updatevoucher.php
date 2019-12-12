@@ -1,12 +1,19 @@
-
 <?php
 session_start(); 
 ob_start();
 	
 	
 ?>
-
-
+<?php
+	include('connection.php');
+	if(isset($_GET['masua'])){
+		
+		$masua = $_GET['masua'];
+		$sqlsua = "select * from product where id_p ='$masua'";
+		$kqsua = $conn->query($sqlsua)->fetch();
+		
+	}
+	?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +33,7 @@ ob_start();
 
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-	<script src="ckeditor_4.13.0_full_easyimage/ckeditor/ckeditor.js" ></script>
+
 </head>
 
 <body id="page-top">
@@ -49,7 +56,7 @@ ob_start();
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -65,17 +72,11 @@ ob_start();
        <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
-          <span>Product</span></a>
+          <span>Sản phẩm</span></a>
       </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Đơn hàng</span></a>
-      </li>
+      
 
       <!-- Nav Item - Utilities Collapse Menu -->
       
@@ -93,7 +94,7 @@ ob_start();
       <li class="nav-item">
         <a class="nav-link" href="comment1.php">
           <i class="fas fa-fw fa-comments"></i>
-          <span>Comment</span></a>
+          <span>Bình luận</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
@@ -104,8 +105,7 @@ ob_start();
 		  <i class="fas fa-fw fa-chart-area"></i>
           <span>Slide</span></a>
       </li>
-		
-		<hr class="sidebar-divider">
+      <hr class="sidebar-divider">
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
@@ -113,9 +113,10 @@ ob_start();
           <span>Voucher</span></a>
       </li>
 		
+		
 		<hr class="sidebar-divider">
 		
-		<li class="nav-item">
+		<li class="nav-item active">
         <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Tài khoản</span></a>
@@ -201,6 +202,7 @@ ob_start();
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
+                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -215,99 +217,88 @@ ob_start();
               </div>
             </li>
 
-
           </ul>
 
         </nav>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        
-        <!-- /.container-fluid -->
-
-      </div>
-		
-		<div class="container-fluid col-md-12 ">
+        <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
+          <h1 class="h3 mb-2 text-gray-800">EDIT Voucher</h1>
           
 
           <!-- Content Row -->
-          <div class="row col-12">
+          <div class="row">
 
-          <form action="" method="post" enctype="multipart/form-data">
+            <form action="" method="post">
+	<div class="form-group">
+    <label for="inputAddress">Mã Vocher</label>
+    <input name="ma_vc" type="text" class="form-control" id="inputAddress" value="<?php echo $kqsua['ma_vc']?>">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Start date </label>
+      <input name="start" type="date" class="form-control" id="inputEmail4" value="<?php echo $kqsua['start']?>">
+    </div>
+	   <div class="form-group col-md-6">
+      <label for="inputEmail4">End date</label>
+      <input name="end" type="date" class="form-control" id="inputEmail4" value="<?php echo $kqsua['end']?>">
+    </div>
 	
-  
-	<div class="form-row">
-    <div class="form-group col-md-12">
-      <label for="inputEmail4">title</label>
-     <textarea name="title" id="editor1" rows="10" cols="80"></textarea>
+  </div>
+					  
+  <div class="form-row">
+	  
+  <div class="form-group col-md-8">
+      <label for="inputCity">Sale</label>
+      <input name="sale" type="number" class="form-control" id="sale" value="<?php echo $kqsua['sale']?>">
+    </div>
+     <div class="form-group col-md-8">
+      <label for="inputCity">detail</label>
+      <input name="detail" type="text" class="form-control" id="detail" value="<?php echo $kqsua['detail']?>">
     </div>
     
-  </div>				  
-  <div class="form-row">
-	  <div class="form-group col-md-12">
-      <label for="inputPassword4">link </label>
-      <input name="link" type="text" class="form-control"  >
-    </div>
-	  
-   
-	  
   </div>
-	<div class="form-row">
-		<div class="col-md-5">
-      <label for="inputState">trạng thái</label>
-      <select name="tt" id="inputState" class="form-control">
-        <option selected>on</option>
-        <option>off</option>
-      </select>
-    </div>
-		
-		<div class="form-group col-md-6">
-    <label for="exampleFormControlFile1">Ảnh</label>
-    <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+  <div class="form-group">
+    
   </div>
-	</div>
-	
- 
-  <button name="add_slide" type="submit" class="btn btn-primary">thêm</button>
+  <button type="submit" name="add_vc" class="btn btn-primary">EDIT VOCHER</button>
 </form>
-            <!-- Donut Chart -->
-	<?php
-		include "connection.php";
-			 if(isset($_POST['add_slide'])){
-			if($_POST['title']==""|| $_FILES['image']==""|| $_POST['link']==""|| $_POST['tt']==""){
-				echo"thêm thất bại, phải nhập đủ thông tin";
-			}
-			else{
-				$title= $_POST['title'];
-				$link = $_POST['link'];
-				$tt = $_POST['tt'];
+<?php
+	include "connection.php";
+		if(isset($_POST['add_vc'])){
+			
+				$ma_vc= $_POST['ma_vc'];
+				$start= $_POST['start'];
+				$end= $_POST['end'];
+				$sale= $_POST['sale'];
+				$detail= $_POST['detail'];
 				
-				$image=$_FILES['image']['name'];
-			$tmpA= $_FILES['image']['tmp_name'];
-			move_uploaded_file( $tmpA ,"image/".$image);
 				
-				$sql= "insert into slide values('','$image','$title','$link','$tt')";
-				$kq = $conn->exec($sql);
-				if($kq==1){
-
-			header("location:slide1.php");
-
 				
+				$sql= "update  voucher set ma_vc='$ma_vc',start='$start',end='$end', sale='$sale', detail='$detail' where id_vc='$masua' ";
+				
+				
+				$kq = $conn->prepare($sql);
+		if($kq->execute()){
+				header('location:voucher1.php');
 			}
 			else{
 				echo "không thêm đc dữ liệu";
 			}
 			}
-		}
-			  ?>
-			  
+	
+	?>	  
+            <!-- Donut Chart -->
+            
           </div>
 
         </div>
-		
+        <!-- /.container-fluid -->
+
+      </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -367,16 +358,11 @@ ob_start();
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
   <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
-<script>
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'editor1' );
-            </script>
+
 </body>
 
+	
 </html>
-
 <?php
 	ob_end_flush();
 	?>
-
