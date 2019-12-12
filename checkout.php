@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	include 'connection.php';
+	$cart = isset($_SESSION['CART']) ? $_SESSION['CART'] : [];
+	$totalPrice = 0;
+	$sumPrice=0;
+?>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -29,31 +36,7 @@
         <![endif]-->
         <!-- header start -->
         <div class="wrapper">
-            <!-- Newsletter Popup Start -->
-            <div class="popup_wrapper hidden-sm hidden-xs">
-                <div class="test">
-                    <span class="popup_off">Close</span>
-                    <div class="subscribe_area text-center">
-                        <h2>Newsletter</h2>
-                        <p>Subscribe to the Neha mailing list to receive updates on new arrivals, special offers and other discount information.</p>
-                        <div id="mc_embed_signup" class="subscribe-bottom">
-                            <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                                <div id="mc_embed_signup_scroll" class="mc-form">
-                                    <input type="email" value="" name="EMAIL" class="email" placeholder="Enter your email address" required>
-                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                    <div class="mc-news" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                                    <div class="clear-2"><input type="submit" value="subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="subscribe-bottom mt-15">
-                            <input type="checkbox" id="newsletter-permission">
-                            <label for="newsletter-permission">Don't show this popup again</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Newsletter Popup End -->
+      
             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
@@ -175,69 +158,7 @@
             </header>
             <div class="header-space"></div>
             <!-- header end -->
-            <!-- sidebar-cart start -->
-            <div class="sidebar-cart onepage-sidebar-area">
-                <div class="wrap-sidebar">
-                    <div class="sidebar-cart-all">
-                        <div class="sidebar-cart-icon">
-                            <button class="op-sidebar-close"><span class="ion-android-close"></span></button>
-                        </div>
-                        <div class="cart-content">
-                            <h3>Shopping Cart</h3>
-                            <ul>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-total">
-                                        <h4>Total : <span>$ 120</span></h4>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-checkout-btn">
-                                        <a class="btn-hover cart-btn-style" href="#">view cart</a>
-                                        <a class="no-mrg btn-hover cart-btn-style" href="#">checkout</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- main-search start -->
+          
             <div class="main-search-active">
                 <div class="sidebar-search-icon">
                     <button class="search-close"><span class="ion-android-close"></span></button>
@@ -316,242 +237,50 @@
             <div class="checkout-area ptb-100">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="coupon-accordion">
-                                <!-- ACCORDION START -->
-                                <h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
-                                <div id="checkout-login" class="coupon-content">
-                                    <div class="coupon-info">
-                                        <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
-                                        <form action="#">
-                                            <p class="form-row-first">
-                                                <label>Username or email <span class="required">*</span></label>
-                                                <input type="text" />
-                                            </p>
-                                            <p class="form-row-last">
-                                                <label>Password  <span class="required">*</span></label>
-                                                <input type="text" />
-                                            </p>
-                                            <p class="form-row">					
-                                                <input type="submit" value="Login" />
-                                                <label>
-                                                    <input type="checkbox" />
-                                                     Remember me 
-                                                </label>
-                                            </p>
-                                            <p class="lost-password">
-                                                <a href="#">Lost your password?</a>
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- ACCORDION END -->	
-                                <!-- ACCORDION START -->
-                                <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
-                                <div id="checkout_coupon" class="coupon-checkout-content">
-                                    <div class="coupon-info">
-                                        <form action="#">
-                                            <p class="checkout-coupon">
-                                                <input type="text" placeholder="Coupon code" />
-                                                <input type="submit" value="Apply Coupon" />
-                                            </p>
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- ACCORDION END -->						
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-6 col-md-12 col-12">
                             <form action="#">
+								 <?php
+														
+									if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
+									$sql_dangnhap = "SELECT * FROM user";
+									$kq_dangnhap = $conn->query($sql_dangnhap)->fetch();
+										
+													 ?>
                                 <div class="checkbox-form">						
-                                    <h3>Billing Details</h3>
+                                    <h3>Điền thông tin nhận hàng</h3>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="country-select">
-                                                <label>Country <span class="required">*</span></label>
-                                                <select>
-                                                  <option value="volvo">bangladesh</option>
-                                                  <option value="saab">Algeria</option>
-                                                  <option value="mercedes">Afghanistan</option>
-                                                  <option value="audi">Ghana</option>
-                                                  <option value="audi2">Albania</option>
-                                                  <option value="audi3">Bahrain</option>
-                                                  <option value="audi4">Colombia</option>
-                                                  <option value="audi5">Dominican Republic</option>
-                                                </select> 										
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
                                             <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label>										
-                                                <input type="text" placeholder="" />
+                                                <label>First Name <span class="required">*</span></label>									<input type="text" placeholder="<?php echo ''.$_SESSION['name_u']; ?>" name="fullname"/>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Last Name <span class="required">*</span></label>										
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
+										</div>
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
-                                                <label>Company Name</label>
-                                                <input type="text" placeholder="" />
+                                                <label>Phone</label>
+                                                <input type="number" placeholder="<?php echo ''.$kq_dangnhap['phone']; ?>" name="phone"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
                                                 <label>Address <span class="required">*</span></label>
-                                                <input type="text" placeholder="Street address" />
+                                                <input type="text" placeholder="Street address" name="dc" />
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">									
-                                                <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Town / City <span class="required">*</span></label>
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>State / County <span class="required">*</span></label>										
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Postcode / Zip <span class="required">*</span></label>										
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Email Address <span class="required">*</span></label>										
-                                                <input type="email" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                                <label>Phone  <span class="required">*</span></label>										
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list create-acc">	
-                                                <input id="cbox" type="checkbox" />
-                                                <label>Create an account?</label>
-                                            </div>
-                                            <div id="cbox_info" class="checkout-form-list create-account">
-                                                <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
-                                                <label>Account password  <span class="required">*</span></label>
-                                                <input type="password" placeholder="password" />	
-                                            </div>
-                                        </div>								
-                                    </div>
-                                    <div class="different-address">
-                                        <div class="ship-different-title">
-                                            <h3>
-                                                <label>Ship to a different address?</label>
-                                                <input id="ship-box" type="checkbox" />
-                                            </h3>
-                                        </div>
-                                        <div id="ship-box-info" class="row">
-                                            <div class="col-md-12">
-                                                <div class="country-select">
-                                                    <label>Country <span class="required">*</span></label>
-                                                    <select>
-                                                      <option value="volvo">bangladesh</option>
-                                                      <option value="saab">Algeria</option>
-                                                      <option value="mercedes">Afghanistan</option>
-                                                      <option value="audi">Ghana</option>
-                                                      <option value="audi2">Albania</option>
-                                                      <option value="audi3">Bahrain</option>
-                                                      <option value="audi4">Colombia</option>
-                                                      <option value="audi5">Dominican Republic</option>
-                                                    </select> 										
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>First Name <span class="required">*</span></label>										
-                                                    <input type="text" placeholder="" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>Last Name <span class="required">*</span></label>										
-                                                    <input type="text" placeholder="" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>Company Name</label>
-                                                    <input type="text" placeholder="" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>Address <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Street address" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">									
-                                                    <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>Town / City <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Town / City" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>State / County <span class="required">*</span></label>										
-                                                    <input type="text" placeholder="" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>Postcode / Zip <span class="required">*</span></label>										
-                                                    <input type="text" placeholder="Postcode / Zip" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>Email Address <span class="required">*</span></label>										
-                                                    <input type="email" placeholder="" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>Phone  <span class="required">*</span></label>										
-                                                    <input type="text" placeholder="Postcode / Zip" />
-                                                </div>
-                                            </div>								
-                                        </div>
-                                        <div class="order-notes">
-                                            <div class="checkout-form-list mrg-nn">
-                                                <label>Order Notes</label>
-                                                <textarea id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery." ></textarea>
-                                            </div>									
-                                        </div>
-                                    </div>													
+										<!-- kết thuc ddien thong tin-->
+              						</div>													
                                 </div>
+								<?php }?>
+								<input type="submit" value="Place order" name="xacnhan"/>
                             </form>
+							
+					
                         </div>	
-                        <div class="col-lg-6 col-md-12 col-12">
+                 		       <div class="col-lg-6 col-md-12 col-12">
                             <div class="your-order">
-                                <h3>Your order</h3>
+                                <h3>Giỏ hàng của bạn</h3>
                                 <div class="your-order-table table-responsive">
                                     <table>
+										
                                         <thead>
                                             <tr>
                                                 <th class="product-name">Product</th>
@@ -559,73 +288,45 @@
                                             </tr>							
                                         </thead>
                                         <tbody>
+											<?php foreach ($cart as $key => $item): ?>
                                             <tr class="cart_item">
                                                 <td class="product-name">
-                                                    Vestibulum suscipit <strong class="product-quantity"> × 1</strong>
+                                                  	<?php echo $item['name_p'] ;?> <strong class="product-quantity">*<?php echo $item['quantity']?></strong>
                                                 </td>
                                                 <td class="product-total">
-                                                    <span class="amount">£165.00</span>
+                                                    
+														<?php 
+															echo 
+															$itemTotal = $item['sale_p']*$item['quantity'];
+															$totalPrice += $itemTotal;
+														?>
+													
                                                 </td>
                                             </tr>
-                                            <tr class="cart_item">
-                                                <td class="product-name">
-                                                    Vestibulum dictum magna	<strong class="product-quantity"> × 1</strong>
-                                                </td>
-                                                <td class="product-total">
-                                                    <span class="amount">£50.00</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr class="cart-subtotal">
-                                                <th>Cart Subtotal</th>
-                                                <td><span class="amount">£215.00</span></td>
-                                            </tr>
-                                            <tr class="order-total">
-                                                <th>Order Total</th>
-                                                <td><strong><span class="amount">£215.00</span></strong>
-                                                </td>
-                                            </tr>								
-                                        </tfoot>
-                                    </table>
+											<?php  endforeach ?>
+										</tbody>
+									 </table>
+									 <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total" name="tongtien">
+                                           <ul>
+											    <li>Tổng tiền<span><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+									 <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total">
+                                           <ul>
+											   <li><a href="cart.php" >Quay lại</a></li>
+                                               
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="payment-method">
                                     <div class="payment-accordion">
-                                        <div class="panel-group" id="faq">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h5 class="panel-title"><a data-toggle="collapse" aria-expanded="true" data-parent="#faq" href="#payment-1">Direct Bank Transfer.</a></h5>
-                                                </div>
-                                                <div id="payment-1" class="panel-collapse collapse show">
-                                                    <div class="panel-body">
-                                                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h5 class="panel-title"><a class="collapsed" data-toggle="collapse" aria-expanded="false" data-parent="#faq" href="#payment-2">Cheque Payment</a></h5>
-                                                </div>
-                                                <div id="payment-2" class="panel-collapse collapse">
-                                                    <div class="panel-body">
-                                                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h5 class="panel-title"><a class="collapsed" data-toggle="collapse" aria-expanded="false" data-parent="#faq" href="#payment-3">PayPal</a></h5>
-                                                </div>
-                                                <div id="payment-3" class="panel-collapse collapse">
-                                                    <div class="panel-body">
-                                                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="order-button-payment">
+                                    	 <div class="order-button-payment">
                                             <input type="submit" value="Place order" />
-                                        </div>								
+                                       	 </div>								
                                     </div>
                                 </div>
                             </div>
