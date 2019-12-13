@@ -60,7 +60,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item ">
+      <li class="nav-item active">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -83,7 +83,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="order1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Đơn hàng</span></a>
       </li>
@@ -119,7 +119,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -241,31 +241,65 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
 	
 		
-	<table class="table text-dark">
+	<table class="table ">
+	<div class="card-header py-3 bg-light">
+     <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
+    </div>
+					  
   <thead>
+	  	<?php
+				include"connection.php";
+				if(isset($_GET['submit-search'])){
+					$search = addslashes($_GET['search']);
+					$sql = "select * from product where name_p LIKE N'%$search%' or price LIKE N'%$search%' or name_cate LIKE N'%$search%' ";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute();
+					$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					
+					if($result >0 ){
+						foreach($result as $row){
+							?>	
     <tr>
-      <th width="11%" scope="col">id</th>
-      <th width="25%" scope="col">tên danh mục</th>
-	<th width="51%" scope="col">Chỉnh sửa</th>
-	
+      <th scope="col">id</th>
+      <th scope="col">Tên</th>
+      <th scope="col">Ảnh</th>
+      <th scope="col">Giá</th>
+		<th scope="col">Giá KM</th>
+		<th scope="col">Số lượng</th>
+		<th scope="col">Ngày đăng</th>
+		<th scope="col">Chi tiết</th>
+		<th scope="col">view</th>
+		<th scope="col">Danh mục</th>
+		<th scope="col">Chỉnh sửa</th>
     </tr>
   </thead>
   <tbody>
-    <?php
-		foreach($result as $row){
-			?>
 	<tr>
+		<td><?=$row['id_p']?></td>
+		<td><?=$row['name_p']?></td>
+		<td><img src="image/<?=$row['image_p']?>" width="150"></td>
+		<td><?=$row['price']?></td>
+		<td><?=$row['sale_p']?></td>
+		<td><?=$row['sl_p']?></td>
+		<td><?=$row['date']?></td>
+		<td><?=$row['detail']?></td>
+		<td><?=$row['view']?></td>
 		<td><?=$row['id_cate']?></td>
-		<td><?=$row['name_cate']?></td>
-		
-		<td>
-			<a class="btn btn-primary text-light" href="suadanhmuc1.php?id=<?=$row['id_cate']?>">Update</a> 
-			<a href="xoadanhmuc.php?id=<?=$row['id_cate']?>" onclick="return confirm('chấp nhận xóa')" class="btn btn-danger text-light">xóa</a> 
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
 		</td>
 	</tr>
 	<?php
 		}
 	?>
+   <?php
+						}
+					}
+					else{
+						echo"không có kết quả thích hợp";
+					}
+				}
+				?>	
     
   </tbody>
 </table>
