@@ -200,7 +200,7 @@
 							
 							
                             <ul>
-								<?php
+								<?php /*?><?php
 								if(isset($_POST['addcart'])){
 									$id = $_POST['addcart'];
 									
@@ -225,7 +225,7 @@
 									$stmt= $conn ->prepare($sql);
 									$stmt -> execute();
 									$r = $stmt -> fetch();
-										?>	
+										?><?php */?>	
 									
                                 <li class="single-product-cart">
                                     <div class="cart-img">
@@ -239,9 +239,9 @@
                                         <a href="#"><i class="ion-ios-trash-outline"></i></a>
                                     </div>
                                 </li>
-								<?php
+								<?php /*?><?php
 											}
-                                ?>
+                                ?><?php */?>
                                 <li class="single-product-cart">
                                     <div class="cart-total">
                                         <h4>Total : <span>$ 120</span></h4>
@@ -323,6 +323,7 @@
                 </div>
             </div>
 
+
             <?php
 						$sql = "select * from banner  where tt='off' limit 1";
 						$kqslide = $conn->query($sql);
@@ -330,6 +331,7 @@
 					
 						?>
             <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/<?= $value['image']   ?>)">
+
                 <div class="container">
                     <div class="breadcrumb-content">
                         <h2>Shop</h2>
