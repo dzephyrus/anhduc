@@ -120,7 +120,7 @@
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																</ul>
-															<?php } if($kq_dangnhap['quyen']=="admin") {?>
+															<?php } else {?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
@@ -180,7 +180,7 @@
                     </form>
                 </div>
             </div>
-            <!-- main-search start 
+            
             <div class="cur-lang-acc-active">
                 <div class="wrap-sidebar">
                     <div class="sidebar-nav-icon">
@@ -285,7 +285,7 @@
                                                             <span>Furniter</span>
                                                         </div>
                                                         <div class="product-categori">
-                                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
+                                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']; ?>"><i class="ion-bag"></i> Add to cart</a>
                                                         </div>
                                                     </div>
                                                 </div>

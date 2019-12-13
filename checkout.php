@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	include 'connection.php';
-	$cart = isset($_SESSION['CART']) ? $_SESSION['CART'] : [];
+	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 	$totalPrice = 0;
 	$sumPrice=0;
 ?>
