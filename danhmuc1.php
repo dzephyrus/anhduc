@@ -1,4 +1,15 @@
 <?php
+	session_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
+
+?>
+<?php
 //câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
 include"connection.php";
 $sql= "select * from category";
@@ -49,7 +60,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item ">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -72,7 +83,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
+        <a class="nav-link" href="order1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Đơn hàng</span></a>
       </li>
@@ -157,12 +168,14 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+				<form method="get" enctype="multipart/form-data" action="search.php">
+              <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="submit" name="submit-search">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
+				</form>
             </div>
           </form>
 
@@ -192,7 +205,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
-				  <a class="dropdown-item" href="duanmau.php" >
+				  <a class="dropdown-item" href="trangchu.php" >
                   <i class="fas fa-pager fa-sm fa-fw mr-2 text-gray-400"></i>
                   my web
                 </a>
@@ -233,8 +246,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <tr>
       <th width="11%" scope="col">id</th>
       <th width="25%" scope="col">tên danh mục</th>
-	<th width="51%" scope="col">ảnh</th>
-	<th width="13%" scope="col">cài đặt</th>
+	<th width="51%" scope="col">Chỉnh sửa</th>
+	
     </tr>
   </thead>
   <tbody>
@@ -245,8 +258,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['id_cate']?></td>
 		<td><?=$row['name_cate']?></td>
 		
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suadanhmuc1.php?id=<?=$row['id_cate']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoadanhmuc.php?id=<?=$row['id_cate']?>" class="text-light">xóa</a> </button>
+		<td>
+			<a class="btn btn-primary text-light" href="suadanhmuc1.php?id=<?=$row['id_cate']?>">Update</a> 
+			<a href="xoadanhmuc.php?id=<?=$row['id_cate']?>" onclick="return confirm('chấp nhận xóa')" class="btn btn-danger text-light">xóa</a> 
 		</td>
 	</tr>
 	<?php
@@ -331,3 +345,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </body>
 
 </html>
+<?php
+    }else{
+        header("location:login.php");
+    }
+?>
