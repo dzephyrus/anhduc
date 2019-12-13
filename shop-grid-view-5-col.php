@@ -27,6 +27,9 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
         <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+ 		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -197,7 +200,7 @@
 							
 							
                             <ul>
-								<?php
+								<?php /*?><?php
 								if(isset($_POST['addcart'])){
 									$id = $_POST['addcart'];
 									
@@ -222,7 +225,7 @@
 									$stmt= $conn ->prepare($sql);
 									$stmt -> execute();
 									$r = $stmt -> fetch();
-										?>	
+										?><?php */?>	
 									
                                 <li class="single-product-cart">
                                     <div class="cart-img">
@@ -236,9 +239,9 @@
                                         <a href="#"><i class="ion-ios-trash-outline"></i></a>
                                     </div>
                                 </li>
-								<?php
+								<?php /*?><?php
 											}
-                                ?>
+                                ?><?php */?>
                                 <li class="single-product-cart">
                                     <div class="cart-total">
                                         <h4>Total : <span>$ 120</span></h4>
@@ -319,6 +322,8 @@
                     </div>
                 </div>
             </div>
+
+
             <?php
 						$sql = "select * from banner  where tt='off' limit 1";
 						$kqslide = $conn->query($sql);
@@ -326,6 +331,7 @@
 					
 						?>
             <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/<?= $value['image']   ?>)">
+
                 <div class="container">
                     <div class="breadcrumb-content">
                         <h2>Shop</h2>
@@ -338,6 +344,7 @@
             </div>
             <?php }
 			?>
+
             <div class="shop-page-wrapper hidden-items padding-filter">
                 <div class="container-fluid">
                     <div class="shop-filters-left">
@@ -781,67 +788,8 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer-area gray-bg pt-100 pb-95">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-5 col-12">
-                            <div class="footer-widget">
-                                <div class="footer-widget-l-content">
-                                    <h4>20 Years Experience</h4>
-                                    <ul>
-                                        <li><a href="#"><i class="ion-social-twitter"></i></a></li> 
-                                        <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
-                                        <li><a href="#"><i class="ion-social-facebook"></i></a></li> 
-                                        <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li> 
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-7 col-12">
-                            <div class="footer-widget">
-                                <div class="footer-widget-m-content text-center">
-                                    <div class="footer-logo">
-                                       <?php
-											include 'connection.php';
-										$stmt = $conn->query("select * from setting");
-										foreach($stmt as $key => $row){
-										?>
-
-										<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
-
-										<?php 
-										}
-										?>
-                                    </div>
-                                    <div class="footer-nav">
-                                        <nav>
-                                            <ul>
-                                                <li><a href="index.html">home</a></li>
-                                                <li><a href="about-us.html">about us</a></li>
-                                                <li><a href="shop-grid-view-sidebar.html">shop </a></li>
-                                                <li><a href="blog-left-sidebar.html"> blog </a></li>
-                                                <li><a href="#">pages </a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="https://freethemescloud.com/" target="_blank" >Free Themes Cloud.</a> All rights reserved. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-12 col-12">
-                            <div class="footer-widget f-right">
-                                <div class="footer-widget-r-content">
-                                    <ul>
-                                        <li><span>Phone :</span> +00 123 54 0056</li>
-                                        <li><span>Email : </span> <a href="#">neha@gmail.com</a></li>
-                                        <li><span>Address :</span> Dhaka Bangladesh</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <!-- footer-->
+					 <?php include 'sharefooter.php'?>
             <!-- modal -->
            
         </div>

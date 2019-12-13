@@ -1,4 +1,23 @@
+<?php
+	session_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
 
+?>
+<?php
+//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
+include"connection.php";
+$sql= "select * from category";
+//Xử lý lệnh sql
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +29,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Charts</title>
+  <title>SB Admin 2 - Buttons</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -100,7 +119,7 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
+        <a class="nav-link" href="account1.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Voucher</span></a>
       </li>
@@ -149,12 +168,14 @@
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+				<form method="get" enctype="multipart/form-data" action="search.php">
+              <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="submit" name="submit-search">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
+				</form>
             </div>
           </form>
 
@@ -162,27 +183,10 @@
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
+            
 
             <!-- Nav Item - Alerts -->
-           
+            
 
             <!-- Nav Item - Messages -->
             
@@ -201,7 +205,7 @@
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
-				  <a class="dropdown-item" href="duanmau.php" >
+				  <a class="dropdown-item" href="trangchu.php" >
                   <i class="fas fa-pager fa-sm fa-fw mr-2 text-gray-400"></i>
                   my web
                 </a>
@@ -217,61 +221,103 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
-          
+          <h1 class="h3 mb-4 text-gray-800">Danh mục</h1>
 
-          <!-- Content Row -->
-          <div class="card shadow m-6">
-			   <div class="card-header py-3 bg-light">
-						 <a href="addaccount1.php" class="btn btn-success">thêm tai khoan</a> 
-				</div>
-<?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from user";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>     
-            <table class="table">
+          <div class="row">
+
+            <div class="col-lg-12">
+
+              <!-- Circle Buttons -->
+              <div class="card shadow mb-4 bg-light">
+                <div class="card-header py-3">
+                  <button class="btn btn-success"><a href="adddanhmuc1.php">thêm danh mục</a></button>
+                </div>
+                <div class="card-body">
+                  
+                  <div class="row">
+		
+		
+		<div class="col-md-12  ">
+			
+	
+		
+	<table class="table ">
+	<div class="card-header py-3 bg-light">
+     <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
+    </div>
 					  
   <thead>
+	  	<?php
+				include"connection.php";
+				if(isset($_GET['submit-search'])){
+					$search = addslashes($_GET['search']);
+					$sql = "select * from product where name_p LIKE N'%$search%' or price LIKE N'%$search%' or name_cate LIKE N'%$search%' ";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute();
+					$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					
+					if($result >0 ){
+						foreach($result as $row){
+							?>	
     <tr>
-      <th scope="col">ID tk</th>
-      <th scope="col">Name</th>
-      
-      <th scope="col">phone</th>
-		<th scope="col">email</th>
-		<th scope="col">quyền</th>
-		<th scope="col">thao tác</th>
-		
-		
+      <th scope="col">id</th>
+      <th scope="col">Tên</th>
+      <th scope="col">Ảnh</th>
+      <th scope="col">Giá</th>
+		<th scope="col">Giá KM</th>
+		<th scope="col">Số lượng</th>
+		<th scope="col">Ngày đăng</th>
+		<th scope="col">Chi tiết</th>
+		<th scope="col">view</th>
+		<th scope="col">Danh mục</th>
+		<th scope="col">Chỉnh sửa</th>
     </tr>
   </thead>
   <tbody>
-    <?php
-		foreach($result as $row){
-			?>
 	<tr>
-		<td><?=$row['id_u']?></td>
-		<td><?=$row['name_u']?></td>
-		<td>0<?=$row['phone']?></td>
-		<td><?=$row['email']?></td>
-		<td><?=$row['quyen']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suataikhoan1.php?id=<?=$row['id_u']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoataikhoan.php?id=<?=$row['id_u']?>" class="text-light">xóa</a> </button>
+		<td><?=$row['id_p']?></td>
+		<td><?=$row['name_p']?></td>
+		<td><img src="image/<?=$row['image_p']?>" width="150"></td>
+		<td><?=$row['price']?></td>
+		<td><?=$row['sale_p']?></td>
+		<td><?=$row['sl_p']?></td>
+		<td><?=$row['date']?></td>
+		<td><?=$row['detail']?></td>
+		<td><?=$row['view']?></td>
+		<td><?=$row['id_cate']?></td>
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
 		</td>
 	</tr>
 	<?php
 		}
 	?>
+   <?php
+						}
+					}
+					else{
+						echo"không có kết quả thích hợp";
+					}
+				}
+				?>	
     
   </tbody>
 </table>
+			
+				
+			</div>
+		</div>
+                  
+                </div>
+              </div>
 
-            <!-- Donut Chart -->
+              <!-- Brand ....Buttons -->
+              
+
+            </div>
+
             
+
           </div>
 
         </div>
@@ -330,14 +376,11 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
-  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
-
 </body>
 
 </html>
+<?php
+    }else{
+        header("location:login.php");
+    }
+?>

@@ -180,11 +180,11 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
               </a>
               <!-- Dropdown - Messages -->
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
+                <form class="form-inline mr-auto w-100 navbar-search" method="get" action="search-backend.php">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
+                      <button class="btn btn-primary" type="submit" name="submit-search">
                         <i class="fas fa-search fa-sm"></i>
                       </button>
                     </div>
@@ -263,8 +263,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
    
 				  <table class="table ">
 					  <div class="card-header py-3 bg-light">
-                 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
-                </div>
+						 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
+					</div>
 					  
   <thead>
 	  	
@@ -297,10 +297,14 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['detail']?></td>
 		<td><?=$row['view']?></td>
 		<td><?=$row['id_cate']?></td>
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
+		<td>
+			<button type="button" class="btn btn-primary text-light"> 
+				<a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> 
+			</button>
+			<a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
 		</td>
 	</tr>
+	 
 	<?php
 		}
 	?>
