@@ -9,7 +9,7 @@ ob_start();
 	if(isset($_GET['masua'])){
 		
 		$masua = $_GET['masua'];
-		$sqlsua = "select * from product where id_p ='$masua'";
+		$sqlsua = "select * from voucher where id_vc ='$masua'";
 		$kqsua = $conn->query($sqlsua)->fetch();
 		
 	}
