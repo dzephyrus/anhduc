@@ -238,7 +238,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-12">
-                            <form action="#">
+                            <form action="#" method="post">
 								 <?php
 														
 									if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
@@ -296,10 +296,7 @@
                                 </div>
 								<?php	
 								}?>
-								<input type="submit" value="Place order" name="xacnhan"/>
-                            </form>
-							
-					
+								
                         </div>	
                  		       <div class="col-lg-6 col-md-12 col-12">
                             <div class="your-order">
@@ -319,7 +316,7 @@
                                                 <td class="product-name">
                                                   	<?php echo $item['name_p'] ;?> <strong class="product-quantity">*<?php echo $item['quantity']?></strong>
                                                 </td>
-                                                <td class="product-total">
+                                                <td class="product-total" >
                                                     
 														<?php 
 															echo 
@@ -333,7 +330,7 @@
 										</tbody>
 									 </table>
 									 <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total" name="tongtien">
+                                        <div class="cart-page-total" >
                                            <ul>
 											    <li>Tổng tiền<span><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
                                             </ul>
@@ -348,15 +345,38 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="payment-method">
-                                    <div class="payment-accordion">
-                                    	 <div class="order-button-payment">
-                                            <input type="submit" value="Place order" />
-                                       	 </div>								
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
+							
+                                            <input type="submit" name="order" value="Place order" class="col-md-5 ml-auto" />
+                                       	 
+							</form>
+						<?php
+					
+						if(isset($_POST['order'])){
+						
+							if($_POST['fullname']=="" || $_POST['dc']=="" || $_POST['phone']=="" ){
+								?> <script> alert"them that bai" ;</script><?php
+							}
+							else{
+								$name= $_POST['fullname'];
+								$phone = $_POST['phone'];
+								$date= date("Y-m-d");
+								$diachi = $_POST['dc'];
+								
+								$sql = "insert into order1 values('','$name','$phone','$diachi')";
+								//echo $sql;
+									$kq = $conn -> exec($sql);
+									if($kq == 1){
+										?><br> <script> alert('Đăng ký tài khoản thành công'); </script> <?php
+									}else{
+										?><br> <script> alert('Đăng ký tài khoản không thành công'); </script> <?php
+									}
+							}
+						}
+					?>
+				  
                     </div>
                 </div>
             </div>

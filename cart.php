@@ -261,7 +261,9 @@
 													
 													<td>
 														
-															   <?php echo $item['quantity']?>
+														<a href="add-cart1.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:24px ">-</a>
+															<p style="display: inline-block; padding: 0 10px;"><?php echo $item['quantity']?></p>
+														<a href="add-cart.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:18px">+</a>
 													</td>
 													
 													<td><?php echo number_format($item['sale_p'], 0, '', ','); ?> vnđ</td>
@@ -270,7 +272,7 @@
 														$totalPrice += $itemTotal;
 														echo number_format($itemTotal, 0, '', ','); ?> vnđ</td>
                                         			<td>
-														<a href="add-cart.php?id_p=<?php echo $item['id_p'] ?>">+1</a>
+														
 														<a href="xoaspgiohang.php?key=<?php echo $key ?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
 													</td>
 												</tr>
@@ -397,6 +399,11 @@
             headroom.init(); 
         </script>
         <script src="assets/js/main.js"></script>
-		
+		<script>
+			function updateCart(id){
+				num = ('$num_'+id).val();
+				alert(num);
+			}
+		</script>
     </body>
 </html>

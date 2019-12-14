@@ -37,7 +37,7 @@ if(isset($_GET['id_p'])){
 			'quantity' => 1
 			];
 		}else{
-			$cart[$existed]['quantity']+=1;
+			$cart[$existed]['quantity']-=1;
 		}
 		$_SESSION['cart'] = $cart;
 

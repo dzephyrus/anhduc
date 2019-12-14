@@ -274,11 +274,11 @@
 									
                                     <div class="product-slider-active owl-carousel">
 										<?php
-						$sql1 = "select * from product   limit 4  ";
-						$kqproduct = $conn->query($sql1);
-						foreach($kqproduct as $key=>$pro){
-					
-						?>
+											$sql1 = "select * from product   limit 4  ";
+											$kqproduct = $conn->query($sql1);
+											foreach($kqproduct as $key=>$pro){
+
+										?>
                                         <div class="col-md-3 col-lg-3 col-sm-4">
                                             <div class="single-product">
 											
@@ -323,18 +323,18 @@
                     </div>
                 </div>
             </div>
-			<?php
-						$sql = "select * from banner where tt='on'  limit 1";
+					<?php
+						$sql = "select * from slide where title='on'  limit 1";
 						$kqslide = $conn->query($sql);
 						foreach($kqslide as $key=>$value){
 					
-						?>
-            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image']   ?>)" data-overlay="3">
+					?>
+            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image_slide']   ?>)" data-overlay="3">
 				
                 <div class="container">
                     <div class="shop-limited-content text-center">
-                        <h2><?php echo $value['detail'] ?></h2>
-                        <a class="btn-hover limited-btn" href="#">view more</a>
+                       <!--<?php echo $value['detail'] ?> !-->
+                        <a class="btn-hover limited-btn" href="">view more</a>
                     </div>
                 </div>
             </div>
@@ -367,6 +367,7 @@
                                         <div class="product-price">
                                             <span><?php echo $pro['price']?></span>
                                         </div>
+										
                                     </div>
                                     <div class="product-cart-categori">
                                         <div class="product-cart">
