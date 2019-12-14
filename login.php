@@ -43,52 +43,16 @@
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-                                <?php
-						include 'connection.php';
-					$stmt = $conn->query("select * from setting");
-					foreach($stmt as $key => $row){
-					?>
-					
-					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
-				
-					<?php 
-					}
-					?>
+                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
                                 </div>
                             </div>
                             <div class="col-lg-6 menu-none-block menu-center">
                                 <div class="main-menu">
                                     <nav>
                                         <ul>
-                                            <li><a href="trangchu.php">home</a></li>
-                                            <li><a href="about-us.php">about us</a></li>
-                                            <li><a href="#">shop</a>
-                                            <ul class="dropdown">
-													<?php
-														include"connection.php";
-														$sql= "select * from category";
-														//Xử lý lệnh sql
-														$stmt = $conn->prepare($sql);
-														$stmt->execute();
-														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-													?>
-															<?php
-																foreach($result as $row){
-																	?>
-																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-
-
-																	<?php
-																}
-															?>
-														
-													</ul> 
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            </li>
+                                            <li><a href="#">home</a></li>
+                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="shop-grid-view-5-col.html">shop</a></li>
                                             <li><a href="#">pages</a>
                                                 <ul class="dropdown">
                                                     <li><a href="about-us.html">about us</a></li>
@@ -100,27 +64,18 @@
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
-                                            
-                                            <li><a href="contact.php">contact</a></li>
+                                            <li><a href="#">blog</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="blog.html">blog </a></li>
+                                                    <li><a href="blog-details.html">blog details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
-                                <div class="header-search-cart">
-										<div class="main-menu">
-                                   			 <nav>
-                                      			 <ul>
-													<li><a href="#">Tài khoản</a>
-															<ul class="dropdown">
-																<li><a href="login.php">Đăng nhập</a></li>
-																<li><a href="register.php">Đăng ký</a></li>
-															</ul>
-													</li>
-													
-												</ul>
-									</div>
-
                                 <div class="header-search-cart">
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
@@ -329,25 +284,17 @@
                     </div>
                 </div>
             </div>
-            <?php
-						$sql = "select * from banner  where tt='off' limit 1";
-						$kqslide = $conn->query($sql);
-						foreach($kqslide as $key=>$value){
-					
-						?>
-            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/<?= $value['image']   ?>)">
+            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
                 <div class="container">
                     <div class="breadcrumb-content">
-                        <h2>About Us</h2>
+                        <h2>login</h2>
                         <ul>
-                            <li><a href="trangchu.php">home</a></li>
-                            <li> about us </li>
+                            <li><a href="#">home</a></li>
+                            <li> login </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <?php }
-			?>
             <!-- login-area start -->
             <div class="register-area ptb-100">
                 <div class="container">

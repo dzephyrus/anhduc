@@ -1,4 +1,15 @@
+<?php
+	session_start();
+	ob_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +41,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="danhmuc1.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -41,7 +52,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item ">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -64,8 +75,8 @@
       <hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
+        <a class="nav-link" href="order1.php">
+         <i class="fas fa-cash-register"></i>
           <span>Đơn hàng</span></a>
       </li>
 
@@ -101,7 +112,7 @@
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
+          <i class="fas fa-money-check-alt"></i>
           <span>Voucher</span></a>
       </li>
 		
@@ -271,14 +282,11 @@
 				$pass = $_POST['pass'];
 				$phone = $_POST['phone'];
 				$email =$_POST['email'];
-				$quyen= $_POST['quyen'];
-				
+				$quyen= $_POST['quyen'];	
 				$sql= "insert into user values('','$name','$phone','$email','$pass','$quyen')";
-				
-				
 				$kq = $conn->exec($sql);
 				if($kq==1){
-				echo "thêm thành công";
+				header("location:account1.php");
 			}
 			else{
 				echo "không thêm đc dữ liệu";
@@ -357,3 +365,9 @@
 </body>
 
 </html>
+<?php
+    }else{
+        header("location:login.php");
+    }
+	ob_end_flush();
+?>

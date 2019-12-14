@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	ob_start();
     include 'connection.php';
     if(isset($_SESSION['name_u'])){
         $username=$_SESSION['name_u'];
@@ -8,15 +9,6 @@
 		$stmt -> execute();
 		$row = $stmt -> fetch();
 
-?>
-<?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from category";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -168,10 +160,10 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-				<form method="get" enctype="multipart/form-data" action="search.php">
-              <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+				<form method="get" enctype="multipart/form-data" action="searchbackend.php">
+              <input type="search" name="Search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="submit" name="submit-search">
+                <button class="btn btn-primary" type="submit" name="Submit-search">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
@@ -219,9 +211,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
+			
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Danh mục</h1>
+         
 
           <div class="row">
 
@@ -229,9 +221,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
               <!-- Circle Buttons -->
               <div class="card shadow mb-4 bg-light">
-                <div class="card-header py-3">
-                  <button class="btn btn-success"><a href="adddanhmuc1.php">thêm danh mục</a></button>
-                </div>
+                
                 <div class="card-body">
                   
                   <div class="row">
@@ -244,21 +234,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<table class="table ">
 	<div class="card-header py-3 bg-light">
      <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="addsanpham1.php" class="text-light">thêm sản phẩm</a> </button>	
-    </div>
-					  
+    </div>		  
   <thead>
-	  	<?php
-				include"connection.php";
-				if(isset($_GET['submit-search'])){
-					$search = addslashes($_GET['search']);
-					$sql = "select * from product where name_p LIKE N'%$search%' or price LIKE N'%$search%' or name_cate LIKE N'%$search%' ";
-					$stmt = $conn->prepare($sql);
-					$stmt->execute();
-					$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-					
-					if($result >0 ){
-						foreach($result as $row){
-							?>	
+	  		
     <tr>
       <th scope="col">id</th>
       <th scope="col">Tên</th>
@@ -273,6 +251,18 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<th scope="col">Chỉnh sửa</th>
     </tr>
   </thead>
+		<?php
+				include"connection.php";
+				if(isset($_GET['Submit-search'])){
+					$search = addslashes($_GET['Submit-search']);
+					$sql = "select * from product where name_p LIKE N'%$search%' or price LIKE N'%$search%' or name_cate LIKE N'%$search%' ";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute();
+					$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					
+					if($result >0 ){
+						foreach($result as $row){
+							?>	
   <tbody>
 	<tr>
 		<td><?=$row['id_p']?></td>
@@ -284,7 +274,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['date']?></td>
 		<td><?=$row['detail']?></td>
 		<td><?=$row['view']?></td>
-		<td><?=$row['id_cate']?></td>
+		<td><?=$row['name_cate']?></td>
 		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> </button>
 		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoasanpham.php?maxoa=<?=$row['id_p']?>" class="text-light">xóa</a> </button>
 		</td>
@@ -298,7 +288,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 					else{
 						echo"không có kết quả thích hợp";
 					}
-				}
+				
 				?>	
     
   </tbody>
@@ -383,4 +373,5 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }else{
         header("location:login.php");
     }
+	ob_end_flush();
 ?>

@@ -119,12 +119,12 @@
 
 													 ?>
 													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
-															<?php if($kq_dangnhap['quyen']=="user"){?>
+															<?php if($kqtk['quyen']=="user"){?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																</ul>
-															<?php } if($kq_dangnhap['quyen']=="admin") {?>
+															<?php } if($kqtk['quyen']=="admin") {?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
@@ -189,14 +189,20 @@
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form>
+					<form method="get" enctype="multipart/form-data" action="search.php">
                         <div class="form-search">
-
                             <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
-                               <button class="btn btn-outline-success my-2 my-sm-0" name="submit-search" type="submit">Search</button>
-
+                            <button name="submit-search" type="submit">
+                                <i class="ion-ios-search-strong"></i>
+                            </button>
                         </div>
                     </form>
+                   <!--<form method="get" enctype="multipart/form-data" action="search.php">
+                        <div class="form-search">
+                            <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
+                               <button class="btn btn-outline-success my-2 my-sm-0" name="submit-search" type="submit">Search</button>
+                        </div>
+                    </form>-->
                 </div>
             </div>
             <!-- main-search start 
@@ -270,52 +276,44 @@
 							
                             <div class="tab-pane active show fade" id="home1" role="tabpanel">
 									
-                                <div class="row">
-									
-                                    <div class="product-slider-active owl-carousel">
-										<?php
-						$sql1 = "select * from product   limit 4  ";
-						$kqproduct = $conn->query($sql1);
+                               <div class="row">
+						<?php
+						$sql = "select * from product order by id_p DESC LIMIT 0,8";
+						$kqproduct = $conn->query($sql);
 						foreach($kqproduct as $key=>$pro){
 					
 						?>
-                                        <div class="col-md-3 col-lg-3 col-sm-4">
-                                            <div class="single-product">
-											
-                                                <div class="product-img" style="width: 270px;height: 300px;">
-                                                    <a href="#"><img src="image/<?php echo $pro['image_p'] ?>"  alt=""  style="width: 250px;"  ></a>
-                                                   
-                                                    <div class="product-action">
-                                                        <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                        <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <div class="product-title-price">
-                                                        <div class="product-title" >
-                                                            <h4><a href="product-details-6.html"><?php echo $pro['name_p'] ?></a></h4>
-                                                        </div>
-                                                        <div class="product-price" style="margin-left: 150px;">
-                                                            <span><?php echo number_format($pro['price'], 0, '', ',') ?>VNĐ</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-cart-categori">
-                                                        <div class="product-cart">
-                                                            <span>Furniter</span>
-                                                        </div>
-                                                        <div class="product-categori">
-                                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-											
-                                        </div>
-                                       <?php }
-						?>
-                                    </div>
-									
+                        <div class="col-md-6 col-lg-4 col-xl-3" >
+							
+                            <div class="single-product mb-35">
+                                <div class="product-img" style="width: 270px;height: 300px;">
+                                    <a href="product-details.php?id=<?php echo $pro['id_p']?>"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
                                 </div>
+                                <div class="product-content">
+                                    <div class="product-title-price">
+                                        <div class="product-title">
+                                            <h4><a href="product-details.php?id=<?php echo $pro['id_p']?>"><?php echo $pro['name_p']?></a></h4>
+                                        </div>
+                                        <div class="product-price">
+                                            <span><?php echo $pro['price']?></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-cart-categori">
+                                        <div class="product-cart">
+                                            <span>Thêm vào giỏ hàng</span>
+                                        </div>
+                                        <div class="product-categori">
+                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+							
+                        </div>
+                      <?php
+						}
+						?>
+                    </div>
 								
                             </div>
                         
@@ -348,7 +346,7 @@
                     </div>
                     <div class="row">
 						<?php
-						$sql = "select * from product  limit 8  ";
+						$sql = "select * from product order by view DESC LIMIT 0,8";
 						$kqproduct = $conn->query($sql);
 						foreach($kqproduct as $key=>$pro){
 					
@@ -357,12 +355,12 @@
 							
                             <div class="single-product mb-35">
                                 <div class="product-img" style="width: 270px;height: 300px;">
-                                    <a href="product-details.php"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
+                                    <a href="product-details.php?id=<?php echo $pro['id_p']?>"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
                                 </div>
                                 <div class="product-content">
                                     <div class="product-title-price">
                                         <div class="product-title">
-                                            <h4><a href="product-details.php"><?php echo $pro['name_p']?></a></h4>
+                                            <h4><a href="product-details.php?id=<?php echo $pro['id_p']?>"><?php echo $pro['name_p']?></a></h4>
                                         </div>
                                         <div class="product-price">
                                             <span><?php echo $pro['price']?></span>

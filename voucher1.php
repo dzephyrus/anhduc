@@ -1,4 +1,14 @@
-
+<?php
+	session_start();
+	ob_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +40,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="danhmuc1.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -342,3 +352,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </body>
 
 </html>
+<?php
+    }else{
+        header("location:login.php");
+    }
+	ob_end_flush();
+?>

@@ -2,10 +2,16 @@
 	include 'connection.php';
 ?>
 <?php
-session_start(); 
-ob_start();
-	
-	
+	session_start();
+	ob_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +44,7 @@ ob_start();
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="danhmuc1.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -62,7 +68,7 @@ ob_start();
       
 
       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Product</span></a>
@@ -72,8 +78,8 @@ ob_start();
       <hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
+        <a class="nav-link" href="order1.php">
+         <i class="fas fa-cash-register"></i>
           <span>Đơn hàng</span></a>
       </li>
 
@@ -109,7 +115,7 @@ ob_start();
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
+          <i class="fas fa-money-check-alt"></i>
           <span>Voucher</span></a>
       </li>
 		
@@ -208,7 +214,7 @@ ob_start();
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
-				  <a class="dropdown-item" href="duanmau.php" >
+				  <a class="dropdown-item" href="trangchu.php">
                   <i class="fas fa-pager fa-sm fa-fw mr-2 text-gray-400"></i>
                   my web
                 </a>
@@ -336,7 +342,7 @@ ob_start();
 								move_uploaded_file( $tmpA ,"image/".$image);
 
 
-								$sql = "insert into product values('','$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm')";
+								$sql = "insert into product values(null,'$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm',(SELECT name_cate FROM category WHERE id_cate='$id_dm'))";
 									echo $sql;
 									$kq = $conn -> exec($sql);
 									if($kq == 1){
@@ -409,5 +415,8 @@ ob_start();
 
 </html>
 <?php
+    }else{
+        header("location:login.php");
+    }
 	ob_end_flush();
-	?>
+?>

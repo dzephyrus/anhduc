@@ -1,8 +1,14 @@
 <?php
-session_start(); 
-ob_start();
-	
-	
+	session_start();
+	ob_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
+
 ?>
 <?php
 include"connection.php";
@@ -67,7 +73,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       
 
       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Product</span></a>
@@ -77,8 +83,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
+        <a class="nav-link" href="order1.php">
+         <i class="fas fa-cash-register"></i>
           <span>Đơn hàng</span></a>
       </li>
 
@@ -114,7 +120,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
+          <i class="fas fa-money-check-alt"></i>
           <span>Voucher</span></a>
       </li>
 		
@@ -296,7 +302,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['date']?></td>
 		<td><?=$row['detail']?></td>
 		<td><?=$row['view']?></td>
-		<td><?=$row['id_cate']?></td>
+		<td><?=$row['name_cate']?></td>
 		<td>
 			<button type="button" class="btn btn-primary text-light"> 
 				<a class="text-light" href="suasp1.php?id=<?php echo $row['id_p']; ?>">Update</a> 
@@ -393,5 +399,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </html>
 <?php
+    }else{
+        header("location:login.php");
+    }
 	ob_end_flush();
-	?>
+?>

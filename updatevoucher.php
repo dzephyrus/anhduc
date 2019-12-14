@@ -1,15 +1,21 @@
 <?php
-session_start(); 
-ob_start();
-	
-	
+	session_start();
+	ob_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
+
 ?>
 <?php
 	include('connection.php');
 	if(isset($_GET['masua'])){
 		
 		$masua = $_GET['masua'];
-		$sqlsua = "select * from voucher where id_vc ='$masua'";
+		$sqlsua = "select * from product where id_p ='$masua'";
 		$kqsua = $conn->query($sqlsua)->fetch();
 		
 	}
@@ -45,7 +51,7 @@ ob_start();
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="danhmuc1.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -364,5 +370,8 @@ ob_start();
 	
 </html>
 <?php
+    }else{
+        header("location:login.php");
+    }
 	ob_end_flush();
-	?>
+?>
