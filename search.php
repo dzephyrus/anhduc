@@ -27,9 +27,6 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
         <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
-		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
- 		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -64,27 +61,27 @@
                                     <nav>
                                        <ul>
                                             <li><a href="trangchu.php">home</a></li>
-                                            <li><a href="about-us.php">about us</a></li>
+                                            <li><a href="about-us.html">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
-										   	<?php
-												include"connection.php";
-												$sql= "select * from category";
-												//Xử lý lệnh sql
-												$stmt = $conn->prepare($sql);
-												$stmt->execute();
-												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-												?>
 													<?php
-												foreach($result as $row){
-												?>
-												
-                                                    <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-                                                   
-                                                
-												<?php
-												}
-												?>
+														include"connection.php";
+														$sql= "select * from category";
+														//Xử lý lệnh sql
+														$stmt = $conn->prepare($sql);
+														$stmt->execute();
+														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+													?>
+															<?php
+																foreach($result as $row){
+																	?>
+																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+
+
+																	<?php
+																}
+															?>
+														
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -94,18 +91,30 @@
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
                                                     <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="login.php">login</a></li>
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
                                             	
-                                            <li><a href="contact.php">contact</a></li>
+                                            <li><a href="contact.html">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
+										<div class="main-menu">
+                                   			 <nav>
+                                      			 <ul>
+													<li><a href="#">Tài khoản</a>
+															<ul class="dropdown">
+																<li><a href="login.php">Đăng nhập</a></li>
+																<li><a href="register.php">Đăng ký</a></li>
+															</ul>
+													</li>
+													
+												</ul>
+									</div>
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
                                             <span class="ion-ios-search-strong"></span>
@@ -123,65 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mobile-menu-area d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
-                                <div class="mobile-menu">
-                                    <nav id="mobile-menu-active">
-                                        <ul class="menu-overflow">
-                                            <li><a href="#">HOME</a>
-                                                <ul>
-                                                    <li><a href="index.html">furniture</a></li>
-                                                    <li><a href="index-electronics.html">electronics</a></li>
-                                                    <li><a href="index-fashion.html">fashion</a></li>
-                                                    <li><a href="index-jewellery.html">jewellery</a></li>
-                                                    <li><a href="index-food-drink.html">food & drink</a></li>
-                                                    <li><a href="index-toys.html">Toys & Games</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">pages</a>
-                                                <ul>
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">shop</a>
-                                                <ul>
-                                                    <li><a href="shop-grid-view-3-col.html">grid 3 column</a></li>
-                                                    <li><a href="shop-grid-view-5-col.html">grid 5 column</a></li>
-                                                    <li><a href="shop-grid-view-sidebar.html">grid with sidebar</a></li>
-                                                    <li><a href="shop-list-view-1-col.html">list 1 column</a></li>
-                                                    <li><a href="shop-list-view-2-col.html">list 2 column</a></li>
-                                                    <li><a href="shop-list-view-sidebar.html">list with sidebar</a></li>
-                                                    <li><a href="shop-list-view-1-col-container.html">list 1 column box</a></li>
-                                                    <li><a href="product-details.html">tab style 1</a></li>
-                                                    <li><a href="product-details-2.html">tab style 2</a></li>
-                                                    <li><a href="product-details-3.html">tab style 3</a></li>
-                                                    <li><a href="product-details-6.html">sticky style</a></li>
-                                                    <li><a href="product-details-7.html">sticky style 2</a></li>
-                                                    <li><a href="product-details-8.html">gallery style</a></li>
-                                                    <li><a href="product-details-9.html">gallery style 2</a></li>
-                                                    <li><a href="product-details-4.html">fixed image style</a></li>
-                                                    <li><a href="product-details-5.html">fixed image style 2</a></li> 
-                                                </ul>
-
-                                            </li>
-                                            <li><a href="#">BLOG</a>
-                                                <ul>
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-2-col.html">blog 2 column</a></li>
-                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html"> Contact  </a></li>
-                                        </ul>
-                                    </nav>							
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -200,7 +151,7 @@
 							
 							
                             <ul>
-								<?php /*?><?php
+								<?php
 								if(isset($_POST['addcart'])){
 									$id = $_POST['addcart'];
 									
@@ -225,7 +176,7 @@
 									$stmt= $conn ->prepare($sql);
 									$stmt -> execute();
 									$r = $stmt -> fetch();
-										?><?php */?>	
+										?>	
 									
                                 <li class="single-product-cart">
                                     <div class="cart-img">
@@ -239,9 +190,9 @@
                                         <a href="#"><i class="ion-ios-trash-outline"></i></a>
                                     </div>
                                 </li>
-								<?php /*?><?php
+								<?php
 											}
-                                ?><?php */?>
+                                ?>
                                 <li class="single-product-cart">
                                     <div class="cart-total">
                                         <h4>Total : <span>$ 120</span></h4>
@@ -322,30 +273,7 @@
                     </div>
                 </div>
             </div>
-
-
-            <?php /*?><?php
-						$sql = "select * from banner  where tt='off' limit 1";
-						$kqslide = $conn->query($sql);
-						foreach($kqslide as $key=>$value){
-					
-						?>
-            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/<?= $value['image']   ?>)">
-
-                <div class="container">
-                    <div class="breadcrumb-content">
-                        <h2>Shop</h2>
-                        <ul>
-                            <li><a href="trangchu.php">home</a></li>
-                            <li> Shop </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <?php }
-			?><?php */?>
-			
-            <div class="breadcrumb-area pt-205 pb-210 bg-img" style="background-image: url(image/ea411dbe-728a-4e96-8aed-357e289f81ce.__CR0,0,970,300_PT0_SX970_V1___.jpg)">
+            <div class="breadcrumb-area pt-205 pb-210 bg-img" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
                 <div class="container">
                     <div class="breadcrumb-content">
                         <h2>shop</h2>
@@ -356,7 +284,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="shop-page-wrapper hidden-items padding-filter">
                 <div class="container-fluid">
                     <div class="shop-filters-left">
@@ -544,19 +471,17 @@
 								
                                 <div class="row custom-row">
 									<?php
-										include 'connection.php';
-										if(isset($_GET['id'])){
-										$id=$_GET['id'];
-										$sql="select * from product where id_cate='$id'";
-									//Xử lý lệnh sql
-									$stmt = $conn->prepare($sql);
-									$stmt->execute();
-									$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-										}
-									?>
-									<?php
-										foreach($result as $row){
-											?>	
+				include"connection.php";
+				if(isset($_GET['submit-search'])){
+					$search = addslashes($_GET['search']);
+					$sql = "select * from product where name_p LIKE N'%$search%' or price LIKE N'%$search%' or name_cate LIKE N'%$search%' ";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute();
+					$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					
+					if($result >0 ){
+						foreach($result as $row){
+							?>	
                                     <div class="custom-col-5 custom-col-style">
                                         <div class="single-product mb-35">
                                             <div class="product-img">
@@ -579,7 +504,8 @@
                                                     </div>
 													
                                                     <div class="product-categori">
-														<a href="add-cart.php?id_p=<?php echo $row['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
+														<form action="" method="get">
+														<button type="submit" class="btn" name="addcart" value="<?=$row['id_p']?>"><a href="addcart.php?id=<?=$row['id_p']?>">add cart</a></button></form>
                                                     </div>
 													
                                                 </div>
@@ -587,8 +513,13 @@
                                         </div>
                                    </div>
                                     <?php
-		}
-	?>	
+						}
+					}
+					else{
+						echo"không có kết quả thích hợp";
+					}
+				}
+				?>	
                                     
                                     
                             <div id="grid-5-col2" class="tab-pane fade">
@@ -799,8 +730,67 @@
                     </div>
                 </div>
             </div>
-            <!-- footer-->
-					 <?php include 'sharefooter.php'?>
+            <footer class="footer-area gray-bg pt-100 pb-95">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-5 col-12">
+                            <div class="footer-widget">
+                                <div class="footer-widget-l-content">
+                                    <h4>20 Years Experience</h4>
+                                    <ul>
+                                        <li><a href="#"><i class="ion-social-twitter"></i></a></li> 
+                                        <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
+                                        <li><a href="#"><i class="ion-social-facebook"></i></a></li> 
+                                        <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li> 
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-7 col-12">
+                            <div class="footer-widget">
+                                <div class="footer-widget-m-content text-center">
+                                    <div class="footer-logo">
+                                       <?php
+											include 'connection.php';
+										$stmt = $conn->query("select * from setting");
+										foreach($stmt as $key => $row){
+										?>
+
+										<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
+
+										<?php 
+										}
+										?>
+                                    </div>
+                                    <div class="footer-nav">
+                                        <nav>
+                                            <ul>
+                                                <li><a href="index.html">home</a></li>
+                                                <li><a href="about-us.html">about us</a></li>
+                                                <li><a href="shop-grid-view-sidebar.html">shop </a></li>
+                                                <li><a href="blog-left-sidebar.html"> blog </a></li>
+                                                <li><a href="#">pages </a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="https://freethemescloud.com/" target="_blank" >Free Themes Cloud.</a> All rights reserved. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-12">
+                            <div class="footer-widget f-right">
+                                <div class="footer-widget-r-content">
+                                    <ul>
+                                        <li><span>Phone :</span> +00 123 54 0056</li>
+                                        <li><span>Email : </span> <a href="#">neha@gmail.com</a></li>
+                                        <li><span>Address :</span> Dhaka Bangladesh</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
             <!-- modal -->
            
         </div>

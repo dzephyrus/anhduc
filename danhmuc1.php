@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	ob_start();
     include 'connection.php';
     if(isset($_SESSION['name_u'])){
         $username=$_SESSION['name_u'];
@@ -49,7 +50,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="danhmuc1.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -84,7 +85,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
 		<li class="nav-item">
         <a class="nav-link" href="order1.php">
-          <i class="fas fa-fw fa-user"></i>
+         <i class="fas fa-cash-register"></i>
           <span>Đơn hàng</span></a>
       </li>
 
@@ -120,7 +121,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
+          <i class="fas fa-money-check-alt"></i>
           <span>Voucher</span></a>
       </li>
 		
@@ -166,19 +167,15 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" enctype="multipart/form-data" action="searchbackend.php">
             <div class="input-group">
-				<form method="get" enctype="multipart/form-data" action="search.php">
-              <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="submit" name="submit-search">
+              <input type="Search" name="Search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">           
+                <button class="btn btn-primary" type="submit" name="Submit-search">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
-              </div>
-				</form>
             </div>
           </form>
-
+			
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
@@ -349,4 +346,5 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }else{
         header("location:login.php");
     }
+	ob_end_flush();
 ?>

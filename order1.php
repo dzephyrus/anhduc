@@ -1,11 +1,14 @@
 <?php
-//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
-include"connection.php";
-$sql= "select * from order";
-//Xử lý lệnh sql
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	session_start();
+	ob_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +41,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="danhmuc1.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -49,7 +52,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item ">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -73,7 +76,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
 		<li class="nav-item">
         <a class="nav-link" href="order1.php">
-          <i class="fas fa-fw fa-user"></i>
+         <i class="fas fa-cash-register"></i>
           <span>Đơn hàng</span></a>
       </li>
 
@@ -109,7 +112,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
+          <i class="fas fa-money-check-alt"></i>
           <span>Voucher</span></a>
       </li>
 		
@@ -332,3 +335,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </body>
 
 </html>
+<?php
+    }else{
+        header("location:login.php");
+    }
+	ob_end_flush();
+?>
