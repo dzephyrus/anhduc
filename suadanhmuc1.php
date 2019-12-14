@@ -1,6 +1,13 @@
 <?php
-session_start(); 
+session_start();
 ob_start();
+  include 'connection.php';
+  if(isset($_SESSION['name_u'])){
+      $username=$_SESSION['name_u'];
+      $sqltk = "select * from user where name = '$username'";
+      $stmt= $conn ->prepare($sqltk);
+  $stmt -> execute();
+  $row = $stmt -> fetch();
 ?>
 <?php
 include"connection.php";
@@ -348,5 +355,8 @@ if(isset($_POST['update'])){
 
 </html>
 <?php
+}else{
+  header("location:login.php");
+}
 	ob_end_flush();
 	?>
