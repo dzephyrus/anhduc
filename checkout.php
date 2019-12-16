@@ -241,24 +241,22 @@
                         <div class="col-lg-6 col-md-12 col-12">
                             <form action="#" method="post">
 								 <?php
-														
-									if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
-									$sql_dangnhap = "SELECT * FROM user";
-									$kq_dangnhap = $conn->query($sql_dangnhap)->fetch();
-										
-													 ?>
+										if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
+											$sql_dangnhap = "SELECT * FROM user";
+											$kq_dangnhap = $conn->query($sql_dangnhap)->fetch();
+								?>
                                 <div class="checkbox-form">						
                                     <h3>Điền thông tin nhận hàng</h3>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label>									<input type="text" placeholder="<?php echo ''.$_SESSION['name_u']; ?>" name="fullname"/>
+                                                <label>First Name <span class="required">*</span></label>									<input type="text" value="<?php echo ''.$_SESSION['name_u']; ?>" name="fullname"/>
                                             </div>
 										</div>
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
                                                 <label>Phone</label>
-                                                <input type="number" placeholder="<?php echo ''.$kq_dangnhap['phone']; ?>" name="phone"/>
+                                                <input type="number" valuer="<?php echo ''.$kq_dangnhap['phone']; ?>" name="phone"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -314,7 +312,11 @@
 													</tr>							
 												</thead>
 												<tbody>
-													<?php foreach ($cart as $key => $item): ?>
+													<?php foreach ($cart as $key => $item): 
+														if($key==0){
+												continue;
+											}
+													?>
 													<tr class="cart_item">
 														<td style="display: none">
 															<?php echo 
@@ -390,7 +392,9 @@
 						<?php
 					
 						if(isset($_POST['order'])){
-						
+							//print_r($_SESSION['cart']);
+//							echo count($_SESSION['cart']);
+//							exit();
 							if($_POST['fullname']=="" || $_POST['dc']=="" || $_POST['phone']=="" ){
 								?> <script> alert"them that bai" ;</script><?php
 							}
@@ -400,10 +404,21 @@
 								$date= date("Y-m-d");
 								$diachi = $_POST['dc'];
 								
-								$sql = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','$itemid')";
-								//echo $sql;
-									$kq = $conn -> exec($sql);
-									if($kq == 1){
+								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice')";
+								$kqoder = $conn -> exec($sqlorder1);
+								$sqlmax = "SELECT MAX(id_order) from order1";
+								$kqmax = $conn -> query($sqlmax)->fetchColumn();
+								$data=$_SESSION["cart"];
+//								var_dump($data);
+								
+								for ($i = 1; $i < count($_SESSION["cart"]); $i++) {
+	
+    							 $id_p=$data[$i]["id_p"];
+//										exit();	
+									$sqldetail="insert into order1detail values(null,'$kqmax','$id_p')";
+									$kqdetail = $conn -> query($sqldetail);
+									}
+									if($kqdetail){
 										?><br> <script> alert('Đăng ký tài khoản thành công'); </script> <?php
 									}else{
 										?><br> <script> alert('Đăng ký tài khoản không thành công'); </script> <?php

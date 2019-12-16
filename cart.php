@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	include 'connection.php';
-	
+	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 	$totalPrice = 0;
 	$stt=1;
 	$sumPrice=0;
@@ -228,11 +228,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <h1 class="cart-heading">Giỏ hàng của bạn</h1>
-							<?php if(isset($_SESSION['case'])) :?>
-								<div>
-									<?php echo $_SESSION['case']; unset($_SESSION['case']);?>
-								</div>
-							<?php endif ?>
+							
                                 <div class="table-content table-responsive">
                                      <table class="table cart-table" id="bang">
 										<thead>
@@ -247,11 +243,13 @@
 											</tr>
 										</thead>
 										<tbody>
-											<?php 
-												if(isset($_SESSION['cart'])){
-													//echo "<pre>";print_r($_SESSION['cart']);
-											 		foreach ($_SESSION['cart'] as $key => $item){
+											
+											<?php foreach ($cart as $key => $item):
+											if($key==0){
+												continue;
+											}
 											?>
+											
 												<tr>
 													<td><?php echo $stt++ ;?></td>
 													<td><?php echo $item['name_p'] ;?></td>
@@ -276,9 +274,7 @@
 														<a href="xoaspgiohang.php?key=<?php echo $key ?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
 													</td>
 												</tr>
-											<?php }}else {
-													echo "Ban chua co san pham";
-											}?>
+											 <?php endforeach ?>
 
 										</tbody>
                                 </table>
