@@ -1,15 +1,17 @@
 <?php
-session_start(); 
-ob_start();
-include 'connection.php';	
+	session_start();
+	include 'connection.php';
 	
+	$totalPrice = 0;
+	$stt=1;
+	$sumPrice=0;
 ?>
 <!doctype html>
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Neha - Minimalist eCommerce HTML5 Template</title>
+        <title>Neha - Minimalist eCommerce HTML5 Template </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -35,7 +37,9 @@ include 'connection.php';
         <![endif]-->
         <!-- header start -->
         <div class="wrapper">
-           
+            <!-- Newsletter Popup Start -->
+       
+            <!-- Newsletter Popup End -->
             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
@@ -49,7 +53,7 @@ include 'connection.php';
                                 <div class="main-menu">
                                     <nav>
                                         <ul>
-                                            <li><a href="#">home</a></li>
+                                            <li><a href="trangchu.php">home</a></li>
                                             <li><a href="about-us.html">about us</a></li>
                                             <li><a href="shop-grid-view-5-col.html">shop</a></li>
                                             <li><a href="#">pages</a>
@@ -158,85 +162,9 @@ include 'connection.php';
             <div class="header-space"></div>
             <!-- header end -->
             <!-- sidebar-cart start -->
-            <div class="sidebar-cart onepage-sidebar-area">
-                <div class="wrap-sidebar">
-                    <div class="sidebar-cart-all">
-                        <div class="sidebar-cart-icon">
-                            <button class="op-sidebar-close"><span class="ion-android-close"></span></button>
-                        </div>
-                        <div class="cart-content">
-                            <h3>Shopping Cart</h3>
-                            <ul>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="assets/img/cart/3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h3><a href="#"> HANDCRAFTED MUG</a></h3>
-                                        <span>1 x $140.00</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ion-ios-trash-outline"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-total">
-                                        <h4>Total : <span>$ 120</span></h4>
-                                    </div>
-                                </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-checkout-btn">
-                                        <a class="btn-hover cart-btn-style" href="#">view cart</a>
-                                        <a class="no-mrg btn-hover cart-btn-style" href="#">checkout</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- main-search start -->
-            <div class="main-search-active">
-                <div class="sidebar-search-icon">
-                    <button class="search-close"><span class="ion-android-close"></span></button>
-                </div>
-                <div class="sidebar-search-input">
-                    <form>
-                        <div class="form-search">
-                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
-                            <button>
-                                <i class="ion-ios-search-strong"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- main-search start -->
-            <div class="cur-lang-acc-active">
+            <<div class="cur-lang-acc-active">
                 <div class="wrap-sidebar">
                     <div class="sidebar-nav-icon">
                         <button class="op-sidebar-close"><span class="ion-android-close"></span></button>
@@ -286,43 +214,113 @@ include 'connection.php';
             <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
                 <div class="container">
                     <div class="breadcrumb-content">
-                        <h2>register</h2>
+                        <h2>cart page</h2>
                         <ul>
                             <li><a href="#">home</a></li>
-                            <li> register </li>
+                            <li> cart </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- register-area start -->
-            <div class="register-area ptb-100">
-                <div class="container-fluid">
+            <!-- shopping-cart-area start -->
+            <div class="cart-main-area pt-95 pb-100">
+                <div class="container">
                     <div class="row">
-                        <div class="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
-                            <div class="login">
-                                <div class="login-form-container">
-                                    <div class="login-form">
-                                        <form action="phpdangky4.php" method="post">
-											<h3>Mời bạn đăng ký tài khoản</h3>
-                                            <input type="text" name="user-name" placeholder="Username" id="username">
-											<span id="errorname" style="padding: 5px 5px"></span>
-                                            <input type="password" name="user-password" placeholder="Password" id="password" >
-											<input type="password" name="user-password2" placeholder="Password2" id="password2" >
-											<input type="number" name="phone" placeholder="Phone" id="phone" >
-                                            <input name="email" placeholder="Email" type="email" id="email" >
-                                            <div class="button-box">
-                                                <button type="submit" class="default-btn floatright" name="xacnhan" onClick="getinput(); return false;">Đăng ký</button>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h1 class="cart-heading">Giỏ hàng của bạn</h1>
+							<?php if(isset($_SESSION['case'])) :?>
+								<div>
+									<?php echo $_SESSION['case']; unset($_SESSION['case']);?>
+								</div>
+							<?php endif ?>
+                                <div class="table-content table-responsive">
+                                     <table class="table cart-table" id="bang">
+										<thead>
+											<tr>
+												<th>Stt</th>
+												<th>Tên sản phẩm</th>
+												<th>Ảnh sản phẩm</th>
+												<th>Số lượng</th>
+												<th>Đơn giá</th>
+												<th>Tổng tiền</th>
+												<th>Thao tác</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php 
+												if(isset($_SESSION['cart'])){
+													//echo "<pre>";print_r($_SESSION['cart']);
+											 		foreach ($_SESSION['cart'] as $key => $item){
+											?>
+												<tr>
+													<td><?php echo $stt++ ;?></td>
+													<td><?php echo $item['name_p'] ;?></td>
+													<td>
+														<img src="image/<?php echo $item['image_p']?>" width="80px" height="25px;">
+													</td>
+													
+													<td id="pro">
+														
+														<a href="add-cart1.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:24px ">-</a>
+															<input type="number" value="<?php echo $item['quantity']?>" 							 onBlur="tinhtien(this,'tt');">
+														<a href="add-cart.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:18px">+</a>
+													</td>
+													
+													<td ><?php echo number_format($item['sale_p'], 0, '', ','); ?> vnđ</td>
+													<td id="tt"><?php 
+														$itemTotal = $item['sale_p']*$item['quantity'];
+														$totalPrice += $itemTotal;
+														echo number_format($itemTotal, 0, '', ','); ?> vnđ</td>
+                                        			<td>
+														
+														<a href="xoaspgiohang.php?key=<?php echo $key ?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
+													</td>
+												</tr>
+				
+											<?php }}else {
+													echo "Ban chua co san pham";
+											}?>
+
+										</tbody>
+                                </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										
+										<form action="" method="get" >
+                                        <div class="coupon-all">
+                                            <div class="coupon">
+                                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
+    											<input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                             </div>
-                                        </form>
-					
+                                        </div>
+										</form>
+											<?php
+											if(isset($_GET['apply_coupon'])){
+												$code = $_GET['apply_coupon'];
+											}
+										?>		   
+                                    </div>
+									
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total">
+                                            <h2>Cart totals</h2>
+                                            <ul>
+                                                <li>Tổng tiền</strong></span> <strong class="cart-total"><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></strong></li>
+                                           
+                                            </ul>
+                                            <a href="checkout.php">Checkout</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- register-area end -->
+            <!-- shopping-cart-area end -->
             <footer class="footer-area gray-bg pt-100 pb-95">
                 <div class="container">
                     <div class="row">
@@ -407,19 +405,47 @@ include 'connection.php';
         </script>
         <script src="assets/js/main.js"></script>
 		<script type="text/javascript">
-			function getinput(){
-				var username = document.getElementById('username').value;
-				var email = document.getElementById('email').value;
-				var phone = document.getElementById('phone').value;
-				var password = document.getElementById('password').value;
-				var password2 = document.getElementById('password2').value;
-				if(username == ""){
-					document.getElementById('errorname').innerHTML= "vui long nhap day du thong tin";
+			function tinhtien(SoLuong, TongTien) {
+				var table = document.getElementById("bang");
+				var a = Number(SoLuong.value);
+				var pro = document.getElementById('pro');
+				var dongia = pro.innerHTML;
+				var ad = parseInt(dongia);
+				console.log(dongia);
+				if(isNaN(pro)){
+					alert (pro);
 				}
-			}
+				//var thanhtien = document.getElementById(TongTien);
+				//var Tong = 0;
+				//thanhtien.innerHTML = a * dongia;
+				
+
+		}
 		</script>
+	<input type="hidden" id="total-price" value="<?php echo $totalPrice ?>">
+    <script>
+        $("input[name='demo0']").TouchSpin({});
+
+        var buttonApplyVoucher = document.querySelector(".button");
+        buttonApplyVoucher.onclick = function(){
+            var voucherCode = document.querySelector('.input-text').value;
+
+            var url = "checkvoucher.php?code=<?php echo $code ?>" + voucherCode;
+            fetch(url, {method: 'GET'})
+                .then((resp) => resp.json())
+                .then(function(data){
+                    if(data == null){
+                        alert('Mã Voucher không tồn tại/hết hạn');
+                    }else{
+                        var totalPrice = document.querySelector('#total-price').value;
+                        totalPrice = parseInt(totalPrice)-parseInt(data.discount_price);
+                        totalPrice = totalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                        document.querySelector('.cart-total').innerText = totalPrice;
+
+                    }
+                });
+
+        }
+    </script>
     </body>
 </html>
-<?php
-	ob_end_flush();
-?>
