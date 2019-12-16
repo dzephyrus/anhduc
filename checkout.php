@@ -1,9 +1,10 @@
 <?php
 	session_start();
 	include 'connection.php';
-	$cart = isset($_SESSION['CART']) ? $_SESSION['CART'] : [];
+	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 	$totalPrice = 0;
 	$sumPrice=0;
+	$sumQuantity=0;
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -238,7 +239,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-12">
-                            <form action="#">
+                            <form action="#" method="post">
 								 <?php
 														
 									if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
@@ -296,67 +297,121 @@
                                 </div>
 								<?php	
 								}?>
-								<input type="submit" value="Place order" name="xacnhan"/>
-                            </form>
-							
-					
+								
                         </div>	
                  		       <div class="col-lg-6 col-md-12 col-12">
-                            <div class="your-order">
-                                <h3>Giỏ hàng của bạn</h3>
-                                <div class="your-order-table table-responsive">
-                                    <table>
-										
-                                        <thead>
-                                            <tr>
-                                                <th class="product-name">Product</th>
-                                                <th class="product-total">Total</th>
-                                            </tr>							
-                                        </thead>
-                                        <tbody>
-											<?php foreach ($cart as $key => $item): ?>
-                                            <tr class="cart_item">
-                                                <td class="product-name">
-                                                  	<?php echo $item['name_p'] ;?> <strong class="product-quantity">*<?php echo $item['quantity']?></strong>
-                                                </td>
-                                                <td class="product-total">
-                                                    
-														<?php 
-															echo 
-															$itemTotal = $item['sale_p']*$item['quantity'];
-															$totalPrice += $itemTotal;
-														?>
+									<div class="your-order">
+										<h3>Giỏ hàng của bạn</h3>
+										<div class="your-order-table table-responsive">
+											<table>
+
+												<thead>
+													<tr>
 													
-                                                </td>
-                                            </tr>
-											<?php  endforeach ?>
-										</tbody>
-									 </table>
-									 <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total" name="tongtien">
-                                           <ul>
-											    <li>Tổng tiền<span><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-									 <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total">
-                                           <ul>
-											   <li><a href="cart.php" >Quay lại</a></li>
-                                               
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="payment-method">
-                                    <div class="payment-accordion">
-                                    	 <div class="order-button-payment">
-                                            <input type="submit" value="Place order" />
-                                       	 </div>								
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+														<th class="product-name">Product</th>
+														<th class="product-quantity">So luong</th>
+														<th class="product-total">Total</th>
+													</tr>							
+												</thead>
+												<tbody>
+													<?php foreach ($cart as $key => $item): ?>
+													<tr class="cart_item">
+														<td style="display: none">
+															<?php echo 
+																		$item['id_p'];
+																		$itemid = $item['id_p'];
+															?>
+														</td>
+														<td class="product-name"><?php echo $item['name_p'] ;?></td>
+														<td><?php echo 
+																	$item['quantity'];
+																	$quantity = $item['quantity'];
+																	$sumQuantity += $quantity;
+															?>
+														</td>
+														<td class="product-total" >
+															<?php 
+																echo 
+																$itemTotal = $item['sale_p']*$item['quantity'];
+																$totalPrice += $itemTotal;
+															?>
+														</td>
+													</tr>
+													<?php  endforeach ?>
+												</tbody>
+											 </table></br>
+											<!-- bang tong-->
+											 <table border="1px solid red">
+												<thead>
+													<tr>
+														<th class="product-quantity">Tong so luong</th>
+														<th class="product-total">Tong tien</th>
+													</tr>							
+												</thead>
+												<tbody>
+													<tr class="cart_item">
+														<td class="product-quantity">
+															<?php echo 
+																$sumQuantity ;
+															?>
+														</td>
+														<td class="product-total" >
+															<span class="required" >
+																<?php echo 
+																		$sumPrice+= $totalPrice;
+																		$_SESSION['tongtien']=$sumPrice;
+																?>
+															</span>
+														</td>
+													</tr>
+
+												</tbody>
+											 </table>
+											<!--Ket thuc tong-->
+											
+											 <div class="col-md-5 ml-auto">
+												<div class="cart-page-total">
+												   <ul>
+													   <li><a href="cart.php" >Quay lại</a></li>
+														
+													</ul>
+												</div>
+											</div>
+										
+										</div>
+
+									</div>
+							<input type="submit" name="order" value="Place order" class="col-md-5 ml-auto mt-3" />
+								</div>
+
+
+                                       	 
+							</form>
+						<?php
+					
+						if(isset($_POST['order'])){
+						
+							if($_POST['fullname']=="" || $_POST['dc']=="" || $_POST['phone']=="" ){
+								?> <script> alert"them that bai" ;</script><?php
+							}
+							else{
+								$name= $_POST['fullname'];
+								$phone = $_POST['phone'];
+								$date= date("Y-m-d");
+								$diachi = $_POST['dc'];
+								
+								$sql = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','$itemid')";
+								//echo $sql;
+									$kq = $conn -> exec($sql);
+									if($kq == 1){
+										?><br> <script> alert('Đăng ký tài khoản thành công'); </script> <?php
+									}else{
+										?><br> <script> alert('Đăng ký tài khoản không thành công'); </script> <?php
+									}
+							}
+						}
+					?>
+				  
                     </div>
                 </div>
             </div>
