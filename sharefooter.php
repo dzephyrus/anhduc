@@ -1,4 +1,4 @@
-<footer class="footer-area gray-bg pt-100 pb-90 pt-90">
+<footer class="footer-area gray-bg pt-100 pb-90 pt-90 w-100">
 	<div class="container"> 		
 	<div class="row">
 		<div class="col-lg-3 col-md-5 col-12">
@@ -24,7 +24,7 @@
 						foreach($stmt as $key => $row){
 						?>
 
-						<img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" >
+						<img src="image/<?=$row['logo']?>" style="width: 100px;" alt="" width="70%" >
 
 						<?php 
 						}

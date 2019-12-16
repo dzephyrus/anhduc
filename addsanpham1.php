@@ -2,10 +2,16 @@
 	include 'connection.php';
 ?>
 <?php
-session_start(); 
-ob_start();
-	
-	
+	session_start();
+	ob_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +44,7 @@ ob_start();
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="danhmuc1.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -62,7 +68,7 @@ ob_start();
       
 
       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Product</span></a>
@@ -72,8 +78,8 @@ ob_start();
       <hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
-          <i class="fas fa-fw fa-user"></i>
+        <a class="nav-link" href="order1.php">
+         <i class="fas fa-cash-register"></i>
           <span>Đơn hàng</span></a>
       </li>
 
@@ -109,7 +115,7 @@ ob_start();
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
+          <i class="fas fa-money-check-alt"></i>
           <span>Voucher</span></a>
       </li>
 		
@@ -208,7 +214,7 @@ ob_start();
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
-				  <a class="dropdown-item" href="duanmau.php" >
+				  <a class="dropdown-item" href="trangchu.php">
                   <i class="fas fa-pager fa-sm fa-fw mr-2 text-gray-400"></i>
                   my web
                 </a>
@@ -249,33 +255,38 @@ ob_start();
               
 				
 		
-		<form class="p-4" action="" method="POST" enctype="multipart/form-data" >
+		<form class="p-4" action="" method="POST" enctype="multipart/form-data" name="addsanpham1">
 					<div class="form-row">				  
 						<div class="form-group col-md-6">
 							<label for="inputAddress">tên sản phẩm</label>
-							<input name="name" type="text" class="form-control" id="inputAddress" placeholder="name">
+							<input name="name" type="text" class="form-control" id="name" placeholder="name">
+							<div id="name_errol" class="val_error"></div>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleFormControlFile1">Ảnh</label>
-							<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+							<input name="image" type="file" class="form-control-file" id="image">
+							<div id="image_errol" class="val_error"></div>
 						</div>
 					</div>
 			
 					<div class="form-row">
 						<div class="form-group col-md-6">
 						  <label for="inputEmail4">giá</label>
-						  <input name="price" type="number" class="form-control" id="inputEmail4" placeholder="price">
+						  <input name="price" type="number" class="form-control" id="price" placeholder="price">
+							<div id="price_errol" class="val_error"></div>
 						</div>
 						  <div class="form-group col-md-6">
 						  <label for="inputCity">Giá khuyến mãi</label>
-						  <input name="SalePrice" type="number" class="form-control" id="inputCity">
+						  <input name="SalePrice" type="number" class="form-control" id="SalePrice">
+							  
 						</div>
 				 	</div>				  
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
 						  <label for="inputEmail4">Số lượng</label>
-						  <input name="soluong" type="number" class="form-control" id="inputEmail4" >
+						  <input name="soluong" type="number" class="form-control" id="soluong">
+							<div id="number_errol" class="val_error"></div>
 						</div>
 				  	</div>
 
@@ -286,6 +297,7 @@ ob_start();
 									  <script>
 										  CKEDITOR.replace( 'ad' );
 									  </script>
+						<div id="ad_errol" class="val_error"></div>
 						</div>				  
 
 				  	<div class="form-row">
@@ -293,7 +305,7 @@ ob_start();
 					<div class="form-group col-md-4">
 					  <label for="inputState">danh mục</label>
 
-						<select name="dmuc" id="inputState" class="form-control">
+						<select name="dmuc" id="dmuc" class="form-control">
 						<?php
 							
 							$sqldm = "select * from category";
@@ -312,7 +324,7 @@ ob_start();
 					</div>
 
 				  </div>
-				  <button name="add_sp" type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+				  <button name="add_sp" type="submit" class="btn btn-primary" onClick="validate()">Thêm sản phẩm</button>
 				</form>
 				<?php
 					
@@ -336,7 +348,7 @@ ob_start();
 								move_uploaded_file( $tmpA ,"image/".$image);
 
 
-								$sql = "insert into product values('','$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm')";
+								$sql = "insert into product values(null,'$name','$image','$price','$sale','$soluong','$date','$chitiet','','$id_dm',(SELECT name_cate FROM category WHERE id_cate='$id_dm'))";
 									echo $sql;
 									$kq = $conn -> exec($sql);
 									if($kq == 1){
@@ -405,9 +417,64 @@ ob_start();
 
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+		<script type="text/javascript">
+			var name = document.forms["addsanpham1"]["name"];
+			var image = document.forms["addsanpham1"]["image"];
+			var price = document.forms["addsanpham1"]["price"];
+			var soluong = document.forms["addsanpham1"]["soluong"];
+			var ad = document.forms["addsanpham1"]["ad"];
+			
+			var name_error = document.getElementById("name_error");
+			var image_error = document.getElementById("image_error");
+			var price_error = document.getElementById("price_error");
+			var soluong_error = document.getElementById("soluong_error");
+			var ad_error = document.getElementById("ad_error");
+			
+			name.addEventListener("blur", nameVerify, true);
+			image.addEventListener("blur", nameVerify, true);
+			price.addEventListener("blur", nameVerify, true);
+			soluong.addEventListener("blur", nameVerify, true);
+			ad.addEventListener("blur", nameVerify, true);
+			
+			function validate(){
+				if(name.value ==""){
+					name.style.border = "1px solid red";
+					name_error.textContent = "name is required";
+					name.focus();
+					return false;
+				}
+				if(image.value ==""){
+					image.style.border = "1px solid red";
+					image_error.textContent = "image is required";
+					image.focus();
+					return false;
+				}
+				if(price.value ==""){
+					price.style.border = "1px solid red";
+					price_error.textContent = "price is required";
+					price.focus();
+					return false;
+				}
+				if(soluong.value ==""){
+					soluong.style.border = "1px solid red";
+					soluong_error.textContent = "soluong is required";
+					soluong.focus();
+					return false;
+				}
+				if(ad.value ==""){
+					ad.style.border = "1px solid red";
+					ad_error.textContent = "ad is required";
+					ad.focus();
+					return false;
+				}
+			}
+		</script>
 </body>
 
 </html>
 <?php
+    }else{
+        header("location:login.php");
+    }
 	ob_end_flush();
-	?>
+?>

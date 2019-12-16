@@ -55,7 +55,7 @@ ob_start();
             <!-- Newsletter Popup Start -->
            
             <!-- Newsletter Popup End -->
-            <header class="pl-155 pr-155 intelligent-header">
+             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
                         <div class="row no-gutters">
@@ -67,7 +67,7 @@ ob_start();
 					foreach($stmt as $key => $row){
 					?>
 					
-					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; " alt="" width="70%" ></a>
 				
 					<?php 
 					}
@@ -79,27 +79,24 @@ ob_start();
                                     <nav>
                                        <ul>
                                             <li><a href="trangchu.php">home</a></li>
-                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="about-us.php">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
-										   	<?php
-												include"connection.php";
-												$sql= "select * from category";
-												//Xử lý lệnh sql
-												$stmt = $conn->prepare($sql);
-												$stmt->execute();
-												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-												?>
 													<?php
-												foreach($result as $row){
-												?>
-												
-                                                    <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-                                                   
-                                                
-												<?php
-												}
-												?>
+														include"connection.php";
+														$sql= "select * from category";
+														//Xử lý lệnh sql
+														$stmt = $conn->prepare($sql);
+														$stmt->execute();
+														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+													?>
+															<?php
+																foreach($result as $row){
+																	?>
+																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+																	<?php
+																}
+															?>
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -109,18 +106,72 @@ ob_start();
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
                                                     <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="login.php">login</a></li>
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
                                             	
-                                            <li><a href="contact.html">contact</a></li>
+                                            <li><a href="contact.php">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
+										<div class="main-menu">
+                                   			 <nav>
+                                      			 <ul>
+
+													 <?php
+
+													 	if(isset($_SESSION['name_u'])){
+															 $username=$_SESSION['name_u'];
+															$sqltk = "select * from user where name_u = '$username'";
+        													$kqtk = $conn->query($sqltk)->fetch();
+															if($kqtk['quyen'] == 'admin'){
+															
+
+													 ?>
+													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
+															<?php if($kqtk['quyen']=="user"){?>
+																<ul class="dropdown">
+																	<li><a href="dangxuat.php">Đăng xuất</a></li>
+																	<li><a href="">Đổi mật khẩu</a></li>
+																</ul>
+															<?php } if($kqtk['quyen']=="admin") {?>
+																<ul class="dropdown">
+																	<li><a href="dangxuat.php">Đăng xuất</a></li>
+																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="danhmuc1.php">Quản trị</a></li>
+																</ul>
+															<?php }?>
+													</li>
+													 <?php
+															}
+															else{
+															?>
+													 			<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
+													
+															<ul class="dropdown">
+																<li><a href="dangxuat.php">Đăng xuất</a></li>
+																<li><a href="">Đổi mật khẩu</a></li>
+															</ul>
+													</li>
+													 		<?php
+														}
+													 ?>
+													<?php } else { ?>
+													 <li><a href="#">Tài khoản</a>
+
+															<ul class="dropdown">
+																<li><a href="login.php">Đăng nhập</a></li>
+																<li><a href="register.php">Đăng ký</a></li>
+															</ul>
+													</li>
+													 <?php 
+																 } ?>
+												</ul>
+									</div>
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
                                             <span class="ion-ios-search-strong"></span>
@@ -330,24 +381,16 @@ ob_start();
 							<div class="product-details-content">
 								<input type="hidden" name="id" value="<?=$id?>">
                                 <h3><?=$row['name_p']?></h3>
-                                <div class="rating-number">
-                                    <div class="quick-view-rating">
-                                        <i class="ion-ios-star red-star"></i>
-                                        <i class="ion-ios-star red-star"></i>
-                                        <i class="ion-android-star-outline"></i>
-                                        <i class="ion-android-star-outline"></i>
-                                        <i class="ion-android-star-outline"></i>
-                                    </div>
-                                    <div class="quick-view-number">
-                                        <span>2 Ratting (S)</span>
-                                    </div>
-                                </div>
+                                
                                 <div class="details-price">
 									<h3><?=$row['sale_p']?></h3>
                                     <span><del><?=$row['price']?></del></span>
                                 </div>
                                 
-                                
+                                <div class="details-price">
+									
+                                    <span><?=$row['detail']?></span>
+                                </div>
                                 <div class="quickview-plus-minus">
                                     <div class="cart-plus-minus">
                                         <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
@@ -355,9 +398,7 @@ ob_start();
                                     <div class="quickview-btn-cart">
                                         <a class="btn-hover-black" href="#">Thêm giỏ hàng</a>
                                     </div>
-                                     <div class="quickview-btn-cart">
-                                        <a class="btn-hover-black" href="checkout.php">Thanh toán</a>
-                                    </div>
+                                     
                                 </div>
                                 <div class="product-categories product-cat-tag">
                                     <ul>
@@ -515,17 +556,13 @@ ob_start();
                             <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
                                 Description
                             </a>
-                            <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
-                                Reviews (0)
-                            </a>
+                            
                         </div>
                         <div class="description-review-text tab-content">
                             <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
                                 <p><?=$row['detail']?></p>
                             </div>
-                            <div class="tab-pane fade" id="pro-review" role="tabpanel">
-                                <a href="#">Be the first to write your review!</a>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -576,7 +613,7 @@ ob_start();
                                                 <span><?=$row['name_cate']?></span>
                                             </div>
                                             <div class="product-categori">
-                                                <a href="#"><i class="ion-bag"></i> Add to cart</a>
+                                                <a href="add-cart.php?id_p=<?php echo $row['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
                                             </div>
                                         </div>
                                     </div>
