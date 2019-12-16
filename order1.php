@@ -243,10 +243,22 @@
   </thead>
   <tbody>
     <?php
-		foreach($result as $row){
+		
+	  include"connection.php";
+      $sql = "select id_order, id_p from order1detail GROUP BY id_order";
+		//$sql = "select COUNT(id_order) from order1 INNER JOIN order1detail on order1.id_order = order1detail.id_order";
+      $kq = $conn->query($sql);
+      foreach($kq as $key=>$value){
 			?>
-				<tr>
-					<td><?=$row['id_cate']?></td>
+	  			<tr>
+				<td><?php echo $key+1 ?></td>
+					<td><?php 
+                  $sqldm = "select * from order1 where id_order = $value[id_order]";
+                  $kqdm = $conn->query($sqldm)->fetch();
+                  if($value['id_order'] == $kqdm['id_order']){
+                     echo $kqdm['id_order'];
+                  }
+              ?></td>
 					<td><?=$row['name_cate']?></td>
 
 					<td>
@@ -254,8 +266,8 @@
 					</td>
 				</tr>
 				<?php
-		}
-	?>
+   }
+   ?>
     
   </tbody>
 </table>

@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	include 'connection.php';
-	
+	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 	$totalPrice = 0;
 	$stt=1;
 	$sumPrice=0;
@@ -38,8 +38,9 @@
         <!-- header start -->
         <div class="wrapper">
             <!-- Newsletter Popup Start -->
+       
             <!-- Newsletter Popup End -->
-             <header class="pl-155 pr-155 intelligent-header">
+            <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
                         <div class="row no-gutters">
@@ -51,7 +52,7 @@
 					foreach($stmt as $key => $row){
 					?>
 					
-					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; " alt="" width="70%" ></a>
 				
 					<?php 
 					}
@@ -83,17 +84,7 @@
 															?>
 													</ul>
 										   </li>
-                                            <li><a href="#">pages</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.php">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
+                                            
                                             	
                                             <li><a href="contact.php">contact</a></li>
                                         </ul>
@@ -122,7 +113,9 @@
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																</ul>
+
 															<?php } if($kqtk['quyen']=="admin") {?>
+
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
@@ -163,14 +156,10 @@
                                     </div>
                                     <div class="header-cart common-style">
                                         <button class="sidebar-trigger">
-                                            <span class="ion-bag"></span>
+                                            <a href="cart.php"><span class="ion-bag"></span></a>
                                         </button>
                                     </div>
-                                    <div class="header-sidebar common-style">
-                                        <button class="header-navbar-active">
-                                            <span class="ion-navicon"></span>
-                                        </button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             
@@ -230,37 +219,24 @@
                     </div>
                 </div>
             </div>
-             <?php
-						$sql = "select * from banner  where tt='off' limit 1";
-						$kqslide = $conn->query($sql);
-						foreach($kqslide as $key=>$value){
-					
-						?>
-            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/<?= $value['image']   ?>)">
-
+            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/pcs-nov2018-category-banners_Royal_canin_1.jpg);background-repeat: no-repeat; background-size: contain">
                 <div class="container">
                     <div class="breadcrumb-content">
-                        <h2>Shop</h2>
+                        <h2>cart page</h2>
                         <ul>
-                            <li><a href="trangchu.php">home</a></li>
-                            <li> Shop </li>
+                            <li><a href="#">home</a></li>
+                            <li> cart </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <?php }
-			?>
             <!-- shopping-cart-area start -->
             <div class="cart-main-area pt-95 pb-100">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <h1 class="cart-heading">Giỏ hàng của bạn</h1>
-							<?php if(isset($_SESSION['case'])) :?>
-								<div>
-									<?php echo $_SESSION['case']; unset($_SESSION['case']);?>
-								</div>
-							<?php endif ?>
+							
                                 <div class="table-content table-responsive">
                                      <table class="table cart-table" id="bang">
 										<thead>
@@ -275,16 +251,19 @@
 											</tr>
 										</thead>
 										<tbody>
-											<?php 
-												if(isset($_SESSION['cart'])){
-													//echo "<pre>";print_r($_SESSION['cart']);
-											 		foreach ($_SESSION['cart'] as $key => $item){
+											
+											<?php foreach ($cart as $key => $item):
+											if($key==0){
+												continue;
+											}
+											if($item['quantity']>0){
 											?>
+											
 												<tr>
 													<td><?php echo $stt++ ;?></td>
 													<td><?php echo $item['name_p'] ;?></td>
 													<td>
-														<img src="image/<?php echo $item['image_p']?>" width="80px" height="25px;">
+														<img src="image/<?php echo $item['image_p']?>" >
 													</td>
 													
 													<td>
@@ -304,31 +283,15 @@
 														<a href="xoaspgiohang.php?key=<?php echo $key ?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
 													</td>
 												</tr>
-											<?php }}else {
-													echo "Ban chua co san pham";
-											}?>
+											 <?php
+											}else{	
+													} 
+											endforeach ?>
 
 										</tbody>
                                 </table>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<?php
-											if(isset($_SESSION['name_u'])){
-										?>
-                                        <div class="coupon-all">
-                                            <div class="coupon">
-                                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
-    											<input class="button" name="apply_coupon" value="Apply coupon" type="submit">
-                                            </div>
-                                        </div>
-										<?php
-											}
-										?>
-                                    </div>
-                                </div>
-
+                         
                                 <div class="row">
                                     <div class="col-md-5 ml-auto">
                                         <div class="cart-page-total">
