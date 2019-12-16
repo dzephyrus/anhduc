@@ -121,7 +121,9 @@
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																</ul>
+
 															<?php } if($kqtk['quyen']=="admin") {?>
+
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
@@ -202,7 +204,7 @@
                     </form>-->
                 </div>
             </div>
-            <!-- main-search start 
+            
             <div class="cur-lang-acc-active">
                 <div class="wrap-sidebar">
                     <div class="sidebar-nav-icon">
@@ -301,6 +303,7 @@
                                         </div>
                                         <div class="product-categori">
                                              <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -318,18 +321,18 @@
                     </div>
                 </div>
             </div>
-			<?php
-						$sql = "select * from banner where tt='on'  limit 1";
+					<?php
+						$sql = "select * from slide where title='on'  limit 1";
 						$kqslide = $conn->query($sql);
 						foreach($kqslide as $key=>$value){
 					
-						?>
-            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image']   ?>)" data-overlay="3">
+					?>
+            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image_slide']   ?>)" data-overlay="3">
 				
                 <div class="container">
                     <div class="shop-limited-content text-center">
-                        <h2><?php echo $value['detail'] ?></h2>
-                        <a class="btn-hover limited-btn" href="#">view more</a>
+                       <!--<?php echo $value['detail'] ?> !-->
+                        <a class="btn-hover limited-btn" href="">view more</a>
                     </div>
                 </div>
             </div>
@@ -362,6 +365,7 @@
                                         <div class="product-price">
                                             <span><?php echo $pro['price']?></span>
                                         </div>
+										
                                     </div>
                                     <div class="product-cart-categori">
                                         <div class="product-cart">

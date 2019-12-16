@@ -263,10 +263,10 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	<tr>
 		<td><?=$row['id_vc']?></td>
-		<td><?=$row['ma_vc']?></td>
+		<td><?=$row['name_vc']?></td>
 		<td><?=$row['start']?></td>
 		<td><?=$row['end']?></td>
-		<td><?=$row['sale']?></td>
+		<td><?=$row['discount_price']?></td>
 		<td><?=$row['detail']?></td>
 		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="updatevoucher.php?masua=<?=$row['id_vc']?>">Update</a> </button>
 		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="dropvoucher.php?maxoa=<?=$row['id_vc']?>" class="text-light">xóa</a> </button>

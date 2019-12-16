@@ -37,12 +37,12 @@ if(isset($_GET['id_p'])){
 			'quantity' => 1
 			];
 		}else{
-			$cart[$existed]['quantity']+=1;
+			$cart[$existed]['quantity']-=1;
 		}
 		$_SESSION['cart'] = $cart;
 
 }}else{
 	echo "ko co";
 }
-	?> echo '<script> location.href='viducart.php'</script>';<?php
+	?> echo '<script> location.href='cart.php'</script>';<?php
 ?>

@@ -8,7 +8,7 @@ session_start();
 	$stmt = $conn->prepare($sqlQuery);
 	$stmt->execute();
 	$product = $stmt->fetch();
-	unset($_SESSION['CART'][$key]);
-	$_SESSION['case']="xo gio hang thanh cong";
+	unset($_SESSION['cart'][$key]);
+	$_SESSION['case']="xoa gio hang thanh cong";
 	header("location: cart.php");
 ?>
