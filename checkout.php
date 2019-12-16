@@ -37,7 +37,7 @@
         <!-- header start -->
         <div class="wrapper">
       
-            <header class="pl-155 pr-155 intelligent-header">
+             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
                         <div class="row no-gutters">
@@ -76,12 +76,9 @@
 																foreach($result as $row){
 																	?>
 																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-
-
 																	<?php
 																}
 															?>
-														
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>

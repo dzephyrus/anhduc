@@ -40,7 +40,7 @@
             <!-- Newsletter Popup Start -->
             
             <!-- Newsletter Popup End -->
-            <header class="pl-155 pr-155 intelligent-header">
+             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
                         <div class="row no-gutters">
@@ -67,24 +67,21 @@
                                             <li><a href="about-us.php">about us</a></li>
                                             <li><a href="#">shop</a>
 												<ul class="dropdown">
-										   	<?php
-												include"connection.php";
-												$sql= "select * from category";
-												//Xử lý lệnh sql
-												$stmt = $conn->prepare($sql);
-												$stmt->execute();
-												$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-												?>
 													<?php
-												foreach($result as $row){
-												?>
-												
-                                                    <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-                                                   
-                                                
-												<?php
-												}
-												?>
+														include"connection.php";
+														$sql= "select * from category";
+														//Xử lý lệnh sql
+														$stmt = $conn->prepare($sql);
+														$stmt->execute();
+														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+													?>
+															<?php
+																foreach($result as $row){
+																	?>
+																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
+																	<?php
+																}
+															?>
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -94,7 +91,7 @@
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
                                                     <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="login.php">login</a></li>
                                                     <li><a href="register.html">register</a></li>
                                                 </ul>
                                             </li>
@@ -106,6 +103,60 @@
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
+										<div class="main-menu">
+                                   			 <nav>
+                                      			 <ul>
+
+													 <?php
+
+													 	if(isset($_SESSION['name_u'])){
+															 $username=$_SESSION['name_u'];
+															$sqltk = "select * from user where name_u = '$username'";
+        													$kqtk = $conn->query($sqltk)->fetch();
+															if($kqtk['quyen'] == 'admin'){
+															
+
+													 ?>
+													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
+															<?php if($kqtk['quyen']=="user"){?>
+																<ul class="dropdown">
+																	<li><a href="dangxuat.php">Đăng xuất</a></li>
+																	<li><a href="">Đổi mật khẩu</a></li>
+																</ul>
+															<?php } if($kqtk['quyen']=="admin") {?>
+																<ul class="dropdown">
+																	<li><a href="dangxuat.php">Đăng xuất</a></li>
+																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="danhmuc1.php">Quản trị</a></li>
+																</ul>
+															<?php }?>
+													</li>
+													 <?php
+															}
+															else{
+															?>
+													 			<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
+													
+															<ul class="dropdown">
+																<li><a href="dangxuat.php">Đăng xuất</a></li>
+																<li><a href="">Đổi mật khẩu</a></li>
+															</ul>
+													</li>
+													 		<?php
+														}
+													 ?>
+													<?php } else { ?>
+													 <li><a href="#">Tài khoản</a>
+
+															<ul class="dropdown">
+																<li><a href="login.php">Đăng nhập</a></li>
+																<li><a href="register.php">Đăng ký</a></li>
+															</ul>
+													</li>
+													 <?php 
+																 } ?>
+												</ul>
+									</div>
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
                                             <span class="ion-ios-search-strong"></span>
@@ -123,65 +174,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mobile-menu-area d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
-                                <div class="mobile-menu">
-                                    <nav id="mobile-menu-active">
-                                        <ul class="menu-overflow">
-                                            <li><a href="#">HOME</a>
-                                                <ul>
-                                                    <li><a href="index.html">furniture</a></li>
-                                                    <li><a href="index-electronics.html">electronics</a></li>
-                                                    <li><a href="index-fashion.html">fashion</a></li>
-                                                    <li><a href="index-jewellery.html">jewellery</a></li>
-                                                    <li><a href="index-food-drink.html">food & drink</a></li>
-                                                    <li><a href="index-toys.html">Toys & Games</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">pages</a>
-                                                <ul>
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">shop</a>
-                                                <ul>
-                                                    <li><a href="shop-grid-view-3-col.html">grid 3 column</a></li>
-                                                    <li><a href="shop-grid-view-5-col.html">grid 5 column</a></li>
-                                                    <li><a href="shop-grid-view-sidebar.html">grid with sidebar</a></li>
-                                                    <li><a href="shop-list-view-1-col.html">list 1 column</a></li>
-                                                    <li><a href="shop-list-view-2-col.html">list 2 column</a></li>
-                                                    <li><a href="shop-list-view-sidebar.html">list with sidebar</a></li>
-                                                    <li><a href="shop-list-view-1-col-container.html">list 1 column box</a></li>
-                                                    <li><a href="product-details.html">tab style 1</a></li>
-                                                    <li><a href="product-details-2.html">tab style 2</a></li>
-                                                    <li><a href="product-details-3.html">tab style 3</a></li>
-                                                    <li><a href="product-details-6.html">sticky style</a></li>
-                                                    <li><a href="product-details-7.html">sticky style 2</a></li>
-                                                    <li><a href="product-details-8.html">gallery style</a></li>
-                                                    <li><a href="product-details-9.html">gallery style 2</a></li>
-                                                    <li><a href="product-details-4.html">fixed image style</a></li>
-                                                    <li><a href="product-details-5.html">fixed image style 2</a></li> 
-                                                </ul>
-
-                                            </li>
-                                            <li><a href="#">BLOG</a>
-                                                <ul>
-                                                    <li><a href="blog.html">blog </a></li>
-                                                    <li><a href="blog-2-col.html">blog 2 column</a></li>
-                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html"> Contact  </a></li>
-                                        </ul>
-                                    </nav>							
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -591,210 +584,7 @@
 	?>	
                                     
                                     
-                            <div id="grid-5-col2" class="tab-pane fade">
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12 col-xl-6">
-                                        <div class="single-product single-product-list product-list-right-pr mb-40">
-                                            <div class="product-img list-img-width">
-                                                <a href="#"><img src="assets/img/product/list-img/1.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-list">
-                                                <div class="product-list-info">
-                                                    <h4><a href="#">Flying Drone with Remote</a></h4>
-                                                    <span>$150.00</span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing el sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-                                                </div>
-                                                <div class="product-list-cart-wishlist">
-                                                    <div class="product-list-cart">
-                                                        <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                    </div>
-                                                    <div class="product-list-wishlist">
-                                                        <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-6">
-                                        <div class="single-product single-product-list product-list-right-pr mb-40">
-                                            <div class="product-img list-img-width">
-                                                <a href="#"><img src="assets/img/product/list-img/2.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-list">
-                                                <div class="product-list-info">
-                                                    <h4><a href="#">Flying Drone with Remote</a></h4>
-                                                    <span>$150.00</span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing el sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-                                                </div>
-                                                <div class="product-list-cart-wishlist">
-                                                    <div class="product-list-cart">
-                                                        <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                    </div>
-                                                    <div class="product-list-wishlist">
-                                                        <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-6">
-                                        <div class="single-product single-product-list product-list-right-pr mb-40">
-                                            <div class="product-img list-img-width">
-                                                <a href="#"><img src="assets/img/product/list-img/3.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-list">
-                                                <div class="product-list-info">
-                                                    <h4><a href="#">Flying Drone with Remote</a></h4>
-                                                    <span>$150.00</span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing el sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-                                                </div>
-                                                <div class="product-list-cart-wishlist">
-                                                    <div class="product-list-cart">
-                                                        <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                    </div>
-                                                    <div class="product-list-wishlist">
-                                                        <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-6">
-                                        <div class="single-product single-product-list product-list-right-pr mb-40">
-                                            <div class="product-img list-img-width">
-                                                <a href="#"><img src="assets/img/product/list-img/4.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-list">
-                                                <div class="product-list-info">
-                                                    <h4><a href="#">Flying Drone with Remote</a></h4>
-                                                    <span>$150.00</span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing el sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-                                                </div>
-                                                <div class="product-list-cart-wishlist">
-                                                    <div class="product-list-cart">
-                                                        <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                    </div>
-                                                    <div class="product-list-wishlist">
-                                                        <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-6">
-                                        <div class="single-product single-product-list product-list-right-pr mb-40">
-                                            <div class="product-img list-img-width">
-                                                <a href="#"><img src="assets/img/product/list-img/5.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-list">
-                                                <div class="product-list-info">
-                                                    <h4><a href="#">Flying Drone with Remote</a></h4>
-                                                    <span>$150.00</span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing el sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-                                                </div>
-                                                <div class="product-list-cart-wishlist">
-                                                    <div class="product-list-cart">
-                                                        <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                    </div>
-                                                    <div class="product-list-wishlist">
-                                                        <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-6">
-                                        <div class="single-product single-product-list product-list-right-pr mb-40">
-                                            <div class="product-img list-img-width">
-                                                <a href="#"><img src="assets/img/product/list-img/6.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-list">
-                                                <div class="product-list-info">
-                                                    <h4><a href="#">Flying Drone with Remote</a></h4>
-                                                    <span>$150.00</span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing el sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-                                                </div>
-                                                <div class="product-list-cart-wishlist">
-                                                    <div class="product-list-cart">
-                                                        <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                    </div>
-                                                    <div class="product-list-wishlist">
-                                                        <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-6">
-                                        <div class="single-product single-product-list product-list-right-pr mb-40">
-                                            <div class="product-img list-img-width">
-                                                <a href="#"><img src="assets/img/product/list-img/7.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-list">
-                                                <div class="product-list-info">
-                                                    <h4><a href="#">Flying Drone with Remote</a></h4>
-                                                    <span>$150.00</span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing el sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-                                                </div>
-                                                <div class="product-list-cart-wishlist">
-                                                    <div class="product-list-cart">
-                                                        <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                    </div>
-                                                    <div class="product-list-wishlist">
-                                                        <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-6">
-                                        <div class="single-product single-product-list product-list-right-pr mb-40">
-                                            <div class="product-img list-img-width">
-                                                <a href="#"><img src="assets/img/product/list-img/8.jpg" alt=""></a>
-                                                <div class="product-action">
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-list">
-                                                <div class="product-list-info">
-                                                    <h4><a href="#">Flying Drone with Remote</a></h4>
-                                                    <span>$150.00</span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing el sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-                                                </div>
-                                                <div class="product-list-cart-wishlist">
-                                                    <div class="product-list-cart">
-                                                        <a class="btn-hover list-btn-style" href="#">add to cart</a>
-                                                    </div>
-                                                    <div class="product-list-wishlist">
-                                                        <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

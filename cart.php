@@ -39,7 +39,7 @@
             <!-- Newsletter Popup Start -->
             
             <!-- Newsletter Popup End -->
-            <header class="pl-155 pr-155 intelligent-header">
+             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
                         <div class="row no-gutters">
@@ -78,12 +78,9 @@
 																foreach($result as $row){
 																	?>
 																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-
-
 																	<?php
 																}
 															?>
-														
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -382,12 +379,18 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<?php
+											if(isset($_SESSION['name_u'])){
+										?>
                                         <div class="coupon-all">
                                             <div class="coupon">
                                                 <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
     											<input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                             </div>
                                         </div>
+										<?php
+											}
+										?>
                                     </div>
                                 </div>
                                 <div class="row">

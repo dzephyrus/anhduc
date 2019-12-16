@@ -50,7 +50,7 @@
 					foreach($stmt as $key => $row){
 					?>
 					
-					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; " alt="" width="70%" ></a>
 				
 					<?php 
 					}
@@ -77,12 +77,9 @@
 																foreach($result as $row){
 																	?>
 																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-
-
 																	<?php
 																}
 															?>
-														
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>

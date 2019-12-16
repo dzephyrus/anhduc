@@ -55,7 +55,7 @@ ob_start();
             <!-- Newsletter Popup Start -->
            
             <!-- Newsletter Popup End -->
-            <header class="pl-155 pr-155 intelligent-header">
+             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
                         <div class="row no-gutters">
@@ -67,7 +67,7 @@ ob_start();
 					foreach($stmt as $key => $row){
 					?>
 					
-					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; " alt="" width="70%" ></a>
 				
 					<?php 
 					}
@@ -94,12 +94,9 @@ ob_start();
 																foreach($result as $row){
 																	?>
 																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-
-
 																	<?php
 																}
 															?>
-														
 													</ul>
 										   </li>
                                             <li><a href="#">pages</a>
@@ -384,24 +381,16 @@ ob_start();
 							<div class="product-details-content">
 								<input type="hidden" name="id" value="<?=$id?>">
                                 <h3><?=$row['name_p']?></h3>
-                                <div class="rating-number">
-                                    <div class="quick-view-rating">
-                                        <i class="ion-ios-star red-star"></i>
-                                        <i class="ion-ios-star red-star"></i>
-                                        <i class="ion-android-star-outline"></i>
-                                        <i class="ion-android-star-outline"></i>
-                                        <i class="ion-android-star-outline"></i>
-                                    </div>
-                                    <div class="quick-view-number">
-                                        <span>2 Ratting (S)</span>
-                                    </div>
-                                </div>
+                                
                                 <div class="details-price">
 									<h3><?=$row['sale_p']?></h3>
                                     <span><del><?=$row['price']?></del></span>
                                 </div>
                                 
-                                
+                                <div class="details-price">
+									
+                                    <span><?=$row['detail']?></span>
+                                </div>
                                 <div class="quickview-plus-minus">
                                     <div class="cart-plus-minus">
                                         <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
@@ -409,9 +398,7 @@ ob_start();
                                     <div class="quickview-btn-cart">
                                         <a class="btn-hover-black" href="#">Thêm giỏ hàng</a>
                                     </div>
-                                     <div class="quickview-btn-cart">
-                                        <a class="btn-hover-black" href="checkout.php">Thanh toán</a>
-                                    </div>
+                                     
                                 </div>
                                 <div class="product-categories product-cat-tag">
                                     <ul>
@@ -569,17 +556,13 @@ ob_start();
                             <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
                                 Description
                             </a>
-                            <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
-                                Reviews (0)
-                            </a>
+                            
                         </div>
                         <div class="description-review-text tab-content">
                             <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
                                 <p><?=$row['detail']?></p>
                             </div>
-                            <div class="tab-pane fade" id="pro-review" role="tabpanel">
-                                <a href="#">Be the first to write your review!</a>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

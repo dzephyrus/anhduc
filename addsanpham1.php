@@ -255,33 +255,38 @@
               
 				
 		
-		<form class="p-4" action="" method="POST" enctype="multipart/form-data" >
+		<form class="p-4" action="" method="POST" enctype="multipart/form-data" name="addsanpham1">
 					<div class="form-row">				  
 						<div class="form-group col-md-6">
 							<label for="inputAddress">tên sản phẩm</label>
-							<input name="name" type="text" class="form-control" id="inputAddress" placeholder="name">
+							<input name="name" type="text" class="form-control" id="name" placeholder="name">
+							<div id="name_errol" class="val_error"></div>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleFormControlFile1">Ảnh</label>
-							<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+							<input name="image" type="file" class="form-control-file" id="image">
+							<div id="image_errol" class="val_error"></div>
 						</div>
 					</div>
 			
 					<div class="form-row">
 						<div class="form-group col-md-6">
 						  <label for="inputEmail4">giá</label>
-						  <input name="price" type="number" class="form-control" id="inputEmail4" placeholder="price">
+						  <input name="price" type="number" class="form-control" id="price" placeholder="price">
+							<div id="price_errol" class="val_error"></div>
 						</div>
 						  <div class="form-group col-md-6">
 						  <label for="inputCity">Giá khuyến mãi</label>
-						  <input name="SalePrice" type="number" class="form-control" id="inputCity">
+						  <input name="SalePrice" type="number" class="form-control" id="SalePrice">
+							  
 						</div>
 				 	</div>				  
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
 						  <label for="inputEmail4">Số lượng</label>
-						  <input name="soluong" type="number" class="form-control" id="inputEmail4" >
+						  <input name="soluong" type="number" class="form-control" id="soluong">
+							<div id="number_errol" class="val_error"></div>
 						</div>
 				  	</div>
 
@@ -292,6 +297,7 @@
 									  <script>
 										  CKEDITOR.replace( 'ad' );
 									  </script>
+						<div id="ad_errol" class="val_error"></div>
 						</div>				  
 
 				  	<div class="form-row">
@@ -299,7 +305,7 @@
 					<div class="form-group col-md-4">
 					  <label for="inputState">danh mục</label>
 
-						<select name="dmuc" id="inputState" class="form-control">
+						<select name="dmuc" id="dmuc" class="form-control">
 						<?php
 							
 							$sqldm = "select * from category";
@@ -318,7 +324,7 @@
 					</div>
 
 				  </div>
-				  <button name="add_sp" type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+				  <button name="add_sp" type="submit" class="btn btn-primary" onClick="validate()">Thêm sản phẩm</button>
 				</form>
 				<?php
 					
@@ -411,6 +417,58 @@
 
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+		<script type="text/javascript">
+			var name = document.forms["addsanpham1"]["name"];
+			var image = document.forms["addsanpham1"]["image"];
+			var price = document.forms["addsanpham1"]["price"];
+			var soluong = document.forms["addsanpham1"]["soluong"];
+			var ad = document.forms["addsanpham1"]["ad"];
+			
+			var name_error = document.getElementById("name_error");
+			var image_error = document.getElementById("image_error");
+			var price_error = document.getElementById("price_error");
+			var soluong_error = document.getElementById("soluong_error");
+			var ad_error = document.getElementById("ad_error");
+			
+			name.addEventListener("blur", nameVerify, true);
+			image.addEventListener("blur", nameVerify, true);
+			price.addEventListener("blur", nameVerify, true);
+			soluong.addEventListener("blur", nameVerify, true);
+			ad.addEventListener("blur", nameVerify, true);
+			
+			function validate(){
+				if(name.value ==""){
+					name.style.border = "1px solid red";
+					name_error.textContent = "name is required";
+					name.focus();
+					return false;
+				}
+				if(image.value ==""){
+					image.style.border = "1px solid red";
+					image_error.textContent = "image is required";
+					image.focus();
+					return false;
+				}
+				if(price.value ==""){
+					price.style.border = "1px solid red";
+					price_error.textContent = "price is required";
+					price.focus();
+					return false;
+				}
+				if(soluong.value ==""){
+					soluong.style.border = "1px solid red";
+					soluong_error.textContent = "soluong is required";
+					soluong.focus();
+					return false;
+				}
+				if(ad.value ==""){
+					ad.style.border = "1px solid red";
+					ad_error.textContent = "ad is required";
+					ad.focus();
+					return false;
+				}
+			}
+		</script>
 </body>
 
 </html>
