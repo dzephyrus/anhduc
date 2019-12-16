@@ -75,17 +75,7 @@
 															?>
 													</ul>
 										   </li>
-                                            <li><a href="#">pages</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.php">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
+                                            
                                             	
                                             <li><a href="contact.php">contact</a></li>
                                         </ul>
@@ -114,7 +104,9 @@
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																</ul>
+
 															<?php } if($kqtk['quyen']=="admin") {?>
+
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
@@ -155,14 +147,10 @@
                                     </div>
                                     <div class="header-cart common-style">
                                         <button class="sidebar-trigger">
-                                            <span class="ion-bag"></span>
+                                            <a href="cart.php"><span class="ion-bag"></span></a>
                                         </button>
                                     </div>
-                                    <div class="header-sidebar common-style">
-                                        <button class="header-navbar-active">
-                                            <span class="ion-navicon"></span>
-                                        </button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             

@@ -40,7 +40,7 @@
             <!-- Newsletter Popup Start -->
             
             <!-- Newsletter Popup End -->
-             <header class="pl-155 pr-155 intelligent-header">
+            <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
                         <div class="row no-gutters">
@@ -52,7 +52,7 @@
 					foreach($stmt as $key => $row){
 					?>
 					
-					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; background-color: #343A40" alt="" width="70%" ></a>
+					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; " alt="" width="70%" ></a>
 				
 					<?php 
 					}
@@ -84,17 +84,7 @@
 															?>
 													</ul>
 										   </li>
-                                            <li><a href="#">pages</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.php">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
+                                            
                                             	
                                             <li><a href="contact.php">contact</a></li>
                                         </ul>
@@ -123,7 +113,9 @@
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																</ul>
+
 															<?php } if($kqtk['quyen']=="admin") {?>
+
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
@@ -164,14 +156,10 @@
                                     </div>
                                     <div class="header-cart common-style">
                                         <button class="sidebar-trigger">
-                                            <span class="ion-bag"></span>
+                                            <a href="cart.php"><span class="ion-bag"></span></a>
                                         </button>
                                     </div>
-                                    <div class="header-sidebar common-style">
-                                        <button class="header-navbar-active">
-                                            <span class="ion-navicon"></span>
-                                        </button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             
@@ -413,91 +401,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="sidebar-widget mb-50">
-                                <h3 class="sidebar-title">Top rated products</h3>
-                                <div class="sidebar-top-rated-all">
-                                    <div class="sidebar-top-rated mb-30">
-                                        <div class="single-top-rated">
-                                            <div class="top-rated-img">
-                                                <a href="#"><img src="assets/img/product/sidebar-product/1.jpg" alt=""></a>
-                                            </div>
-                                            <div class="top-rated-text">
-                                                <h4><a href="#">Flying Drone</a></h4>
-                                                <div class="top-rated-rating">
-                                                    <ul>
-                                                        <li><i class="reting-color ion-android-star"></i></li>
-                                                        <li><i class="reting-color ion-android-star"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <span>$140.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-top-rated mb-30">
-                                        <div class="single-top-rated">
-                                            <div class="top-rated-img">
-                                                <a href="#"><img src="assets/img/product/sidebar-product/2.jpg" alt=""></a>
-                                            </div>
-                                            <div class="top-rated-text">
-                                                <h4><a href="#">Flying Drone</a></h4>
-                                                <div class="top-rated-rating">
-                                                    <ul>
-                                                        <li><i class="reting-color ion-android-star"></i></li>
-                                                        <li><i class="reting-color ion-android-star"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <span>$140.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-top-rated mb-30">
-                                        <div class="single-top-rated">
-                                            <div class="top-rated-img">
-                                                <a href="#"><img src="assets/img/product/sidebar-product/3.jpg" alt=""></a>
-                                            </div>
-                                            <div class="top-rated-text">
-                                                <h4><a href="#">Flying Drone</a></h4>
-                                                <div class="top-rated-rating">
-                                                    <ul>
-                                                        <li><i class="reting-color ion-android-star"></i></li>
-                                                        <li><i class="reting-color ion-android-star"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <span>$140.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-top-rated mb-30">
-                                        <div class="single-top-rated">
-                                            <div class="top-rated-img">
-                                                <a href="#"><img src="assets/img/product/sidebar-product/4.jpg" alt=""></a>
-                                            </div>
-                                            <div class="top-rated-text">
-                                                <h4><a href="#">Flying Drone</a></h4>
-                                                <div class="top-rated-rating">
-                                                    <ul>
-                                                        <li><i class="reting-color ion-android-star"></i></li>
-                                                        <li><i class="reting-color ion-android-star"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                        <li><i class="ion-android-star-outline"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <span>$140.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="shop-filters-right">
@@ -553,16 +457,37 @@
                                     <div class="custom-col-5 custom-col-style">
                                         <div class="single-product mb-35">
                                             <div class="product-img">
-                                                <a href="product-details.php?id=<?=$row['id_p']?>" class=""><img src="image/<?php echo $row["image_p"]?>" alt=""></a>
-                                                
-                                            </div>
+                                        <a href="product-details.php?id=<?=$row['id_p']?>"><img src="image/<?=$row['image_p']?>" alt=""></a>
+										<?php
+											if(isset($row['sale_p'])){
+												if($row['sale_p'] >0 ){
+												?>
+													 <span>sale</span>
+												<?php
+											} }
+										?>
+                                        
+                                    </div>
                                             <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
+                                                <div class="product-title-price flex-column">
+                                                    <div class="product-title w-100">
                                                         <h4><a href="product-details.php?id=<?=$row['id_p']?>"><?php echo $row["name_p"]?></a></h4>
                                                     </div>
-                                                    <div class="product-price">
-                                                        <span><?php echo $row["sale_p"]?> <del> <?php echo $row["price"]?></del></span>
+                                                    <div class="product-price d-flex w-100">
+                                                        <?php
+														if(isset($row['sale_p'])){
+															if($row['sale_p'] <=0 ){
+															?>
+															<h4 style="color: #C05557"><?php echo $row["price"]?></h4> 
+															<?php
+															}
+															else{
+															?>
+																<h4 style="color: #C05557"><?php echo $row["sale_p"]?></h4> <del style="padding-top: 15px; margin-left: 15px"> <?php echo $row["price"]?></del>
+															<?php
+															}
+														}
+														?>
                                                     </div>
                                                 </div>
                                                 <div class="product-cart-categori">

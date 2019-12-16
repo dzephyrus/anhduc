@@ -82,17 +82,7 @@
 															?>
 													</ul>
 										   </li>
-                                            <li><a href="#">pages</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.php">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
+                                            
                                             	
                                             <li><a href="contact.php">contact</a></li>
                                         </ul>
@@ -164,14 +154,10 @@
                                     </div>
                                     <div class="header-cart common-style">
                                         <button class="sidebar-trigger">
-                                            <span class="ion-bag"></span>
+                                            <a href="cart.php"><span class="ion-bag"></span></a>
                                         </button>
                                     </div>
-                                    <div class="header-sidebar common-style">
-                                        <button class="header-navbar-active">
-                                            <span class="ion-navicon"></span>
-                                        </button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             
@@ -205,53 +191,7 @@
                 </div>
             </div>
             
-            <div class="cur-lang-acc-active">
-                <div class="wrap-sidebar">
-                    <div class="sidebar-nav-icon">
-                        <button class="op-sidebar-close"><span class="ion-android-close"></span></button>
-                    </div>
-                    <div class="cur-lang-acc-all">
-                        <div class="single-currency-language-account">
-                            <div class="cur-lang-acc-title">
-                                <h4>Currency: <span>USD </span></h4>
-                            </div>
-                            <div class="cur-lang-acc-dropdown">
-                                <ul>
-                                    <li><a href="#">EUR  Euro</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-currency-language-account">
-                            <div class="cur-lang-acc-title">
-                                <h4>Language: <span><img src="assets/img/icon-img/english.png" alt=""> English </span></h4>
-                            </div>
-                            <div class="cur-lang-acc-dropdown">
-                                <ul>
-                                    <li><a href="#"><img src="assets/img/icon-img/english.png" alt=""> English </a></li>
-                                    <li><a href="#"><img src="assets/img/icon-img/es.png" alt=""> spanish </a></li>
-                                    <li><a href="#"><img src="assets/img/icon-img/fr.png" alt=""> french </a></li>
-                                    <li><a href="#"><img src="assets/img/icon-img/ge.png" alt=""> german </a></li>
-                                    <li><a href="#"><img src="assets/img/icon-img/es.png" alt=""> spanish </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-currency-language-account">
-                            <div class="cur-lang-acc-title">
-                                <h4>My Account:</h4>
-                            </div>
-                            <div class="cur-lang-acc-dropdown">
-                                <ul>
-                                    <li><a href="#">Compare Products </a></li>
-                                    <li><a href="#">Default welcome msg!</a></li>
-                                    <li><a href="register.html">register</a></li>
-                                    <li><a href="wishlist.html">My Wish List</a></li>
-                                    <li><a href="login.html">Sign In </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
              
            <!--long slider-->
 			   <?php include 'shareslider.php'?>
@@ -285,18 +225,40 @@
                         <div class="col-md-6 col-lg-4 col-xl-3" >
 							
                             <div class="single-product mb-35">
-                                <div class="product-img" style="width: 270px;height: 300px;">
-                                    <a href="product-details.php?id=<?php echo $pro['id_p']?>"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
-                                </div>
-                                <div class="product-content">
-                                    <div class="product-title-price">
-                                        <div class="product-title">
-                                            <h4><a href="product-details.php?id=<?php echo $pro['id_p']?>"><?php echo $pro['name_p']?></a></h4>
-                                        </div>
-                                        <div class="product-price">
-                                            <span><?php echo $pro['price']?></span>
-                                        </div>
+                                <div class="product-img">
+                                        <a href="product-details.php?id=<?=$pro['id_p']?>"><img src="image/<?=$pro['image_p']?>" alt=""></a>
+										<?php
+											if(isset($pro['sale_p'])){
+												if($pro['sale_p'] >0 ){
+												?>
+													 <span>sale</span>
+												<?php
+											} }
+										?>
+                                        
                                     </div>
+                                <div class="product-content">
+                                    <div class="product-title-price flex-column">
+                                                    <div class="product-title w-100">
+                                                        <h4><a href="product-details.php?id=<?=$pro['id_p']?>"><?php echo $pro["name_p"]?></a></h4>
+                                                    </div>
+                                                    <div class="product-price d-flex w-100">
+                                                        <?php
+											if(isset($pro['sale_p'])){
+												if($pro['sale_p'] <=0 ){
+												?>
+													<h4 style="color: #C05557"><?php echo $pro["price"]?></h4> 
+												<?php
+												}
+												else{
+													?>
+													<h4 style="color: #C05557"><?php echo $pro["sale_p"]?></h4> <del style="padding-top: 15px; margin-left: 15px"> <?php echo $pro["price"]?></del>
+												<?php
+												}
+											}
+												?>
+                                                    </div>
+                                                </div>
                                     <div class="product-cart-categori">
                                         <div class="product-cart">
                                             <span>Thêm vào giỏ hàng</span>
@@ -356,17 +318,122 @@
                             <div class="single-product mb-35">
                                 <div class="product-img" style="width: 270px;height: 300px;">
                                     <a href="product-details.php?id=<?php echo $pro['id_p']?>"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
+									<?php
+											if(isset($pro['sale_p'])){
+												if($pro['sale_p'] >0 ){
+												?>
+													 <span>sale</span>
+												<?php
+											} }
+										?>
                                 </div>
                                 <div class="product-content">
-                                    <div class="product-title-price">
-                                        <div class="product-title">
-                                            <h4><a href="product-details.php?id=<?php echo $pro['id_p']?>"><?php echo $pro['name_p']?></a></h4>
+                                   <div class="product-title-price flex-column">
+                                                    <div class="product-title w-100">
+                                                        <h4><a href="product-details.php?id=<?=$pro['id_p']?>"><?php echo $pro["name_p"]?></a></h4>
+                                                    </div>
+                                                    <div class="product-price d-flex w-100">
+                                                        <?php
+											if(isset($pro['sale_p'])){
+												if($pro['sale_p'] <=0 ){
+												?>
+													<h4 style="color: #C05557"><?php echo $pro["price"]?></h4> 
+												<?php
+												}
+												else{
+													?>
+													<h4 style="color: #C05557"><?php echo $pro["sale_p"]?></h4> <del style="padding-top: 15px; margin-left: 15px"> <?php echo $pro["price"]?></del>
+												<?php
+												}
+											}
+												?>
+                                                    </div>
+                                                </div>
+                                    <div class="product-cart-categori">
+                                        <div class="product-cart">
+                                            <span>Thêm vào giỏ hàng</span>
                                         </div>
-                                        <div class="product-price">
-                                            <span><?php echo $pro['price']?></span>
+                                        <div class="product-categori">
+                                             <a href="add-cart.php?id_p=<?php echo $pro['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
                                         </div>
-										
                                     </div>
+                                </div>
+                            </div>
+							
+                        </div>
+                      <?php
+						}
+						?>
+                    </div>
+                </div>
+            </div>
+			   
+			   <?php
+						$sql = "select * from slide where title='on'  limit 1";
+						$kqslide = $conn->query($sql);
+						foreach($kqslide as $key=>$value){
+					
+					?>
+            <div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url(image/<?php echo $value['image_slide']   ?>)" data-overlay="3">
+				
+                <div class="container">
+                    <div class="shop-limited-content text-center">
+                       <!--<?php echo $value['detail'] ?> !-->
+                        <a class="btn-hover limited-btn" href="">view more</a>
+                    </div>
+                </div>
+            </div>
+			<?php }
+			?>
+            <div class="product-collection-area pt-100 pb-50">
+                <div class="container">
+                    <div class="section-title text-center mb-55">
+                        <h2>Top View</h2>
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when look</p>
+                    </div>
+                    <div class="row">
+						<?php
+						$sql = "select * from product order by view DESC LIMIT 0,8";
+						$kqproduct = $conn->query($sql);
+						foreach($kqproduct as $key=>$pro){
+					
+						?>
+                        <div class="col-md-6 col-lg-4 col-xl-3" >
+							
+                            <div class="single-product mb-35">
+                                <div class="product-img" style="width: 270px;height: 300px;">
+                                    <a href="product-details.php?id=<?php echo $pro['id_p']?>"><img src="image/<?php echo $pro['image_p']?>" alt=""></a>
+									<?php
+											if(isset($pro['sale_p'])){
+												if($pro['sale_p'] >0 ){
+												?>
+													 <span>sale</span>
+												<?php
+											} }
+										?>
+                                </div>
+                                <div class="product-content">
+                                   <div class="product-title-price flex-column">
+                                                    <div class="product-title w-100">
+                                                        <h4><a href="product-details.php?id=<?=$pro['id_p']?>"><?php echo $pro["name_p"]?></a></h4>
+                                                    </div>
+                                                    <div class="product-price d-flex w-100">
+                                                        <?php
+											if(isset($pro['sale_p'])){
+												if($pro['sale_p'] <=0 ){
+												?>
+													<h4 style="color: #C05557"><?php echo $pro["price"]?></h4> 
+												<?php
+												}
+												else{
+													?>
+													<h4 style="color: #C05557"><?php echo $pro["sale_p"]?></h4> <del style="padding-top: 15px; margin-left: 15px"> <?php echo $pro["price"]?></del>
+												<?php
+												}
+											}
+												?>
+                                                    </div>
+                                                </div>
                                     <div class="product-cart-categori">
                                         <div class="product-cart">
                                             <span>Thêm vào giỏ hàng</span>

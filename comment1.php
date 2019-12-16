@@ -239,7 +239,7 @@
   <thead>
     <tr>
 		<th scope="col">STT</th>
-      <th scope="col">ID_SP</th>
+      <th scope="col">ID và tên SP</th>
       <th scope="col">Số BL</th>
       <th scope="col">BL gần đây</th>
 		<th scope="col">BL cũ nhất</th>

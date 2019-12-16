@@ -99,17 +99,7 @@ ob_start();
 															?>
 													</ul>
 										   </li>
-                                            <li><a href="#">pages</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="about-us.html">about us</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="contact.html">contact</a></li>
-                                                    <li><a href="login.php">login</a></li>
-                                                    <li><a href="register.html">register</a></li>
-                                                </ul>
-                                            </li>
+                                           
                                             	
                                             <li><a href="contact.php">contact</a></li>
                                         </ul>
@@ -138,7 +128,9 @@ ob_start();
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																</ul>
+
 															<?php } if($kqtk['quyen']=="admin") {?>
+
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
@@ -179,14 +171,10 @@ ob_start();
                                     </div>
                                     <div class="header-cart common-style">
                                         <button class="sidebar-trigger">
-                                            <span class="ion-bag"></span>
+                                            <a href="cart.php"><span class="ion-bag"></span></a>
                                         </button>
                                     </div>
-                                    <div class="header-sidebar common-style">
-                                        <button class="header-navbar-active">
-                                            <span class="ion-navicon"></span>
-                                        </button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             
@@ -396,7 +384,7 @@ ob_start();
                                         <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
                                     </div>
                                     <div class="quickview-btn-cart">
-                                        <a class="btn-hover-black" href="#">Thêm giỏ hàng</a>
+                                         <a href="add-cart.php?id_p=<?php echo $row['id_p']?>"><i class="ion-bag"></i> Add to cart</a>
                                     </div>
                                      
                                 </div>
@@ -596,16 +584,37 @@ ob_start();
                                 <div class="single-product mb-35">
                                     <div class="product-img">
                                         <a href="product-details.php?id=<?=$row['id_p']?>"><img src="image/<?=$row['image_p']?>" alt=""></a>
-                                        <span>sale</span>
+										<?php
+											if(isset($row['sale_p'])){
+												if($row['sale_p'] >0 ){
+												?>
+													 <span>sale</span>
+												<?php
+											} }
+										?>
                                         
                                     </div>
                                     <div class="product-content">
-                                        <div class="product-title-price">
-                                            <div class="product-title">
-                                                <h4><a href="product-details-6.html"><?=$row['name_p']?></a></h4>
+                                        <div class="product-title-price flex-column">
+                                            <div class="product-title w-100">
+                                                <h4><a href="product-details.php?id=<?=$row['id_p']?>"><?php echo $row["name_p"]?></a></h4>
                                             </div>
-                                            <div class="product-price">
-                                                <span><?=$row['price']?></span>
+                                            <div class="product-price d-flex w-100">
+												<?php
+											if(isset($row['sale_p'])){
+												if($row['sale_p'] <=0 ){
+												?>
+													<h4 style="color: #C05557"><?php echo $row["price"]?></h4> 
+												<?php
+												}
+												else{
+													?>
+													<h4 style="color: #C05557"><?php echo $row["sale_p"]?></h4> <del style="padding-top: 15px; margin-left: 15px"> <?php echo $row["price"]?></del>
+												<?php
+												}
+											}
+												?>
+                                                
                                             </div>
                                         </div>
                                         <div class="product-cart-categori">
