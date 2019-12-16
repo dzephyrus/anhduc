@@ -266,7 +266,7 @@
 														<a href="add-cart.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:18px">+</a>
 													</td>
 													
-													<td><?php echo number_format($item['sale_p'], 0, '', ','); ?> vnđ</td>
+													<td ><?php echo number_format($item['sale_p'], 0, '', ','); ?> vnđ</td>
 													<td><?php 
 														$itemTotal = $item['sale_p']*$item['quantity'];
 														$totalPrice += $itemTotal;
@@ -283,27 +283,13 @@
 										</tbody>
                                 </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										
-										<form action="" method="get" >
-                                        <div class="coupon-all">
-                                            <div class="coupon">
-                                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
-    											<input class="button" name="apply_coupon" value="Apply coupon" type="submit">
-                                            </div>
-                                        </div>
-										</form>
-													   
-                                    </div>
-									
-                                </div>
+                         
                                 <div class="row">
                                     <div class="col-md-5 ml-auto">
                                         <div class="cart-page-total">
                                             <h2>Cart totals</h2>
                                             <ul>
-                                                <li>Tổng tiền<span><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
+                                                <li>Tổng tiền<span class="required"><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
                                            
                                             </ul>
                                             <a href="checkout.php">Checkout</a>
@@ -399,11 +385,6 @@
             headroom.init(); 
         </script>
         <script src="assets/js/main.js"></script>
-		<script>
-			function updateCart(id){
-				num = ('$num_'+id).val();
-				alert(num);
-			}
-		</script>
+		
     </body>
 </html>

@@ -44,5 +44,5 @@ if(isset($_GET['id_p'])){
 }}else{
 	echo "ko co";
 }
-	?> echo '<script> location.href='cart.php'</script>';<?php
+	?> echo '<script> location.href='viducart.php'</script>';<?php
 ?>
