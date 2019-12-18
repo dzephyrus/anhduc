@@ -1,10 +1,7 @@
 <?php
 	session_start();
 	include 'connection.php';
-	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-	$totalPrice = 0;
-	$stt=1;
-	$sumPrice=0;
+	
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -230,70 +227,43 @@
                             <h1 class="cart-heading">Giỏ hàng của bạn</h1>
 							
                                 <div class="table-content table-responsive">
-                                     <table class="table cart-table" id="bang">
-										<thead>
-											<tr>
-												<th>Stt</th>
-												<th>Tên sản phẩm</th>
-												<th>Ảnh sản phẩm</th>
-												<th>Số lượng</th>
-												<th>Đơn giá</th>
-												<th>Tổng tiền</th>
-												<th>Thao tác</th>
-											</tr>
-										</thead>
-										<tbody>
-											
-											<?php foreach ($cart as $key => $item):
-											if($key==0){
-												continue;
-											}
-											?>
-											
-												<tr>
-													<td><?php echo $stt++ ;?></td>
-													<td><?php echo $item['name_p'] ;?>
-													</td>
-													<td>
-														<img src="image/<?php echo $item['image_p']?>" width="80px" height="25px;">
-													</td>
-													
-													<td>
-														
-														<a href="add-cart1.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:24px ">-</a>
-															<p style="display: inline-block; padding: 0 10px;"><?php echo $item['quantity']?></p>
-														<a href="add-cart.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:18px">+</a>
-													</td>
-													
-													<td ><?php echo number_format($item['sale_p'], 0, '', ','); ?> vnđ</td>
-													<td><?php 
-														$itemTotal = $item['sale_p']*$item['quantity'];
-														$totalPrice += $itemTotal;
-														echo number_format($itemTotal, 0, '', ','); ?> vnđ</td>
-                                        			<td>
-														
-														<a href="xoaspgiohang.php?key=<?php echo $key ?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
-													</td>
-												</tr>
-											 <?php endforeach ?>
+                                  <table class="table">
 
-										</tbody>
-                                </table>
+											 <button type="button" class="btn btn-success " style="width: 15%; float: right; padding: 0px 5px;"> <a href="lichsumuahang.php" class="text-light">Quay lại</a> </button>	
+											</div>	  
+											<thead style="padding-top: 10px;">
+											<tr>
+												<th scope="col">STT</th>
+												<th scope="col">Tên sản phẩm</th>
+												<th scope="col">Đơn giá</th>
+												<th scope="col">Số lượng</th>
+											</tr>
+										  </thead>
+											<?php 
+												if(isset($_GET['id_order'])){
+													$id=$_GET['id_order'];
+													$sql = "select * from order1 INNER JOIN order1detail on order1.id_order = order1detail.id_order where order1detail.id_order ='$id'";
+													$stmt= $conn ->prepare($sql);
+													$stmt -> execute();
+													$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+												}
+											?>
+											<?php
+												foreach($result as $key => $row){
+													?>
+										  <tbody>
+												 <td> <?php echo $key + 1 ?> </td>  
+												<td> <?php echo $row['name_p']?> </td>
+											  	<td><?php echo $row['price']?></td>
+											  <td><?php echo $row['quantity1']?></td>
+										  </tbody>
+											<?php
+										}
+										?>
+									</table>
+									
                                 </div>
-                         
-                                <div class="row">
-                                    <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total">
-                                            <h2>Cart totals</h2>
-                                            <ul>
-                                                <li>Tổng tiền<span class="required"><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
-                                           
-                                            </ul>
-                                            <a href="checkout.php">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            
+                           
                         </div>
                     </div>
                 </div>

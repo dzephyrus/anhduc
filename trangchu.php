@@ -122,12 +122,12 @@
 															<?php if($kq_dangnhap['quyen']=="user"){?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="doimatkhau.php">Đổi mật khẩu</a></li>
 																</ul>
 															<?php } else {?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="doimatkhau.php">Đổi mật khẩu</a></li>
 																	<li><a href="danhmuc1.php">Quản trị</a></li>
 																</ul>
 															<?php }?>
@@ -140,7 +140,8 @@
 													
 															<ul class="dropdown">
 																<li><a href="dangxuat.php">Đăng xuất</a></li>
-																<li><a href="">Đổi mật khẩu</a></li>
+																<li><a href="doimatkhau.php">Đổi mật khẩu</a></li>
+																<li><a href="lichsumuahang.php">Lich su</a></li>
 															</ul>
 													</li>
 													 		<?php

@@ -190,11 +190,7 @@
                                             <input type="text" name="user-name" placeholder="Username">
                                             <input type="password" name="user-password" placeholder="Password">
                                             <div class="button-box">
-                                                <div class="login-toggle-btn">
-                                                    <input type="checkbox" checked>
-                                                    <label>Nhớ tài khoản</label>
-                                                    <a href="#">Quên mật khẩu</a>
-                                                </div>
+                                               
                                                 <button type="submit" name="login" class="default-btn floatright">Login</button>
                                             </div>
                                         </form>

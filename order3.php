@@ -244,7 +244,7 @@
 				  	<th scope="col">Tên sản phẩm</th>
 				  	<th scope="col">Số lượng</th>
 					
-					<th scope="col">Chỉnh sửa</th>
+					
 
 				</tr>
 			  </thead>
@@ -262,7 +262,7 @@
 					foreach($result as $key => $row){
 						?>
 			  <tbody>
-				  <td> <?php echo $key++ ?> </td>  
+				  <td> <?php echo $key+1 ?> </td>  
 				  <td> <?php echo $row['id_p']?> </td> 
 					<td> <?php echo $row['name_p']?> </td>  
 				    <td><?php echo $row['quantity1']?></td>

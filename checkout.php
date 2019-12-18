@@ -251,6 +251,7 @@
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
                                                 <label>First Name <span class="required">*</span></label>		<br>							<?php echo ''.$_SESSION['name_u']; ?>
+												<input type="hidden" name="fullname" value="<?php echo $_SESSION['name_u'] ?>">
                                             </div>
 										</div>
                                         <div class="col-md-12">
@@ -399,7 +400,7 @@
 							//print_r($_SESSION['cart']);
 //							echo count($_SESSION['cart']);
 //							exit();
-							if($_POST['fullname']=="" || $_POST['dc']=="" || $_POST['phone']=="" ){
+							if( $_POST['fullname']==""||$_POST['dc']=="" || $_POST['phone']=="" ){
 								?> <script> alert"them that bai" ;</script><?php
 							}
 							else{
@@ -408,7 +409,7 @@
 								$date= date("Y-m-d");
 								$diachi = $_POST['dc'];
 								
-								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','on')";
+								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','$date','on')";
 								$kqoder = $conn -> exec($sqlorder1);
 								$sqlmax = "SELECT MAX(id_order) from order1";
 								$kqmax = $conn -> query($sqlmax)->fetchColumn();
@@ -416,10 +417,9 @@
 //								var_dump($data);
 								
 								for ($i = 1; $i < count($_SESSION["cart"]); $i++) {
-	
-    							 $id_p=$data[$i]["id_p"];
+									$id_p=$data[$i]["id_p"];
 									$price = $data[$i]["price"];
-								$name_p = $data[$i]["name_p"];
+									$name_p = $data[$i]["name_p"];
 								
 									
 

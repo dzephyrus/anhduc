@@ -1,10 +1,7 @@
 <?php
 	session_start();
 	include 'connection.php';
-	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-	$totalPrice = 0;
-	$stt=1;
-	$sumPrice=0;
+	
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -234,66 +231,62 @@
 										<thead>
 											<tr>
 												<th>Stt</th>
-												<th>Tên sản phẩm</th>
-												<th>Ảnh sản phẩm</th>
-												<th>Số lượng</th>
-												<th>Đơn giá</th>
+												<th>Ngay mua</th>
+												<th>Address</th>
+												<th>Tong so luong sp mua</th>
 												<th>Tổng tiền</th>
-												<th>Thao tác</th>
+												
+												<th>Thao tac</th>
 											</tr>
 										</thead>
-										<tbody>
-											
-											<?php foreach ($cart as $key => $item):
-											if($key==0){
-												continue;
-											}
-											?>
-											
-												<tr>
-													<td><?php echo $stt++ ;?></td>
-													<td><?php echo $item['name_p'] ;?>
-													</td>
-													<td>
-														<img src="image/<?php echo $item['image_p']?>" width="80px" height="25px;">
-													</td>
-													
-													<td>
-														
-														<a href="add-cart1.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:24px ">-</a>
-															<p style="display: inline-block; padding: 0 10px;"><?php echo $item['quantity']?></p>
-														<a href="add-cart.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:18px">+</a>
-													</td>
-													
-													<td ><?php echo number_format($item['sale_p'], 0, '', ','); ?> vnđ</td>
-													<td><?php 
-														$itemTotal = $item['sale_p']*$item['quantity'];
-														$totalPrice += $itemTotal;
-														echo number_format($itemTotal, 0, '', ','); ?> vnđ</td>
-                                        			<td>
-														
-														<a href="xoaspgiohang.php?key=<?php echo $key ?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
-													</td>
-												</tr>
-											 <?php endforeach ?>
+									
+												 <tbody>
+										  <?php
+										  include"connection.php";
+											if(isset($_SESSION['name_u'])){
+												$name_u = $_SESSION['name_u'];
+												$sql = "select COUNT(id_order), id_order, name_u, phone, address, quantity,date_m,status, totalprice from order1 where name_u='$name_u' GROUP BY id_order";
+												$kq = $conn->query($sql);
+												foreach($kq as $key=>$value){
+												if($value['status']=='off'){
 
-										</tbody>
+											?>
+											<tr>
+
+										  <td><?php echo $key+1 ?></td>
+										  <td>
+											  <?php 
+													  echo $value['date_m']; 
+												?>
+											</td>        
+											<td>
+											  <?php 
+													  echo $value['address']; 
+												?>
+											</td>
+											<td>
+												<?php 
+													  echo $value['quantity']; 
+												?>
+											</td>
+											<td>
+												<?php 
+													echo $value['totalprice']; 
+												?>
+											</td>
+											
+											<td><button type="button" class="btn btn-success"><a href="chitietlsmh.php?id_order=<?php echo $value['id_order']; ?>">Chi tiết</a></button></td>
+										</tr>	
+										  <?php
+									   }}}else{
+											echo "ban chua mua hang";
+										}
+									   ?>
+									  </tbody>
                                 </table>
+									
                                 </div>
-                         
-                                <div class="row">
-                                    <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total">
-                                            <h2>Cart totals</h2>
-                                            <ul>
-                                                <li>Tổng tiền<span class="required"><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
-                                           
-                                            </ul>
-                                            <a href="checkout.php">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            
+                           
                         </div>
                     </div>
                 </div>
