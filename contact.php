@@ -1,3 +1,8 @@
+<?php
+session_start(); 
+ob_start();
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -350,7 +355,7 @@
                     <div class="contact-form-wrap">
                         <h2 class="contact-title">Get In Touch</h2>
                         <div class="contact-message">
-                            <form id="contact-form" action="assets/mail.php" method="post">
+                            <form id="contact-form" action="" method="post">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="contact-form-style contact-font-one">
@@ -364,13 +369,13 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="contact-form-style contact-font-three">
-                                            <input name="subject" placeholder="Your Title" type="text">
+                                            <input name="title" placeholder="Your Title" type="text">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="contact-form-style contact-font-four">
-                                            <textarea name="message" placeholder="Message"></textarea>
-                                            <button class="submit btn-hover" type="submit"> Send Message</button>
+                                            <textarea name="detail" placeholder="Message"></textarea>
+                                            <button class="submit btn-hover" type="submit" name="btn"> Send Message</button>
                                         </div>
                                     </div>
                                 </div>
@@ -378,6 +383,29 @@
                             <p class="form-messege"></p>
                         </div>
                     </div>
+                    <?php
+		include('connection.php');
+		if(isset($_POST['btn'])){
+			$name = $_POST['name'];
+            $email =$_POST['email'];
+             $title =$_POST['title'];
+             $detail =$_POST['detail'];
+			 $ngay = date('y-m-d');
+			
+			$sqlgui = "insert into messinger value('','$name','$email','$title','$detail','$ngay')";
+//			echo $sqlgui ."<br>";
+			$kqgui = $conn->exec($sqlgui);
+			if($kqgui==1){
+               header("location:contact.php");
+			}else{
+				echo('thất bại');
+			}
+	
+		}
+		
+		
+		?>
+
                     <div class="contact-map">
                         <div id="hastech2"></div>
                     </div>
@@ -386,12 +414,6 @@
             <!-- contact-area end -->
             <?php include 'sharefooter.php'?>
         </div>
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -451,3 +473,6 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<?php
+	ob_end_flush();
+	?>

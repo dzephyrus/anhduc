@@ -10,6 +10,15 @@
 		$row = $stmt -> fetch();
 
 ?>
+<?php
+//câu lệnh chung để hiển thị từ dòng 3 -> dòng 8
+include"connection.php";
+$sql= "select * from messinger";
+//Xử lý lệnh sql
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +30,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Cards</title>
+  <title>SB Admin 2 - Buttons</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -52,7 +61,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-     <li class="nav-item ">
+      <li class="nav-item ">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -131,14 +140,6 @@
           <i class="fas fa-fw fa-wrench"></i>
           <span>Cài đặt</span></a>
       </li>
-		
-		<hr class="sidebar-divider">
-		
-		<li class="nav-item">
-        <a class="nav-link" href="setting1.php">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Cài đặt</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -166,39 +167,20 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" enctype="multipart/form-data" action="searchbackend.php">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+              <input type="Search" name="Search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">           
+                <button class="btn btn-primary" type="submit" name="Submit-search">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
-              </div>
             </div>
           </form>
-
+			
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
+            
 
             <!-- Nav Item - Alerts -->
             
@@ -212,6 +194,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username ?></span>
+                
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -226,7 +209,6 @@
               </div>
             </li>
 
-
           </ul>
 
         </nav>
@@ -236,73 +218,82 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Thêm danh mục</h1>
-          </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Pending Requests Card Example -->
-            
+          <h1 class="h3 mb-4 text-gray-800">LIÊN HỆ</h1>
 
           <div class="row">
 
             <div class="col-lg-12">
 
-              <!-- Default Card Example -->
-              
-				
-		<div class="form-group">
-    <label for="exampleInputEmail1">thêm danh mục</label>
-   
+              <!-- Circle Buttons -->
+              <div class="card shadow mb-4 bg-light">
+                <div class="card-header py-3">
+                  <button class="btn btn-success">liên hệ</button>
+                </div>
+                <div class="card-body">
+                  
+                  <div class="row">
+		
+		
+		<div class="col-md-12  ">
 			
-  </div>
-		<form action="" method="post" enctype="multipart/form-data">			
-			<div class="input-group input-group-lg" style="width: 80%">
-  				<input type="text" class="form-control " name="dm_name" placeholder="tên danh mục" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4" required>
-  			<div class="input-group-append" id="button-addon4">
-    			<button name="add_dm" class="btn btn-outline-secondary" type="submit">Thêm danh mục</button>
-    			<button class="btn btn-outline-secondary" type="button"><a href="danhmuc1.php">quản trị danh mục</a></button>
-  			</div>
-			</div>
-		</form>
+	
+		
+	<table class="table text-dark">
+  <thead>
+    <tr>
+      <th width="14%" scope="col">id</th>
+      <th width="14%" scope="col">name</th>
+      <th width="14%" scope="col">email</th>
+      <th width="14%" scope="col">Tiêu đề</th>
+      <th width="15%" scope="col">Nội dung</th>
+      <th width="14%" scope="col">Ngày</th>
+      <th width="14%" scope="col">Ngày</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+		foreach($result as $row){
+			?>
+	<tr>
+		<td><?=$row['id_mess']?></td>
+		<td><?=$row['name']?></td>
+        <td><?=$row['email']?></td>
+		<td><?=$row['title']?></td>
+        <td><?=$row['detail']?></td>
+		<td><?=$row['date']?></td>
+		
+		<td>
+			<a href="xoalienhe.php?id=<?=$row['id_mess']?>" onclick="return confirm('chấp nhận xóa')" class="btn btn-danger text-light">xóa</a> 
+		</td>
+	</tr>
+	<?php
+		}
+	?>
+    
+  </tbody>
+</table>
+			
 				
-	</div>
-<?php
-		include"connection.php";
-	if(isset($_POST['add_dm'])){
-		if($_POST['dm_name']== ""){
-			echo 'thiếu tên danh mục';
-		}
-		else{
-			$name = $_POST['dm_name'];
-			$sql = "insert into category(name_cate) values ('$name')";
-			$stmt = $conn -> prepare($sql);
-			$stmt ->execute();
-			if($stmt){
-				header("location:danhmuc1.php");
-			}
-			else{
-				echo 'thêm thất bại';
-			}
-		}
-		}
-					
-?>
+			</div>
 		</div>
+                  
+                </div>
+              </div>
+
+              <!-- Brand ....Buttons -->
+              
+
+            </div>
 
             
+
+          </div>
+
         </div>
         <!-- /.container-fluid -->
 
-     
+      </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -354,10 +345,11 @@
 
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+
 </body>
 
 </html>
-	<?php
+<?php
     }else{
         header("location:login.php");
     }

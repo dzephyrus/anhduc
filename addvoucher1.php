@@ -237,16 +237,16 @@
             <form action="" method="post">
 	<div class="form-group">
     <label for="inputAddress">Mã Vocher</label>
-    <input name="ma_vc" type="text" class="form-control" id="inputAddress" placeholder="Mã Vocher">
+    <input name="ma_vc" type="text" class="form-control" id="inputAddress" placeholder="Mã Vocher" required>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Start date </label>
-      <input name="start" type="date" class="form-control" id="inputEmail4" placeholder="start date">
+      <input name="start" type="date" class="form-control" id="inputEmail4" placeholder="start date" required>
     </div>
 	   <div class="form-group col-md-6">
       <label for="inputEmail4">End date</label>
-      <input name="end" type="date" class="form-control" id="inputEmail4" placeholder="End date">
+      <input name="end" type="date" class="form-control" id="inputEmail4" placeholder="End date" required >
     </div>
 	
   </div>
@@ -255,11 +255,11 @@
 	  
   <div class="form-group col-md-8">
       <label for="inputCity">Sale</label>
-      <input name="sale" type="number" class="form-control" id="sale">
+      <input name="sale" type="number" class="form-control" id="sale" required pattern="[0-9]" min="1">
     </div>
      <div class="form-group col-md-8">
       <label for="inputCity">detail</label>
-      <input name="detail" type="text" class="form-control" id="detail">
+      <input name="detail" type="text" class="form-control" id="detail" required>
     </div>
     
   </div>

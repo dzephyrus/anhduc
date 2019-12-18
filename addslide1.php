@@ -255,7 +255,7 @@
   <div class="form-row">
 	  <div class="form-group col-md-12">
       <label for="inputPassword4">link </label>
-      <input name="link" type="text" class="form-control"  >
+      <input name="link" type="url" class="form-control" required  pattern="[^\s]+">
     </div>
 	  
    
@@ -264,7 +264,7 @@
 	<div class="form-row">
 		<div class="col-md-5">
       <label for="inputState">trạng thái</label>
-      <select name="tt" id="inputState" class="form-control">
+      <select name="tt" id="inputState" class="form-control" >
         <option selected>on</option>
         <option>off</option>
       </select>
@@ -272,7 +272,7 @@
 		
 		<div class="form-group col-md-6">
     <label for="exampleFormControlFile1">Ảnh</label>
-    <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+    <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1" required>
   </div>
 	</div>
 	
