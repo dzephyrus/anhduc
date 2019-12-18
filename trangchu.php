@@ -109,7 +109,7 @@
 															<?php if($kqtk['quyen']=="user"){?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="suataikhoan.php">Đổi mật khẩu</a></li>
 																</ul>
 
 															<?php } if($kqtk['quyen']=="admin") {?>
@@ -118,6 +118,7 @@
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
 																	<li><a href="">Đổi mật khẩu</a></li>
 																	<li><a href="danhmuc1.php">Quản trị</a></li>
+																	<li><a href="lichsumuahang.php?id=<?=$kqtk['id_u']?>">lịch sử mua hàng</a></li>
 																</ul>
 															<?php }?>
 													</li>
@@ -129,7 +130,8 @@
 													
 															<ul class="dropdown">
 																<li><a href="dangxuat.php">Đăng xuất</a></li>
-																<li><a href="">Đổi mật khẩu</a></li>
+																<li><a href="thaydoitk.php?id=<?=$kqtk['id_u']?>">Đổi mật khẩu</a></li>
+																<li><a href="lichsumuahang.php?id=<?=$kqtk['id_u']?>">lịch sử mua hàng</a></li>
 															</ul>
 													</li>
 													 		<?php

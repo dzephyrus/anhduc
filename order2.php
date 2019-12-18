@@ -1,15 +1,4 @@
-<?php
-	session_start();
-	ob_start();
-    include 'connection.php';
-    if(isset($_SESSION['name_u'])){
-        $username=$_SESSION['name_u'];
-        $sqltk = "select * from user where name = '$username'";
-        $stmt= $conn ->prepare($sqltk);
-		$stmt -> execute();
-		$row = $stmt -> fetch();
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="danhmuc1.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -52,7 +41,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item ">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -76,7 +65,7 @@
 		
 		<li class="nav-item">
         <a class="nav-link" href="order1.php">
-          <i class="fas fa-fw fa-user"></i>
+         <i class="fas fa-cash-register"></i>
           <span>Đơn hàng</span></a>
       </li>
 
@@ -112,7 +101,7 @@
 		
 		<li class="nav-item">
         <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-fw fa-user"></i>
+          <i class="fas fa-money-check-alt"></i>
           <span>Voucher</span></a>
       </li>
 		
@@ -173,7 +162,24 @@
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
 
             <!-- Nav Item - Alerts -->
            
@@ -194,7 +200,7 @@
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
-				  <a class="dropdown-item" href="duanmau.php" >
+				  <a class="dropdown-item" href="trangchu.php" >
                   <i class="fas fa-pager fa-sm fa-fw mr-2 text-gray-400"></i>
                   my web
                 </a>
@@ -218,100 +224,55 @@
           <div class="card shadow m-6">
 
             <table class="table">
-					  
-				  <thead>
-					<tr>
-						<th scope="col">STT</th>
-						<th scope="col">ID_Order</th>
-						<th scope="col">Ten tai khoan</th>
-						<th scope="col">Số điện thoại</th>
-						<th scope="col" width="25%">Địa chỉ</th>
-						<th scope="col">Số lượng sp</th>
-						<th scope="col">Tổng tiền</th>
-						<th scope="col">Trang thai</th>
-						<th scope="col">Chỉnh sửa</th>
+				<div class="card-header py-3 bg-light">
+					<h3 style="float:left;">Tên tài khoản: <?php 
+					include 'connection.php';
+					$sqldm = "select * from order1 where id_order = '$_GET[id_order]'";
+					$kqdm = $conn->query($sqldm)->fetch();
+                  	
+                    echo $kqdm['name_u'];
+					
+//					
+					
+              ?> </h3>
+                 <button type="button" class="btn btn-success " style="width: 15%; float: right"> <a href="order3.php" class="text-light">quản trị BL</a> </button>	
+                </div>	  
+			  <thead>
+				<tr>
+					<th scope="col">STT</th>
+					<th scope="col">id sản phẩm</th>
+				  	<th scope="col">Tên sản phẩm</th>
+				  	<th scope="col">Số lượng</th>
+					
+					<th scope="col">Chỉnh sửa</th>
 
-					</tr>
-				  </thead>
-				  <tbody>
-					  <?php
-					  include"connection.php";
-					  $sql = "select COUNT(id_order),id_order, name_u, phone, address, quantity, totalprice from order1 GROUP BY id_order";
-					  $kq = $conn->query($sql);
-					  foreach($kq as $key=>$value){
+				</tr>
+			  </thead>
+				<?php 
+					if(isset($_GET['id_order'])){
+						$id=$_GET['id_order'];
+						$sql = "select * from order1 INNER JOIN order1detail on order1.id_order = order1detail.id_order where order1detail.id_order ='$id'";
+						$stmt= $conn ->prepare($sql);
+						$stmt -> execute();
+						$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						
+					}
+				?>
+				<?php
+					foreach($result as $key => $row){
 						?>
-					<tr>
+			  <tbody>
+				  <td> <?php echo $key++ ?> </td>  
+				  <td> <?php echo $row['id_p']?> </td> 
+					<td> <?php echo $row['name_p']?> </td>  
+				    <td><?php echo $row['quantity1']?></td>
+			  </tbody>
+				<?php
+		}
+	?>
+</table>
 
-					  <td><?php echo $key+1 ?></td>
-					  <td><?php 
-								  $sqldm = "select * from order1 where id_order = $value[id_order]";
-								  $kqdm = $conn->query($sqldm)->fetch();
-								  if($value['id_order'] == $kqdm['id_order']){
-									 echo $kqdm['id_order']; 
-								  }
-							?>
-						</td>        
-					    <td>
-							<?php 
-								  $sqldm = "select * from order1 where id_order = $value[id_order]";
-								  $kqdm = $conn->query($sqldm)->fetch();
-								  if($value['name_u'] == $kqdm['name_u']){
-									 echo $kqdm['name_u']; 
-								  }
-							?>
-						</td>
-					    <td><?php 
-								  $sqldm = "select * from order1 where id_order = $value[id_order]";
-								  $kqdm = $conn->query($sqldm)->fetch();
-								  if($value['phone'] == $kqdm['phone']){
-									 echo $kqdm['phone']; 
-								  }
-							?>
-						</td>
-						<td>
-							<?php 
-								  $sqldm = "select * from order1 where id_order = $value[id_order]";
-								  $kqdm = $conn->query($sqldm)->fetch();
-								  if($value['address'] == $kqdm['address']){
-									 echo $kqdm['address']; 
-								  }
-							?>
-						</td>
-						<td>
-							<?php 
-								  $sqldm = "select * from order1 where id_order = $value[id_order]";
-								  $kqdm = $conn->query($sqldm)->fetch();
-								  if($value['quantity'] == $kqdm['quantity']){
-									 echo $kqdm['quantity']; 
-								  }
-							?>
-						</td>
-						<td>
-							<?php 
-								  $sqldm = "select * from order1 where id_order = $value[id_order]";
-								  $kqdm = $conn->query($sqldm)->fetch();
-								  if($value['totalprice'] == $kqdm['totalprice']){
-									 echo $kqdm['totalprice']; 
-								  }
-							?>
-						</td>
-						<td><?php 
-								  $sqldm1 = "select * from order1 where id_order = $value[id_order]";
-								  $kqdm1 = $conn->query($sqldm1)->fetch();
-								 
-									 echo $kqdm1['status']; 
-								  
-							?>
-						</td>
-						<td><button type="button" class="btn btn-success"><a href="order2.php?id_order=<?php echo $value['id_order']; ?>">Chi tiết</a></button></td>
-					</tr>	
-					  <?php
-				   }
-				   ?>
-				  </tbody>
-				</table>
-
-            <!-- Donut Chart -->
+							<!-- Donut Chart -->
             
           </div>
 
@@ -382,9 +343,3 @@
 </body>
 
 </html>
-<?php
-    }else{
-        header("location:login.php");
-    }
-	ob_end_flush();
-?>

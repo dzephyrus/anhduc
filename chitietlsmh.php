@@ -1,10 +1,7 @@
 <?php
 	session_start();
 	include 'connection.php';
-	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-	$totalPrice = 0;
-	$stt=1;
-	$sumPrice=0;
+	
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -46,109 +43,40 @@
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-									<?php
-						include 'connection.php';
-					$stmt = $conn->query("select * from setting");
-					foreach($stmt as $key => $row){
-					?>
-					
-					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; " alt="" width="70%" ></a>
-				
-					<?php 
-					}
-					?>
+                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
                                 </div>
                             </div>
                             <div class="col-lg-6 menu-none-block menu-center">
                                 <div class="main-menu">
                                     <nav>
-                                       <ul>
+                                        <ul>
                                             <li><a href="trangchu.php">home</a></li>
-                                            <li><a href="about-us.php">about us</a></li>
-                                            <li><a href="#">shop</a>
-												<ul class="dropdown">
-													<?php
-														include"connection.php";
-														$sql= "select * from category";
-														//Xử lý lệnh sql
-														$stmt = $conn->prepare($sql);
-														$stmt->execute();
-														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-													?>
-															<?php
-																foreach($result as $row){
-																	?>
-																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-																	<?php
-																}
-															?>
-													</ul>
-										   </li>
-                                            
-                                            	
-                                            <li><a href="contact.php">contact</a></li>
+                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="shop-grid-view-5-col.html">shop</a></li>
+                                            <li><a href="#">pages</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="about-us.html">about us</a></li>
+                                                    <li><a href="cart.html">cart</a></li>
+                                                    <li><a href="checkout.html">checkout</a></li>
+                                                    <li><a href="wishlist.html">wishlist</a></li>
+                                                    <li><a href="contact.html">contact</a></li>
+                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="register.html">register</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">blog</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="blog.html">blog </a></li>
+                                                    <li><a href="blog-details.html">blog details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
-										<div class="main-menu">
-                                   			 <nav>
-                                      			 <ul>
-
-													 <?php
-
-													 	if(isset($_SESSION['name_u'])){
-															 $username=$_SESSION['name_u'];
-															$sqltk = "select * from user where name_u = '$username'";
-        													$kqtk = $conn->query($sqltk)->fetch();
-															if($kqtk['quyen'] == 'admin'){
-															
-
-													 ?>
-													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
-															<?php if($kqtk['quyen']=="user"){?>
-																<ul class="dropdown">
-																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="">Đổi mật khẩu</a></li>
-																</ul>
-
-															<?php } if($kqtk['quyen']=="admin") {?>
-
-																<ul class="dropdown">
-																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="">Đổi mật khẩu</a></li>
-																	<li><a href="danhmuc1.php">Quản trị</a></li>
-																</ul>
-															<?php }?>
-													</li>
-													 <?php
-															}
-															else{
-															?>
-													 			<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
-													
-															<ul class="dropdown">
-																<li><a href="dangxuat.php">Đăng xuất</a></li>
-																<li><a href="">Đổi mật khẩu</a></li>
-															</ul>
-													</li>
-													 		<?php
-														}
-													 ?>
-													<?php } else { ?>
-													 <li><a href="#">Tài khoản</a>
-
-															<ul class="dropdown">
-																<li><a href="login.php">Đăng nhập</a></li>
-																<li><a href="register.php">Đăng ký</a></li>
-															</ul>
-													</li>
-													 <?php 
-																 } ?>
-												</ul>
-									</div>
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
                                             <span class="ion-ios-search-strong"></span>
@@ -156,13 +84,74 @@
                                     </div>
                                     <div class="header-cart common-style">
                                         <button class="sidebar-trigger">
-                                            <a href="cart.php"><span class="ion-bag"></span></a>
+                                            <span class="ion-bag"></span>
                                         </button>
                                     </div>
-                                    
+                                    <div class="header-sidebar common-style">
+                                        <button class="header-navbar-active">
+                                            <span class="ion-navicon"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            
+                            <div class="mobile-menu-area d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
+                                <div class="mobile-menu">
+                                    <nav id="mobile-menu-active">
+                                        <ul class="menu-overflow">
+                                            <li><a href="#">HOME</a>
+                                                <ul>
+                                                    <li><a href="index.html">furniture</a></li>
+                                                    <li><a href="index-electronics.html">electronics</a></li>
+                                                    <li><a href="index-fashion.html">fashion</a></li>
+                                                    <li><a href="index-jewellery.html">jewellery</a></li>
+                                                    <li><a href="index-food-drink.html">food & drink</a></li>
+                                                    <li><a href="index-toys.html">Toys & Games</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">pages</a>
+                                                <ul>
+                                                    <li><a href="about-us.html">about us</a></li>
+                                                    <li><a href="cart.html">cart</a></li>
+                                                    <li><a href="checkout.html">checkout</a></li>
+                                                    <li><a href="wishlist.html">wishlist</a></li>
+                                                    <li><a href="contact.html">contact</a></li>
+                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="register.html">register</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">shop</a>
+                                                <ul>
+                                                    <li><a href="shop-grid-view-3-col.html">grid 3 column</a></li>
+                                                    <li><a href="shop-grid-view-5-col.html">grid 5 column</a></li>
+                                                    <li><a href="shop-grid-view-sidebar.html">grid with sidebar</a></li>
+                                                    <li><a href="shop-list-view-1-col.html">list 1 column</a></li>
+                                                    <li><a href="shop-list-view-2-col.html">list 2 column</a></li>
+                                                    <li><a href="shop-list-view-sidebar.html">list with sidebar</a></li>
+                                                    <li><a href="shop-list-view-1-col-container.html">list 1 column box</a></li>
+                                                    <li><a href="product-details.html">tab style 1</a></li>
+                                                    <li><a href="product-details-2.html">tab style 2</a></li>
+                                                    <li><a href="product-details-3.html">tab style 3</a></li>
+                                                    <li><a href="product-details-6.html">sticky style</a></li>
+                                                    <li><a href="product-details-7.html">sticky style 2</a></li>
+                                                    <li><a href="product-details-8.html">gallery style</a></li>
+                                                    <li><a href="product-details-9.html">gallery style 2</a></li>
+                                                    <li><a href="product-details-4.html">fixed image style</a></li>
+                                                    <li><a href="product-details-5.html">fixed image style 2</a></li> 
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">BLOG</a>
+                                                <ul>
+                                                    <li><a href="blog.html">blog </a></li>
+                                                    <li><a href="blog-2-col.html">blog 2 column</a></li>
+                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
+                                                    <li><a href="blog-details.html">blog details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html"> Contact  </a></li>
+                                        </ul>
+                                    </nav>							
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -219,7 +208,7 @@
                     </div>
                 </div>
             </div>
-            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(image/pcs-nov2018-category-banners_Royal_canin_1.jpg);background-repeat: no-repeat; background-size: contain">
+            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
                 <div class="container">
                     <div class="breadcrumb-content">
                         <h2>cart page</h2>
@@ -238,89 +227,43 @@
                             <h1 class="cart-heading">Giỏ hàng của bạn</h1>
 							
                                 <div class="table-content table-responsive">
-                                     <table class="table cart-table" id="bang">
-										<thead>
-											<tr>
-												<th>Stt</th>
-												<th>Tên sản phẩm</th>
-												<th>Ảnh sản phẩm</th>
-												<th>Số lượng</th>
-												<th>Đơn giá</th>
-												<th>Tổng tiền</th>
-												<th>Thao tác</th>
-											</tr>
-										</thead>
-										<tbody>
-											
-											<?php foreach ($cart as $key => $item):
-											if($key==0){
-												continue;
-											}
-											
-											?>
-											
-												<tr>
-													<td><?php echo $stt++ ;?></td>
-													<td><?php echo $item['name_p'] ;?></td>
-													<td>
-														<img src="image/<?php echo $item['image_p']?>" >
-													</td>
-													
-													<td>
-														
-														<a href="add-cart1.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:24px ">-</a>
-															<p style="display: inline-block; padding: 0 10px;"><?php echo $item['quantity']?></p>
-														<a href="add-cart.php?id_p=<?php echo $item['id_p'] ;?>" style="font-size:18px">+</a>
-													</td>
-													
-													<td><?php
-														
-														if($item['sale_p']>0){
-															echo number_format($item['sale_p'], 0, '', ',');
-														}
-														else{
-															echo $item['price'];
-														}
-														?> vnđ</td>
-													<td><?php 
-														if($item['sale_p']>0){
-															$itemTotal = $item['sale_p']*$item['quantity'];
-															$totalPrice += $itemTotal;
-														echo number_format($itemTotal, 0, '', ','); 
-														}
-														else{
-															$itemTotal = $item['price']*$item['quantity'];
-															$totalPrice += $itemTotal;
-														echo number_format($itemTotal, 0, '', ','); 
-														}
-														?> vnđ</td>
-                                        			<td>
-														
-														<a href="xoaspgiohang.php?key=<?php echo $key ?>" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> xóa</a>
-													</td>
-												</tr>
-											 <?php
-												
-												 
-											endforeach ?>
+                                  <table class="table">
 
-										</tbody>
-                                </table>
+											 <button type="button" class="btn btn-success " style="width: 15%; float: right; padding: 0px 5px;"> <a href="lichsumuahang.php" class="text-light">Quay lại</a> </button>	
+											</div>	  
+											<thead style="padding-top: 10px;">
+											<tr>
+												<th scope="col">STT</th>
+												<th scope="col">Tên sản phẩm</th>
+												<th scope="col">Đơn giá</th>
+												<th scope="col">Số lượng</th>
+											</tr>
+										  </thead>
+											<?php 
+												if(isset($_GET['id_order'])){
+													$id=$_GET['id_order'];
+													$sql = "select * from order1 INNER JOIN order1detail on order1.id_order = order1detail.id_order where order1detail.id_order ='$id'";
+													$stmt= $conn ->prepare($sql);
+													$stmt -> execute();
+													$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+												}
+											?>
+											<?php
+												foreach($result as $key => $row){
+													?>
+										  <tbody>
+												 <td> <?php echo $key + 1 ?> </td>  
+												<td> <?php echo $row['name_p']?> </td>
+											  	<td><?php echo $row['price']?></td>
+											  <td><?php echo $row['quantity1']?></td>
+										  </tbody>
+											<?php
+										}
+										?>
+									</table>
+									
                                 </div>
-                         
-                                <div class="row">
-                                    <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total">
-                                            <h2>Cart totals</h2>
-                                            <ul>
-                                                <li>Tổng tiền<span class="required"><?php echo $sumPrice+= $totalPrice; $_SESSION['tongtien']=$sumPrice ;?></span></li>
-                                           
-                                            </ul>
-                                            <a href="checkout.php">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            
+                           
                         </div>
                     </div>
                 </div>

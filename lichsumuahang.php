@@ -1,13 +1,10 @@
 <?php
 	session_start();
 	include 'connection.php';
-	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-	$totalPrice = 0;
-	$sumPrice=0;
-	$sumQuantity=0;
+	ob_start();
 ?>
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -37,7 +34,9 @@
         <![endif]-->
         <!-- header start -->
         <div class="wrapper">
-      
+            <!-- Newsletter Popup Start -->
+       
+            <!-- Newsletter Popup End -->
             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
@@ -109,7 +108,7 @@
 															<?php if($kqtk['quyen']=="user"){?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="suataikhoan.php">Đổi mật khẩu</a></li>
 																</ul>
 
 															<?php } if($kqtk['quyen']=="admin") {?>
@@ -129,7 +128,7 @@
 													
 															<ul class="dropdown">
 																<li><a href="dangxuat.php">Đăng xuất</a></li>
-																<li><a href="">Đổi mật khẩu</a></li>
+																<li><a href="thaydoitk.php?id=<?=$kqtk['id_u']?>">Đổi mật khẩu</a></li>
 															</ul>
 													</li>
 													 		<?php
@@ -167,24 +166,10 @@
             </header>
             <div class="header-space"></div>
             <!-- header end -->
-          
-            <div class="main-search-active">
-                <div class="sidebar-search-icon">
-                    <button class="search-close"><span class="ion-android-close"></span></button>
-                </div>
-                <div class="sidebar-search-input">
-                    <form>
-                        <div class="form-search">
-                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
-                            <button>
-                                <i class="ion-ios-search-strong"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <!-- sidebar-cart start -->
+            
             <!-- main-search start -->
-            <div class="cur-lang-acc-active">
+            <<div class="cur-lang-acc-active">
                 <div class="wrap-sidebar">
                     <div class="sidebar-nav-icon">
                         <button class="op-sidebar-close"><span class="ion-android-close"></span></button>
@@ -234,233 +219,87 @@
             <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
                 <div class="container">
                     <div class="breadcrumb-content">
-                        <h2>checkout</h2>
+                        <h2>cart page</h2>
                         <ul>
                             <li><a href="#">home</a></li>
-                            <li> checkout </li>
+                            <li> cart </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- checkout-area start -->
-            <div class="checkout-area ptb-100">
+            <!-- shopping-cart-area start -->
+            <div class="cart-main-area pt-95 pb-100">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 col-md-12 col-12">
-                            <form action="#" method="post">
-								 <?php
-										if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
-											$sql_dangnhap = "SELECT * FROM user where name_u = '$_SESSION[name_u]'";
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h1 class="cart-heading">Giỏ hàng của bạn</h1>
+							
+                                <div class="table-content table-responsive">
+                                     <table class="table cart-table" id="bang">
+										<thead>
+											<tr>
+												<th>Stt</th>
+												<th>Ngay mua</th>
+												<th>Address</th>
+												<th>Tong so luong sp mua</th>
+												<th>Tổng tiền</th>
+												
+												<th>Thao tac</th>
+											</tr>
+										</thead>
+									
+												 <tbody>
+										  <?php
+										  include"connection.php";
+											if(isset($_SESSION['name_u'])){
+												$name_u = $_SESSION['name_u'];
+												$sql = "select COUNT(id_order), id_order, name_u, phone, address, quantity,date_m,status, totalprice from order1 where name_u='$name_u' GROUP BY id_order";
+												$kq = $conn->query($sql);
+												foreach($kq as $key=>$value){
+												if($value['status']=='off'){
+
+											?>
+											<tr>
+
+										  <td><?php echo $key+1 ?></td>
+										  <td>
+											  <?php 
+													  echo $value['date_m']; 
+												?>
+											</td>        
+											<td>
+											  <?php 
+													  echo $value['address']; 
+												?>
+											</td>
+											<td>
+												<?php 
+													  echo $value['quantity']; 
+												?>
+											</td>
+											<td>
+												<?php 
+													echo $value['totalprice']; 
+												?>
+											</td>
 											
-											$stmt= $conn ->prepare($sql_dangnhap);
-											$stmt -> execute();
-											$result = $stmt->fetch();
-											
-											
-								?>
-                                <div class="checkbox-form">						
-                                    <h3>Điền thông tin nhận hàng</h3>
-                                    <div class="row">
-                                        <div class="col-md-12">
-											
-                                            <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label><br>
-												<?php echo ''.$_SESSION['name_u']; ?>
-												<input type="hidden" value="<?php echo $_SESSION['name_u']; ?>" name="fullname"/>
-												<input type="hidden" value="<?php echo $result['id_u']; ?>" name="id_u"/>
-											</div>
-											
-										</div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Phone</label>
-                                                <input type="number" value="<?php echo $result['phone'] ?>" name="phone"/>
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Address <span class="required">*</span></label>
-                                                <input type="text" placeholder="Street address" name="dc" />
-                                            </div>
-                                        </div>
-										<!-- kết thuc ddien thong tin-->
-              						</div>													
+											<td><button type="button" class="btn btn-success"><a href="chitietlsmh.php?id_order=<?php echo $value['id_order']; ?>">Chi tiết</a></button></td>
+										</tr>	
+										  <?php
+									   }}}else{
+											echo "ban chua mua hang";
+										}
+									   ?>
+									  </tbody>
+                                </table>
+									
                                 </div>
-								<?php } 
-								else{
-								?>
-									<div class="checkbox-form">						
-                                    <h3>Điền thông tin nhận hàng</h3>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label><input type="text" placeholder="tên" name="fullname"/>
-                                            </div>
-										</div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Phone</label>
-                                                <input type="number" placeholder="phone" name="phone"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Address <span class="required">*</span></label>
-                                                <input type="text" placeholder="Street address" name="dc" />
-                                            </div>
-                                        </div>
-										<!-- kết thuc ddien thong tin-->
-              						</div>													
-                                </div>
-								<?php	
-								}?>
-								
-                        </div>	
-                 		       <div class="col-lg-6 col-md-12 col-12">
-									<div class="your-order">
-										<h3>Giỏ hàng của bạn</h3>
-										<div class="your-order-table table-responsive">
-											<table>
-
-												<thead>
-													<tr>
-													
-														<th class="product-name">Product</th>
-														<th class="product-quantity">So luong</th>
-														<th class="product-total">Total</th>
-													</tr>							
-												</thead>
-												<tbody>
-													<?php foreach ($cart as $key => $item): 
-														if($key==0){
-												continue;
-											}
-													?>
-													<tr class="cart_item">
-														<td style="display: none">
-															<?php echo 
-																		$item['id_p'];
-																		$itemid = $item['id_p'];
-															?>
-														</td>
-														<td class="product-name"><?php echo $item['name_p'] ;?></td>
-														<td><?php echo 
-																	$item['quantity'];
-																	$quantity = $item['quantity'];
-																	$sumQuantity += $quantity;
-															?>
-														</td>
-														<td class="product-total" >
-															<?php 
-															
-														if($item['sale_p']>0){
-															$itemTotal = $item['sale_p']*$item['quantity'];
-															$totalPrice += $itemTotal;
-														echo number_format($itemTotal, 0, '', ','); 
-														}
-														else{
-															$itemTotal = $item['price']*$item['quantity'];
-															$totalPrice += $itemTotal;
-														echo number_format($itemTotal, 0, '', ','); 
-														}
-														
-															?>
-														</td>
-													</tr>
-													<?php  endforeach ?>
-												</tbody>
-											 </table></br>
-											<!-- bang tong-->
-											 <table border="1px solid red">
-												<thead>
-													<tr>
-														<th class="product-quantity">Tong so luong</th>
-														<th class="product-total">Tong tien</th>
-													</tr>							
-												</thead>
-												<tbody>
-													<tr class="cart_item">
-														<td class="product-quantity">
-															<?php echo 
-																$sumQuantity ;
-															?>
-														</td>
-														<td class="product-total" >
-															<span class="required" >
-																<?php echo 
-																		$sumPrice+= $totalPrice;
-																		$_SESSION['tongtien']=$sumPrice;
-																?>
-															</span>
-														</td>
-													</tr>
-
-												</tbody>
-											 </table>
-											<!--Ket thuc tong-->
-											
-											 <div class="col-md-5 ml-auto">
-												<div class="cart-page-total">
-												   <ul>
-													   <li><a href="cart.php" >Quay lại</a></li>
-														
-													</ul>
-												</div>
-											</div>
-										
-										</div>
-
-									</div>
-							<input type="submit" name="order" value="Place order" class="col-md-5 ml-auto mt-3" />
-								</div>
-
-
-                                       	 
-							</form>
-						<?php
-					
-						if(isset($_POST['order'])){
-							//print_r($_SESSION['cart']);
-//							echo count($_SESSION['cart']);
-//							exit();
-							if($_POST['fullname']=="" || $_POST['dc']=="" || $_POST['phone']=="" ){
-								?> <script> alert"them that bai" ;</script><?php
-							}
-							else{
-								$name= $_POST['fullname'];
-								$phone = $_POST['phone'];
-								$date= date("Y-m-d");
-								$diachi = $_POST['dc'];
-								$id_u = $_POST['id_u'];
-								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','$id_u','on')";
-								$kqoder = $conn -> exec($sqlorder1);
-								$sqlmax = "SELECT MAX(id_order) from order1";
-								$kqmax = $conn -> query($sqlmax)->fetchColumn();
-								$data=$_SESSION["cart"];
-//								var_dump($data);
-								
-								for ($i = 1; $i < count($_SESSION["cart"]); $i++) {
-	
-    							 	$id_p=$data[$i]["id_p"];
-									$price = $data[$i]["price"];
-									$name_p = $data[$i]["name_p"];
-//										exit();	
-									$sqldetail="insert into order1detail values(null,'$kqmax','$id_p','$price','$name_p','$quantity')";
-									$kqdetail = $conn -> query($sqldetail);
-									}
-									if($kqdetail){
-										?><br> <script> alert('Đặt mua thành công, đơn hàng sẽ được xử lý trong vòng 24h') </script> <?php
-									}else{
-										?><br> <script> alert('Đặt mua không thành công'); </script> <?php
-									}
-							}
-						}
-					?>
-				  
+                           
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- checkout-area end -->	
+            <!-- shopping-cart-area end -->
             <footer class="footer-area gray-bg pt-100 pb-95">
                 <div class="container">
                     <div class="row">
@@ -544,5 +383,6 @@
             headroom.init(); 
         </script>
         <script src="assets/js/main.js"></script>
+		
     </body>
 </html>

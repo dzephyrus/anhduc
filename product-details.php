@@ -252,10 +252,10 @@ ob_start();
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form>
+                    <form method="get" enctype="multipart/form-data" action="search.php">
                         <div class="form-search">
-                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
-                            <button>
+                            <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
+                            <button name="submit-search" type="submit">
                                 <i class="ion-ios-search-strong"></i>
                             </button>
                         </div>
