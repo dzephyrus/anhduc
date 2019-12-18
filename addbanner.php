@@ -263,7 +263,7 @@
     </div>
 		
 		<div class="form-group col-md-6">
-    <label for="exampleFormControlFile1">Ảnh</label>
+    <label for="exampleFormControlFile1" required>Ảnh</label>
     <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
   </div>
 	</div>

@@ -266,7 +266,7 @@
   </div>
 		<form action="" method="post" enctype="multipart/form-data">			
 			<div class="input-group input-group-lg" style="width: 80%">
-  				<input type="text" class="form-control " name="dm_name" placeholder="tên danh mục" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+  				<input type="text" class="form-control " name="dm_name" placeholder="tên danh mục" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4" required>
   			<div class="input-group-append" id="button-addon4">
     			<button name="add_dm" class="btn btn-outline-secondary" type="submit">Thêm danh mục</button>
     			<button class="btn btn-outline-secondary" type="button"><a href="danhmuc1.php">quản trị danh mục</a></button>

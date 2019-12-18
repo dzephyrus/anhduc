@@ -259,12 +259,12 @@
 					<div class="form-row">				  
 						<div class="form-group col-md-6">
 							<label for="inputAddress">tên sản phẩm</label>
-							<input name="name" type="text" class="form-control" id="name" placeholder="name">
+							<input name="name" type="text" class="form-control" id="name" placeholder="name" required  >
 							<div id="name_errol" class="val_error"></div>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleFormControlFile1">Ảnh</label>
-							<input name="image" type="file" class="form-control-file" id="image">
+							<input name="image" type="file" class="form-control-file" id="image" required>
 							<div id="image_errol" class="val_error"></div>
 						</div>
 					</div>
@@ -272,12 +272,12 @@
 					<div class="form-row">
 						<div class="form-group col-md-6">
 						  <label for="inputEmail4">giá</label>
-						  <input name="price" type="number" class="form-control" id="price" placeholder="price">
+						  <input name="price" type="number" class="form-control" id="price" placeholder="price" required pattern="[0-9]" min="1"  >
 							<div id="price_errol" class="val_error"></div>
 						</div>
 						  <div class="form-group col-md-6">
 						  <label for="inputCity">Giá khuyến mãi</label>
-						  <input name="SalePrice" type="number" class="form-control" id="SalePrice">
+						  <input name="SalePrice" type="number" class="form-control" id="SalePrice" required pattern="[0-9]" min="1" >
 							  
 						</div>
 				 	</div>				  
@@ -285,7 +285,7 @@
 					<div class="form-row">
 						<div class="form-group col-md-6">
 						  <label for="inputEmail4">Số lượng</label>
-						  <input name="soluong" type="number" class="form-control" id="soluong">
+						  <input name="soluong" type="number" class="form-control" id="soluong" required pattern="[0-9]" min="1" >
 							<div id="number_errol" class="val_error"></div>
 						</div>
 				  	</div>

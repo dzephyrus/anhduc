@@ -237,16 +237,16 @@
             <form action="" method="post">
 	<div class="form-group">
     <label for="inputAddress">tên</label>
-    <input name="name" type="text" class="form-control" id="inputAddress" placeholder="name">
+    <input name="name" type="text" class="form-control" id="inputAddress" placeholder="name" required>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">pass</label>
-      <input name="pass" type="password" class="form-control" id="inputEmail4" placeholder="password">
+      <input name="pass" type="password" class="form-control" id="inputEmail4" placeholder="password" required>
     </div>
 	  <div class="form-group col-md-6">
       <label for="inputCity">Số điện thoại</label>
-      <input name="phone" type="number" class="form-control" id="inputCity">
+      <input name="phone" type="tel" class="form-control" id="inputCity" required placeholder="+8400000000" pattern="(\+84|0)\d{9,10}"    title="Nhập số điện thoại từ 10 đến 11 số"  min ="0"  >
     </div>
     
   </div>
@@ -255,7 +255,7 @@
 	  
   <div class="form-group col-md-8">
       <label for="inputCity">email</label>
-      <input name="email" type="email" class="form-control" id="inputCity">
+      <input name="email" type="email" class="form-control" id="inputCity" required  pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$">
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">quyền</label>
