@@ -250,13 +250,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label>									<input type="text" value="<?php echo ''.$_SESSION['name_u']; ?>" name="fullname"/>
+                                                <label>First Name <span class="required">*</span></label>		<br>							<?php echo ''.$_SESSION['name_u']; ?>
                                             </div>
 										</div>
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
                                                 <label>Phone</label>
-                                                <input type="number" valuer="<?php echo ''.$kq_dangnhap['phone']; ?>" name="phone"/>
+                                                <input type="number" value="<?php echo ''.$kq_dangnhap['phone']; ?>" name="phone"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -324,7 +324,11 @@
 																		$itemid = $item['id_p'];
 															?>
 														</td>
-														<td class="product-name"><?php echo $item['name_p'] ;?></td>
+														<td class="product-name"><?php echo 
+																		$item['name_p'] ;
+																		
+															?>
+														</td>
 														<td><?php echo 
 																	$item['quantity'];
 																	$quantity = $item['quantity'];
@@ -333,8 +337,8 @@
 														</td>
 														<td class="product-total" >
 															<?php 
-																echo 
-																$itemTotal = $item['sale_p']*$item['quantity'];
+																echo
+																$itemTotal = $item['sale_p'] *$item['quantity'];
 																$totalPrice += $itemTotal;
 															?>
 														</td>
@@ -404,7 +408,7 @@
 								$date= date("Y-m-d");
 								$diachi = $_POST['dc'];
 								
-								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice')";
+								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','on')";
 								$kqoder = $conn -> exec($sqlorder1);
 								$sqlmax = "SELECT MAX(id_order) from order1";
 								$kqmax = $conn -> query($sqlmax)->fetchColumn();
@@ -414,8 +418,12 @@
 								for ($i = 1; $i < count($_SESSION["cart"]); $i++) {
 	
     							 $id_p=$data[$i]["id_p"];
-//										exit();	
-									$sqldetail="insert into order1detail values(null,'$kqmax','$id_p')";
+									$price = $data[$i]["price"];
+								$name_p = $data[$i]["name_p"];
+								
+									
+
+									$sqldetail="insert into order1detail values(null,'$kqmax','$id_p','$price','$name_p','$quantity')";
 									$kqdetail = $conn -> query($sqldetail);
 									}
 									if($kqdetail){

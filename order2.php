@@ -1,11 +1,5 @@
 
-<?php
-session_start(); 
-ob_start();
-
-?>
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -16,7 +10,7 @@ ob_start();
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Cards</title>
+  <title>SB Admin 2 - Charts</title>
 
   <!-- Custom fonts for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,7 +18,7 @@ ob_start();
 
   <!-- Custom styles for this template-->
   <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -47,7 +41,7 @@ ob_start();
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item ">
+      <li class="nav-item active">
         <a class="nav-link" href="danhmuc1.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
@@ -60,7 +54,7 @@ ob_start();
       
 
       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="sanpham1.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Product</span></a>
@@ -70,7 +64,7 @@ ob_start();
       <hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="account1.php">
+        <a class="nav-link" href="order2.php">
           <i class="fas fa-fw fa-user"></i>
           <span>Đơn hàng</span></a>
       </li>
@@ -188,7 +182,7 @@ ob_start();
             </li>
 
             <!-- Nav Item - Alerts -->
-            
+           
 
             <!-- Nav Item - Messages -->
             
@@ -223,164 +217,114 @@ ob_start();
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Sửa sản phẩm</h1>
+          <h1 class="h3 mb-2 text-gray-800">Charts</h1>
+          
+
+          <!-- Content Row -->
+          <div class="card shadow m-6">
+
+            <table class="table">
+					  
+				  <thead>
+					<tr>
+						<th scope="col">STT</th>
+						<th scope="col">ID_Order</th>
+						<th scope="col">Ten tai khoan</th>
+						<th scope="col">Số điện thoại</th>
+						<th scope="col" width="25%">Địa chỉ</th>
+						<th scope="col">Số lượng sp</th>
+						<th scope="col">Tổng tiền</th>
+						<th scope="col">Trang thai</th>
+						<th scope="col">Chỉnh sửa</th>
+
+					</tr>
+				  </thead>
+				  <tbody>
+					  <?php
+					  include"connection.php";
+					  $sql = "select COUNT(id_order),id_order, name_u, phone, address, quantity, totalprice from order1 GROUP BY id_order";
+					  $kq = $conn->query($sql);
+					  foreach($kq as $key=>$value){
+						?>
+					<tr>
+
+					  <td><?php echo $key+1 ?></td>
+					  <td><?php 
+								  $sqldm = "select * from order1 where id_order = $value[id_order]";
+								  $kqdm = $conn->query($sqldm)->fetch();
+								  if($value['id_order'] == $kqdm['id_order']){
+									 echo $kqdm['id_order']; 
+								  }
+							?>
+						</td>        
+					    <td>
+							<?php 
+								  $sqldm = "select * from order1 where id_order = $value[id_order]";
+								  $kqdm = $conn->query($sqldm)->fetch();
+								  if($value['name_u'] == $kqdm['name_u']){
+									 echo $kqdm['name_u']; 
+								  }
+							?>
+						</td>
+					    <td><?php 
+								  $sqldm = "select * from order1 where id_order = $value[id_order]";
+								  $kqdm = $conn->query($sqldm)->fetch();
+								  if($value['phone'] == $kqdm['phone']){
+									 echo $kqdm['phone']; 
+								  }
+							?>
+						</td>
+						<td>
+							<?php 
+								  $sqldm = "select * from order1 where id_order = $value[id_order]";
+								  $kqdm = $conn->query($sqldm)->fetch();
+								  if($value['address'] == $kqdm['address']){
+									 echo $kqdm['address']; 
+								  }
+							?>
+						</td>
+						<td>
+							<?php 
+								  $sqldm = "select * from order1 where id_order = $value[id_order]";
+								  $kqdm = $conn->query($sqldm)->fetch();
+								  if($value['quantity'] == $kqdm['quantity']){
+									 echo $kqdm['quantity']; 
+								  }
+							?>
+						</td>
+						<td>
+							<?php 
+								  $sqldm = "select * from order1 where id_order = $value[id_order]";
+								  $kqdm = $conn->query($sqldm)->fetch();
+								  if($value['totalprice'] == $kqdm['totalprice']){
+									 echo $kqdm['totalprice']; 
+								  }
+							?>
+						</td>
+						<td><?php 
+								  $sqldm1 = "select * from order1 where id_order = $value[id_order]";
+								  $kqdm1 = $conn->query($sqldm1)->fetch();
+								 
+									 echo $kqdm1['status']; 
+								  
+							?>
+						</td>
+						<td><button type="button" class="btn btn-success"><a href="order3.php?id_order=<?php echo $value['id_order']; ?>">Chi tiết</a></button></td>
+					</tr>	
+					  <?php
+				   }
+				   ?>
+				  </tbody>
+				</table>
+
+            <!-- Donut Chart -->
+            
           </div>
 
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Earnings (Monthly) Card Example -->
-            
-
-            <!-- Pending Requests Card Example -->
-            
-
-          <div class="row">
-
-            <div class="col-lg-12">
-
-              <!-- Default Card Example -->
-              
-				
-		
-		<?php
-			include "connection.php";
-				if(isset($_GET['id'])){
-			$id=$_GET['id'];		
-			$sql="select * from product where id_p='$id'";
-			$stmt= $conn ->prepare($sql);
-			$stmt -> execute();
-			$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
-		}
-				if(isset($_POST['add_sp'])){
-					if($_POST['name']==""|| $_POST['price']==""|| $_POST['soluong']==""|| $_POST['ad']==""|| $_POST['SalePrice']<0 ){
-						echo"thêm thất bại, phải nhập đủ thông tin";
-					}
-					elseif($_POST['price']<=0 || $_POST['soluong']<0 ){
-						echo"giá của sản phẩm phải lớn hơn 0";
-					}
-					else{
-						$name= $_POST['name'];
-						$price = $_POST['price'];
-						$sale = $_POST['SalePrice'];
-						$soluong =$_POST['soluong'];
-						$date= date("Y-m-d");
-						$chitiet=$_POST['ad'];
-						$id_dm= $_POST['dmuc'];
-
-						if($_FILES['image']['name']!=""){
-					//cho phép upload ảnh vào
-					//cộng thêm time để tránh trùng ảnh
-			$image = $_FILES['image']['name'];
-			$tmp = $_FILES['image']['tmp_name'];
-					//upload ảnh lên server
-			move_uploaded_file( $tmp ,"image/".$image );
-				#Nếu Ảnh được add vào thì sẽ upload ảnh lên server và câu lệnh update có thêm phần update ảnh
-				$sql= "update product set name_p='$name', image_p='$image', price='$price', sale_p='$sale', sl_p='$soluong',date='$date', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
-			}
-			else{
-				//$image = "";
-				$sql= "update product set name_p='$name', price='$price', sale_p='$sale', date='$date' , sl_p='$soluong', detail='$chitiet', id_cate='$id_dm',name_cate=(SELECT name_cate FROM category WHERE id_cate='$id_dm') where id_p='$id'";
-			}
-
-					
-					$kqs = $conn -> prepare($sql);
-							if($kqs -> execute()){
-								header("location:sanpham1.php");
-							}else{
-								echo 'loi';
-							}
-					}
-				}
-			?>               
-			<form class="p-4" action="" method="POST" enctype="multipart/form-data" >
-			<input type="hidden" name="id" value="<?=$id?>">
-			<div class="form-row">				  
-			<div class="form-group col-md-6">
-
-			<label for="inputAddress">tên sản phẩm</label>
-			<input name="name" type="text" class="form-control" id="inputAddress" value="<?=$row['name_p']?>">
-			</div>
-			<div class="form-group col-md-6">
-				<label for="exampleFormControlFile1">Ảnh</label>
-					<img src="image/<?=$row['image_p']?>" width="120" alt="" style="padding: 5px 5px;">
-			<input type="hidden" name="image" value="<?=$row['image']?>">
-			<input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
-		  </div>
-			</div>
-
-			<div class="form-row">
-			<div class="form-group col-md-6">
-			  <label for="inputEmail4">giá</label>
-			  <input name="price" type="number" class="form-control" id="inputEmail4" value="<?=$row['price']?>">
-			</div>
-			  <div class="form-group col-md-6">
-			  <label for="inputCity">Giá khuyến mãi</label>
-			  <input name="SalePrice" type="number" class="form-control" id="inputCity" value="<?=$row['sale_p']?>">
-			</div>
-		  </div>				  
-
-			<div class="form-row">
-			<div class="form-group col-md-6">
-			  <label for="inputEmail4">Số lượng</label>
-			  <input name="soluong" type="number" class="form-control" id="inputEmail4" value="<?=$row['sl_p']?>" >
-			</div>
-
-		  </div>
-
-			<div class="form-group"  >
-			
-			
-				<label for="inputAddress">chi tiết sp</label>
-						<textarea name="ad" style="width: 90%;">
-							<?php echo $row['detail']?>
-									</textarea>
-									  <script>
-										  CKEDITOR.replace( 'ad' );
-									  </script>
-						</div>		
-		  </div>				  
-
-		 
-			
-			<div class="form-group col-md-4" >
-			  <label for="inputState" class="col-md-4">danh mục</label>
-<div class="form-row col-md-12 d-flex">
-				<select name="dmuc" id="inputState" class="form-control ">
-					<!-- Đổ danh mục ra ngoài -->
-				<?php
-					include "connection.php";
-					$sqldm = "select * from category";
-					$kqdm = $conn->query($sqldm);
-					foreach ($kqdm as $key => $value){
-				?>
-					<!-- Nếu danh mục trong phần danh_muc = danh mục trong phần sanpham thì set selected -->
-					<option value="<?php echo $value['id_cate']?>" 
-							<?php
-								if($value['id_cate']==$row['id_cate']){echo 'selected';}
-							?>  >
-
-							<a href="" name="tenmuc" ><?php echo $value['name_cate']?></a>
-							
-					</option>
-
-					<?php }
-					?>
-				</select>
-			
-		 
-<button name="add_sp" type="submit" class="btn btn-primary text-light col-md-4 mt-3  ">sửa</button>
-			</div>
-				</div>
-		</form>
         </div>
         <!-- /.container-fluid -->
 
-     
+      </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -432,13 +376,15 @@ ob_start();
 
   <!-- Custom scripts for all pages-->
   <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js"></script>
+  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js"></script>
+  <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/chart-bar-demo.js"></script>
+
 </body>
 
 </html>
-
-	
-
-<?php
-
-	ob_end_flush();
-	?>

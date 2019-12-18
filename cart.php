@@ -252,7 +252,8 @@
 											
 												<tr>
 													<td><?php echo $stt++ ;?></td>
-													<td><?php echo $item['name_p'] ;?></td>
+													<td><?php echo $item['name_p'] ;?><?php echo $item['price'] ;?>
+													</td>
 													<td>
 														<img src="image/<?php echo $item['image_p']?>" width="80px" height="25px;">
 													</td>
@@ -278,6 +279,7 @@
 
 										</tbody>
                                 </table>
+									
                                 </div>
                          
                                 <div class="row">
@@ -292,7 +294,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+                           
                         </div>
                     </div>
                 </div>
