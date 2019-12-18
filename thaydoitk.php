@@ -2,14 +2,13 @@
 	session_start();
 	ob_start();
 	include 'connection.php';	
-	
 ?>
 <!doctype html>
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Neha - Minimalist eCommerce HTML5 Template</title>
+        <title>Neha - Minimalist eCommerce HTML5 Template </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -44,109 +43,40 @@
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="logo">
-									<?php
-						include 'connection.php';
-					$stmt = $conn->query("select * from setting");
-					foreach($stmt as $key => $row){
-					?>
-					
-					<a href="trangchu.php"><img src="image/<?=$row['logo']?>" style="width: 100px; " alt="" width="70%" ></a>
-				
-					<?php 
-					}
-					?>
+                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt="" /></a>
                                 </div>
                             </div>
                             <div class="col-lg-6 menu-none-block menu-center">
                                 <div class="main-menu">
                                     <nav>
-                                       <ul>
+                                        <ul>
                                             <li><a href="trangchu.php">home</a></li>
-                                            <li><a href="about-us.php">about us</a></li>
-                                            <li><a href="#">shop</a>
-												<ul class="dropdown">
-													<?php
-														include"connection.php";
-														$sql= "select * from category";
-														//Xử lý lệnh sql
-														$stmt = $conn->prepare($sql);
-														$stmt->execute();
-														$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-													?>
-															<?php
-																foreach($result as $row){
-																	?>
-																		 <li><a href="shop-grid-view-5-col.php?id=<?=$row['id_cate']?>"><?=$row['name_cate']?></a></li>
-																	<?php
-																}
-															?>
-													</ul>
-										   </li>
-                                            
-                                            	
-                                            <li><a href="contact.php">contact</a></li>
+                                            <li><a href="about-us.html">about us</a></li>
+                                            <li><a href="shop-grid-view-5-col.html">shop</a></li>
+                                            <li><a href="#">pages</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="about-us.html">about us</a></li>
+                                                    <li><a href="cart.html">cart</a></li>
+                                                    <li><a href="checkout.html">checkout</a></li>
+                                                    <li><a href="wishlist.html">wishlist</a></li>
+                                                    <li><a href="contact.html">contact</a></li>
+                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="register.html">register</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">blog</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="blog.html">blog </a></li>
+                                                    <li><a href="blog-details.html">blog details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html">contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 col-6">
                                 <div class="header-search-cart">
-										<div class="main-menu">
-                                   			 <nav>
-                                      			 <ul>
-
-													 <?php
-
-													 	if(isset($_SESSION['name_u'])){
-															 $username=$_SESSION['name_u'];
-															$sqltk = "select * from user where name_u = '$username'";
-        													$kqtk = $conn->query($sqltk)->fetch();
-															if($kqtk['quyen'] == 'admin'){
-															
-
-													 ?>
-													<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
-															<?php if($kqtk['quyen']=="user"){?>
-																<ul class="dropdown">
-																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="suataikhoan.php">Đổi mật khẩu</a></li>
-																</ul>
-
-															<?php } if($kqtk['quyen']=="admin") {?>
-
-																<ul class="dropdown">
-																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="">Đổi mật khẩu</a></li>
-																	<li><a href="danhmuc1.php">Quản trị</a></li>
-																</ul>
-															<?php }?>
-													</li>
-													 <?php
-															}
-															else{
-															?>
-													 			<li><a href="#">chao ban:<?php echo ''.$_SESSION['name_u']; ?></a>
-													
-															<ul class="dropdown">
-																<li><a href="dangxuat.php">Đăng xuất</a></li>
-																<li><a href="thaydoitk.php">Đổi mật khẩu</a></li>
-															</ul>
-													</li>
-													 		<?php
-														}
-													 ?>
-													<?php } else { ?>
-													 <li><a href="#">Tài khoản</a>
-
-															<ul class="dropdown">
-																<li><a href="login.php">Đăng nhập</a></li>
-																<li><a href="register.php">Đăng ký</a></li>
-															</ul>
-													</li>
-													 <?php 
-																 } ?>
-												</ul>
-									</div>
                                     <div class="header-search common-style">
                                         <button class="sidebar-trigger-search">
                                             <span class="ion-ios-search-strong"></span>
@@ -154,31 +84,91 @@
                                     </div>
                                     <div class="header-cart common-style">
                                         <button class="sidebar-trigger">
-                                            <a href="cart.php"><span class="ion-bag"></span></a>
+                                            <span class="ion-bag"></span>
                                         </button>
                                     </div>
-                                    
+                                    <div class="header-sidebar common-style">
+                                        <button class="header-navbar-active">
+                                            <span class="ion-navicon"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            
+                            <div class="mobile-menu-area d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
+                                <div class="mobile-menu">
+                                    <nav id="mobile-menu-active">
+                                        <ul class="menu-overflow">
+                                            <li><a href="#">HOME</a>
+                                                <ul>
+                                                    <li><a href="index.html">furniture</a></li>
+                                                    <li><a href="index-electronics.html">electronics</a></li>
+                                                    <li><a href="index-fashion.html">fashion</a></li>
+                                                    <li><a href="index-jewellery.html">jewellery</a></li>
+                                                    <li><a href="index-food-drink.html">food & drink</a></li>
+                                                    <li><a href="index-toys.html">Toys & Games</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">pages</a>
+                                                <ul>
+                                                    <li><a href="about-us.html">about us</a></li>
+                                                    <li><a href="cart.html">cart</a></li>
+                                                    <li><a href="checkout.html">checkout</a></li>
+                                                    <li><a href="wishlist.html">wishlist</a></li>
+                                                    <li><a href="contact.html">contact</a></li>
+                                                    <li><a href="login.html">login</a></li>
+                                                    <li><a href="register.html">register</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">shop</a>
+                                                <ul>
+                                                    <li><a href="shop-grid-view-3-col.html">grid 3 column</a></li>
+                                                    <li><a href="shop-grid-view-5-col.html">grid 5 column</a></li>
+                                                    <li><a href="shop-grid-view-sidebar.html">grid with sidebar</a></li>
+                                                    <li><a href="shop-list-view-1-col.html">list 1 column</a></li>
+                                                    <li><a href="shop-list-view-2-col.html">list 2 column</a></li>
+                                                    <li><a href="shop-list-view-sidebar.html">list with sidebar</a></li>
+                                                    <li><a href="shop-list-view-1-col-container.html">list 1 column box</a></li>
+                                                    <li><a href="product-details.html">tab style 1</a></li>
+                                                    <li><a href="product-details-2.html">tab style 2</a></li>
+                                                    <li><a href="product-details-3.html">tab style 3</a></li>
+                                                    <li><a href="product-details-6.html">sticky style</a></li>
+                                                    <li><a href="product-details-7.html">sticky style 2</a></li>
+                                                    <li><a href="product-details-8.html">gallery style</a></li>
+                                                    <li><a href="product-details-9.html">gallery style 2</a></li>
+                                                    <li><a href="product-details-4.html">fixed image style</a></li>
+                                                    <li><a href="product-details-5.html">fixed image style 2</a></li> 
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">BLOG</a>
+                                                <ul>
+                                                    <li><a href="blog.html">blog </a></li>
+                                                    <li><a href="blog-2-col.html">blog 2 column</a></li>
+                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
+                                                    <li><a href="blog-details.html">blog details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html"> Contact  </a></li>
+                                        </ul>
+                                    </nav>							
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </header>
             <div class="header-space"></div>
             <!-- header end -->
-            <!-- sidebar-cart start -->
-            
+           
             <!-- main-search start -->
             <div class="main-search-active">
                 <div class="sidebar-search-icon">
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form method="get" enctype="multipart/form-data" action="search.php">
+                    <form>
                         <div class="form-search">
-                            <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
-                            <button name="submit-search" type="submit">
+                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
+                            <button>
                                 <i class="ion-ios-search-strong"></i>
                             </button>
                         </div>
@@ -186,110 +176,58 @@
                 </div>
             </div>
             <!-- main-search start -->
-            <div class="cur-lang-acc-active">
-                <div class="wrap-sidebar">
-                    <div class="sidebar-nav-icon">
-                        <button class="op-sidebar-close"><span class="ion-android-close"></span></button>
-                    </div>
-                    <div class="cur-lang-acc-all">
-                        <div class="single-currency-language-account">
-                            <div class="cur-lang-acc-title">
-                                <h4>Currency: <span>USD </span></h4>
-                            </div>
-                            <div class="cur-lang-acc-dropdown">
-                                <ul>
-                                    <li><a href="#">EUR  Euro</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-currency-language-account">
-                            <div class="cur-lang-acc-title">
-                                <h4>Language: <span><img src="assets/img/icon-img/english.png" alt=""> English </span></h4>
-                            </div>
-                            <div class="cur-lang-acc-dropdown">
-                                <ul>
-                                    <li><a href="#"><img src="assets/img/icon-img/english.png" alt=""> English </a></li>
-                                    <li><a href="#"><img src="assets/img/icon-img/es.png" alt=""> spanish </a></li>
-                                    <li><a href="#"><img src="assets/img/icon-img/fr.png" alt=""> french </a></li>
-                                    <li><a href="#"><img src="assets/img/icon-img/ge.png" alt=""> german </a></li>
-                                    <li><a href="#"><img src="assets/img/icon-img/es.png" alt=""> spanish </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-currency-language-account">
-                            <div class="cur-lang-acc-title">
-                                <h4>My Account:</h4>
-                            </div>
-                            <div class="cur-lang-acc-dropdown">
-                                <ul>
-                                    <li><a href="#">Compare Products </a></li>
-                                    <li><a href="#">Default welcome msg!</a></li>
-                                    <li><a href="register.html">register</a></li>
-                                    <li><a href="wishlist.html">My Wish List</a></li>
-                                    <li><a href="login.html">Sign In </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
-                <div class="container">
-                    <div class="breadcrumb-content">
-                        <h2>register</h2>
-                        <ul>
-                            <li><a href="#">home</a></li>
-                            <li> register </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- register-area start -->
+           
+            <!-- login-area start -->
             <div class="register-area ptb-100">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
                             <div class="login">
                                 <div class="login-form-container">
                                     <div class="login-form">
-										<?php
-											require_once "connection.php";
-											if(isset($_GET['id'])){
-												$id=$_GET['id'];
-												$sql="select * from user where id_u='$id'";
-												$stmt= $conn ->prepare($sql);
-												$stmt -> execute();
-												$row = $stmt -> fetch();
-												//fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
-											}
-													if(isset($_POST['sua'])){
-															$name= $_POST['name'];
-															$pass = $_POST['pass'];
-															$quyen = $_POST['quyen'];
-															$phone= $_POST['phone'];
-															$email= $_POST['email'];
-															$sql= "update user set name_u='$name', phone='$phone', email='$email', pass='$pass', quyen='$quyen' where id_u='$id'";
-															$stmt = $conn->prepare($sql);
-															$stmt->execute();
-
-														if ($stmt->rowCount() > 0) {
-															echo "cập nhập thành công";
-														} else {
-														echo "Cập nhật dữ liệu thất bại";
-														}
-														}
-											?>
                                         <form action="#" method="post">
-											<h2>thay đổi thông tin <?=$row['name_u']?></h2>
-                                            <input type="password" name="pass" placeholder="<?=$row['pass']?>">
-											<input type="number" name="phone" placeholder="<?=$row['phone']?>">
-                                            <input name="user-email" placeholder="<?=$row['email']?>" type="email">
-											<input name="quyen" type="hidden" class="form-control" id="inputCity" value="user">
+											<h3 align="center">Mời bạn đổi mật khẩu</h3>
+											<p style="padding: 5px 0px; font-size: 20px;">Tài khoản:<strong style="padding: 5px 10px"><?php echo $_SESSION['name_u']?></strong></p> 
+											<input type="hidden" name="name_u" value="<?php echo $_SESSION['name_u']?>">
+                                            <input type="password" name="user-password" placeholder="Password cũ">
+											<input type="password" name="user-password2" placeholder="Password mới">
+											<input type="password" name="user-password3" placeholder="Nhập lại password mới">
                                             <div class="button-box">
-                                                <button type="submit" name="sua" class="default-btn floatright">sửa tài khoản</button>
+                                                <button type="submit" name="update" class="default-btn floatright">Update</button>
                                             </div>
                                         </form>
-										
+										<?php
+												
+											if (isset($_POST['update'])) {
+												
+												$user = $_SESSION['name_u'];		
+												$sqlcheck="select * from user where name_u='$user'";
+												$kqcheck= $conn ->query($sqlcheck)->fetch();
+												
+												if($_POST['user-password2']=="" || $_POST['user-password'] == "" ||$_POST['user-password3']==""){
+													echo '<h6 style="color:red; padding:10px 0px;">Dữ liệu không được để trống</h4>';
+												}else{
+												$pass = $_POST['user-password'];
+												$pass2 = $_POST['user-password2'];
+												$pass3 = $_POST['user-password3'];
+													if($kqcheck['pass'] != $pass){
+														echo '<h6 style="color:red; padding:10px 0px;">Mật khẩu cũ không đúng</h4>';
+													}
+													else if($pass2 != $pass3){
+														echo '<h6 style="color:red; padding:10px 0px;">Hai mật khẩu không trùng nhau</h4>';
+													}else{
+														$sqlupdate = "UPDATE user
+																	SET pass = '$pass2'
+																	WHERE name_u = '$user'";
+														$kqupdate = $conn -> query($sqlupdate);
+															if($kqupdate){
+																	echo '<h6 style="color:red; padding:10px 0px;">Đổi thành công</h4>';
+																}else{
+																	echo 'Lỗi';
+																}
+													}
+											}}
+									  ?>
                                     </div>
                                 </div>
                             </div>
@@ -297,7 +235,7 @@
                     </div>
                 </div>
             </div>
-            <!-- register-area end -->
+            <!-- login-area end -->
             <footer class="footer-area gray-bg pt-100 pb-95">
                 <div class="container">
                     <div class="row">
@@ -383,3 +321,6 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<?php
+	ob_end_flush();
+?>

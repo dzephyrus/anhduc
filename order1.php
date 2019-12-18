@@ -236,7 +236,7 @@
 				  <tbody>
 					  <?php
 					  include"connection.php";
-					  $sql = "select COUNT(id_order),id_order, name_u, phone, address, quantity, totalprice from order1 GROUP BY id_order";
+					  $sql = "select COUNT(id_order),id_order, name_u, phone, address, quantity, totalprice,id_u, status from order1 GROUP BY id_order";
 					  $kq = $conn->query($sql);
 					  foreach($kq as $key=>$value){
 						?>
@@ -295,14 +295,23 @@
 								  }
 							?>
 						</td>
-						<td><?php 
-								  $sqldm1 = "select * from order1 where id_order = $value[id_order]";
-								  $kqdm1 = $conn->query($sqldm1)->fetch();
-								 
-									 echo $kqdm1['status']; 
-								  
-							?>
+								<?php 
+								  $sqldm = "select * from order1 where id_order = $value[id_order]";
+								  $kqdm = $conn->query($sqldm)->fetch();
+								  if($value['status'] == $kqdm['status']){
+									  if($kqdm['status']=='on'){ ?>
+						<td >
+								<a href="offorder.php?id=<?php echo $value['id_order'] ?>" >
+								<button style="width: 50px;height: 50px;background: #33B33D;color: white;font-size: 18px;">
+								on </button></a>
 						</td>
+								<?php 	}else{ ?>
+						<td >
+								<a href="onorder.php?id=<?php echo $value['id_order'] ?>" >
+								<button style="width: 50px;height: 50px;background: #C90407;color: white;font-size: 18px;">
+								off </button></a>
+						</td>
+							 	<?php   }}?>
 						<td><button type="button" class="btn btn-success"><a href="order2.php?id_order=<?php echo $value['id_order']; ?>">Chi tiết</a></button></td>
 					</tr>	
 					  <?php

@@ -120,9 +120,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-money-check-alt"></i>
-          <span>Voucher</span></a>
+        <a class="nav-link" href="lienhe.php">
+          <i class="fas fa-clipboard"></i>
+          <span>Contact</span></a>
       </li>
 		
 		<hr class="sidebar-divider">

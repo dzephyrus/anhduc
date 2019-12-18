@@ -1,4 +1,15 @@
+<?php
+	session_start();
+	ob_start();
+    include 'connection.php';
+    if(isset($_SESSION['name_u'])){
+        $username=$_SESSION['name_u'];
+        $sqltk = "select * from user where name = '$username'";
+        $stmt= $conn ->prepare($sqltk);
+		$stmt -> execute();
+		$row = $stmt -> fetch();
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,9 +111,9 @@
 		<hr class="sidebar-divider">
 		
 		<li class="nav-item">
-        <a class="nav-link" href="voucher1.php">
-          <i class="fas fa-money-check-alt"></i>
-          <span>Voucher</span></a>
+        <a class="nav-link" href="lienhe.php">
+          <i class="fas fa-clipboard"></i>
+          <span>Contact</span></a>
       </li>
 		
 		<hr class="sidebar-divider">
@@ -343,3 +354,9 @@
 </body>
 
 </html>
+<?php
+    }else{
+        header("location:login.php");
+    }
+	ob_end_flush();
+?>

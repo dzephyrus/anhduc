@@ -432,7 +432,7 @@
 								$date= date("Y-m-d");
 								$diachi = $_POST['dc'];
 								$id_u = $_POST['id_u'];
-								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','$id_u','on')";
+								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','$date','$id_u','on')";
 								$kqoder = $conn -> exec($sqlorder1);
 								$sqlmax = "SELECT MAX(id_order) from order1";
 								$kqmax = $conn -> query($sqlmax)->fetchColumn();

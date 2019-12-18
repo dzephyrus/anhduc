@@ -251,10 +251,11 @@
 												 <tbody>
 										  <?php
 										  include"connection.php";
-											if(isset($_SESSION['name_u'])){
-												$name_u = $_SESSION['name_u'];
-												$sql = "select COUNT(id_order), id_order, name_u, phone, address, quantity,date_m,status, totalprice from order1 where name_u='$name_u' GROUP BY id_order";
+											if(isset($_GET['id'])){
+												$id_u = $_GET['id'];
+												$sql = "select COUNT(id_order), id_order, name_u, phone, address, quantity,date_m,id_u, status, totalprice from order1 where id_u='$id_u' GROUP BY id_order";
 												$kq = $conn->query($sql);
+								
 												foreach($kq as $key=>$value){
 												if($value['status']=='off'){
 
