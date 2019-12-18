@@ -1,17 +1,15 @@
 <?php
 	session_start();
-	include 'connection.php';
-	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-	$totalPrice = 0;
-	$sumPrice=0;
-	$sumQuantity=0;
+	ob_start();
+	include 'connection.php';	
+	
 ?>
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Neha - Minimalist eCommerce HTML5 Template </title>
+        <title>Neha - Minimalist eCommerce HTML5 Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -37,7 +35,9 @@
         <![endif]-->
         <!-- header start -->
         <div class="wrapper">
-      
+            <!-- Newsletter Popup Start -->
+            
+            <!-- Newsletter Popup End -->
             <header class="pl-155 pr-155 intelligent-header">
                 <div class="header-area header-area-2">
                     <div class="container-fluid p-0">
@@ -109,7 +109,7 @@
 															<?php if($kqtk['quyen']=="user"){?>
 																<ul class="dropdown">
 																	<li><a href="dangxuat.php">Đăng xuất</a></li>
-																	<li><a href="">Đổi mật khẩu</a></li>
+																	<li><a href="suataikhoan.php">Đổi mật khẩu</a></li>
 																</ul>
 
 															<?php } if($kqtk['quyen']=="admin") {?>
@@ -129,7 +129,7 @@
 													
 															<ul class="dropdown">
 																<li><a href="dangxuat.php">Đăng xuất</a></li>
-																<li><a href="">Đổi mật khẩu</a></li>
+																<li><a href="thaydoitk.php">Đổi mật khẩu</a></li>
 															</ul>
 													</li>
 													 		<?php
@@ -167,16 +167,18 @@
             </header>
             <div class="header-space"></div>
             <!-- header end -->
-          
+            <!-- sidebar-cart start -->
+            
+            <!-- main-search start -->
             <div class="main-search-active">
                 <div class="sidebar-search-icon">
                     <button class="search-close"><span class="ion-android-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form>
+                    <form method="get" enctype="multipart/form-data" action="search.php">
                         <div class="form-search">
-                            <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
-                            <button>
+                            <input id="search" class="input-text" name="search" value="" placeholder="Search Entire Store" type="search">
+                            <button name="submit-search" type="submit">
                                 <i class="ion-ios-search-strong"></i>
                             </button>
                         </div>
@@ -234,233 +236,68 @@
             <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
                 <div class="container">
                     <div class="breadcrumb-content">
-                        <h2>checkout</h2>
+                        <h2>register</h2>
                         <ul>
                             <li><a href="#">home</a></li>
-                            <li> checkout </li>
+                            <li> register </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- checkout-area start -->
-            <div class="checkout-area ptb-100">
-                <div class="container">
+            <!-- register-area start -->
+            <div class="register-area ptb-100">
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-6 col-md-12 col-12">
-                            <form action="#" method="post">
-								 <?php
-										if(isset($_SESSION['name_u']) && $_SESSION['name_u']){
-											$sql_dangnhap = "SELECT * FROM user where name_u = '$_SESSION[name_u]'";
-											
-											$stmt= $conn ->prepare($sql_dangnhap);
-											$stmt -> execute();
-											$result = $stmt->fetch();
-											
-											
-								?>
-                                <div class="checkbox-form">						
-                                    <h3>Điền thông tin nhận hàng</h3>
-                                    <div class="row">
-                                        <div class="col-md-12">
-											
-                                            <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label><br>
-												<?php echo ''.$_SESSION['name_u']; ?>
-												<input type="hidden" value="<?php echo $_SESSION['name_u']; ?>" name="fullname"/>
-												<input type="hidden" value="<?php echo $result['id_u']; ?>" name="id_u"/>
-											</div>
-											
-										</div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Phone</label>
-                                                <input type="number" value="<?php echo $result['phone'] ?>" name="phone"/>
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Address <span class="required">*</span></label>
-                                                <input type="text" placeholder="Street address" name="dc" />
-                                            </div>
-                                        </div>
-										<!-- kết thuc ddien thong tin-->
-              						</div>													
-                                </div>
-								<?php } 
-								else{
-								?>
-									<div class="checkbox-form">						
-                                    <h3>Điền thông tin nhận hàng</h3>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label><input type="text" placeholder="tên" name="fullname"/>
-                                            </div>
-										</div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Phone</label>
-                                                <input type="number" placeholder="phone" name="phone"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                                <label>Address <span class="required">*</span></label>
-                                                <input type="text" placeholder="Street address" name="dc" />
-                                            </div>
-                                        </div>
-										<!-- kết thuc ddien thong tin-->
-              						</div>													
-                                </div>
-								<?php	
-								}?>
-								
-                        </div>	
-                 		       <div class="col-lg-6 col-md-12 col-12">
-									<div class="your-order">
-										<h3>Giỏ hàng của bạn</h3>
-										<div class="your-order-table table-responsive">
-											<table>
-
-												<thead>
-													<tr>
-													
-														<th class="product-name">Product</th>
-														<th class="product-quantity">So luong</th>
-														<th class="product-total">Total</th>
-													</tr>							
-												</thead>
-												<tbody>
-													<?php foreach ($cart as $key => $item): 
-														if($key==0){
-												continue;
+                        <div class="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
+                            <div class="login">
+                                <div class="login-form-container">
+                                    <div class="login-form">
+										<?php
+											require_once "connection.php";
+											if(isset($_GET['id'])){
+												$id=$_GET['id'];
+												$sql="select * from user where id_u='$id'";
+												$stmt= $conn ->prepare($sql);
+												$stmt -> execute();
+												$row = $stmt -> fetch();
+												//fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
 											}
-													?>
-													<tr class="cart_item">
-														<td style="display: none">
-															<?php echo 
-																		$item['id_p'];
-																		$itemid = $item['id_p'];
-															?>
-														</td>
-														<td class="product-name"><?php echo $item['name_p'] ;?></td>
-														<td><?php echo 
-																	$item['quantity'];
-																	$quantity = $item['quantity'];
-																	$sumQuantity += $quantity;
-															?>
-														</td>
-														<td class="product-total" >
-															<?php 
-															
-														if($item['sale_p']>0){
-															$itemTotal = $item['sale_p']*$item['quantity'];
-															$totalPrice += $itemTotal;
-														echo number_format($itemTotal, 0, '', ','); 
-														}
-														else{
-															$itemTotal = $item['price']*$item['quantity'];
-															$totalPrice += $itemTotal;
-														echo number_format($itemTotal, 0, '', ','); 
-														}
-														
-															?>
-														</td>
-													</tr>
-													<?php  endforeach ?>
-												</tbody>
-											 </table></br>
-											<!-- bang tong-->
-											 <table border="1px solid red">
-												<thead>
-													<tr>
-														<th class="product-quantity">Tong so luong</th>
-														<th class="product-total">Tong tien</th>
-													</tr>							
-												</thead>
-												<tbody>
-													<tr class="cart_item">
-														<td class="product-quantity">
-															<?php echo 
-																$sumQuantity ;
-															?>
-														</td>
-														<td class="product-total" >
-															<span class="required" >
-																<?php echo 
-																		$sumPrice+= $totalPrice;
-																		$_SESSION['tongtien']=$sumPrice;
-																?>
-															</span>
-														</td>
-													</tr>
+													if(isset($_POST['sua'])){
+															$name= $_POST['name'];
+															$pass = $_POST['pass'];
+															$quyen = $_POST['quyen'];
+															$phone= $_POST['phone'];
+															$email= $_POST['email'];
+															$sql= "update user set name_u='$name', phone='$phone', email='$email', pass='$pass', quyen='$quyen' where id_u='$id'";
+															$stmt = $conn->prepare($sql);
+															$stmt->execute();
 
-												</tbody>
-											 </table>
-											<!--Ket thuc tong-->
-											
-											 <div class="col-md-5 ml-auto">
-												<div class="cart-page-total">
-												   <ul>
-													   <li><a href="cart.php" >Quay lại</a></li>
-														
-													</ul>
-												</div>
-											</div>
+														if ($stmt->rowCount() > 0) {
+															echo "cập nhập thành công";
+														} else {
+														echo "Cập nhật dữ liệu thất bại";
+														}
+														}
+											?>
+                                        <form action="#" method="post">
+											<h2>thay đổi thông tin <?=$row['name_u']?></h2>
+                                            <input type="password" name="pass" placeholder="<?=$row['pass']?>">
+											<input type="number" name="phone" placeholder="<?=$row['phone']?>">
+                                            <input name="user-email" placeholder="<?=$row['email']?>" type="email">
+											<input name="quyen" type="hidden" class="form-control" id="inputCity" value="user">
+                                            <div class="button-box">
+                                                <button type="submit" name="sua" class="default-btn floatright">sửa tài khoản</button>
+                                            </div>
+                                        </form>
 										
-										</div>
-
-									</div>
-							<input type="submit" name="order" value="Place order" class="col-md-5 ml-auto mt-3" />
-								</div>
-
-
-                                       	 
-							</form>
-						<?php
-					
-						if(isset($_POST['order'])){
-							//print_r($_SESSION['cart']);
-//							echo count($_SESSION['cart']);
-//							exit();
-							if($_POST['fullname']=="" || $_POST['dc']=="" || $_POST['phone']=="" ){
-								?> <script> alert"them that bai" ;</script><?php
-							}
-							else{
-								$name= $_POST['fullname'];
-								$phone = $_POST['phone'];
-								$date= date("Y-m-d");
-								$diachi = $_POST['dc'];
-								$id_u = $_POST['id_u'];
-								$sqlorder1 = "insert into order1 values('','$name','$phone','$diachi','$sumQuantity','$sumPrice','$id_u','on')";
-								$kqoder = $conn -> exec($sqlorder1);
-								$sqlmax = "SELECT MAX(id_order) from order1";
-								$kqmax = $conn -> query($sqlmax)->fetchColumn();
-								$data=$_SESSION["cart"];
-//								var_dump($data);
-								
-								for ($i = 1; $i < count($_SESSION["cart"]); $i++) {
-	
-    							 	$id_p=$data[$i]["id_p"];
-									$price = $data[$i]["price"];
-									$name_p = $data[$i]["name_p"];
-//										exit();	
-									$sqldetail="insert into order1detail values(null,'$kqmax','$id_p','$price','$name_p','$quantity')";
-									$kqdetail = $conn -> query($sqldetail);
-									}
-									if($kqdetail){
-										?><br> <script> alert('Đặt mua thành công, đơn hàng sẽ được xử lý trong vòng 24h') </script> <?php
-									}else{
-										?><br> <script> alert('Đặt mua không thành công'); </script> <?php
-									}
-							}
-						}
-					?>
-				  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- checkout-area end -->	
+            <!-- register-area end -->
             <footer class="footer-area gray-bg pt-100 pb-95">
                 <div class="container">
                     <div class="row">
