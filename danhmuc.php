@@ -50,7 +50,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="danhmuc1.php">
+        <a class="nav-link" href="danhmuc.php">
           <i class="fas fa-fw fa-tasks"></i>
           <span>Danh mục</span></a>
       </li>
@@ -233,7 +233,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <tr>
       <th width="11%" scope="col">id</th>
       <th width="25%" scope="col">tên danh mục</th>
-	<th width="51%" scope="col">ảnh</th>
+	
 	<th width="13%" scope="col">cài đặt</th>
     </tr>
   </thead>
@@ -245,8 +245,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<td><?=$row['id_cate']?></td>
 		<td><?=$row['name_cate']?></td>
 		
-		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suadanhmuc1.php?id=<?=$row['id_dm']?>">Update</a> </button>
-		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoadanhmuc.php?id=<?=$row['id_dm']?>" class="text-light">xóa</a> </button>
+		<td><button type="button" class="btn btn-primary text-light"> <a class="text-light" href="suadanhmuc1.php?id=<?=$row['id_cate']?>">Update</a> </button>
+		<button type="button" class="btn btn-danger text-light" onclick="return confirm('chấp nhận xóa')"> <a href="xoadanhmuc.php?id=<?=$row['id_cate']?>" class="text-light">xóa</a> </button>
 		</td>
 	</tr>
 	<?php

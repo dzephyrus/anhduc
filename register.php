@@ -302,19 +302,26 @@ include 'connection.php';
                             <div class="login">
                                 <div class="login-form-container">
                                     <div class="login-form">
-                                        <form action="phpdangky4.php" method="post">
+                                        <form method="post" action="#">
 											<h3>Mời bạn đăng ký tài khoản</h3>
                                             <input type="text" name="user-name" placeholder="Username" id="username">
-											<span id="errorname" style="padding: 5px 5px"></span>
-                                            <input type="password" name="user-password" placeholder="Password" id="password" >
-											<input type="password" name="user-password2" placeholder="Password2" id="password2" >
+												<span id="errorname" style=" color: red;"></span>
 											<input type="number" name="phone" placeholder="Phone" id="phone" >
+												<span id="errorphone" style=" color: red;"></span>
                                             <input name="email" placeholder="Email" type="email" id="email" >
-                                            <div class="button-box">
+												<span id="erroremail" style="padding-bottom: 5px; color: red;"></span>
+                                            <input type="password" name="user-password1" placeholder="Password" id="password" >
+												<span id="errorpassword1" style="padding-bottom: 5px; color: red;"></span>
+											<input type="password" name="user-password2" placeholder="Password2" id="password2" >
+												<span id="errorpassword2" style="padding-bottom: 5px; color: red;"></span>
+											<span id="errorpassword3" style="padding-bottom: 5px; color: red;"></span>
+											 <div class="button-box">
                                                 <button type="submit" class="default-btn floatright" name="xacnhan" onClick="getinput(); return false;">Đăng ký</button>
                                             </div>
+											
+											
                                         </form>
-					
+				
                                     </div>
                                 </div>
                             </div>
@@ -411,11 +418,31 @@ include 'connection.php';
 				var username = document.getElementById('username').value;
 				var email = document.getElementById('email').value;
 				var phone = document.getElementById('phone').value;
-				var password = document.getElementById('password').value;
+				var password1 = document.getElementById('password').value;
 				var password2 = document.getElementById('password2').value;
+				//check name
 				if(username == ""){
-					document.getElementById('errorname').innerHTML= "vui long nhap day du thong tin";
+					document.getElementById('errorname').innerHTML= "vui long nhap day du ten";
 				}
+				//check email
+				if(email == ""){
+					document.getElementById('erroremail').innerHTML= "vui long nhap email";
+				}else{
+					document.getElementById('erroremail').innerHTML="";
+				}
+				//check phone
+				if(phone == ""){
+					document.getElementById('errorphone').innerHTML= "vui long nhap so dien thoại";
+				}else{
+					document.getElementById('errorphone').innerHTML="";
+				}
+				//check phone
+				if(password1  == ""){
+					document.getElementById('errorpassword1 ').innerHTML= "vui long nhap mat khau";
+				}else{
+					document.getElementById('errorpassword1 ').innerHTML="";
+				}
+				
 			}
 		</script>
     </body>

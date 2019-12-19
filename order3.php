@@ -242,6 +242,7 @@
 					<th scope="col">STT</th>
 					<th scope="col">id sản phẩm</th>
 				  	<th scope="col">Tên sản phẩm</th>
+					 	<th scope="col">Don gia</th>
 				  	<th scope="col">Số lượng</th>
 					
 					
@@ -264,8 +265,9 @@
 			  <tbody>
 				  <td> <?php echo $key+1 ?> </td>  
 				  <td> <?php echo $row['id_p']?> </td> 
-					<td> <?php echo $row['name_p']?> </td>  
-				    <td><?php echo $row['quantity1']?></td>
+				  <td> <?php echo $row['name_p']?> </td> 
+				  <td><?php echo $row['price'] ?></td>
+				  <td><?php echo $row['quantity1']?></td>
 			  </tbody>
 				<?php
 		}

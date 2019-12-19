@@ -2,35 +2,7 @@
 session_start(); 
 ob_start();
 ?>
-<?php
-include"connection.php";
-if(isset($_GET['id'])){
-	$id=$_GET['id'];
-	$sql="select * from category where id_cate='$id'";
-	$stmt= $conn ->prepare($sql);
-	$stmt -> execute();
-	
-	$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
-	
-}
-if(isset($_POST['update'])){
-	$name= $_POST['name'];
-		//$image = "";
-		$sql= "update category set name_cate='$name' where id_cate='$id'";
-	
-				$stmt = $conn->prepare($sql);
-    			$stmt->execute();
-				
-				
-	if ($stmt->rowCount() > 0) {
-        header('location:danhmuc1.php');
-    } else {
-       echo "Cập nhật dữ liệu thất bại";
-    }
-	//dm loi eo update ddcccc, dcmmmmm
-	
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -243,7 +215,7 @@ if(isset($_POST['update'])){
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Cards</h1>
+            <h1 class="h3 mb-0 text-gray-800">Sửa danh mục</h1>
           </div>
 
             <!-- Earnings (Monthly) Card Example -->
@@ -266,10 +238,37 @@ if(isset($_POST['update'])){
               
 				
 		<div class="form-group">
-    <label for="exampleInputEmail1">thêm danh mục</label>
-   
-			
-  </div>
+   			</div>
+				 <?php
+					include"connection.php";
+					if(isset($_GET['id'])){
+						$id=$_GET['id'];
+						$sql="select * from category where id_cate='$id'";
+						$stmt= $conn ->prepare($sql);
+						$stmt -> execute();
+						$row = $stmt -> fetch(); //fetch giúp đổ dữ liệu của 1 id đó ra ngoài, kiểu hiển thị hết thông tin . Còn fetchAll là đổ dữ liệu của tất cả các id ra ngoài chỗ cần dùng, fetchAll dùng trong hiển thị dữ liệu. Đổ dữ liệu vào biến $row.
+
+					}
+					if(isset($_POST['update'])){
+						$name= $_POST['name'];
+						$sqlCheckUser = "select * from category where name_cate= '$name';";
+						$kqCheckUser = $conn->query($sqlCheckUser)->fetch();
+						if(isset($kqCheckUser['name_cate'])){
+							echo 'danh muc da ton tại';
+						}else{
+							$sql= "update category set name_cate='$name' where id_cate='$id'";
+							$kqs = $conn -> prepare($sql);
+							if($kqs -> execute()) {
+								header('location:danhmuc.php');
+							} else {
+								echo "Cập nhật dữ liệu thất bại";
+							}
+
+						}
+					}
+					?>
+              
+
 		<form action="" method="post" enctype="multipart/form-data">			
 		<div class="input-group input-group-lg" style="width: 80%">
 			<input type="hidden" name="id" value="<?=$id?>">
@@ -282,9 +281,7 @@ if(isset($_POST['update'])){
 </div>
 		
 	</form>
-              <!-- Basic Card Example -->
-              
-
+            
             </div>
 
             

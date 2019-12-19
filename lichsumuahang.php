@@ -275,7 +275,9 @@
 												?>
 											</td>
 											
-											<td><button type="button" class="btn btn-success"><a href="chitietlsmh.php?id_order=<?php echo $value['id_order']; ?>">Chi tiết</a></button></td>
+											<td>
+												<a href="chitietlsmh.php?id_order=<?php echo $value['id_order']; ?>" class="btn btn-success">Chi tiết</a>
+											</td>
 										</tr>	
 										  <?php
 									   }}}else{

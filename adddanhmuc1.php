@@ -258,11 +258,16 @@
 <?php
 		include"connection.php";
 	if(isset($_POST['add_dm'])){
+		$name = $_POST['dm_name'];
 		if($_POST['dm_name']== ""){
 			echo 'thiếu tên danh mục';
 		}
 		else{
-			$name = $_POST['dm_name'];
+			$sqlCheckUser = "select * from category where name_cate= '$name';";
+			$kqCheckUser = $conn->query($sqlCheckUser)->fetch();
+			if(isset($kqCheckUser['name_cate'])){
+				echo 'danh muc da ton tại';
+			}else{
 			$sql = "insert into category(name_cate) values ('$name')";
 			$stmt = $conn -> prepare($sql);
 			$stmt ->execute();
@@ -273,7 +278,7 @@
 				echo 'thêm thất bại';
 			}
 		}
-		}
+		}}
 					
 ?>
 		</div>
